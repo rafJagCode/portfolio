@@ -10,17 +10,19 @@ export default function App() {
 
 		render={() => {
 			return (
-				<ReactFullpage.Wrapper>
-					<div className="section">
-						<div className={styles.section__container}></div>
-					</div>
-					<div className="section">
-						<div className={styles.section__container}></div>
-					</div>
-					<div className="section">
-						<div className={styles.section__container}></div>
-					</div>
-				</ReactFullpage.Wrapper>
+				<div className={styles.app__container}>
+					<ReactFullpage.Wrapper>
+						<section className="section">
+							<div className={styles.section__container}></div>
+						</section>
+						<section className="section">
+							<div className={styles.section__container}></div>
+						</section>
+						<section className="section">
+							<div className={styles.section__container}></div>
+						</section>
+					</ReactFullpage.Wrapper>
+				</div>
 			);
 		}}
 	/>

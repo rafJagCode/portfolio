@@ -1,5 +1,7 @@
+.app__container {
+ background-color: var(--theme-primary);
+}
 .section__container {
  height: calc(100% - #{$topbar-height});
  margin-top: $topbar-height;
- background-color: var(--theme-primary);
 }
