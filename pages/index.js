@@ -1,5 +1,6 @@
 import styles from './App.module.scss';
 import ReactFullpage from '@fullpage/react-fullpage';
+import ParticlesBackground from '@/components/particles_background/ParticlesBackground';
 
 export default function App() {
 
@@ -11,6 +12,7 @@ export default function App() {
 		render={() => {
 			return (
 				<div className={styles.app__container}>
+					<ParticlesBackground className={styles.app__particles}/>
 					<ReactFullpage.Wrapper>
 						<section className="section">
 							<div className={styles.section__container}></div>
