@@ -15,7 +15,10 @@ export default function App() {
 						<div className={styles.section__container}></div>
 					</div>
 					<div className="section">
-						<div className="section__container"></div>
+						<div className={styles.section__container}></div>
+					</div>
+					<div className="section">
+						<div className={styles.section__container}></div>
 					</div>
 				</ReactFullpage.Wrapper>
 			);

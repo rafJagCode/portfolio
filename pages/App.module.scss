@@ -1,3 +1,5 @@
 .section__container {
+ height: calc(100% - #{$topbar-height});
+ margin-top: $topbar-height;
  background-color: var(--theme-primary);
 }
