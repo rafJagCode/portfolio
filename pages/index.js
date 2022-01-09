@@ -1,6 +1,6 @@
-import styles from './Home.module.scss';
+import styles from './App.module.scss';
 
-export default function Home() {
+export default function App() {
   return (
     <div id="app" className={styles.app}>
 		<div className={styles.sections}>
