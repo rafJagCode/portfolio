@@ -1,14 +1,23 @@
 import styles from './App.module.scss';
+import ReactFullpage from '@fullpage/react-fullpage';
 
 export default function App() {
+
   return (
-    <div id="app" className={styles.app}>
-		<div className={styles.sections}>
-			<div class={styles.section1}></div>
-			<div class={styles.section2}></div>
-			<div class={styles.section3}></div>
-			<div class={styles.section4}></div>
-		</div>
-    </div>
+      <ReactFullpage
+		licenseKey = {'YOUR_KEY_HERE'}
+		scrollingSpeed = {1000}
+
+		render={() => {
+			return (
+				<ReactFullpage.Wrapper>
+					<div className="section">
+					</div>
+					<div className="section">
+					</div>
+				</ReactFullpage.Wrapper>
+			);
+		}}
+	/>
   )
 }
