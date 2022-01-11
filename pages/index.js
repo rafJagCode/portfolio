@@ -1,6 +1,9 @@
 import styles from './App.module.scss';
-import ReactFullpage from '@fullpage/react-fullpage';
+import navigationLinks from '@/configuration/navigation_links';
 import ParticlesBackground from '@/components/particles_background/ParticlesBackground';
+import Topbar from '@/components/topbar/Topbar';
+import Sidebar from '@/components/sidebar/Sidebar';
+import ReactFullpage from '@fullpage/react-fullpage';
 
 export default function App() {
 
@@ -13,6 +16,8 @@ export default function App() {
 			return (
 				<div className={styles.app__container}>
 					<ParticlesBackground className={styles.app__particles}/>
+					<Topbar navigationLinks={navigationLinks}/>
+					<Sidebar navigationLinks={navigationLinks}/>
 					<ReactFullpage.Wrapper>
 						<section className="section">
 							<div className={styles.section__container}></div>
