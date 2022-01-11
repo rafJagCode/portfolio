@@ -8,17 +8,18 @@ import ReactFullpage from '@fullpage/react-fullpage';
 export default function App() {
 
   return (
-      <ReactFullpage
-		licenseKey = {`Ca(6HeW5q[zX%k*>A#'V%I@@k|5*QKt)s]k3HmOaAPWk}sQdFK('[p0:wkl3f=|Fo0%ijhruscuZC\SYLWQI`}
-		scrollingSpeed = {1000}
-
-		render={() => {
-			return (
-				<div className={styles.app__container}>
-					<ParticlesBackground className={styles.app__particles}/>
-					<Topbar navigationLinks={navigationLinks}/>
-					<Sidebar navigationLinks={navigationLinks}/>
-					<ReactFullpage.Wrapper>
+	<div className={styles.app__container}>
+		<Topbar navigationLinks={navigationLinks}/>
+		<Sidebar navigationLinks={navigationLinks}/>
+      	<ReactFullpage
+			licenseKey = {`Ca(6HeW5q[zX%k*>A#'V%I@@k|5*QKt)s]k3HmOaAPWk}sQdFK('[p0:wkl3f=|Fo0%ijhruscuZC\SYLWQI`}
+			scrollingSpeed = {1000}
+			dragAndMove = {true}
+			touchSensitivity = {3}
+			render={(state, fullpageApi) => {
+				return([
+					<ParticlesBackground className={styles.app__particles} key="particles"/>,
+					<ReactFullpage.Wrapper key="fullpage__wrapper">
 						<section className="section">
 							<div className={styles.section__container}></div>
 						</section>
@@ -29,9 +30,9 @@ export default function App() {
 							<div className={styles.section__container}></div>
 						</section>
 					</ReactFullpage.Wrapper>
-				</div>
-			);
-		}}
-	/>
+				]);
+			}}
+		/>
+	</div>
   )
 }
