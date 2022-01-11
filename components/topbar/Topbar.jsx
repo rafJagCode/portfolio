@@ -1,4 +1,5 @@
 import styles from './Topbar.module.scss';
+import NavLink from '@/components/nav_link/NavLink';
 
 export default function Topbar({navigationLinks}) {
 	return (
@@ -8,7 +9,7 @@ export default function Topbar({navigationLinks}) {
 			<div className="topbar__right">
 			{
 				navigationLinks.map((link) =>{
-					return link.name;
+					return <NavLink link={link}/>;
 				})
 			}
 			</div>
