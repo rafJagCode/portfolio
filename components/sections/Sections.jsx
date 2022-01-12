@@ -7,6 +7,8 @@ import {useEffect} from 'react';
 export default function Sections({state, setFullpageApi}){
 	useEffect(()=>{
 		setFullpageApi(state.fullpageApi);
+		const anchor = '#' + window.location.hash.substr(1);
+		state.fullpageApi.moveTo(anchor);
 	}, [state]);
 
 	return([
