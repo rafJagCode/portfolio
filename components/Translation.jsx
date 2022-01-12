@@ -17,7 +17,7 @@ export default function Translation({text}) {
 		});
 
 		return ()=>{
-			observer.disconect();
+			observer.disconnect();
 		}
 	}, [])
 

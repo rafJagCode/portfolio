@@ -17,7 +17,7 @@ export default function LanguageController() {
 		});
 
 		return ()=>{
-			observer.disconect();
+			observer.disconnect();
 		}
 	}, [])
 
