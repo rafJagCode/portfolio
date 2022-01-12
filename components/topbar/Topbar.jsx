@@ -1,10 +1,12 @@
 import styles from './Topbar.module.scss';
 import NavLink from '@/components/navlink/NavLink';
+import LanguageController from '@/components/language_controller/LanguageController';
 
 export default function Topbar({Navigation}) {
 	return (
 		<header className={styles.topbar}>
 			<div className={styles.topbar__left}>
+				<LanguageController/>
 			</div>
 			<div className={styles.topbar__right}>
 				<nav className="topbar__navigation">

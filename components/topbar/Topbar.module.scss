@@ -1,6 +1,7 @@
 .topbar {
- display: flex;
- flex-direction: column;
+ display: grid;
+ align-items: center;
+ grid-template-columns: auto 1fr;
  position: fixed;
  top: 0;
  width: 100%;
@@ -8,10 +9,10 @@
  z-index: 1;
 }
 .topbar__left {
- align-self: flex-start;
+ justify-self: start;
 }
 .topbar__right {
- align-self: flex-end;
+ justify-self: end;
 }
 .topbar__menu {
  display: flex;

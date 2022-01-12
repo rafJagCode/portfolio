@@ -1,7 +1,7 @@
 import ParticlesBackground from '@/components/particles_background/ParticlesBackground';
 import ReactFullpage from '@fullpage/react-fullpage';
 import styles from './Sections.module.scss';
-import {useEffect, useState} from 'react';
+import {useEffect} from 'react';
 
 export default function Sections({state, setFullpageApi}){
 	useEffect(()=>{

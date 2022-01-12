@@ -1,0 +1,25 @@
+.language_controller {
+ font-size: 1rem;
+ color: var(--theme-text);
+ display: flex;
+ align-items: center;
+ & span {
+  cursor: pointer;
+  padding: 0.5rem 0.8rem;
+ }
+ & span:hover {
+  text-shadow: 1px 1px 4px var(--theme-accent), -1px -1px 4px var(--theme-accent);
+ }
+ & [data-is-current='true'] {
+  color: var(--theme-accent);
+  font-weight: 800;
+  &:hover {
+   text-shadow: none;
+  }
+ }
+}
+.language_controller__vertical_line {
+ height: 1.1rem;
+ width: 1px;
+ background-color: var(--theme-text);
+}
