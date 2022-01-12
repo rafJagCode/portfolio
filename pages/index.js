@@ -4,14 +4,10 @@ import Topbar from '@/components/topbar/Topbar';
 import Sidebar from '@/components/sidebar/Sidebar';
 import ReactFullpage from '@fullpage/react-fullpage';
 import Sections from '@/components/sections/Sections';
-import {useState, useEffect} from 'react';
+import {useState} from 'react';
 
 export default function App() {
 	const [fullpageApi, setFullpageApi] = useState();
-
-	useEffect(()=>{
-		document.querySelector('html').lang = localStorage.getItem('lang') ? localStorage.getItem('lang') : 'pl';
-	}, [])
 
 	const Navigation = {
 		navigationLinks: navigationLinks,
