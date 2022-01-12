@@ -1,18 +1,26 @@
 import styles from './Topbar.module.scss';
-import NavLink from '@/components/nav_link/NavLink';
+import NavLink from '@/components/navlink/NavLink';
 
-export default function Topbar({navigationLinks}) {
+export default function Topbar({Navigation}) {
 	return (
-		<nav className={styles.topbar}>
-			<div className="topbar__left">
+		<header className={styles.topbar}>
+			<div className={styles.topbar__left}>
 			</div>
-			<div className="topbar__right">
-			{
-				navigationLinks.map((link) =>{
-					return <NavLink link={link} key={link.name}/>;
-				})
-			}
+			<div className={styles.topbar__right}>
+				<nav className="topbar__navigation">
+					<ul className={styles.topbar__menu}>
+						{
+							Navigation.navigationLinks.map((link) =>{
+								return (
+									<li key={link.name}>
+										<NavLink link={link} fullpageApi={Navigation.fullpageApi}/>
+									</li>
+								)
+							})
+						}
+					</ul>
+				</nav>
 			</div>
-		</nav>
+		</header>
 	)
 }

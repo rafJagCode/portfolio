@@ -1,0 +1,18 @@
+.topbar {
+ display: flex;
+ flex-direction: column;
+ position: fixed;
+ top: 0;
+ width: 100%;
+ height: $topbar-height;
+ z-index: 1;
+}
+.topbar__left {
+ align-self: flex-start;
+}
+.topbar__right {
+ align-self: flex-end;
+}
+.topbar__menu {
+ display: flex;
+}

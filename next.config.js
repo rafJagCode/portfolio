@@ -1,7 +1,7 @@
 module.exports = {
-  reactStrictMode: true,
+	reactStrictMode: true,
 	sassOptions: {
 		includePaths: ['.'],
 		prependData: `@import "variables.scss";`,
 	}
-}
+};

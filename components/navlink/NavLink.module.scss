@@ -1,0 +1,19 @@
+.navlink {
+ font-size: 1rem;
+ display: flex;
+ align-items: center;
+ gap: 0.3rem;
+ padding: 0.5rem 0.8rem;
+ color: var(--theme-text);
+ cursor: pointer;
+ svg {
+  display: block;
+ }
+ &:hover {
+  color: white;
+  text-shadow: 1px 1px 4px var(--theme-accent), -1px -1px 4px var(--theme-accent);
+  svg {
+   filter: drop-shadow(1px 1px 2px var(--theme-accent)) drop-shadow(-1px -1px 2px var(--theme-accent));
+  }
+ }
+}
