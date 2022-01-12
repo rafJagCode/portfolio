@@ -10,7 +10,7 @@
   display: block;
  }
  &:hover {
-  color: white;
+  color: var(--theme-text);
   text-shadow: 1px 1px 4px var(--theme-accent), -1px -1px 4px var(--theme-accent);
   svg {
    filter: drop-shadow(1px 1px 2px var(--theme-accent)) drop-shadow(-1px -1px 2px var(--theme-accent));
