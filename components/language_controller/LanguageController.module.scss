@@ -3,14 +3,14 @@
  color: var(--theme-text);
  display: flex;
  align-items: center;
- & span {
+ & a {
   cursor: pointer;
   padding: 0.5rem 0.8rem;
  }
- & span:hover {
+ & a:hover {
   text-shadow: 1px 1px 4px var(--theme-accent), -1px -1px 4px var(--theme-accent);
  }
- & [data-is-current='true'] {
+ & a[data-is-selected='true'] {
   color: var(--theme-accent);
   font-weight: 800;
   &:hover {
