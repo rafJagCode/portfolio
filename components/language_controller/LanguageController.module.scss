@@ -6,6 +6,10 @@
  & a {
   cursor: pointer;
   padding: 0.5rem 0.8rem;
+  line-height: 1rem;
+  width: 3rem;
+  display: flex;
+  justify-content: center;
  }
  & a:hover {
   text-shadow: 1px 1px 4px var(--theme-accent), -1px -1px 4px var(--theme-accent);
