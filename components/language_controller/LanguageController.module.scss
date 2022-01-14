@@ -16,7 +16,6 @@
  }
  & a[data-is-selected='true'] {
   color: var(--theme-accent);
-  font-weight: 800;
   &:hover {
    text-shadow: none;
   }
