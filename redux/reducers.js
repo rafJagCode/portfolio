@@ -14,6 +14,17 @@ const language = (state = INITIAL_LANGUAGE, action) => {
 	}
 }
 
+const FULLPAGE_API = null;
+
+const fullpageApi = (state = FULLPAGE_API, action) => {
+	switch(action.type){
+		case types.SET_FULLPAGE_API:
+			return action.fullpageApi;
+		default:
+			return state;
+	}
+}
+
 export default combineReducers({
-    language
+    language, fullpageApi
 });

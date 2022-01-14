@@ -3,13 +3,17 @@ import ReactFullpage from '@fullpage/react-fullpage';
 import styles from './Sections.module.scss';
 import Footer from '@/components/footer/Footer';
 import {useEffect} from 'react';
+import {useDispatch} from 'react-redux';
 
-export default function Sections({state, setFullpageApi}){
+export default function Sections({state}){
+	const dispatch = useDispatch();
+
 	useEffect(()=>{
-		setFullpageApi(state.fullpageApi);
+		const fullpageApi = state.fullpageApi;
+		dispatch({type: 'SET_FULLPAGE_API', fullpageApi: fullpageApi});
 		const anchor = '#' + window.location.hash.substr(1);
-		state.fullpageApi.moveTo(anchor);
-	}, [state]);
+		fullpageApi.moveTo(anchor);
+	}, []);
 
 	return([
 		<ParticlesBackground className={styles.sections__particles} key="particles"/>,
