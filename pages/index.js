@@ -4,9 +4,18 @@ import Topbar from '@/components/topbar/Topbar';
 import Sidebar from '@/components/sidebar/Sidebar';
 import ReactFullpage from '@fullpage/react-fullpage';
 import Sections from '@/components/sections/Sections';
-import {useState} from 'react';
+import {useState, useEffect} from 'react';
+import {useDispatch} from 'react-redux';
+import {defaultTranslation} from '@/translations/translations';
 
 export default function App() {
+	const dispatch = useDispatch();
+
+	useEffect(()=>{
+		const language = localStorage.getItem('language') ? localStorage.getItem('language') : defaultTranslation;
+		dispatch({type: 'CHANGE_LANGUAGE', language: language});
+	}, [])
+
 	const [fullpageApi, setFullpageApi] = useState();
 
 	const Navigation = {
