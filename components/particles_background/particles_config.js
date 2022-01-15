@@ -4,7 +4,7 @@ const particlesConfig = {
         "opacity": 0
     },
     "fullScreen": {
-        "enable": true,
+        "enable": false,
         "zIndex": 1
     },
     "detectRetina": true,

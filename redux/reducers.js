@@ -1,5 +1,6 @@
 import types from './types'
 import {combineReducers} from 'redux';
+import store from './store';
 
 const INITIAL_LANGUAGE = 'pl';
 
@@ -25,6 +26,17 @@ const fullpageApi = (state = FULLPAGE_API, action) => {
 	}
 }
 
+const SIDEBAR_OPEN = false;
+
+const sidebarOpen = (state = SIDEBAR_OPEN, action) => {
+	switch(action.type){
+		case types.CHANGE_SIDEBAR_STATE:
+			return !state;
+		default:
+			return state;
+	}
+}
+
 export default combineReducers({
-    language, fullpageApi
+    language, fullpageApi, sidebarOpen
 });

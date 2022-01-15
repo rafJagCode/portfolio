@@ -1,11 +1,12 @@
 import styles from './Topbar.module.scss';
 import NavLink from '@/components/navlink/NavLink';
+import Hamburger from '@/components/hamburger/Hamburger';
 import LanguageController from '@/components/language_controller/LanguageController';
 import navigationLinks from '@/configuration/navigation_links';
 
 export default function Topbar() {
 	return (
-		<header className={styles.topbar}>
+		<header className={styles.topbar} id="topbar">
 			<div className={styles.topbar__left}>
 				<LanguageController/>
 			</div>
@@ -21,6 +22,7 @@ export default function Topbar() {
 								)
 							})
 						}
+						<Hamburger/>
 					</ul>
 				</nav>
 			</div>

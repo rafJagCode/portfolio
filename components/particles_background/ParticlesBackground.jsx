@@ -1,10 +1,15 @@
 import Particles from "react-tsparticles";
 import particlesConfig from './particles_config';
+import styles from './ParticlesBackground.module.scss';
+import {memo} from 'react'
 
-export default function ParticlesBackground({className}) {
-	const particlesLoaded = (container) => {
+const ParticlesBackground = memo(() => {
+	const particlesInit = (main) => {
 	};
+
 	return (
-		<Particles params={particlesConfig} className={className} loaded={particlesLoaded}/>
+		<Particles params={particlesConfig} className={styles.particles} init={particlesInit}/>
 	)
-}
+})
+
+export default ParticlesBackground;

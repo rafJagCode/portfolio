@@ -16,7 +16,7 @@ export default function Sections({state}){
 	}, []);
 
 	return([
-		<ParticlesBackground className={styles.sections__particles} key="particles"/>,
+		<ParticlesBackground key="particles"/>,
 		<ReactFullpage.Wrapper key="fullpage__wrapper">
 			<section className="section">
 				<div className={styles.section__container}>
