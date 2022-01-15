@@ -10,7 +10,7 @@ export default function Hamburger() {
 	}
 
 	return (
-		<button className={styles.hamburger} data-is-open={sidebarOpen} onClick={handleClick}>
+		<button className={styles.hamburger} data-is-open={sidebarOpen} onClick={handleClick} id="hamburger">
 			<span className={styles.hamburger__line1}></span>
 			<span className={styles.hamburger__line2}></span>
 			<span className={styles.hamburger__line3}></span>

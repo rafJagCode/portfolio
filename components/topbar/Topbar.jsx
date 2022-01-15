@@ -12,7 +12,7 @@ export default function Topbar() {
 			</div>
 			<div className={styles.topbar__right}>
 				<nav className="topbar__navigation">
-					<ul className={styles.topbar__menu}>
+					<ul className={styles.topbar__menu} id="topbarMenu">
 						{
 							navigationLinks.map((link) =>{
 								return (

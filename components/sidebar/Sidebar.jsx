@@ -24,11 +24,13 @@ export default function Sidebar() {
 	}
 
 	useEffect(() => {
-		const topbar = document.querySelector('#topbar');
+		const topbarMenu = document.querySelector('#topbarMenu');
+		const languageController = document.querySelector('#languageController');
 
 		const handleClickOutsideSidebar = (e) => {
 			if(!isSidebarOpen.current) return;
-			if(topbar.contains(e.target)) return;
+			if(topbarMenu.contains(e.target)) return;
+			if(languageController.contains(e.target)) return;
 			if(sidebarRef.current.contains(e.target)) return;
 			dispatch({type: 'CHANGE_SIDEBAR_STATE'});
 		}

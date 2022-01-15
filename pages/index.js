@@ -19,8 +19,8 @@ export default function App() {
 
 	return (
 		<div className={styles.app__container}>
-			<Topbar/>
 			<Sidebar/>
+			<Topbar/>
 			<main className={styles.app__content} data-is-blured={sidebarOpen}>
 				<ReactFullpage
 					licenseKey = {`Ca(6HeW5q[zX%k*>A#'V%I@@k|5*QKt)s]k3HmOaAPWk}sQdFK('[p0:wkl3f=|Fo0%ijhruscuZC\SYLWQI`}
