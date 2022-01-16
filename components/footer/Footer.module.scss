@@ -1,0 +1,16 @@
+.footer {
+ width: 100%;
+ height: $footer-height;
+ box-shadow: 0 -6px 4px -4px var(--theme-text);
+ display: flex;
+ flex-direction: column;
+ align-items: center;
+ justify-content: center;
+}
+.footer__author {
+ font-size: 0.8rem;
+ font-weight: 600;
+}
+.footer__copyright {
+ font-size: 0.7rem;
+}

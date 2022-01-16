@@ -1,0 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Saira:wght@300;500;800&display=swap');
+html {
+ font-family: 'Saira', sans-serif;
+ font-size: calc(10px + (20 - 10) * ((100vw - 300px) / (1600 - 300)));
+ color: var(--theme-text);
+}

@@ -1,0 +1,39 @@
+$height: 1rem;
+.hamburger {
+ background-color: transparent;
+ cursor: pointer;
+ margin: 0.5rem 0.8rem;
+ height: $height;
+ width: calc($height * 1.4142135624 - 3px);
+ display: flex;
+ flex-direction: column;
+ justify-content: space-between;
+ span {
+  pointer-events: none;
+  background-color: var(--theme-text);
+  height: 2px;
+  transition: all 0.5s ease;
+  transform-origin: left;
+ }
+ .hamburger__line2 {
+  height: 1px;
+  margin: 0 1px;
+ }
+ &[data-is-open='true'] {
+  .hamburger__line1 {
+   transform: rotate(45deg);
+  }
+  .hamburger__line2 {
+   opacity: 0;
+  }
+  .hamburger__line3 {
+   transform: rotate(-45deg);
+  }
+ }
+}
+
+@media (min-width: $hamburger-breakpoint) {
+ .hamburger {
+  display: none;
+ }
+}

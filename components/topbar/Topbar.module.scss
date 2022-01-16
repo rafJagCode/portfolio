@@ -1,0 +1,32 @@
+.topbar {
+ display: grid;
+ align-items: center;
+ grid-template-columns: auto 1fr;
+ position: fixed;
+ top: 0;
+ width: 100%;
+ height: $topbar-height;
+ z-index: 1;
+}
+.topbar__left {
+ justify-self: start;
+}
+.topbar__right {
+ justify-self: end;
+}
+.topbar__menu {
+ height: $topbar-height;
+ min-width: $sidebar-width;
+ justify-content: flex-end;
+ display: flex;
+ align-items: center;
+ & li {
+  display: none;
+ }
+}
+
+@media (min-width: $hamburger-breakpoint) {
+ .topbar__menu li {
+  display: inherit;
+ }
+}

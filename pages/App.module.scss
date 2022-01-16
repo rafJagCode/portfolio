@@ -1,0 +1,9 @@
+.app__container {
+ background-color: var(--theme-primary);
+}
+.app__content {
+ &[data-is-blured='true'] {
+  filter: blur(4px);
+  pointer-events: none;
+ }
+}
