@@ -2,6 +2,7 @@ import ParticlesBackground from '@/components/particles_background/ParticlesBack
 import ReactFullpage from '@fullpage/react-fullpage';
 import styles from './Sections.module.scss';
 import Home from '@/components/home/Home';
+import Projects from '@/components/projects/Projects';
 import Footer from '@/components/footer/Footer';
 import {useEffect} from 'react';
 import {useDispatch} from 'react-redux';
@@ -25,7 +26,9 @@ export default function Sections({state}){
 				</div>
 			</section>
 			<section className="section">
-				<div className={styles.section__container}></div>
+				<div className={styles.section__container}>
+					<Projects/>
+				</div>
 			</section>
 			<section className="section">
 				<div className={styles.section__container}></div>
