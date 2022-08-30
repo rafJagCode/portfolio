@@ -40,11 +40,12 @@ $ufo-orbit-time: 5s;
  animation-iteration-count: infinite;
  -webkit-animation-timing-function: linear;
  animation-timing-function: linear;
+ display: grid;
+ justify-items: end;
+ align-items: end;
 }
 
 .home_image__ufo {
- background-image: url('/static/images/ufo.png');
- background-size: contain;
  width: 10%;
  aspect-ratio: 1;
  -webkit-animation-name: invert-orbit;
@@ -55,51 +56,98 @@ $ufo-orbit-time: 5s;
  animation-iteration-count: infinite;
  -webkit-animation-timing-function: linear;
  animation-timing-function: linear;
+ transform: rotateY(30deg) rotateX(-75deg) scale(1.8);
+}
+
+.ufo {
+ position: absolute;
+ background-image: url('/static/images/ufo.svg');
+ background-size: contain;
+ background-repeat: no-repeat;
+ background-position-y: bottom;
+ width: 100%;
+ aspect-ratio: 1;
 }
 
 @-webkit-keyframes orbit {
  0% {
-  transform: rotateZ(0deg);
+  transform: rotateZ(360deg);
+ }
+ 25% {
+  transform: rotateZ(270deg);
+ }
+ 50% {
+  transform: rotateZ(180deg);
+ }
+ 75% {
+  transform: rotateZ(90deg);
  }
  100% {
-  transform: rotateZ(360deg);
+  transform: rotateZ(0deg);
  }
 }
 @keyframes orbit {
  0% {
-  transform: rotateZ(0deg);
+  transform: rotateZ(360deg);
+ }
+ 25% {
+  transform: rotateZ(270deg);
+ }
+ 50% {
+  transform: rotateZ(180deg);
+ }
+ 75% {
+  transform: rotateZ(90deg);
  }
  100% {
-  transform: rotateZ(360deg);
+  transform: rotateZ(0deg);
  }
 }
 
 @-webkit-keyframes invert-orbit {
  0% {
-  transform: rotateZ(360deg) rotateY(30deg) rotateX(-75deg) scale(1.25);
+  transform: rotateZ(0deg) rotateY(30deg) rotateX(-75deg) scale(1.8);
  }
- 12.5% {
-  transform: rotateZ(315deg) rotateY(30deg) rotateX(-75deg) scale(1);
+ 25% {
+  transform: rotateZ(90deg) rotateY(30deg) rotateX(-75deg) scale(1.3);
  }
- 62.5% {
-  transform: rotateZ(135deg) rotateY(30deg) rotateX(-75deg) scale(2);
+ 40% {
+  transform: rotateZ(144deg) rotateY(30deg) rotateX(-75deg) scale(1);
+ }
+ 50% {
+  transform: rotateZ(180deg) rotateY(30deg) rotateX(-75deg) scale(1.2);
+ }
+ 75% {
+  transform: rotateZ(270deg) rotateY(30deg) rotateX(-75deg) scale(1.5);
+ }
+ 90% {
+  transform: rotateZ(324deg) rotateY(30deg) rotateX(-75deg) scale(2);
  }
  100% {
-  transform: rotateZ(0deg) rotateY(30deg) rotateX(-75deg) scale(1.25);
+  transform: rotateZ(360deg) rotateY(30deg) rotateX(-75deg) scale(1.8);
  }
 }
 
 @keyframes invert-orbit {
  0% {
-  transform: rotateZ(360deg) rotateY(30deg) rotateX(-75deg) scale(1.25);
+  transform: rotateZ(0deg) rotateY(30deg) rotateX(-75deg) scale(1.8);
  }
- 12.5% {
-  transform: rotateZ(315deg) rotateY(30deg) rotateX(-75deg) scale(1);
+ 25% {
+  transform: rotateZ(90deg) rotateY(30deg) rotateX(-75deg) scale(1.3);
  }
- 62.5% {
-  transform: rotateZ(135deg) rotateY(30deg) rotateX(-75deg) scale(2);
+ 40% {
+  transform: rotateZ(144deg) rotateY(30deg) rotateX(-75deg) scale(1);
+ }
+ 50% {
+  transform: rotateZ(180deg) rotateY(30deg) rotateX(-75deg) scale(1.2);
+ }
+ 75% {
+  transform: rotateZ(270deg) rotateY(30deg) rotateX(-75deg) scale(1.5);
+ }
+ 90% {
+  transform: rotateZ(324deg) rotateY(30deg) rotateX(-75deg) scale(2);
  }
  100% {
-  transform: rotateZ(0deg) rotateY(30deg) rotateX(-75deg) scale(1.25);
+  transform: rotateZ(360deg) rotateY(30deg) rotateX(-75deg) scale(1.8);
  }
 }

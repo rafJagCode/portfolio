@@ -35,6 +35,14 @@ $planets: (
  height: 60%;
  max-width: 100%;
  max-height: 100%;
+ position: relative;
+}
+.projects__ufo_container {
+ width: 10rem;
+ height: 10rem;
+ position: absolute;
+ top: 0;
+ right: 0;
 }
 .projects__plain {
  position: relative;
