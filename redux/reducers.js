@@ -37,6 +37,20 @@ const sidebarOpen = (state = SIDEBAR_OPEN, action) => {
 	}
 }
 
+const SCROLL_STATE = {
+	origin: undefined,
+	destination: undefined,
+	direction: undefined,
+}
+
+const scrollState = (state = SCROLL_STATE, action) =>{
+	switch(action.type){
+		case types.SET_SCROLLING_STATE:
+			return {...state, ...action.scrollState};
+		default: return state;
+	}
+}
+
 export default combineReducers({
-    language, fullpageApi, sidebarOpen
+    language, fullpageApi, sidebarOpen, scrollState
 });
