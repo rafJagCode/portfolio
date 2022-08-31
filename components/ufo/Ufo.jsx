@@ -5,18 +5,15 @@ export default function Ufo({ isVisible }) {
   const ufoComponent = useRef();
 
   const ufoContainerObserver = new ResizeObserver((entries) => {
-    const fireSizeFactor = 1 + 0.6;
     const ufoContainer = entries[0];
     const ufoContainerBoundingClientRect = ufoContainer.target.getBoundingClientRect();
     const ufoWidth = ufoContainerBoundingClientRect.width + "px";
-    const ufoHeight = ufoContainerBoundingClientRect.height * fireSizeFactor + "px";
     const topInPercents = (parseFloat(ufoContainerBoundingClientRect.top) / window.innerHeight) * 100;
     const leftInPercents = (parseFloat(ufoContainerBoundingClientRect.left) / window.innerWidth) * 100;
-    ufoComponent.current.style.top = topInPercents + "%";
-    ufoComponent.current.style.left = leftInPercents + "%";
 
     ufoComponent.current.style.width = ufoWidth;
-    ufoComponent.current.style.height = ufoHeight;
+    ufoComponent.current.style.top = topInPercents + "%";
+    ufoComponent.current.style.left = leftInPercents + "%";
   });
 
   useEffect(() => {
