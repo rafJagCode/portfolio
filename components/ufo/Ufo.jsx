@@ -1,27 +1,44 @@
 import styles from "./Ufo.module.scss";
 import { useEffect, useRef } from "react";
-import { useSelector } from "react-redux";
 
 export default function Ufo({ isVisible }) {
-  const fullpageApi = useSelector((state) => state.fullpageApi);
   const ufoComponent = useRef();
 
-  const ufoContainerObserver = new ResizeObserver((entries) => {
-    const ufoContainer = entries[0];
-    const ufoContainerBoundingClientRect = ufoContainer.target.getBoundingClientRect();
-    const ufoWidth = ufoContainerBoundingClientRect.width + "px";
-    const leftInPercents = (parseFloat(ufoContainerBoundingClientRect.left) / window.innerWidth) * 100;
-    const activeSectionIndex = fullpageApi.getActiveSection().index;
-    let topInPercents;
-    if (!activeSectionIndex) {
-      topInPercents = (parseFloat(ufoContainerBoundingClientRect.top) / window.innerHeight) * 100;
-    } else {
-      topInPercents = ((activeSectionIndex * window.innerHeight + parseFloat(ufoContainerBoundingClientRect.top)) / window.innerHeight) * 100;
-    }
+  const getUfoContainerDimensions = (ufoContainer) => {
+    const ufoContainerBoundingClientRect = ufoContainer.getBoundingClientRect();
+    return {
+      width: parseFloat(ufoContainerBoundingClientRect.width),
+      top: parseFloat(ufoContainerBoundingClientRect.top),
+      left: parseFloat(ufoContainerBoundingClientRect.left),
+    };
+  };
 
-    ufoComponent.current.style.width = ufoWidth;
-    ufoComponent.current.style.top = topInPercents + "%";
-    ufoComponent.current.style.left = leftInPercents + "%";
+  const getUfoComponentResizedValues = (ufoContainerDimensions) => {
+    const homeSection = document.getElementById("home");
+    const homeSectionTop = -1 * parseFloat(homeSection.getBoundingClientRect().top);
+
+    const width = ufoContainerDimensions.width;
+    const top = ((homeSectionTop + ufoContainerDimensions.top) / window.innerHeight) * 100;
+    const left = (ufoContainerDimensions.left / window.innerWidth) * 100;
+
+    return {
+      width: width,
+      top: top,
+      left: left,
+    };
+  };
+
+  const assignResizedStyleValues = (ufoComponentResizedValues) => {
+    ufoComponent.current.style.width = ufoComponentResizedValues.width + "px";
+    ufoComponent.current.style.top = ufoComponentResizedValues.top + "%";
+    ufoComponent.current.style.left = ufoComponentResizedValues.left + "%";
+  };
+
+  const ufoContainerObserver = new ResizeObserver((entries) => {
+    const ufoContainer = entries[0].target;
+    const ufoContainerDimensions = getUfoContainerDimensions(ufoContainer);
+    const ufoComponentResizedValues = getUfoComponentResizedValues(ufoContainerDimensions);
+    assignResizedStyleValues(ufoComponentResizedValues);
   });
 
   useEffect(() => {
