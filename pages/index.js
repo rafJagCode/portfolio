@@ -3,10 +3,8 @@ import Sidebar from "@/components/sidebar/Sidebar";
 import Topbar from "@/components/topbar/Topbar";
 import ReactFullpage from "@fullpage/react-fullpage";
 import Sections from "@/components/sections/Sections";
-import animateToLaunchingPosition from "@/services/ufo/animateToLaunchingPosition";
-import swapOrbitingUfoToUfoComponent from "@/services/ufo/swapOrbitingUfoToUfoComponent";
-import startUfoEngine from "@/services/ufo/startUfoEngine";
 import Ufo from "@/components/ufo/Ufo";
+import handleLeavingHomeUfoAnimation from "@/services/ufo/handleLeavingHomeUfoAnimation";
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { defaultTranslation } from "@/translations/translations";
@@ -27,19 +25,13 @@ export default function App() {
       type: "SET_SCROLLING_STATE",
       scrollState: { origin, destination, direction },
     });
-    const ufoOrbit = document.getElementById("home_image__orbit");
-    const ufoContainer = document.getElementById("home__ufo_container");
 
-    const ufoOrbitAnimation = ufoOrbit.getAnimations()[0];
-    const ufoContainerAnimation = ufoContainer.getAnimations()[0];
-
-    animateToLaunchingPosition(ufoOrbitAnimation, ufoContainerAnimation).then(() => {
-      swapOrbitingUfoToUfoComponent(ufoContainer);
-      setIsUfoComponentVisible(true);
-      startUfoEngine();
-    });
-
-    return false;
+    if (!isUfoComponentVisible) {
+      handleLeavingHomeUfoAnimation().then(() => {
+        setIsUfoComponentVisible(true);
+      });
+      //   return false;
+    }
   };
 
   return (
@@ -54,7 +46,9 @@ export default function App() {
           touchSensitivity={3}
           anchors={["#home", "#projects", "#technologies", "#contact"]}
           onLeave={onLeave}
-          render={(state) => <Sections state={state} />}
+          render={(state) => {
+            return <Sections state={state} />;
+          }}
         />
         <Ufo isVisible={isUfoComponentVisible} />
       </main>
