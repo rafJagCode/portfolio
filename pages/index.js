@@ -11,7 +11,6 @@ import { defaultTranslation } from "@/translations/translations";
 
 export default function App() {
   const sidebarOpen = useSelector((state) => state.sidebarOpen);
-  const fullpageApi = useSelector((state) => state.fullpageApi);
   const dispatch = useDispatch();
   const [isUfoComponentVisible, setIsUfoComponentVisible] = useState(false);
 
@@ -21,17 +20,18 @@ export default function App() {
   }, []);
 
   const onLeave = (origin, destination, direction) => {
+    if (!isUfoComponentVisible) {
+      handleLeavingHomeUfoAnimation().then(() => {
+        setIsUfoComponentVisible(true);
+        fullpage_api.moveTo(destination.anchor);
+      });
+      return false;
+    }
+
     dispatch({
       type: "SET_SCROLLING_STATE",
       scrollState: { origin, destination, direction },
     });
-
-    if (!isUfoComponentVisible) {
-      handleLeavingHomeUfoAnimation().then(() => {
-        setIsUfoComponentVisible(true);
-      });
-      //   return false;
-    }
   };
 
   return (
