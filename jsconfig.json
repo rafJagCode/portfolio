@@ -5,7 +5,8 @@
    "@/components/*": ["components/*"],
    "@/hooks/*": ["hooks/*"],
    "@/configuration/*": ["configuration/*"],
-   "@/translations/*": ["translations/*"]
+   "@/translations/*": ["translations/*"],
+   "@/services/*": ["services/*"]
   }
  }
 }

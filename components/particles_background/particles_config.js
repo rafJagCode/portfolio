@@ -23,7 +23,7 @@ const particlesConfig = {
                 "right": "out",
                 "top": "out"
             },
-            "speed": 1
+            "speed": 0.1
         },
         "number": {
             "density": {
