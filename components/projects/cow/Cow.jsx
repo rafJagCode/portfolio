@@ -13,7 +13,7 @@ export default function Cow({ imageName, top, left }) {
       className={styles.cow}
       style={{ backgroundImage: `url(/static/images/${imageName}.png`, left: left, top: top }}
       onMouseOver={mouseOver}
-      onmouseout="mouseOut()"
+      //   onMouseOut="mouseOut()"
       ref={cowRef}
     ></button>
   );
