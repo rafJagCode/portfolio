@@ -37,16 +37,17 @@ const sidebarOpen = (state = SIDEBAR_OPEN, action) => {
   }
 };
 
-const SCROLL_STATE = {
-  origin: undefined,
-  destination: undefined,
-  direction: undefined,
+const HOME_UFO_CONTAINER_DIMENSIONS_AND_POSITION = {
+  width: undefined,
+  height: undefined,
+  top: undefined,
+  left: undefined,
 };
 
-const scrollState = (state = SCROLL_STATE, action) => {
+const homeUfoContainerDimensionsAndPosition = (state = HOME_UFO_CONTAINER_DIMENSIONS_AND_POSITION, action) => {
   switch (action.type) {
-    case types.SET_SCROLLING_STATE:
-      return { ...state, ...action.scrollState };
+    case types.SET_HOME_UFO_CONTAINER_DIMENSION_AND_POSITION:
+      return { ...state, ...action.dimensionsAndPosition };
     default:
       return state;
   }
@@ -67,6 +68,6 @@ export default combineReducers({
   language,
   fullpageApi,
   sidebarOpen,
-  scrollState,
+  homeUfoContainerDimensionsAndPosition,
   hoveredCow,
 });

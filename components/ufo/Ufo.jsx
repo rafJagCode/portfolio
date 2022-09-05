@@ -1,28 +1,24 @@
 import styles from './Ufo.module.scss';
-import { useEffect, useRef } from 'react';
+import { useEffect, forwardRef } from 'react';
 import { useSelector } from 'react-redux';
-import resizeUfoComponent from '@/services/ufo/resizeUfoComponent';
 import parkUfoAboveTheCow from '@/services/ufo/parkUfoAboveTheCow';
+import changeWidth from '@/services/ufo/changeWidth';
+import changePosition from '@/services/ufo/changePosition';
 
-export default function Ufo({ isVisible }) {
-  const ufoComponent = useRef();
+const Ufo = forwardRef((props, ufoComponent) => {
+  const homeUfoContainerDimensionsAndPosition = useSelector((state) => state.homeUfoContainerDimensionsAndPosition);
   const hoveredCow = useSelector((state) => state.hoveredCow);
 
-  const ufoContainerObserver = new ResizeObserver((entries) => {
-    const ufoContainer = entries[0].target;
-    resizeUfoComponent(ufoContainer, ufoComponent);
-  });
-
   useEffect(() => {
-    const ufoContainer = document.getElementById('home__ufo_container');
-    if (isVisible) ufoContainerObserver.observe(ufoContainer);
-    else ufoContainerObserver.unobserve(ufoContainer);
-  }, [isVisible]);
+    let { top, left } = homeUfoContainerDimensionsAndPosition;
+    changeWidth(ufoComponent.current, homeUfoContainerDimensionsAndPosition.width);
+    changePosition(ufoComponent.current, top, left);
+  }, [homeUfoContainerDimensionsAndPosition]);
 
-  useEffect(() => {
-    if (!hoveredCow) return;
-    parkUfoAboveTheCow(ufoComponent, hoveredCow);
-  }, [hoveredCow]);
+  //   useEffect(() => {
+  //     if (!hoveredCow) return;
+  //     parkUfoAboveTheCow(ufoComponent, hoveredCow);
+  //   }, [hoveredCow]);
 
   return (
     <div
@@ -37,4 +33,6 @@ export default function Ufo({ isVisible }) {
       ></div>
     </div>
   );
-}
+});
+
+export default Ufo;
