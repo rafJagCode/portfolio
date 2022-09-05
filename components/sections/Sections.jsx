@@ -1,23 +1,23 @@
-import ParticlesBackground from "@/components/particles_background/ParticlesBackground";
-import ReactFullpage from "@fullpage/react-fullpage";
-import styles from "./Sections.module.scss";
-import Home from "@/components/home/Home";
-import Projects from "@/components/projects/Projects";
-import Footer from "@/components/footer/Footer";
-import { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import ParticlesBackground from '@/components/particles_background/ParticlesBackground';
+import ReactFullpage from '@fullpage/react-fullpage';
+import styles from './Sections.module.scss';
+import Home from '@/components/home/Home';
+import Projects from '@/components/projects/Projects';
+import Footer from '@/components/footer/Footer';
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 
-export default function Sections({ state }) {
+export default function Sections() {
   const dispatch = useDispatch();
+
   window.onhashchange = (e) => {
-    state.fullpageApi.moveTo(`#${e.newURL.split("#")[1]}`);
+    fullpage_api.moveTo(`#${e.newURL.split('#')[1]}`);
   };
 
   useEffect(() => {
-    const fullpageApi = state.fullpageApi;
-    dispatch({ type: "SET_FULLPAGE_API", fullpageApi: fullpageApi });
-    let anchor = "#" + window.location.hash.substr(1);
-    fullpageApi.moveTo(anchor);
+    dispatch({ type: 'SET_FULLPAGE_API', fullpageApi: fullpage_api });
+    let anchor = `#${window.location.hash.substr(1)}`;
+    fullpage_api.moveTo(anchor);
   }, []);
 
   return [
@@ -37,7 +37,10 @@ export default function Sections({ state }) {
         <div className={styles.section__container}></div>
       </section>
       <section className="section">
-        <div className={styles.section__container} data-is-last="true"></div>
+        <div
+          className={styles.section__container}
+          data-is-last="true"
+        ></div>
         <Footer />
       </section>
     </ReactFullpage.Wrapper>,
