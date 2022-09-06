@@ -15,6 +15,9 @@ export default function HomeImage() {
 
   useEffect(() => {
     homeUfoContainerResizeObserver.observe(homeUfoContainerRef.current);
+    return () => {
+      homeUfoContainerResizeObserver.unobserve(homeUfoContainerRef.current);
+    };
   }, []);
 
   return (

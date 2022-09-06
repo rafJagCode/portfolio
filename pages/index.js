@@ -5,8 +5,10 @@ import ReactFullpage from '@fullpage/react-fullpage';
 import Sections from '@/components/sections/Sections';
 import Ufo from '@/components/ufo/Ufo';
 import handleLeavingHomeUfoAnimation from '@/services/ufo/handleLeavingHomeUfoAnimation';
-import swapOrbitingUfoToUfoComponent from '@/services/ufo/swapOrbitingUfoToUfoComponent';
+import swapUfos from '@/services/ufo/swapUfos';
 import startUfoEngine from '@/services/ufo/startUfoEngine';
+import startOrbitingAnimation from '@/services/ufo/startOrbitingAnimation';
+import stopUfoEngine from '@/services/ufo/stopUfoEngine';
 import getElementDimensions from '@/services/resize_observer/getElementDimensions';
 import getElementPosition from '@/services/resize_observer/getElementPosition';
 import { useEffect, useState, useRef } from 'react';
@@ -29,15 +31,25 @@ export default function App() {
       handleLeavingHomeUfoAnimation().then(() => {
         const ufoContainer = document.getElementById('home__ufo_container');
         dispatch({ type: 'SET_HOME_UFO_CONTAINER_DIMENSION_AND_POSITION', dimensionsAndPosition: { ...getElementDimensions(ufoContainer), ...getElementPosition(ufoContainer) } });
-        swapOrbitingUfoToUfoComponent(ufoContainer, ufoRef.current);
-        startUfoEngine();
+        swapUfos(ufoContainer, ufoRef.current);
         setIsUfoComponentVisible(true);
-        // fullpage_api.moveTo(destination.anchor);
+        fullpage_api.moveTo(destination.anchor);
       });
       return false;
     }
+    startUfoEngine();
   };
 
+  const afterLoad = (origin, destination) => {
+    const ufoContainer = document.getElementById('home__ufo_container');
+    dispatch({ type: 'SET_HOME_UFO_CONTAINER_DIMENSION_AND_POSITION', dimensionsAndPosition: { ...getElementDimensions(ufoContainer), ...getElementPosition(ufoContainer) } });
+    stopUfoEngine();
+    if (origin.anchor === '#home') return;
+    if (destination.anchor !== '#home') return;
+    swapUfos(ufoRef.current, ufoContainer);
+    setIsUfoComponentVisible(false);
+    startOrbitingAnimation(ufoContainer);
+  };
   return (
     <div className={styles.app__container}>
       <Sidebar />
@@ -53,6 +65,7 @@ export default function App() {
           touchSensitivity={3}
           anchors={['#home', '#projects', '#technologies', '#contact']}
           onLeave={onLeave}
+          afterLoad={afterLoad}
           render={() => {
             return <Sections />;
           }}
