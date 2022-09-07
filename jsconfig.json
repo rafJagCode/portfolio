@@ -1,12 +1,12 @@
 {
- "compilerOptions": {
-  "baseUrl": ".",
-  "paths": {
-   "@/components/*": ["components/*"],
-   "@/hooks/*": ["hooks/*"],
-   "@/configuration/*": ["configuration/*"],
-   "@/translations/*": ["translations/*"],
-   "@/services/*": ["services/*"]
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@/components/*": ["components/*"],
+      "@/hooks/*": ["hooks/*"],
+      "@/configuration/*": ["configuration/*"],
+      "@/translations/*": ["translations/*"],
+      "@/handlers/*": ["handlers/*"]
+    }
   }
- }
 }
