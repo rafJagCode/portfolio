@@ -1,11 +1,11 @@
 $fireSizeFactor: 0.6;
 .ufo {
   position: fixed;
-  width: 0;
   aspect-ratio: $fireSizeFactor;
+  visibility: hidden;
 }
 .ufo__image {
-  background-image: url("/static/images/ufo.svg");
+  background-image: url('/static/images/ufo.svg');
   background-size: contain;
   background-repeat: no-repeat;
   background-position-y: bottom;
@@ -15,7 +15,7 @@ $fireSizeFactor: 0.6;
   z-index: 2;
 }
 .ufo__fire {
-  background-image: url("/static/images/fire.svg");
+  background-image: url('/static/images/fire.svg');
   background-size: contain;
   width: 100%;
   height: calc($fireSizeFactor / ($fireSizeFactor + 1) * 100%);

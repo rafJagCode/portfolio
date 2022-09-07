@@ -1,23 +1,15 @@
-import styles from './Projects.module.scss';
+import styles from "./Projects.module.scss";
+import Cow from "@/components/projects/cow/Cow";
 
 export default function Projects() {
-	return (
-		<div className={styles.projects}>
-			<div className={styles.projects__container}>
-				<div className={styles.projects__ufo_container} id='projects__ufo_container'></div>
-				<div className={styles.projects__plain}>
-					<div className={styles.projects__sun}></div>
-					<div className={styles.projects__uranus_orbit}>
-						<div className={styles.projects__uranus_planet}></div>
-					</div>
-					<div className={styles.projects__jupiter_orbit}>
-						<div className={styles.projects__jupiter_planet}></div>
-					</div>
-					<div className={styles.projects__saturn_orbit}>
-						<div className={styles.projects__saturn_planet}></div>
-					</div>
-				</div>
-			</div>
-		</div>
-	)
+  return (
+    <div className={styles.projects}>
+      <div className={styles.projects__island_container}>
+        <div className={styles.projects__island}></div>
+        <Cow imageName="cow1" top="-17%" left="10%" />
+        <Cow imageName="cow2" top="-30%" left="40%" />
+        <Cow imageName="cow1" top="-10%" left="65%" />
+      </div>
+    </div>
+  );
 }
