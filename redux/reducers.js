@@ -1,6 +1,5 @@
 import types from './types';
 import { combineReducers } from 'redux';
-import store from './store';
 
 const INITIAL_LANGUAGE = 'pl';
 
@@ -37,22 +36,6 @@ const sidebarOpen = (state = SIDEBAR_OPEN, action) => {
   }
 };
 
-const HOME_UFO_CONTAINER_DIMENSIONS_AND_POSITION = {
-  width: undefined,
-  height: undefined,
-  top: undefined,
-  left: undefined,
-};
-
-const homeUfoContainerDimensionsAndPosition = (state = HOME_UFO_CONTAINER_DIMENSIONS_AND_POSITION, action) => {
-  switch (action.type) {
-    case types.SET_HOME_UFO_CONTAINER_DIMENSION_AND_POSITION:
-      return { ...state, ...action.dimensionsAndPosition };
-    default:
-      return state;
-  }
-};
-
 const HOVERED_COW = null;
 
 const hoveredCow = (state = HOVERED_COW, action) => {
@@ -64,10 +47,27 @@ const hoveredCow = (state = HOVERED_COW, action) => {
   }
 };
 
+const SET_GLOBAL_REFS = {
+  earth: null,
+  ufo: null,
+  topbarMenu: null,
+  languageController: null,
+};
+
+const globalRefs = (state = SET_GLOBAL_REFS, action) => {
+  switch (action.type) {
+    case types.SET_GLOBAL_REFS: {
+      return { ...state, [action.element]: action.ref };
+    }
+    default:
+      return state;
+  }
+};
+
 export default combineReducers({
   language,
   fullpageApi,
   sidebarOpen,
-  homeUfoContainerDimensionsAndPosition,
   hoveredCow,
+  globalRefs,
 });
