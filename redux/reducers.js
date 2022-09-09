@@ -64,10 +64,25 @@ const globalRefs = (state = SET_GLOBAL_REFS, action) => {
   }
 };
 
+const SET_ANIMATIONS = {
+  ufoOrbitingAnimation: undefined,
+};
+
+const animations = (state = SET_ANIMATIONS, action) => {
+  switch (action.type) {
+    case types.SET_ANIMATIONS: {
+      return { ...state, [action.animationName]: action.animation };
+    }
+    default:
+      return state;
+  }
+};
+
 export default combineReducers({
   language,
   fullpageApi,
   sidebarOpen,
   hoveredCow,
   globalRefs,
+  animations,
 });

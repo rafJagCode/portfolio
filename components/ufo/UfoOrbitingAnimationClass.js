@@ -17,6 +17,7 @@ class UfoOrbitingAnimationClass {
   #isUfoLeavingHomeSection;
   #animationPromise;
   #animationPromiseResolve;
+  #goToLaunchingPositionIsOn;
 
   constructor(ufoElement, earthElement) {
     this.#start = undefined;
@@ -32,11 +33,12 @@ class UfoOrbitingAnimationClass {
     this.#secondEarthCornerY = undefined;
     this.#earthCenterLeft = undefined;
     this.#orbitToRight = true;
-    this.#speed = 2;
+    this.#speed = 3;
     this.#animation = undefined;
     this.#isUfoLeavingHomeSection = false;
     this.#animationPromise = undefined;
     this.#animationPromiseResolve = undefined;
+    this.#goToLaunchingPositionIsOn = false;
   }
 
   step = (timestamp) => {
@@ -126,12 +128,15 @@ class UfoOrbitingAnimationClass {
   };
 
   animate = () => {
+    if (this.#animation) return;
     this.#animationPromise = new Promise((resolve) => (this.#animationPromiseResolve = resolve));
     this.#animation = requestAnimationFrame(this.step);
   };
 
   goToLaunchingPosition = () => {
-    this.#speed *= 2;
+    if (this.#goToLaunchingPositionIsOn) return;
+    this.#goToLaunchingPositionIsOn = true;
+    this.#speed *= 4;
     this.#isUfoLeavingHomeSection = true;
     return this.#animationPromise;
   };
@@ -140,6 +145,7 @@ class UfoOrbitingAnimationClass {
     if (!this.areStopConditionsFullfiled()) return;
     cancelAnimationFrame(this.#animation);
     this.#animationPromiseResolve();
+    this.resetAnimation();
     return true;
   };
 
@@ -148,6 +154,14 @@ class UfoOrbitingAnimationClass {
     let isUfoInFirstEarthCorner = this.#firstEarthCornerX - this.#ufoCenterLeft <= 0;
     if (!isUfoInFirstEarthCorner) return false;
     return true;
+  };
+
+  resetAnimation = () => {
+    this.#isUfoLeavingHomeSection = false;
+    this.#speed /= 4;
+    this.#start = undefined;
+    this.#animation = undefined;
+    this.#goToLaunchingPositionIsOn = false;
   };
 }
 
