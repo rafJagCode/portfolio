@@ -4,6 +4,8 @@ $fireSizeFactor: 0.6;
   top: 0;
   width: 7%;
   aspect-ratio: $fireSizeFactor;
+  visibility: hidden;
+  z-index: 2;
 }
 .ufo__image {
   background-image: url('/static/images/ufo.svg');
@@ -24,4 +26,5 @@ $fireSizeFactor: 0.6;
   background-position-x: center;
   position: absolute;
   bottom: 10%;
+  opacity: 0;
 }
