@@ -18,6 +18,7 @@ export default function Sections() {
     dispatch({ type: 'SET_FULLPAGE_API', fullpageApi: fullpage_api });
     let anchor = `#${window.location.hash.substr(1)}`;
     fullpage_api.moveTo(anchor);
+    document.querySelector('#fullpage').style.zIndex = 1;
   }, []);
 
   return [
