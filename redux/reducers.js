@@ -36,11 +36,11 @@ const sidebarOpen = (state = SIDEBAR_OPEN, action) => {
   }
 };
 
-const HOVERED_COW = null;
+const CLICKED_COW = null;
 
-const hoveredCow = (state = HOVERED_COW, action) => {
+const clickedCow = (state = CLICKED_COW, action) => {
   switch (action.type) {
-    case types.SET_HOVERED_COW:
+    case types.SET_CLICKED_COW:
       return action.cow;
     default:
       return state;
@@ -66,6 +66,7 @@ const globalRefs = (state = SET_GLOBAL_REFS, action) => {
 
 const SET_ANIMATIONS = {
   ufoOrbitingAnimation: undefined,
+  ufoEngineAnimation: undefined,
 };
 
 const animations = (state = SET_ANIMATIONS, action) => {
@@ -82,7 +83,7 @@ export default combineReducers({
   language,
   fullpageApi,
   sidebarOpen,
-  hoveredCow,
+  clickedCow,
   globalRefs,
   animations,
 });
