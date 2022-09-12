@@ -10,7 +10,9 @@ import { defaultTranslation } from '@/translations/translations';
 
 export default function App() {
   const sidebarOpen = useSelector((state) => state.sidebarOpen);
-  const ufoOrbitingAnimation = useSelector((state) => state.animations.ufoOrbitingAnimation);
+  const [ufoOrbitingAnimation, ufoEngineAnimation] = useSelector((state) => {
+    return [state.animations.ufoOrbitingAnimation, state.animations.ufoEngineAnimation];
+  });
   const dispatch = useDispatch();
   const [isUfoOnStartingPosition, setIsUfoOnStartingPosition] = useState(false);
   const [delayedScroll, setDelayedScroll] = useState(undefined);
@@ -22,35 +24,44 @@ export default function App() {
   }, []);
 
   useEffect(() => {
-    if (ufoOrbitingAnimation && delayedScroll) {
-      fullpage_api.moveTo(delayedScroll);
-      setDelayedScroll(undefined);
-    }
+    if (ufoOrbitingAnimation && delayedScroll) handleDelayedScroll();
   }, [ufoOrbitingAnimation]);
 
+  const delayScroll = (destination) => {
+    setDelayedScroll(destination.anchor);
+    return false;
+  };
+
+  const handleDelayedScroll = () => {
+    fullpage_api.moveTo(delayedScroll);
+    setDelayedScroll(undefined);
+  };
+
+  const goToLaunchingPositionAndScroll = (destination) => {
+    setIsLaunchingInProgress(true);
+    ufoOrbitingAnimation.stopOrbiting().then(() => {
+      setIsUfoOnStartingPosition(true);
+      setIsLaunchingInProgress(false);
+      fullpage_api.moveTo(destination.anchor);
+    });
+  };
+
   const onLeave = (origin, destination) => {
-    if (origin.anchor !== '#home') return;
-    if (!ufoOrbitingAnimation) {
-      setDelayedScroll(destination.anchor);
-      return false;
-    }
-    if (!isUfoOnStartingPosition) {
-      if (!isLaunchingInProgress) {
-        setIsLaunchingInProgress(true);
-        ufoOrbitingAnimation.goToLaunchingPosition().then(() => {
-          setIsUfoOnStartingPosition(true);
-          setIsLaunchingInProgress(false);
-          fullpage_api.moveTo(destination.anchor);
-        });
-      }
-      return false;
-    }
+    if (!ufoOrbitingAnimation) return delayScroll(destination);
+    ufoEngineAnimation.turnOnEngines();
+    if (origin.anchor !== '#home') return true;
+    if (isUfoOnStartingPosition) return true;
+    if (isLaunchingInProgress) return false;
+    goToLaunchingPositionAndScroll(destination);
+    return false;
   };
 
   const afterLoad = (origin, destination) => {
+    if (!ufoEngineAnimation) return;
+    ufoEngineAnimation.turnOffEngines();
     if (destination.anchor !== '#home') return;
     if (!ufoOrbitingAnimation) return;
-    ufoOrbitingAnimation.animate();
+    ufoOrbitingAnimation.startOrbiting();
     setIsUfoOnStartingPosition(false);
   };
 
