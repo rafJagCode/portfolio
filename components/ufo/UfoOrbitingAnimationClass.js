@@ -123,7 +123,7 @@ class UfoOrbitingAnimationClass {
 
   getScale = () => {
     let sizeFactor = 0.4;
-    return 1 - this.#depth * sizeFactor;
+    return 1.2 - this.#depth * sizeFactor;
   };
 
   setSpeed = () => {
@@ -137,6 +137,7 @@ class UfoOrbitingAnimationClass {
   };
 
   stop = () => {
+    this.#ufo.style.transform = `scale(1)`;
     cancelAnimationFrame(this.#requestAnimationID);
     this.reset();
     this.#resolve();

@@ -9,10 +9,13 @@ import UfoHoveringOverCowAnimationClass from './UfoHoveringOverCowAnimationClass
 const Ufo = () => {
   const ufoRef = useRef();
   const fireRef = useRef();
-  const earthRef = useSelector((state) => state.globalRefs.earth);
-  const clickedCow = useSelector((state) => state.clickedCow);
   const orbitingAnimationRef = useRef(undefined);
   const hoveringOverCowAnimationRef = useRef(new UfoHoveringOverCowAnimationClass());
+  const beamRef = useRef();
+
+  const earthRef = useSelector((state) => state.globalRefs.earth);
+  const clickedCow = useSelector((state) => state.clickedCow);
+
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -30,7 +33,7 @@ const Ufo = () => {
   useEffect(() => {
     hoveringOverCowAnimationRef.current.stopHovering();
     if (!clickedCow) return;
-    hoveringOverCowAnimationRef.current.startHovering(ufoRef.current, clickedCow);
+    hoveringOverCowAnimationRef.current.startHovering(ufoRef.current, clickedCow, beamRef.current);
   }, [clickedCow]);
 
   return (
@@ -42,6 +45,11 @@ const Ufo = () => {
       <div
         className={styles.ufo__fire}
         ref={fireRef}
+      ></div>
+      <div
+        className={styles.ufo__beam}
+        ref={beamRef}
+        style={{ opacity: 0 }}
       ></div>
     </div>
   );

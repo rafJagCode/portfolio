@@ -28,3 +28,13 @@ $fireSizeFactor: 0.6;
   bottom: 10%;
   opacity: 0;
 }
+.ufo__beam {
+  background-image: url('/static/images/ufo-beam.svg');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position-x: center;
+  position: absolute;
+  top: calc(1 / ($fireSizeFactor + 1) * 100%);
+  left: 50%;
+  transform: translate(-50%);
+}
