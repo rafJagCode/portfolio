@@ -4,52 +4,75 @@ import Topbar from '@/components/topbar/Topbar';
 import ReactFullpage from '@fullpage/react-fullpage';
 import Sections from '@/components/sections/Sections';
 import Ufo from '@/components/ufo/Ufo';
-import handleLeavingHomeUfoAnimation from '@/services/ufo/handleLeavingHomeUfoAnimation';
-import swapUfos from '@/services/ufo/swapUfos';
-import startUfoEngine from '@/services/ufo/startUfoEngine';
-import startOrbitingAnimation from '@/services/ufo/startOrbitingAnimation';
-import stopUfoEngine from '@/services/ufo/stopUfoEngine';
-import getElementDimensions from '@/services/resize_observer/getElementDimensions';
-import getElementPosition from '@/services/resize_observer/getElementPosition';
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { defaultTranslation } from '@/translations/translations';
+import useGoToLaunchingPosition from '@/components/ufo/hooks/useGoToLaunchingPosition';
 
 export default function App() {
+  const [goToLaunchingPosition] = useGoToLaunchingPosition();
   const sidebarOpen = useSelector((state) => state.sidebarOpen);
+  const [ufoOrbitingAnimation, ufoEngineAnimation, ufoHoveringOverCowAnimation] = useSelector((state) => {
+    return [state.animations.ufoOrbitingAnimation, state.animations.ufoEngineAnimation, state.animations.ufoHoveringOverCowAnimation];
+  });
   const dispatch = useDispatch();
-  const [isUfoComponentVisible, setIsUfoComponentVisible] = useState(false);
-  const ufoRef = useRef();
+  const [isUfoOnStartingPosition, setIsUfoOnStartingPosition] = useState(false);
+  const [delayedScroll, setDelayedScroll] = useState(undefined);
+  const [isLaunchingInProgress, setIsLaunchingInProgress] = useState(false);
 
   useEffect(() => {
     const language = localStorage.getItem('language') ? localStorage.getItem('language') : defaultTranslation;
     dispatch({ type: 'CHANGE_LANGUAGE', language: language });
   }, []);
 
-  const onLeave = (origin, destination, direction) => {
-    if (!isUfoComponentVisible) {
-      handleLeavingHomeUfoAnimation().then(() => {
-        const ufoContainer = document.getElementById('home__ufo_container');
-        dispatch({ type: 'SET_HOME_UFO_CONTAINER_DIMENSION_AND_POSITION', dimensionsAndPosition: { ...getElementDimensions(ufoContainer), ...getElementPosition(ufoContainer) } });
-        swapUfos(ufoContainer, ufoRef.current);
-        setIsUfoComponentVisible(true);
-        fullpage_api.moveTo(destination.anchor);
-      });
+  useEffect(() => {
+    if (ufoOrbitingAnimation && delayedScroll) handleDelayedScroll();
+  }, [ufoOrbitingAnimation]);
+
+  const delayScroll = (destination) => {
+    setDelayedScroll(destination.anchor);
+    return false;
+  };
+
+  const handleDelayedScroll = () => {
+    fullpage_api.moveTo(delayedScroll);
+    setDelayedScroll(undefined);
+  };
+
+  const goToLaunchingPositionAndScroll = (destination) => {
+    setIsLaunchingInProgress(true);
+    ufoOrbitingAnimation.stopOrbiting().then(() => {
+      setIsUfoOnStartingPosition(true);
+      setIsLaunchingInProgress(false);
+      fullpage_api.moveTo(destination.anchor);
+    });
+  };
+
+  const onLeave = (origin, destination) => {
+    if (!ufoOrbitingAnimation) return delayScroll(destination);
+    ufoEngineAnimation.turnOnEngines();
+    if (origin.anchor === '#projects') {
+      dispatch({ type: 'SET_CLICKED_COW', cow: null });
+      ufoHoveringOverCowAnimation.goToLaunchingPosition();
+      goToLaunchingPosition();
       return false;
     }
-    startUfoEngine();
+    if (origin.anchor !== '#home') return true;
+    if (isUfoOnStartingPosition) return true;
+    if (isLaunchingInProgress) return false;
+    goToLaunchingPositionAndScroll(destination);
+    return false;
   };
 
   const afterLoad = (origin, destination) => {
-    const ufoContainer = document.getElementById('home__ufo_container');
-    dispatch({ type: 'SET_HOME_UFO_CONTAINER_DIMENSION_AND_POSITION', dimensionsAndPosition: { ...getElementDimensions(ufoContainer), ...getElementPosition(ufoContainer) } });
-    stopUfoEngine();
-    if (origin.anchor === '#home') return;
+    if (!ufoEngineAnimation) return;
+    ufoEngineAnimation.turnOffEngines();
     if (destination.anchor !== '#home') return;
-    swapUfos(ufoRef.current, ufoContainer);
-    setIsUfoComponentVisible(false);
-    startOrbitingAnimation(ufoContainer);
+    if (!ufoOrbitingAnimation) return;
+    ufoOrbitingAnimation.startOrbiting();
+    setIsUfoOnStartingPosition(false);
   };
+
   return (
     <div className={styles.app__container}>
       <Sidebar />
@@ -70,7 +93,7 @@ export default function App() {
             return <Sections />;
           }}
         />
-        <Ufo ref={ufoRef} />
+        <Ufo />
       </main>
     </div>
   );

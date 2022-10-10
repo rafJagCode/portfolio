@@ -6,6 +6,8 @@ import { useEffect, useRef } from 'react';
 
 export default function Sidebar() {
   const sidebarOpen = useSelector((state) => state.sidebarOpen);
+  const topbarMenuRef = useSelector((state) => state.globalRefs.topbarMenu);
+  const languageControllerRef = useSelector((state) => state.globalRefs.languageController);
   const isSidebarOpen = useRef();
   isSidebarOpen.current = sidebarOpen;
 
@@ -24,8 +26,9 @@ export default function Sidebar() {
   }
 
   useEffect(() => {
-    const topbarMenu = document.querySelector('#topbarMenu');
-    const languageController = document.querySelector('#languageController');
+    if (!topbarMenuRef || !languageControllerRef) return;
+    const topbarMenu = topbarMenuRef.current;
+    const languageController = languageControllerRef.current;
 
     const handleClickOutsideSidebar = (e) => {
       if (!isSidebarOpen.current) return;
@@ -39,7 +42,7 @@ export default function Sidebar() {
     return () => {
       document.removeEventListener('click', handleClickOutsideSidebar);
     };
-  }, []);
+  }, [topbarMenuRef, languageControllerRef]);
 
   return (
     <nav

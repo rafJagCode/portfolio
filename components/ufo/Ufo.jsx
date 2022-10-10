@@ -1,38 +1,61 @@
 import styles from './Ufo.module.scss';
-import { useEffect, forwardRef } from 'react';
-import { useSelector } from 'react-redux';
-import parkUfoAboveTheCow from '@/services/ufo/parkUfoAboveTheCow';
-import changeWidth from '@/services/ufo/changeWidth';
-import changePosition from '@/services/ufo/changePosition';
+import { useRef, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { useGoToStart } from './ufoHandler';
+import UfoOrbitingAnimationClass from './UfoOrbitingAnimationClass';
+import UfoEngineAnimationClass from './UfoEngineAnimationClass';
+import UfoHoveringOverCowAnimationClass from './UfoHoveringOverCowAnimationClass';
 
-const Ufo = forwardRef((props, ufoComponent) => {
-  const homeUfoContainerDimensionsAndPosition = useSelector((state) => state.homeUfoContainerDimensionsAndPosition);
-  const hoveredCow = useSelector((state) => state.hoveredCow);
+const Ufo = () => {
+  const goToStart = useGoToStart();
+  const ufoRef = useRef();
+  const fireRef = useRef();
+  const orbitingAnimationRef = useRef(undefined);
+  const hoveringOverCowAnimationRef = useRef(new UfoHoveringOverCowAnimationClass());
+  const beamRef = useRef();
+
+  const earthRef = useSelector((state) => state.globalRefs.earth);
+  const clickedCow = useSelector((state) => state.clickedCow);
+
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    let { top, left } = homeUfoContainerDimensionsAndPosition;
-    changeWidth(ufoComponent.current, homeUfoContainerDimensionsAndPosition.width);
-    changePosition(ufoComponent.current, top, left);
-  }, [homeUfoContainerDimensionsAndPosition]);
+    if (!earthRef) return;
+    goToStart();
+    orbitingAnimationRef.current = new UfoOrbitingAnimationClass(ufoRef.current, earthRef.current);
+    orbitingAnimationRef.current.startOrbiting();
+    dispatch({ type: 'SET_ANIMATIONS', animationName: 'ufoOrbitingAnimation', animation: orbitingAnimationRef.current });
+  }, [earthRef]);
 
-  //   useEffect(() => {
-  //     if (!hoveredCow) return;
-  //     parkUfoAboveTheCow(ufoComponent, hoveredCow);
-  //   }, [hoveredCow]);
+  useEffect(() => {
+    dispatch({ type: 'SET_GLOBAL_REFS', element: 'ufo', ref: ufoRef });
+    dispatch({ type: 'SET_ANIMATIONS', animationName: 'ufoEngineAnimation', animation: new UfoEngineAnimationClass(fireRef.current) });
+    dispatch({ type: 'SET_ANIMATIONS', animationName: 'ufoHoveringOverCowAnimation', animation: hoveringOverCowAnimationRef.current });
+  }, []);
+
+  useEffect(() => {
+    hoveringOverCowAnimationRef.current.stopHovering();
+    if (!clickedCow) return;
+    hoveringOverCowAnimationRef.current.startHovering(ufoRef.current, clickedCow, beamRef.current);
+  }, [clickedCow]);
 
   return (
     <div
       className={styles.ufo}
-      id="ufo"
-      ref={ufoComponent}
+      ref={ufoRef}
     >
       <div className={styles.ufo__image}></div>
       <div
         className={styles.ufo__fire}
-        id="ufo__fire"
+        ref={fireRef}
+      ></div>
+      <div
+        className={styles.ufo__beam}
+        ref={beamRef}
+        style={{ opacity: 0 }}
       ></div>
     </div>
   );
-});
+};
 
 export default Ufo;
