@@ -60,6 +60,11 @@ class UfoHoveringOverCowAnimationClass {
     if (this.#beam.opacity <= 0) return;
     this.#beam.style.opacity = `${parseFloat(this.#beam.style.opacity) - 0.1}`;
   };
+
+  goToLaunchingPosition = () => {
+    this.stopHovering();
+    this.#beam.style.opacity = 0;
+  };
 }
 
 export default UfoHoveringOverCowAnimationClass;

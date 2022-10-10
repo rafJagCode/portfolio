@@ -1,12 +1,13 @@
 import styles from './Ufo.module.scss';
 import { useRef, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { goToStart } from './ufoHandler';
+import { useGoToStart } from './ufoHandler';
 import UfoOrbitingAnimationClass from './UfoOrbitingAnimationClass';
 import UfoEngineAnimationClass from './UfoEngineAnimationClass';
 import UfoHoveringOverCowAnimationClass from './UfoHoveringOverCowAnimationClass';
 
 const Ufo = () => {
+  const goToStart = useGoToStart();
   const ufoRef = useRef();
   const fireRef = useRef();
   const orbitingAnimationRef = useRef(undefined);
@@ -20,14 +21,16 @@ const Ufo = () => {
 
   useEffect(() => {
     if (!earthRef) return;
-    goToStart(ufoRef.current, earthRef.current);
+    goToStart();
     orbitingAnimationRef.current = new UfoOrbitingAnimationClass(ufoRef.current, earthRef.current);
     orbitingAnimationRef.current.startOrbiting();
     dispatch({ type: 'SET_ANIMATIONS', animationName: 'ufoOrbitingAnimation', animation: orbitingAnimationRef.current });
   }, [earthRef]);
 
   useEffect(() => {
+    dispatch({ type: 'SET_GLOBAL_REFS', element: 'ufo', ref: ufoRef });
     dispatch({ type: 'SET_ANIMATIONS', animationName: 'ufoEngineAnimation', animation: new UfoEngineAnimationClass(fireRef.current) });
+    dispatch({ type: 'SET_ANIMATIONS', animationName: 'ufoHoveringOverCowAnimation', animation: hoveringOverCowAnimationRef.current });
   }, []);
 
   useEffect(() => {

@@ -7,11 +7,13 @@ import Ufo from '@/components/ufo/Ufo';
 import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { defaultTranslation } from '@/translations/translations';
+import useGoToLaunchingPosition from '@/components/ufo/hooks/useGoToLaunchingPosition';
 
 export default function App() {
+  const [goToLaunchingPosition] = useGoToLaunchingPosition();
   const sidebarOpen = useSelector((state) => state.sidebarOpen);
-  const [ufoOrbitingAnimation, ufoEngineAnimation] = useSelector((state) => {
-    return [state.animations.ufoOrbitingAnimation, state.animations.ufoEngineAnimation];
+  const [ufoOrbitingAnimation, ufoEngineAnimation, ufoHoveringOverCowAnimation] = useSelector((state) => {
+    return [state.animations.ufoOrbitingAnimation, state.animations.ufoEngineAnimation, state.animations.ufoHoveringOverCowAnimation];
   });
   const dispatch = useDispatch();
   const [isUfoOnStartingPosition, setIsUfoOnStartingPosition] = useState(false);
@@ -49,6 +51,12 @@ export default function App() {
   const onLeave = (origin, destination) => {
     if (!ufoOrbitingAnimation) return delayScroll(destination);
     ufoEngineAnimation.turnOnEngines();
+    if (origin.anchor === '#projects') {
+      dispatch({ type: 'SET_CLICKED_COW', cow: null });
+      ufoHoveringOverCowAnimation.goToLaunchingPosition();
+      goToLaunchingPosition();
+      return false;
+    }
     if (origin.anchor !== '#home') return true;
     if (isUfoOnStartingPosition) return true;
     if (isLaunchingInProgress) return false;

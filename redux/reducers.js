@@ -67,6 +67,7 @@ const globalRefs = (state = SET_GLOBAL_REFS, action) => {
 const SET_ANIMATIONS = {
   ufoOrbitingAnimation: undefined,
   ufoEngineAnimation: undefined,
+  ufoHoveringOverCowAnimation: undefined,
 };
 
 const animations = (state = SET_ANIMATIONS, action) => {
