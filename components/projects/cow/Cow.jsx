@@ -2,18 +2,24 @@ import styles from './Cow.module.scss';
 import { useRef } from 'react';
 import { useDispatch } from 'react-redux';
 
-export default function Cow({ imageName, top, left }) {
+export default function Cow({ imageName }) {
   const cowRef = useRef();
   const dispatch = useDispatch();
   const onClick = () => {
-    dispatch({ type: 'SET_CLICKED_COW', cow: cowRef.current });
+    dispatch({ type: 'SET_CLICKED_COW_REF', cowRef: cowRef });
   };
   return (
     <button
       className={styles.cow}
-      style={{ backgroundImage: `url(/static/images/${imageName}.png`, left: left, top: top }}
+      style={{ gridColumn: `${imageName}_column_start / ${imageName}_column_end` }}
       ref={cowRef}
       onClick={onClick}
-    ></button>
+    >
+      <img
+        className={styles.cow__image}
+        src={`/static/images/${imageName}.png`}
+        alt={`image ${imageName}`}
+      ></img>
+    </button>
   );
 }

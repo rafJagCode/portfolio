@@ -1,6 +1,7 @@
 import styles from './LanguageController.module.scss';
 import { useRef, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { refsTypes } from '@/types';
 
 export default function LanguageController() {
   const languageControllerRef = useRef();
@@ -12,7 +13,7 @@ export default function LanguageController() {
   };
 
   useEffect(() => {
-    dispatch({ type: 'SET_GLOBAL_REFS', element: 'languageController', ref: languageControllerRef });
+    dispatch({ type: 'GLOBAL_REFS', refName: refsTypes.LANGUAGE_CONTROLLER_REF, ref: languageControllerRef });
   }, []);
 
   return (

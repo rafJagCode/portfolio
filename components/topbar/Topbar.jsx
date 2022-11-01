@@ -5,13 +5,14 @@ import LanguageController from '@/components/language_controller/LanguageControl
 import navigationLinks from '@/configuration/navigation_links';
 import { useRef, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
+import { refsTypes } from '@/types';
 
 export default function Topbar() {
   const topbarMenuRef = useRef();
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch({ type: 'SET_GLOBAL_REFS', element: 'topbarMenu', ref: topbarMenuRef });
+    dispatch({ type: 'GLOBAL_REFS', refName: refsTypes.TOPBAR_MENU_REF, ref: topbarMenuRef });
   }, []);
 
   return (

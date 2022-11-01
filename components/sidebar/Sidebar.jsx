@@ -3,51 +3,45 @@ import navigationLinks from '@/configuration/navigation_links';
 import NavLink from '@/components/navlink/NavLink';
 import { useSelector, useDispatch } from 'react-redux';
 import { useEffect, useRef } from 'react';
+import { refsTypes } from '@/types';
 
 export default function Sidebar() {
-  const sidebarOpen = useSelector((state) => state.sidebarOpen);
-  const topbarMenuRef = useSelector((state) => state.globalRefs.topbarMenu);
-  const languageControllerRef = useSelector((state) => state.globalRefs.languageController);
-  const isSidebarOpen = useRef();
-  isSidebarOpen.current = sidebarOpen;
-
-  const dispatch = useDispatch();
+  const isSidebarOpen = useSelector((state) => state.isSidebarOpen);
+  const topbarMenuRef = useSelector((state) => state.globalRefs[refsTypes.TOPBAR_MENU_REF]);
+  const languageControllerRef = useSelector((state) => state.globalRefs[refsTypes.LANGUAGE_CONTROLLER_REF]);
   const sidebarRef = useRef();
+  const dispatch = useDispatch();
 
-  const fullpageApi = useSelector((state) => state.fullpageApi);
-  if (fullpageApi) {
-    if (sidebarOpen) {
-      fullpageApi.setAllowScrolling(false);
-      fullpageApi.setKeyboardScrolling(false);
-    } else {
-      fullpageApi.setAllowScrolling(true);
-      fullpageApi.setKeyboardScrolling(true);
-    }
-  }
+  const handleClickOutsideSidebar = (e) => {
+    if (!isSidebarOpen) return;
+    if (topbarMenuRef.current.contains(e.target)) return;
+    if (languageControllerRef.current.contains(e.target)) return;
+    if (sidebarRef.current.contains(e.target)) return;
+    dispatch({ type: 'CHANGE_SIDEBAR_STATE' });
+  };
 
   useEffect(() => {
     if (!topbarMenuRef || !languageControllerRef) return;
-    const topbarMenu = topbarMenuRef.current;
-    const languageController = languageControllerRef.current;
-
-    const handleClickOutsideSidebar = (e) => {
-      if (!isSidebarOpen.current) return;
-      if (topbarMenu.contains(e.target)) return;
-      if (languageController.contains(e.target)) return;
-      if (sidebarRef.current.contains(e.target)) return;
-      dispatch({ type: 'CHANGE_SIDEBAR_STATE' });
-    };
-
-    document.addEventListener('click', handleClickOutsideSidebar, { capture: true });
+    addEventListener('click', handleClickOutsideSidebar, { capture: true });
     return () => {
-      document.removeEventListener('click', handleClickOutsideSidebar);
+      removeEventListener('click', handleClickOutsideSidebar, { capture: true });
     };
   }, [topbarMenuRef, languageControllerRef]);
+
+  useEffect(() => {
+    if (isSidebarOpen) {
+      fullpage_api.setAllowScrolling(false);
+      fullpage_api.setKeyboardScrolling(false);
+      return;
+    }
+    fullpage_api.setAllowScrolling(true);
+    fullpage_api.setKeyboardScrolling(true);
+  }, [isSidebarOpen]);
 
   return (
     <nav
       className={styles.sidebar}
-      data-is-open={sidebarOpen}
+      data-is-open={isSidebarOpen}
       ref={sidebarRef}
     >
       <ul className={styles.sidebar__menu}>

@@ -1,11 +1,15 @@
 $fireSizeFactor: 0.6;
 .ufo {
   position: fixed;
-  top: 0;
-  width: 7%;
+  top: 50%;
+  left: 50%;
+  width: 7rem;
   aspect-ratio: $fireSizeFactor;
-  visibility: hidden;
   z-index: 2;
+  transition: filter 1000ms ease 0s;
+  &[data-is-blured='true'] {
+    filter: blur(5px);
+  }
 }
 .ufo__image {
   background-image: url('/static/images/ufo.svg');
@@ -17,8 +21,8 @@ $fireSizeFactor: 0.6;
   position: absolute;
   z-index: 2;
 }
-.ufo__fire {
-  background-image: url('/static/images/fire.svg');
+.ufo__engine {
+  background-image: url('/static/images/engine.svg');
   background-size: contain;
   width: 100%;
   height: calc($fireSizeFactor / ($fireSizeFactor + 1) * 100%);
@@ -30,7 +34,7 @@ $fireSizeFactor: 0.6;
 }
 .ufo__beam {
   background-image: url('/static/images/ufo-beam.svg');
-  background-size: contain;
+  background-size: 100% 100%;
   background-repeat: no-repeat;
   background-position-x: center;
   position: absolute;

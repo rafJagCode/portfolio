@@ -6,7 +6,8 @@
       "@/hooks/*": ["hooks/*"],
       "@/configuration/*": ["configuration/*"],
       "@/translations/*": ["translations/*"],
-      "@/handlers/*": ["handlers/*"]
+      "@/handlers/*": ["handlers/*"],
+      "@/types": ["types.js"]
     }
   }
 }
