@@ -5,7 +5,7 @@
   height: 100vh;
   box-shadow: -2px 0 3px var(--theme-accent);
   transition: all 0.5s linear;
-  z-index: 2;
+  z-index: 3;
   background-color: var(--theme-primary);
   &[data-is-open='true'] {
     right: 0;
