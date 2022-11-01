@@ -4,21 +4,20 @@ import Topbar from '@/components/topbar/Topbar';
 import ReactFullpage from '@fullpage/react-fullpage';
 import Sections from '@/components/sections/Sections';
 import Ufo from '@/components/ufo/Ufo';
-import { useEffect, useState } from 'react';
+import useScrollMachineState from '@/hooks/useScrollMachineState';
+import useDelayedScroll from '@/hooks/useDelayedScroll';
+import useBeforeScrollHandler from '@/hooks/useBeforeScrollHandler';
+import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { defaultTranslation } from '@/translations/translations';
-import useGoToLaunchingPosition from '@/components/ufo/hooks/useGoToLaunchingPosition';
 
 export default function App() {
-  const [goToLaunchingPosition] = useGoToLaunchingPosition();
-  const sidebarOpen = useSelector((state) => state.sidebarOpen);
-  const [ufoOrbitingAnimation, ufoEngineAnimation, ufoHoveringOverCowAnimation] = useSelector((state) => {
-    return [state.animations.ufoOrbitingAnimation, state.animations.ufoEngineAnimation, state.animations.ufoHoveringOverCowAnimation];
-  });
+  const orbitingAnimation = useSelector((state) => state.animations.ORBITING_ANIMATION);
+  const engineAnimation = useSelector((state) => state.animations.ENGINE_ANIMATION);
+  const [states, updateState, compareState, currentState] = useScrollMachineState();
+  const [repeatScrollWhenAnimationReady, delayScroll] = useDelayedScroll(states, updateState, compareState, currentState);
+  const handleAnimationsBeforeScroll = useBeforeScrollHandler(engineAnimation, orbitingAnimation, updateState);
   const dispatch = useDispatch();
-  const [isUfoOnStartingPosition, setIsUfoOnStartingPosition] = useState(false);
-  const [delayedScroll, setDelayedScroll] = useState(undefined);
-  const [isLaunchingInProgress, setIsLaunchingInProgress] = useState(false);
 
   useEffect(() => {
     const language = localStorage.getItem('language') ? localStorage.getItem('language') : defaultTranslation;
@@ -26,61 +25,32 @@ export default function App() {
   }, []);
 
   useEffect(() => {
-    if (ufoOrbitingAnimation && delayedScroll) handleDelayedScroll();
-  }, [ufoOrbitingAnimation]);
-
-  const delayScroll = (destination) => {
-    setDelayedScroll(destination.anchor);
-    return false;
-  };
-
-  const handleDelayedScroll = () => {
-    fullpage_api.moveTo(delayedScroll);
-    setDelayedScroll(undefined);
-  };
-
-  const goToLaunchingPositionAndScroll = (destination) => {
-    setIsLaunchingInProgress(true);
-    ufoOrbitingAnimation.stopOrbiting().then(() => {
-      setIsUfoOnStartingPosition(true);
-      setIsLaunchingInProgress(false);
-      fullpage_api.moveTo(destination.anchor);
-    });
-  };
+    if (!!orbitingAnimation) updateState('ORBITING_ANIMATION_READY');
+  }, [orbitingAnimation]);
 
   const onLeave = (origin, destination) => {
-    if (!ufoOrbitingAnimation) return delayScroll(destination);
-    ufoEngineAnimation.turnOnEngines();
-    if (origin.anchor === '#projects') {
-      dispatch({ type: 'SET_CLICKED_COW', cow: null });
-      ufoHoveringOverCowAnimation.goToLaunchingPosition();
-      goToLaunchingPosition();
-      return false;
-    }
-    if (origin.anchor !== '#home') return true;
-    if (isUfoOnStartingPosition) return true;
-    if (isLaunchingInProgress) return false;
-    goToLaunchingPositionAndScroll(destination);
+    if (compareState(states.isOrbitingAnimationNotReady)) return repeatScrollWhenAnimationReady(destination);
+    if (compareState(states.isScrollDelayed)) return false;
+    if (compareState(states.isScrollAllowed)) return true;
+
+    delayScroll(destination);
+    handleAnimationsBeforeScroll(origin);
+
     return false;
   };
 
   const afterLoad = (origin, destination) => {
-    if (!ufoEngineAnimation) return;
-    ufoEngineAnimation.turnOffEngines();
-    if (destination.anchor !== '#home') return;
-    if (!ufoOrbitingAnimation) return;
-    ufoOrbitingAnimation.startOrbiting();
-    setIsUfoOnStartingPosition(false);
+    if (!engineAnimation) return;
+    updateState('HANDLE_SCROLL');
+    engineAnimation.stopAnimation();
+    if (destination.anchor === '#home') orbitingAnimation.startAnimation();
   };
 
   return (
     <div className={styles.app__container}>
       <Sidebar />
       <Topbar />
-      <main
-        className={styles.app__content}
-        data-is-blured={sidebarOpen}
-      >
+      <main className={styles.app__content}>
         <ReactFullpage
           licenseKey={`Ca(6HeW5q[zX%k*>A#'V%I@@k|5*QKt)s]k3HmOaAPWk}sQdFK('[p0:wkl3f=|Fo0%ijhruscuZC\SYLWQI`}
           scrollingSpeed={1000}
