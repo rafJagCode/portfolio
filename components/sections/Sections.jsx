@@ -5,21 +5,37 @@ import Home from '@/components/home/Home';
 import Projects from '@/components/projects/Projects';
 import Footer from '@/components/footer/Footer';
 import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 export default function Sections() {
-  const dispatch = useDispatch();
+  const sidebarOpen = useSelector((state) => state.sidebarOpen);
 
-  window.onhashchange = (e) => {
+  const handleHashChange = (e) => {
     fullpage_api.moveTo(`#${e.newURL.split('#')[1]}`);
   };
 
   useEffect(() => {
-    dispatch({ type: 'SET_FULLPAGE_API', fullpageApi: fullpage_api });
-    let anchor = `#${window.location.hash.substr(1)}`;
-    fullpage_api.moveTo(anchor);
-    document.querySelector('#fullpage').style.zIndex = 1;
+    addEventListener('hashchange', handleHashChange);
+    return () => {
+      removeEventListener('hashchange', handleHashChange);
+    };
   }, []);
+
+  useEffect(() => {
+    const anchor = `#${window.location.hash.substr(1)}`;
+    if (anchor === '#home') return;
+    fullpage_api.moveTo(anchor);
+  }, []);
+
+  useEffect(() => {
+    if (sidebarOpen) {
+      document.querySelector('#fullpage').style.filter = 'blur(5px)';
+      document.querySelector('#fullpage').style.pointerEvents = 'none';
+    } else {
+      document.querySelector('#fullpage').style.filter = 'none';
+      document.querySelector('#fullpage').style.pointerEvents = 'auto';
+    }
+  }, [sidebarOpen]);
 
   return [
     <ParticlesBackground key="particles" />,
