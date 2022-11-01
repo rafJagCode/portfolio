@@ -7,7 +7,7 @@ export default function HomeImage() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch({ type: 'SET_GLOBAL_REFS', element: 'earth', ref: earthRef });
+    dispatch({ type: 'SET_GLOBAL_REFS', element: 'earthRef', ref: earthRef });
   }, []);
 
   return (
