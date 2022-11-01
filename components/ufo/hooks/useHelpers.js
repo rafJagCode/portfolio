@@ -6,10 +6,10 @@ import BeamHelper from '../helpers/BeamHelper';
 import CowHelper from '../helpers/CowHelper';
 import { useSelector } from 'react-redux';
 import { useState, useEffect } from 'react';
+import { refsTypes } from '@/types';
 
 const useHelpers = (ufoRef, engineRef, beamRef) => {
-  const earthRef = useSelector((state) => state.globalRefs.earthRef);
-  const clickedCowRef = useSelector((state) => state.clickedCowRef);
+  const earthRef = useSelector((state) => state.globalRefs[refsTypes.EARTH_REF]);
 
   const [ufoHelper, setUfoHelper] = useState(null);
   const [flyingHelper, setFlyingHelper] = useState(null);

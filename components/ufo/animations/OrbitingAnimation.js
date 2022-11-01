@@ -1,4 +1,5 @@
 import Animation from './Animation';
+import { animationsTypes } from '@/types';
 
 class OrbitingAnimation extends Animation {
   #baseSpeed;
@@ -13,7 +14,7 @@ class OrbitingAnimation extends Animation {
   #earthHelper;
 
   constructor(dispatch = null, ufoHelper, flyingHelper, earthHelper) {
-    super('ORBITING_ANIMATION', dispatch);
+    super(animationsTypes.ORBITING_ANIMATION, dispatch);
     this.#ufoHelper = ufoHelper;
     this.#flyingHelper = flyingHelper;
     this.#earthHelper = earthHelper;

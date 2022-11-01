@@ -1,12 +1,13 @@
 import { useDispatch, useSelector } from 'react-redux';
+import { animationsTypes } from '@/types';
 
 const useCowAnimations = () => {
   const dispatch = useDispatch();
-  const flyToCowAnimation = useSelector((state) => state.animations.FLY_TO_COW_ANIMATION);
-  const putCowDownAnimation = useSelector((state) => state.animations.PUT_COW_DOWN_ANIMATION);
-  const beamAnimation = useSelector((state) => state.animations.BEAM_ANIMATION);
-  const hoveOverCowAnimation = useSelector((state) => state.animations.HOVER_OVER_COW_ANIMATION);
-  const flyToLaunchingPositionAnimation = useSelector((state) => state.animations.FLY_TO_LAUNCHING_POSITION_ANIMATION);
+  const flyToCowAnimation = useSelector((state) => state.animations[animationsTypes.FLY_TO_COW_ANIMATION]);
+  const putCowDownAnimation = useSelector((state) => state.animations[animationsTypes.PUT_COW_DOWN_ANIMATION]);
+  const beamAnimation = useSelector((state) => state.animations[animationsTypes.BEAM_ANIMATION]);
+  const hoveOverCowAnimation = useSelector((state) => state.animations[animationsTypes.HOVER_OVER_COW_ANIMATION]);
+  const flyToLaunchingPositionAnimation = useSelector((state) => state.animations[animationsTypes.FLY_TO_LAUNCHING_POSITION_ANIMATION]);
   const clickedCowRef = useSelector((state) => state.clickedCowRef);
 
   const stopCowAbduction = async () => {

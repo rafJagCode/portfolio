@@ -1,4 +1,5 @@
 import Animation from './Animation';
+import { animationsTypes } from '@/types';
 
 class FlyToLaunchingPosition extends Animation {
   #flyingHelper;
@@ -7,7 +8,7 @@ class FlyToLaunchingPosition extends Animation {
   #speed;
 
   constructor(dispatch = null, flyingHelper, earthHelper) {
-    super('FLY_TO_LAUNCHING_POSITION_ANIMATION', dispatch);
+    super(animationsTypes.FLY_TO_LAUNCHING_POSITION_ANIMATION, dispatch);
     this.#flyingHelper = flyingHelper;
     this.#earthHelper = earthHelper;
     this.reset();

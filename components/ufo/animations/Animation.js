@@ -9,7 +9,7 @@ class Animation {
     if (!name) throw new Error('Animation must have name');
     this.#name = name;
     this.step = this.step.bind(this);
-    if (dispatch) dispatch({ type: 'SET_ANIMATIONS', animationName: this.#name, animation: this });
+    if (dispatch) dispatch({ type: 'ANIMATIONS', animationName: this.#name, animation: this });
   }
 
   startAnimation() {

@@ -1,11 +1,12 @@
 import Animation from './Animation';
+import { animationsTypes } from '@/types';
 
 class EngineAnimation extends Animation {
   #engineHelper;
   #startTime;
 
   constructor(dispatch = null, engineHelper) {
-    super('ENGINE_ANIMATION', dispatch);
+    super(animationsTypes.ENGINE_ANIMATION, dispatch);
     this.#engineHelper = engineHelper;
     this.reset();
   }

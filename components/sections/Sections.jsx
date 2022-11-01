@@ -8,7 +8,7 @@ import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 
 export default function Sections() {
-  const sidebarOpen = useSelector((state) => state.sidebarOpen);
+  const isSidebarOpen = useSelector((state) => state.isSidebarOpen);
 
   const handleHashChange = (e) => {
     fullpage_api.moveTo(`#${e.newURL.split('#')[1]}`);
@@ -28,14 +28,14 @@ export default function Sections() {
   }, []);
 
   useEffect(() => {
-    if (sidebarOpen) {
+    if (isSidebarOpen) {
       document.querySelector('#fullpage').style.filter = 'blur(5px)';
       document.querySelector('#fullpage').style.pointerEvents = 'none';
     } else {
       document.querySelector('#fullpage').style.filter = 'none';
       document.querySelector('#fullpage').style.pointerEvents = 'auto';
     }
-  }, [sidebarOpen]);
+  }, [isSidebarOpen]);
 
   return [
     <ParticlesBackground key="particles" />,

@@ -1,4 +1,5 @@
 import Animation from './Animation';
+import { animationsTypes } from '@/types';
 
 class BeamAnimation extends Animation {
   #beamHelper;
@@ -6,7 +7,7 @@ class BeamAnimation extends Animation {
   #cowHelper;
 
   constructor(dispatch = null, beamHelper, ufoHelper, cowHelper) {
-    super('BEAM_ANIMATION', dispatch);
+    super(animationsTypes.BEAM_ANIMATION, dispatch);
     this.#beamHelper = beamHelper;
     this.#ufoHelper = ufoHelper;
     this.#cowHelper = cowHelper;

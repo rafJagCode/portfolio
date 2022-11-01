@@ -6,7 +6,7 @@ import { useRef, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 
 const Ufo = () => {
-  const sidebarOpen = useSelector((state) => state.sidebarOpen);
+  const isSidebarOpen = useSelector((state) => state.isSidebarOpen);
   const [ufoRef, engineRef, beamRef] = [useRef(null), useRef(null), useRef(null)];
   const [ufoHelper, flyingHelper, earthHelper, engineHelper, beamHelper, cowHelper] = useHelpers(ufoRef, engineRef, beamRef);
 
@@ -21,7 +21,7 @@ const Ufo = () => {
     <div
       className={styles.ufo}
       ref={ufoRef}
-      data-is-blured={sidebarOpen}
+      data-is-blured={isSidebarOpen}
     >
       <div className={styles.ufo__image}></div>
       <div

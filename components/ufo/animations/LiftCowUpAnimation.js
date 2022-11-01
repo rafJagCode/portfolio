@@ -1,10 +1,11 @@
 import Animation from './Animation';
+import { animationsTypes } from '@/types';
 
 class LiftCowUpAnimation extends Animation {
   #cowHelper;
 
   constructor(dispatch = null, cowHelper) {
-    super('LIFT_COW_UP_ANIMATION', dispatch);
+    super(animationsTypes.LIFT_COW_UP_ANIMATION, dispatch);
     this.#cowHelper = cowHelper;
     this.reset();
   }

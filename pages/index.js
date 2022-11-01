@@ -10,10 +10,11 @@ import useBeforeScrollHandler from '@/hooks/useBeforeScrollHandler';
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { defaultTranslation } from '@/translations/translations';
+import { animationsTypes } from '@/types';
 
 export default function App() {
-  const orbitingAnimation = useSelector((state) => state.animations.ORBITING_ANIMATION);
-  const engineAnimation = useSelector((state) => state.animations.ENGINE_ANIMATION);
+  const orbitingAnimation = useSelector((state) => state.animations[animationsTypes.ORBITING_ANIMATION]);
+  const engineAnimation = useSelector((state) => state.animations[animationsTypes.ENGINE_ANIMATION]);
   const [states, updateState, compareState, currentState] = useScrollMachineState();
   const [repeatScrollWhenAnimationReady, delayScroll] = useDelayedScroll(states, updateState, compareState, currentState);
   const handleAnimationsBeforeScroll = useBeforeScrollHandler(engineAnimation, orbitingAnimation, updateState);

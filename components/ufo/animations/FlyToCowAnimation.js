@@ -1,4 +1,5 @@
 import Animation from './Animation';
+import { animationsTypes } from '@/types';
 
 class FlyToCowAnimation extends Animation {
   #flyingHelper;
@@ -7,7 +8,7 @@ class FlyToCowAnimation extends Animation {
   #speed;
 
   constructor(dispatch = null, flyingHelper, cowHelper) {
-    super('FLY_TO_COW_ANIMATION', dispatch);
+    super(animationsTypes.FLY_TO_COW_ANIMATION, dispatch);
     this.#flyingHelper = flyingHelper;
     this.#cowHelper = cowHelper;
     this.reset();

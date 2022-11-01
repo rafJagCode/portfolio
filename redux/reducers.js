@@ -1,9 +1,10 @@
 import types from './types';
 import { combineReducers } from 'redux';
+import { animationsTypes, refsTypes } from '@/types';
 
-const INITIAL_LANGUAGE = 'pl';
+const LANGUAGE = 'pl';
 
-const language = (state = INITIAL_LANGUAGE, action) => {
+const language = (state = LANGUAGE, action) => {
   switch (action.type) {
     case types.CHANGE_LANGUAGE:
       localStorage.setItem('language', action.language);
@@ -14,20 +15,9 @@ const language = (state = INITIAL_LANGUAGE, action) => {
   }
 };
 
-const FULLPAGE_API = null;
+const IS_SIDEBAR_OPEN = false;
 
-const fullpageApi = (state = FULLPAGE_API, action) => {
-  switch (action.type) {
-    case types.SET_FULLPAGE_API:
-      return action.fullpageApi;
-    default:
-      return state;
-  }
-};
-
-const SIDEBAR_OPEN = false;
-
-const sidebarOpen = (state = SIDEBAR_OPEN, action) => {
+const isSidebarOpen = (state = IS_SIDEBAR_OPEN, action) => {
   switch (action.type) {
     case types.CHANGE_SIDEBAR_STATE:
       return !state;
@@ -36,43 +26,48 @@ const sidebarOpen = (state = SIDEBAR_OPEN, action) => {
   }
 };
 
-const CLICKED_COW = null;
+const CLICKED_COW_REF = null;
 
-const clickedCow = (state = CLICKED_COW, action) => {
+const clickedCowRef = (state = CLICKED_COW_REF, action) => {
   switch (action.type) {
-    case types.SET_CLICKED_COW:
-      return action.cow;
+    case types.SET_CLICKED_COW_REF:
+      return action.cowRef;
     default:
       return state;
   }
 };
 
-const SET_GLOBAL_REFS = {
-  earth: null,
-  ufo: null,
-  topbarMenu: null,
-  languageController: null,
+const GLOBAL_REFS = {
+  [refsTypes.EARTH_REF]: null,
+  [refsTypes.LANGUAGE_CONTROLLER_REF]: null,
+  [refsTypes.TOPBAR_MENU_REF]: null,
+  [refsTypes.UFO_REF]: null,
 };
 
-const globalRefs = (state = SET_GLOBAL_REFS, action) => {
+const globalRefs = (state = GLOBAL_REFS, action) => {
   switch (action.type) {
-    case types.SET_GLOBAL_REFS: {
-      return { ...state, [action.element]: action.ref };
+    case types.GLOBAL_REFS: {
+      return { ...state, [action.refName]: action.ref };
     }
     default:
       return state;
   }
 };
 
-const SET_ANIMATIONS = {
-  ufoOrbitingAnimation: undefined,
-  ufoEngineAnimation: undefined,
-  ufoHoveringOverCowAnimation: undefined,
+const ANIMATIONS = {
+  [animationsTypes.BEAM_ANIMATION]: null,
+  [animationsTypes.ENGINE_ANIMATION]: null,
+  [animationsTypes.FLY_TO_COW_ANIMATION]: null,
+  [animationsTypes.FLY_TO_LAUNCHING_POSITION_ANIMATION]: null,
+  [animationsTypes.HOVER_OVER_COW_ANIMATION]: null,
+  [animationsTypes.LIFT_COW_UP_ANIMATION]: null,
+  [animationsTypes.ORBITING_ANIMATION]: null,
+  [animationsTypes.PUT_COW_DOWN_ANIMATION]: null,
 };
 
-const animations = (state = SET_ANIMATIONS, action) => {
+const animations = (state = ANIMATIONS, action) => {
   switch (action.type) {
-    case types.SET_ANIMATIONS: {
+    case types.ANIMATIONS: {
       return { ...state, [action.animationName]: action.animation };
     }
     default:
@@ -82,9 +77,8 @@ const animations = (state = SET_ANIMATIONS, action) => {
 
 export default combineReducers({
   language,
-  fullpageApi,
-  sidebarOpen,
-  clickedCow,
+  isSidebarOpen,
+  clickedCowRef,
   globalRefs,
   animations,
 });

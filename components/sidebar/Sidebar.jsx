@@ -3,16 +3,17 @@ import navigationLinks from '@/configuration/navigation_links';
 import NavLink from '@/components/navlink/NavLink';
 import { useSelector, useDispatch } from 'react-redux';
 import { useEffect, useRef } from 'react';
+import { refsTypes } from '@/types';
 
 export default function Sidebar() {
-  const sidebarOpen = useSelector((state) => state.sidebarOpen);
-  const topbarMenuRef = useSelector((state) => state.globalRefs.topbarMenu);
-  const languageControllerRef = useSelector((state) => state.globalRefs.languageController);
+  const isSidebarOpen = useSelector((state) => state.isSidebarOpen);
+  const topbarMenuRef = useSelector((state) => state.globalRefs[refsTypes.TOPBAR_MENU_REF]);
+  const languageControllerRef = useSelector((state) => state.globalRefs[refsTypes.LANGUAGE_CONTROLLER_REF]);
   const sidebarRef = useRef();
   const dispatch = useDispatch();
 
   const handleClickOutsideSidebar = (e) => {
-    if (!sidebarOpen) return;
+    if (!isSidebarOpen) return;
     if (topbarMenuRef.current.contains(e.target)) return;
     if (languageControllerRef.current.contains(e.target)) return;
     if (sidebarRef.current.contains(e.target)) return;
@@ -28,19 +29,19 @@ export default function Sidebar() {
   }, [topbarMenuRef, languageControllerRef]);
 
   useEffect(() => {
-    if (sidebarOpen) {
+    if (isSidebarOpen) {
       fullpage_api.setAllowScrolling(false);
       fullpage_api.setKeyboardScrolling(false);
       return;
     }
     fullpage_api.setAllowScrolling(true);
     fullpage_api.setKeyboardScrolling(true);
-  }, [sidebarOpen]);
+  }, [isSidebarOpen]);
 
   return (
     <nav
       className={styles.sidebar}
-      data-is-open={sidebarOpen}
+      data-is-open={isSidebarOpen}
       ref={sidebarRef}
     >
       <ul className={styles.sidebar__menu}>
