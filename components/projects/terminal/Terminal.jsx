@@ -16,7 +16,10 @@ export default function Terminal() {
         src="/static/images/terminal.svg"
         alt="terminal image"
       />
-      <div className={styles.terminal__text}>
+      <div
+        className={styles.terminal__text}
+        id="terminal__text"
+      >
         {commands.map((command, index) => {
           return (
             <Command
