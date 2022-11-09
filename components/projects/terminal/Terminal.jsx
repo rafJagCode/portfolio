@@ -1,11 +1,12 @@
 import styles from './Terminal.module.scss';
 import Command from './command/Command';
-import { useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 
 export default function Terminal() {
-  const [isCommandVisible, setIsCommandVisible] = useState(false);
+  const dispatch = useDispatch();
+  const commands = useSelector((state) => state.terminal.display);
   const onClick = () => {
-    setIsCommandVisible((state) => !state);
+    dispatch({ type: 'QUEUE_COMMAND', command: 'HOME_NAME' });
   };
 
   return (
@@ -15,7 +16,17 @@ export default function Terminal() {
         src="/static/images/terminal.svg"
         alt="terminal image"
       />
-      <div className={styles.terminal__text}>{isCommandVisible && <Command command="HOME_NAME" />}</div>
+      <div className={styles.terminal__text}>
+        {commands.map((command, index) => {
+          return (
+            <Command
+              command={command.text}
+              resolve={command.resolve}
+              key={command + index}
+            />
+          );
+        })}
+      </div>
       <button
         style={{ position: 'absolute', zIndex: 5 }}
         onClick={onClick}
