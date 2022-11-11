@@ -1,10 +1,11 @@
 class TypingAnimation {
-  #requestAnimationID = null;
-  #startTime = null;
-  #duration = null;
-  #textToType = '';
-  #typed = '';
-  #resolve = null;
+  #requestAnimationID;
+  #startTime;
+  #duration;
+  #textToType;
+  #typed;
+  #resolve;
+  #typingSpeed = 0.005;
 
   constructor() {
     this.reset();
@@ -35,9 +36,9 @@ class TypingAnimation {
     this.#resolve = null;
   }
 
-  step(setTyped, timestamp) {
-    this.setStartTime(timestamp);
-    this.setDuration(timestamp);
+  step(setTyped) {
+    this.setStartTime();
+    this.setDuration();
     if (this.#typed === this.#textToType) {
       this.stop();
       return;
@@ -46,19 +47,19 @@ class TypingAnimation {
     this.#requestAnimationID = requestAnimationFrame(this.step);
   }
 
-  setStartTime(timestamp) {
+  setStartTime() {
     if (!!this.#startTime) return;
-    this.#startTime = timestamp;
+    this.#startTime = performance.now();
   }
 
-  setDuration(timestamp) {
-    this.#duration = timestamp - this.#startTime;
+  setDuration() {
+    this.#duration = performance.now() - this.#startTime;
   }
 
   typeCharacter(setTyped) {
-    const expectedTypedLength = parseInt((this.#duration / 1000) * 5) + 1;
+    const expectedTypedLength = parseInt(this.#duration * this.#typingSpeed);
     if (this.#typed.length >= expectedTypedLength) return;
-    this.#typed += this.#textToType.charAt(expectedTypedLength - 1);
+    this.#typed = this.#textToType.slice(0, expectedTypedLength);
     setTyped(this.#typed);
   }
 
