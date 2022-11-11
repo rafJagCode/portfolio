@@ -8,4 +8,23 @@
   overflow-y: auto;
   scrollbar-color: #323232 black;
   scrollbar-width: thin;
+  /* ===== Scrollbar CSS ===== */
+  /* Firefox */
+  scrollbar-width: thin;
+  scrollbar-color: #323232 #000000;
+
+  /* Chrome, Edge, and Safari */
+  &::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: #000000;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: #323232;
+    border-radius: 0px;
+    border: 0px none #000000;
+  }
 }
