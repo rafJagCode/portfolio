@@ -5,7 +5,7 @@ import { useDispatch } from 'react-redux';
 export default function Terminal() {
   const dispatch = useDispatch();
   const onClick = () => {
-    dispatch({ type: 'QUEUE_COMMAND', command: 'HOME_NAME' });
+    dispatch({ type: 'QUEUE_COMMAND', command: 'COMMAND_CAT_INSTRUCTION', print: 'PRINT_INSTRUCTION', directory: 'COW1' });
   };
 
   return (

@@ -20,6 +20,8 @@ const createCommandWithPromise = (action) => {
   const promise = new Promise((res) => (resolve = res));
   const command = {
     text: action.command,
+    print: action.print || null,
+    directory: action.directory || null,
     promise: promise,
     resolve: resolve,
   };
