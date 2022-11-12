@@ -13,6 +13,7 @@ const terminalQueueingMiddleware = (store) => (next) => (action) => {
     displayAfterLastQueuedCommand(next, lastQueuedCommand, command);
     removeFromQueueWhenTypingFinished(next, command);
   }
+  return command;
 };
 
 const createCommandWithPromise = (action) => {

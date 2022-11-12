@@ -1,7 +1,9 @@
 import useCowAnimations from '@/hooks/useCowAnimations';
+import { useDispatch } from 'react-redux';
 
 const useBeforeScrollHandler = (engineAnimation, orbitingAnimation, updateState) => {
   const stopCowAbduction = useCowAnimations();
+  const dispatch = useDispatch();
 
   const handleAnimationsBeforeScroll = (origin) => {
     if (origin.anchor === '#home') handleLeavingHomeSection();
@@ -20,6 +22,7 @@ const useBeforeScrollHandler = (engineAnimation, orbitingAnimation, updateState)
     await stopCowAbduction();
     engineAnimation.startAnimation();
     updateState('ALLOW_SCROLL');
+    dispatch({ type: 'CLEAR_TERMINAL' });
   };
 
   const handleLeavingTechnologiesSection = async () => {

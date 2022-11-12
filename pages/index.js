@@ -45,6 +45,7 @@ export default function App() {
     updateState('HANDLE_SCROLL');
     engineAnimation.stopAnimation();
     if (destination.anchor === '#home') orbitingAnimation.startAnimation();
+    if (destination.anchor === '#projects') dispatch({ type: 'QUEUE_COMMAND', command: 'COMMAND_CAT_INSTRUCTION', print: 'PRINT_INSTRUCTION' });
   };
 
   return (

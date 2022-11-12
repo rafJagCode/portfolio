@@ -95,7 +95,7 @@ const terminal = (state = TERMINAL, action) => {
       return { ...state, display: display };
     }
     case types.CLEAR_TERMINAL: {
-      return state;
+      return TERMINAL;
     }
     default:
       return state;
