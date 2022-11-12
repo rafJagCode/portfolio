@@ -22,6 +22,7 @@ class TypingAnimation {
   }
 
   stop() {
+    if (!this.#requestAnimationID) return;
     cancelAnimationFrame(this.#requestAnimationID);
     this.#resolve();
     this.reset();

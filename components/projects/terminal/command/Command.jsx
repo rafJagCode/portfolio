@@ -9,25 +9,31 @@ export default function Command({ command, resolve, print, directory, setIsTermi
   const [isTypingFinished, setIsTypingFinished] = useState(false);
 
   useEffect(() => {
-    if (command === 'EMPTY') return;
+    let isMounted = true;
     setIsTerminalBusy(true);
-    new TypingAnimation()
+    const typingAnimation = new TypingAnimation();
+    typingAnimation
       .setTextToType(t(command))
       .type(setTyped)
       .then(() => {
         resolve();
-        setIsTypingFinished(true);
+        if (isMounted) setIsTypingFinished(true);
         setIsTerminalBusy(false);
       });
+    return () => {
+      isMounted = false;
+      typingAnimation.stop();
+      setIsTerminalBusy(false);
+    };
   }, []);
 
   return (
     <span className="command">
       {command !== 'EMPTY' && isTypingFinished ? t(command) : typed}
-      {isTypingFinished && <br></br>}
-      {isTypingFinished && t(print)}
-      {isTypingFinished && <br></br>}
-      {isTypingFinished && <StartingLine directory={directory} />}
+      {command !== 'clear' && isTypingFinished && <br></br>}
+      {!!print && isTypingFinished && t(print)}
+      {!!print && isTypingFinished && <br></br>}
+      {command !== 'clear' && isTypingFinished && <StartingLine directory={directory} />}
     </span>
   );
 }
