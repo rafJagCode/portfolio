@@ -1,4 +1,5 @@
 import StartingLine from './StartingLine';
+import ProjectLinks from './ProjectLinks';
 import useTranslation from '@/hooks/useTranslation';
 import TypingAnimation from '../animations/TypingAnimation';
 import { useState, useEffect } from 'react';
@@ -29,10 +30,11 @@ export default function Command({ command, resolve, print, directory, setIsTermi
 
   return (
     <span className="command">
-      {command !== 'EMPTY' && isTypingFinished ? t(command) : typed}
+      {isTypingFinished ? t(command) : typed}
       {command !== 'clear' && isTypingFinished && <br></br>}
       {!!print && isTypingFinished && t(print)}
       {!!print && isTypingFinished && <br></br>}
+      {command === 'COMMAND_CAT_PROJECT_DESCRIPTION' && isTypingFinished && <ProjectLinks project={directory} />}
       {command !== 'clear' && isTypingFinished && <StartingLine directory={directory} />}
     </span>
   );

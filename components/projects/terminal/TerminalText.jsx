@@ -7,6 +7,7 @@ import { useEffect, useRef, useState } from 'react';
 
 export default function TerminalText() {
   const commands = useSelector((state) => state.terminal.display);
+  const directory = useSelector((state) => state.terminal.directory);
   const terminalTextRef = useRef();
   const [scrollHeight, setScrollHeight] = useState(null);
   const [isTerminalBusy, setIsTerminalBusy] = useState(false);
@@ -32,7 +33,7 @@ export default function TerminalText() {
       id="terminal__text"
       ref={terminalTextRef}
     >
-      <StartingLine />
+      <StartingLine directory={directory} />
       {commands.map((command, index) => {
         return (
           <Command

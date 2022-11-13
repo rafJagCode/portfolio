@@ -76,6 +76,7 @@ const animations = (state = ANIMATIONS, action) => {
 };
 
 const TERMINAL = {
+  directory: null,
   queue: [],
   display: [],
 };
@@ -96,6 +97,9 @@ const terminal = (state = TERMINAL, action) => {
     }
     case types.CLEAR_TERMINAL: {
       return TERMINAL;
+    }
+    case types.CHANGE_DIRECTORY: {
+      return { ...state, directory: action.directory };
     }
     default:
       return state;
