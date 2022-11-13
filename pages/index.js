@@ -15,6 +15,7 @@ import { animationsTypes } from '@/types';
 export default function App() {
   const orbitingAnimation = useSelector((state) => state.animations[animationsTypes.ORBITING_ANIMATION]);
   const engineAnimation = useSelector((state) => state.animations[animationsTypes.ENGINE_ANIMATION]);
+  const holdLaunchingPositionAnimation = useSelector((state) => state.animations[animationsTypes.HOLD_LAUNCHING_POSITION_ANIMATION]);
   const [states, updateState, compareState, currentState] = useScrollMachineState();
   const [repeatScrollWhenAnimationReady, delayScroll] = useDelayedScroll(states, updateState, compareState, currentState);
   const handleAnimationsBeforeScroll = useBeforeScrollHandler(engineAnimation, orbitingAnimation, updateState);
@@ -35,6 +36,7 @@ export default function App() {
     if (compareState(states.isScrollAllowed)) return true;
 
     delayScroll(destination);
+    holdLaunchingPositionAnimation.stopAnimation();
     handleAnimationsBeforeScroll(origin);
 
     return false;
@@ -44,6 +46,7 @@ export default function App() {
     if (!engineAnimation) return;
     updateState('HANDLE_SCROLL');
     engineAnimation.stopAnimation();
+    if (destination.anchor !== '#home') holdLaunchingPositionAnimation.startAnimation();
     if (destination.anchor === '#home') orbitingAnimation.startAnimation();
     if (destination.anchor === '#projects') dispatch({ type: 'QUEUE_COMMAND', command: 'COMMAND_CAT_INSTRUCTION', print: 'PRINT_INSTRUCTION' });
   };

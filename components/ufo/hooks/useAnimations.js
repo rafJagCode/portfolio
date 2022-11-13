@@ -6,12 +6,21 @@ import HoverOverCow from '../animations/HoverOverCowAnimation';
 import LiftCowUpAnimation from '../animations/LiftCowUpAnimation';
 import PutCowDownAnimation from '../animations/PutCowDownAnimation';
 import FlyToLaunchingPosition from '../animations/FlyToLaunchingPositionAnimation';
+import HoldLaunchingPositionAnimation from '../animations/HoldLaunchingPositionAnimation';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useRef } from 'react';
 
 const useAnimations = (ufoHelper, flyingHelper, earthHelper, engineHelper, beamHelper, cowHelper) => {
   const clickedCowRef = useSelector((state) => state.clickedCowRef);
-  const [beamAnimationRef, flyToCowAnimationRef, hoveOverCowAnimationRef, liftCowUpAnimationRef, putCowDownAnimationRef, flyToLaunchingPositionRef] = [useRef(null), useRef(null), useRef(null), useRef(null), useRef(null), useRef(null)];
+  const [beamAnimationRef, flyToCowAnimationRef, hoveOverCowAnimationRef, liftCowUpAnimationRef, putCowDownAnimationRef, flyToLaunchingPositionRef, holdLaunchingPositionAnimationRef] = [
+    useRef(null),
+    useRef(null),
+    useRef(null),
+    useRef(null),
+    useRef(null),
+    useRef(null),
+    useRef(null),
+  ];
   const dispatch = useDispatch();
 
   const stopAbductingCow = async () => {
@@ -22,6 +31,7 @@ const useAnimations = (ufoHelper, flyingHelper, earthHelper, engineHelper, beamH
   };
 
   const startAbductingCow = async () => {
+    holdLaunchingPositionAnimationRef.current.stopAnimation();
     const flyStatus = await flyToCowAnimationRef.current.startAnimation();
     if (flyStatus === 'FLY_ABORTED') return;
     hoveOverCowAnimationRef.current.startAnimation();
@@ -67,6 +77,7 @@ const useAnimations = (ufoHelper, flyingHelper, earthHelper, engineHelper, beamH
   useEffect(() => {
     if (!flyingHelper || !earthHelper) return;
     flyToLaunchingPositionRef.current = new FlyToLaunchingPosition(dispatch, flyingHelper, earthHelper);
+    holdLaunchingPositionAnimationRef.current = new HoldLaunchingPositionAnimation(dispatch, flyingHelper, earthHelper);
   }, [flyingHelper, earthHelper]);
 
   useEffect(() => {
