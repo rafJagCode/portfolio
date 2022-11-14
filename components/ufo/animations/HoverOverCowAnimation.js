@@ -38,8 +38,9 @@ class HoverOverCow extends Animation {
   }
 
   setDestination() {
+    const spaceAboveCow = 0.6;
     const [cowTopMiddleX, cowTopMiddleY] = this.#cowHelper.getCowTopMiddlePosition();
-    this.#destination = [cowTopMiddleX, cowTopMiddleY / 2];
+    this.#destination = [cowTopMiddleX, cowTopMiddleY * spaceAboveCow];
   }
 
   isDestinationReached() {

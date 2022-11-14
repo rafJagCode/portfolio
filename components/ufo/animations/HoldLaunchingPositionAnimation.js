@@ -1,14 +1,13 @@
 import Animation from './Animation';
 import { animationsTypes } from '@/types';
 
-class FlyToLaunchingPosition extends Animation {
+class HoldLaunchingPositionAnimation extends Animation {
   #flyingHelper;
   #earthHelper;
   #destination;
-  #speed;
 
   constructor(dispatch = null, flyingHelper, earthHelper) {
-    super(animationsTypes.FLY_TO_LAUNCHING_POSITION_ANIMATION, dispatch);
+    super(animationsTypes.HOLD_LAUNCHING_POSITION_ANIMATION, dispatch);
     this.#flyingHelper = flyingHelper;
     this.#earthHelper = earthHelper;
     this.reset();
@@ -25,14 +24,15 @@ class FlyToLaunchingPosition extends Animation {
   reset() {
     this.requestAnimationID = null;
     this.#destination = null;
-    this.#speed = 15;
   }
 
   step() {
     this.setDestination();
-    if (this.isDestinationReached()) this.stopAnimation();
-    else {
-      this.#flyingHelper.makeUfoStep(this.#destination, this.#speed);
+    if (this.isDestinationReached()) {
+      this.requestAnimationID = requestAnimationFrame(this.step);
+      return;
+    } else {
+      this.#flyingHelper.teleportUfoToDestination(this.#destination);
       this.requestAnimationID = requestAnimationFrame(this.step);
     }
   }
@@ -47,4 +47,4 @@ class FlyToLaunchingPosition extends Animation {
   }
 }
 
-export default FlyToLaunchingPosition;
+export default HoldLaunchingPositionAnimation;

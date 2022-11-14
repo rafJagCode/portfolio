@@ -12,7 +12,7 @@ export default class MyDocument extends Document {
           <link
             rel="preconnect"
             href="https://fonts.gstatic.com"
-            crossorigin
+            crossOrigin="true"
           />
           <link
             href="https://fonts.googleapis.com/css2?family=Saira:wght@300;500;800&family=VT323&display=swap"

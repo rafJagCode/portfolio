@@ -26,6 +26,8 @@ class BeamAnimation extends Animation {
   reset() {
     this.requestAnimationID = null;
     this.changeBeamOpacity(0);
+    this.#beamHelper.changeBeamWidth(0);
+    this.#beamHelper.changeBeamHeight(0);
   }
 
   step() {

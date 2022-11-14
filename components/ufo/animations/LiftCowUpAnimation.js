@@ -15,7 +15,8 @@ class LiftCowUpAnimation extends Animation {
   }
 
   stop() {
-    this.resolve();
+    if (this.isLifted()) this.resolve('LIFTING_FINISHED');
+    else this.resolve('LIFTING_ABORTED');
   }
 
   reset() {
@@ -37,7 +38,7 @@ class LiftCowUpAnimation extends Animation {
   }
 
   lift() {
-    this.#cowHelper.shiftCowImageVertically(1);
+    this.#cowHelper.shiftCowImageVertically(2);
   }
 }
 
