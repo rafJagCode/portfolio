@@ -37,7 +37,7 @@ class PutCowDownAnimation extends Animation {
   }
 
   putCowDown() {
-    this.#cowHelper.shiftCowImageVertically(-1);
+    this.#cowHelper.shiftCowImageVertically(-2);
   }
 }
 

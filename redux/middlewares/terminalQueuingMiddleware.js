@@ -48,6 +48,10 @@ const removeCommandFromQueue = (next, command) => {
 
 const removeFromQueueWhenTypingFinished = async (next, command) => {
   await command.promise;
+  if (command.text === 'clear') {
+    next({ type: types.CLEAR_TERMINAL, clearOnlyDisplay: true });
+    next({ type: types.CHANGE_DIRECTORY, directory: command.directory });
+  }
   removeCommandFromQueue(next, command);
 };
 

@@ -25,7 +25,7 @@ class FlyToLaunchingPosition extends Animation {
   reset() {
     this.requestAnimationID = null;
     this.#destination = null;
-    this.#speed = 10;
+    this.#speed = 15;
   }
 
   step() {

@@ -96,7 +96,8 @@ const terminal = (state = TERMINAL, action) => {
       return { ...state, display: display };
     }
     case types.CLEAR_TERMINAL: {
-      return TERMINAL;
+      if (action.clearOnlyDisplay) return { directory: state.directory, queue: state.queue, display: [] };
+      return { ...TERMINAL };
     }
     case types.CHANGE_DIRECTORY: {
       return { ...state, directory: action.directory };

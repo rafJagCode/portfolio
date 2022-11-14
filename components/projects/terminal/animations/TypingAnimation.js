@@ -24,8 +24,10 @@ class TypingAnimation {
   stop() {
     if (!this.#requestAnimationID) return;
     cancelAnimationFrame(this.#requestAnimationID);
-    this.#resolve();
-    this.reset();
+    setTimeout(() => {
+      this.#resolve();
+      this.reset();
+    }, 300);
   }
 
   reset() {
