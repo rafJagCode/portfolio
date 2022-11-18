@@ -3,6 +3,7 @@ import ReactFullpage from '@fullpage/react-fullpage';
 import styles from './Sections.module.scss';
 import Home from '@/components/home/Home';
 import Projects from '@/components/projects/Projects';
+import Technologies from '@/components/technologies/Technologies';
 import Footer from '@/components/footer/Footer';
 import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
@@ -51,7 +52,9 @@ export default function Sections() {
         </div>
       </section>
       <section className="section">
-        <div className={styles.section__container}></div>
+        <div className={styles.section__container}>
+          <Technologies />
+        </div>
       </section>
       <section className="section">
         <div

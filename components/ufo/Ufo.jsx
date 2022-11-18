@@ -2,13 +2,20 @@ import styles from './Ufo.module.scss';
 import useHelpers from './hooks/useHelpers';
 import useAnimations from './hooks/useAnimations';
 import positionUfoInEarthCenter from './utils/positionUfoInEarthCenter';
+import { refsTypes } from '@/types';
 import { useRef, useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 const Ufo = () => {
+  const dispatch = useDispatch();
   const isSidebarOpen = useSelector((state) => state.isSidebarOpen);
   const [ufoRef, engineRef, beamRef] = [useRef(null), useRef(null), useRef(null)];
   const [ufoHelper, flyingHelper, earthHelper, engineHelper, beamHelper, cowHelper] = useHelpers(ufoRef, engineRef, beamRef);
+
+  useEffect(() => {
+    if (!ufoRef) return;
+    dispatch({ type: 'GLOBAL_REFS', refName: refsTypes.UFO_REF, ref: ufoRef });
+  }, [ufoRef]);
 
   useEffect(() => {
     if (!ufoHelper || !earthHelper) return;
