@@ -1,10 +1,12 @@
 import styles from './Laser.module.scss';
 import LaserAnimation from './LaserAnimation';
 import { refsTypes } from '@/types';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { useEffect, useState, useRef } from 'react';
 
 export default function Laser({ id, removeLaser }) {
+  const dispatch = useDispatch();
+  const crosshairAngle = useSelector((state) => state.crosshairAngle);
   const ufoRef = useSelector((state) => state.globalRefs[refsTypes.UFO_REF]);
   const asteroidsCollisionZones = useSelector((state) => state.asteroidsCollisionZones);
   const asteroidsCollisionPoints = useSelector((state) => state.asteroidsCollisionPoints);
@@ -12,9 +14,9 @@ export default function Laser({ id, removeLaser }) {
   const laserAnimation = useRef(null);
   const [position, setPosition] = useState(null);
 
-  const getLaserStartingPosition = (ufo) => {
-    const x = ufo.offsetLeft;
-    const y = ufo.offsetTop + ufo.offsetHeight / 2;
+  const getLaserStartingPosition = (ufo, laser) => {
+    const x = ufo.offsetLeft + ufo.offsetWidth / 2 - laser.offsetWidth;
+    const y = ufo.offsetTop + ufo.offsetHeight / 2 - laser.offsetHeight / 2;
     return { x, y };
   };
 
@@ -25,8 +27,8 @@ export default function Laser({ id, removeLaser }) {
 
   useEffect(() => {
     if (!ufoRef || !laserRef) return;
-    const startingPosition = getLaserStartingPosition(ufoRef.current);
-    laserAnimation.current = new LaserAnimation(laserRef, startingPosition, setPosition);
+    const startingPosition = getLaserStartingPosition(ufoRef.current, laserRef.current);
+    laserAnimation.current = new LaserAnimation(laserRef, startingPosition, setPosition, crosshairAngle, dispatch);
     displayLaser(laserAnimation.current);
   }, [ufoRef, laserRef]);
 
