@@ -1,5 +1,4 @@
 import types from './types';
-import { combineReducers } from 'redux';
 import { animationsTypes, refsTypes } from '@/types';
 
 const LANGUAGE = 'pl';
@@ -107,37 +106,11 @@ const terminal = (state = TERMINAL, action) => {
   }
 };
 
-const ASTEROIDS_COLLISION_ZONES = {};
-
-const asteroidsCollisionZones = (state = ASTEROIDS_COLLISION_ZONES, action) => {
-  switch (action.type) {
-    case types.UPDATE_ASTEROID_COLLISION_ZONE: {
-      return { ...state, [action.asteroidID]: action.asteroidCollisionZone };
-    }
-    default:
-      return state;
-  }
-};
-
-const ASTEROIDS_COLLISION_POINTS = {};
-
-const asteroidsCollisionPoints = (state = ASTEROIDS_COLLISION_POINTS, action) => {
-  switch (action.type) {
-    case types.UPDATE_ASTEROID_COLLISION_POINTS: {
-      return { ...state, [action.asteroidID]: action.asteroidCollisionPoints };
-    }
-    default:
-      return state;
-  }
-};
-
-export default combineReducers({
+export default {
   language,
   isSidebarOpen,
   clickedCowRef,
   globalRefs,
   animations,
   terminal,
-  asteroidsCollisionZones,
-  asteroidsCollisionPoints,
-});
+};
