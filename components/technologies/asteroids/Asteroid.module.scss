@@ -1,7 +1,9 @@
 .asteroid {
+  position: absolute;
+}
+.asteroid__image {
   height: 100px;
   width: 100px;
-  position: absolute;
 }
 .test {
   width: 1px;

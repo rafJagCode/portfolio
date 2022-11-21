@@ -1,6 +1,7 @@
 import styles from './Asteroid.module.scss';
 import imagesCollisionPoints from './imagesCollisionPoints';
 import Explosion from './explosion/Explosion';
+import Healthbar from './healthbar/Healthbar';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useRef, useState } from 'react';
 
@@ -62,13 +63,18 @@ export default function Asteroid({ asteroidID, imageName, startingPosition }) {
           />
         );
       })}
-      <img
-        src={`/static/images/${imageName}.svg`}
-        ref={asteroidRef}
-        id={asteroidID}
+      <div
         className={styles.asteroid}
         style={{ left: position.x, top: position.y }}
-      ></img>
+      >
+        <Healthbar />
+        <img
+          src={`/static/images/${imageName}.svg`}
+          ref={asteroidRef}
+          id={asteroidID}
+          className={styles.asteroid__image}
+        ></img>
+      </div>
       {asteroidsCollisionPoints[asteroidID]?.map((collisionPoint, index) => {
         return (
           <div
