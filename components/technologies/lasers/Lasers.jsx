@@ -1,8 +1,16 @@
 import Laser from './Laser';
-import { useState } from 'react';
+import { useSelector } from 'react-redux';
+import { useState, useEffect } from 'react';
 
 export default function Lasers() {
+  const spaceKeyPressed = useSelector((state) => state.keys[' '].pressed);
   const [lasers, setLasers] = useState([]);
+
+  useEffect(() => {
+    if (!spaceKeyPressed) return;
+    addLaser();
+  }, [spaceKeyPressed]);
+
   const addLaser = () => {
     setLasers((lasers) => [...lasers, { id: performance.now() * Math.floor(Math.random() * 1000) }]);
   };
@@ -13,7 +21,6 @@ export default function Lasers() {
 
   return (
     <div>
-      <button onClick={addLaser}>SHOOT</button>
       {lasers.map((laser) => (
         <Laser
           key={laser.id}
