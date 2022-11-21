@@ -1,22 +1,17 @@
 import styles from './Asteroid.module.scss';
-import imagesCollisionPoints from './imagesCollisionPoints';
 import Explosion from './explosion/Explosion';
 import Healthbar from './healthbar/Healthbar';
+import useCollisionPointsUpdater from './hooks/useCollisionPointsUpdater';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useRef, useState } from 'react';
 
 export default function Asteroid({ asteroidID, imageName, startingPosition }) {
-  const asteroidsCollisionPoints = useSelector((state) => state.asteroidsCollisionPoints);
   const asteroidHits = useSelector((state) => state.asteroidsHits[asteroidID]);
   const dispatch = useDispatch();
   const asteroidRef = useRef(null);
   const [position, setPosition] = useState(startingPosition);
+  const asteroidCollisionPoints = useCollisionPointsUpdater(asteroidID, imageName, position);
   const [explosions, setExplosions] = useState([]);
-
-  const updateCollisionPoints = () => {
-    const asteroidCollisionPoints = imagesCollisionPoints[imageName].map((point) => ({ x: point.x + position.x, y: point.y + position.y }));
-    dispatch({ type: 'UPDATE_ASTEROID_COLLISION_POINTS', asteroidID, asteroidCollisionPoints });
-  };
 
   const updateCollisionZone = () => {
     const asteroid = asteroidRef.current;
@@ -34,7 +29,6 @@ export default function Asteroid({ asteroidID, imageName, startingPosition }) {
 
   useEffect(() => {
     updateCollisionZone();
-    updateCollisionPoints();
   }, [position]);
 
   const addExplosion = (hitpoint) => {
@@ -75,7 +69,7 @@ export default function Asteroid({ asteroidID, imageName, startingPosition }) {
           className={styles.asteroid__image}
         ></img>
       </div>
-      {asteroidsCollisionPoints[asteroidID]?.map((collisionPoint, index) => {
+      {asteroidCollisionPoints?.map((collisionPoint, index) => {
         return (
           <div
             key={index}
