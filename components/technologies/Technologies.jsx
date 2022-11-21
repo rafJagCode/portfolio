@@ -2,8 +2,8 @@ import styles from './Technologies.module.scss';
 import GameController from './game_controller/GameController';
 import Crosshair from './crosshair/Crosshair';
 import Lasers from './lasers/Lasers';
-import Asteroid from './asteroids/Asteroid';
-import asteroids from './asteroids/asteroidsStartingSetup';
+import Asteroid from './asteroid/Asteroid';
+import asteroids from './asteroid/asteroidsStartingSetup';
 import { useSelector } from 'react-redux';
 
 export default function Technologies() {
