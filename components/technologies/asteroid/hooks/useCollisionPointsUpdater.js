@@ -7,7 +7,7 @@ const useCollisionPointsUpdater = (asteroidID, imageName, position) => {
 
   const asteroidCollisionPoints = useMemo(() => {
     return imagesCollisionPoints[imageName].map((point) => ({ x: point.x + position.x, y: point.y + position.y }));
-  }, position);
+  }, [position]);
 
   const updateCollisionPoints = () => {
     dispatch({ type: 'UPDATE_ASTEROID_COLLISION_POINTS', asteroidID, asteroidCollisionPoints });
