@@ -5,15 +5,15 @@ import Home from '@/components/home/Home';
 import Projects from '@/components/projects/Projects';
 import Technologies from '@/components/technologies/Technologies';
 import Footer from '@/components/footer/Footer';
-import { useEffect } from 'react';
+import { useEffect, useCallback } from 'react';
 import { useSelector } from 'react-redux';
 
 export default function Sections() {
   const isSidebarOpen = useSelector((state) => state.isSidebarOpen);
 
-  const handleHashChange = (e) => {
+  const handleHashChange = useCallback((e) => {
     fullpage_api.moveTo(`#${e.newURL.split('#')[1]}`);
-  };
+  }, []);
 
   useEffect(() => {
     addEventListener('hashchange', handleHashChange);
