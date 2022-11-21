@@ -66,12 +66,12 @@ export default function Asteroid({ asteroidID, imageName, startingPosition }) {
       <div
         className={styles.asteroid}
         style={{ left: position.x, top: position.y }}
+        ref={asteroidRef}
+        id={asteroidID}
       >
-        <Healthbar />
+        <Healthbar asteroidHits={asteroidHits} />
         <img
           src={`/static/images/${imageName}.svg`}
-          ref={asteroidRef}
-          id={asteroidID}
           className={styles.asteroid__image}
         ></img>
       </div>
