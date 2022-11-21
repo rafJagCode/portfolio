@@ -3,8 +3,9 @@ import Explosion from './explosion/Explosion';
 import Healthbar from './healthbar/Healthbar';
 import useCollisionPointsUpdater from './hooks/useCollisionPointsUpdater';
 import useCollisionZoneUpdater from './hooks/useCollisionZonesUpdater';
+import useExplosions from './hooks/useExplosions';
 import { useSelector } from 'react-redux';
-import { useEffect, useState, useMemo } from 'react';
+import { useState, useMemo } from 'react';
 
 export default function Asteroid({ asteroidID, imageName, startingPosition }) {
   const asteroidSize = useMemo(() => 100);
@@ -12,20 +13,7 @@ export default function Asteroid({ asteroidID, imageName, startingPosition }) {
   const [position, setPosition] = useState(startingPosition);
   const asteroidCollisionPoints = useCollisionPointsUpdater(asteroidID, imageName, position);
   const asteroidCollisionZone = useCollisionZoneUpdater(asteroidID, position, asteroidSize);
-  const [explosions, setExplosions] = useState([]);
-
-  const addExplosion = (hitpoint) => {
-    setExplosions((state) => [...state, { id: performance.now() * Math.floor(Math.random() * 1000), hitpoint: hitpoint, size: 50 }]);
-  };
-
-  const removeExplosion = (id) => {
-    setExplosions((explosions) => explosions.filter((explosion) => explosion.id !== id));
-  };
-
-  useEffect(() => {
-    if (!asteroidHits || !asteroidHits.length) return;
-    addExplosion(asteroidHits.at(-1));
-  }, [asteroidHits]);
+  const [explosions, removeExplosion] = useExplosions(asteroidHits);
 
   return (
     <>
