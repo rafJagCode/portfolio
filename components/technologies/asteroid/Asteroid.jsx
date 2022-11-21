@@ -4,16 +4,19 @@ import Healthbar from './healthbar/Healthbar';
 import useCollisionPointsUpdater from './hooks/useCollisionPointsUpdater';
 import useCollisionZoneUpdater from './hooks/useCollisionZonesUpdater';
 import useExplosions from './hooks/useExplosions';
+import useHealthPoints from './hooks/useHealthPoints';
 import { useSelector } from 'react-redux';
-import { useState, useMemo } from 'react';
+import { useState } from 'react';
 
 export default function Asteroid({ asteroidID, imageName, startingPosition }) {
-  const asteroidSize = useMemo(() => 100);
+  const asteroidSize = 100;
+  const startingHealthPoints = 5;
   const asteroidHits = useSelector((state) => state.asteroidsHits[asteroidID]);
   const [position, setPosition] = useState(startingPosition);
   const asteroidCollisionPoints = useCollisionPointsUpdater(asteroidID, imageName, position);
   const asteroidCollisionZone = useCollisionZoneUpdater(asteroidID, position, asteroidSize);
   const [explosions, removeExplosion] = useExplosions(asteroidHits);
+  const healthPoints = useHealthPoints(startingHealthPoints, asteroidHits);
 
   return (
     <>
@@ -33,7 +36,10 @@ export default function Asteroid({ asteroidID, imageName, startingPosition }) {
         style={{ left: position.x, top: position.y }}
         id={asteroidID}
       >
-        <Healthbar asteroidHits={asteroidHits} />
+        <Healthbar
+          startingHealthPoints={startingHealthPoints}
+          healthPoints={healthPoints}
+        />
         <img
           src={`/static/images/${imageName}.svg`}
           className={styles.asteroid__image}
