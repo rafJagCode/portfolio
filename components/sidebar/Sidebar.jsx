@@ -2,7 +2,7 @@ import styles from './Sidebar.module.scss';
 import navigationLinks from '@/configuration/navigation_links';
 import NavLink from '@/components/navlink/NavLink';
 import { useSelector, useDispatch } from 'react-redux';
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useCallback } from 'react';
 import { refsTypes } from '@/types';
 
 export default function Sidebar() {
@@ -13,16 +13,19 @@ export default function Sidebar() {
   const sidebarRef = useRef();
   const dispatch = useDispatch();
 
-  const handleClickOutsideSidebar = (e) => {
-    if (!isSidebarOpenRef.current) return;
-    if (topbarMenuRef.current.contains(e.target)) return;
-    if (languageControllerRef.current.contains(e.target)) return;
-    if (sidebarRef.current.contains(e.target)) return;
-    dispatch({ type: 'CHANGE_SIDEBAR_STATE' });
-  };
+  const handleClickOutsideSidebar = useCallback(
+    (e) => {
+      if (!topbarMenuRef || !languageControllerRef) return;
+      if (!isSidebarOpenRef.current) return;
+      if (topbarMenuRef.current.contains(e.target)) return;
+      if (languageControllerRef.current.contains(e.target)) return;
+      if (sidebarRef.current.contains(e.target)) return;
+      dispatch({ type: 'CHANGE_SIDEBAR_STATE' });
+    },
+    [topbarMenuRef, languageControllerRef],
+  );
 
   useEffect(() => {
-    if (!topbarMenuRef || !languageControllerRef) return;
     addEventListener('click', handleClickOutsideSidebar, { capture: true });
     return () => {
       removeEventListener('click', handleClickOutsideSidebar, { capture: true });
