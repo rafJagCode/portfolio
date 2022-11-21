@@ -1,5 +1,5 @@
 import types from './types';
-import availableKeys from '@/components/technologies/game_controller/availableKeys';
+import availableKeys from '@/configuration/availableKeys';
 
 const GAME_STATE = 'FINISHED';
 

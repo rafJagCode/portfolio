@@ -1,11 +1,13 @@
 import styles from './GameController.module.scss';
-import availableKeys from './availableKeys';
+import availableKeys from '@/configuration/availableKeys';
+import useUfoSteering from './hooks/useUfoSteering';
 import { useSelector, useDispatch } from 'react-redux';
 import { useEffect, useCallback } from 'react';
 
 export default function GameController() {
   const dispatch = useDispatch();
   const gameState = useSelector((state) => state.gameState);
+  useUfoSteering();
 
   const handleKeyStateChange = useCallback((e) => {
     if (!availableKeys.includes(e.key)) return;

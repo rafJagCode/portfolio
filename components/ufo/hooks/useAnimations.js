@@ -7,6 +7,7 @@ import LiftCowUpAnimation from '../animations/LiftCowUpAnimation';
 import PutCowDownAnimation from '../animations/PutCowDownAnimation';
 import FlyToLaunchingPosition from '../animations/FlyToLaunchingPositionAnimation';
 import HoldLaunchingPositionAnimation from '../animations/HoldLaunchingPositionAnimation';
+import UfoSteeringAnimation from '../animations/UfoSteeringAnimation';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useRef } from 'react';
 
@@ -109,6 +110,11 @@ const useAnimations = (ufoHelper, flyingHelper, earthHelper, engineHelper, beamH
     if (!cowHelper || !flyToCowAnimationRef.current || !beamAnimationRef.current) return;
     handleCowAbduction();
   }, [cowHelper, flyToCowAnimationRef, beamAnimationRef, clickedCowRef]);
+
+  useEffect(() => {
+    if (!flyingHelper) return;
+    new UfoSteeringAnimation(dispatch, flyingHelper);
+  }, [flyingHelper]);
 };
 
 export default useAnimations;
