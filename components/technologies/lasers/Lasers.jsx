@@ -1,4 +1,5 @@
 import Laser from './Laser';
+import uuid from 'react-uuid';
 import { useSelector } from 'react-redux';
 import { useState, useEffect } from 'react';
 
@@ -12,7 +13,7 @@ export default function Lasers() {
   }, [spaceKeyPressed]);
 
   const addLaser = () => {
-    setLasers((lasers) => [...lasers, { id: performance.now() * Math.floor(Math.random() * 1000) }]);
+    setLasers((lasers) => [...lasers, { id: uuid() }]);
   };
 
   const removeLaser = (id) => {

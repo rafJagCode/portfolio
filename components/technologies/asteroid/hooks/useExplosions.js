@@ -1,10 +1,11 @@
+import uuid from 'react-uuid';
 import { useEffect, useState } from 'react';
 
 const useExplosions = (asteroidHits) => {
   const [explosions, setExplosions] = useState([]);
 
   const addExplosion = (hitpoint) => {
-    setExplosions((state) => [...state, { id: performance.now() * Math.floor(Math.random() * 1000), hitpoint: hitpoint, size: 50 }]);
+    setExplosions((state) => [...state, { id: uuid(), hitpoint: hitpoint, size: 50 }]);
   };
 
   const removeExplosion = (id) => {
