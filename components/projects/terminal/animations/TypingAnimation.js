@@ -25,6 +25,7 @@ class TypingAnimation {
     if (!this.#requestAnimationID) return;
     cancelAnimationFrame(this.#requestAnimationID);
     setTimeout(() => {
+      if (!this.#resolve) return;
       this.#resolve();
       this.reset();
     }, 300);
