@@ -40,11 +40,13 @@ class CrosshairAnimation {
 
   handleRightArrow() {
     this.#angle -= this.#angleVelocity;
+    if (this.#angle <= 0) this.#angle = 2 * Math.PI;
     this.#x = this.#r * Math.cos(this.#angle);
     this.#y = this.#r * Math.sin(this.#angle);
   }
   handleLeftArrow() {
     this.#angle += this.#angleVelocity;
+    if (this.#angle >= 2 * Math.PI) this.#angle = 0;
     this.#x = this.#r * Math.cos(this.#angle);
     this.#y = this.#r * Math.sin(this.#angle);
   }
