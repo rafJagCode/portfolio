@@ -8,8 +8,7 @@ export default function Laser({ id, removeLaser }) {
   const dispatch = useDispatch();
   const crosshairAngle = useSelector((state) => state.crosshairAngle);
   const ufoRef = useSelector((state) => state.globalRefs[refsTypes.UFO_REF]);
-  const asteroidsCollisionZones = useSelector((state) => state.asteroidsCollisionZones);
-  const asteroidsCollisionPoints = useSelector((state) => state.asteroidsCollisionPoints);
+  const asteroidsData = useSelector((state) => state.asteroidsData);
   const laserRef = useRef(null);
   const laserAnimation = useRef(null);
   const [position, setPosition] = useState(null);
@@ -34,13 +33,8 @@ export default function Laser({ id, removeLaser }) {
 
   useEffect(() => {
     if (!laserAnimation) return;
-    laserAnimation.current.setAsteroidsCollisionZones(asteroidsCollisionZones);
-  }, [laserAnimation, asteroidsCollisionZones]);
-
-  useEffect(() => {
-    if (!laserAnimation) return;
-    laserAnimation.current.setAsteroidsCollisionPoints(asteroidsCollisionPoints);
-  }, [laserAnimation, asteroidsCollisionPoints]);
+    laserAnimation.current.setAsteroidsData(asteroidsData);
+  }, [laserAnimation, asteroidsData]);
 
   return (
     <div
