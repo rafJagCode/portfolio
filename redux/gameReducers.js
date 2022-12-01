@@ -13,24 +13,15 @@ const gameState = (state = GAME_STATE, action) => {
   }
 };
 
-const ASTEROIDS_COLLISION_ZONES = {};
+const ASTEROIDS_DATA = {};
 
-const asteroidsCollisionZones = (state = ASTEROIDS_COLLISION_ZONES, action) => {
+const asteroidsData = (state = ASTEROIDS_DATA, action) => {
   switch (action.type) {
-    case types.UPDATE_ASTEROID_COLLISION_ZONE: {
-      return { ...state, [action.asteroidID]: action.asteroidCollisionZone };
+    case types.UPDATE_ASTEROID_DATA: {
+      return { ...state, [action.asteroidID]: { ...state[action.asteroidID], ...action.asteroidData } };
     }
-    default:
-      return state;
-  }
-};
-
-const ASTEROIDS_COLLISION_POINTS = {};
-
-const asteroidsCollisionPoints = (state = ASTEROIDS_COLLISION_POINTS, action) => {
-  switch (action.type) {
-    case types.UPDATE_ASTEROID_COLLISION_POINTS: {
-      return { ...state, [action.asteroidID]: action.asteroidCollisionPoints };
+    case types.UPDATE_ASTEROID_POSITION: {
+      return { ...state, [action.asteroidID]: { ...state[action.asteroidID], posX: action.posX, posY: action.posY } };
     }
     default:
       return state;
@@ -78,8 +69,7 @@ const crosshairAngle = (state = CROSSHAIR_ANGLE, action) => {
 
 export default {
   gameState,
-  asteroidsCollisionZones,
-  asteroidsCollisionPoints,
+  asteroidsData,
   asteroidsHits,
   keys,
   crosshairAngle,
