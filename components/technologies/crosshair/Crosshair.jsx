@@ -14,12 +14,15 @@ export default function Crosshair() {
   const arrowLeft = useSelector((state) => state.keys.ArrowLeft);
 
   useEffect(() => {
-    if (!ufoRef || !crosshairRef) return;
-    crosshairAnimationRef.current = new CrosshairAnimation(crosshairRef, ufoRef, setPosition);
-    crosshairAnimationRef.current.start();
     return () => {
       crosshairAnimationRef.current.stop();
     };
+  }, []);
+
+  useEffect(() => {
+    if (!ufoRef || !crosshairRef) return;
+    crosshairAnimationRef.current = new CrosshairAnimation(crosshairRef, ufoRef, setPosition);
+    crosshairAnimationRef.current.start();
   }, [ufoRef, crosshairRef]);
 
   useEffect(() => {

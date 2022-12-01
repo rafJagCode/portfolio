@@ -27,7 +27,7 @@ class CrosshairAnimation {
 
   stop() {
     if (!this.#requestAnimationID) return;
-    cancelAnimationFrame(this.step);
+    cancelAnimationFrame(this.#requestAnimationID);
   }
 
   step() {
