@@ -21,7 +21,7 @@ export default function Lasers() {
   };
 
   return (
-    <div>
+    <>
       {lasers.map((laser) => (
         <Laser
           key={laser.id}
@@ -29,6 +29,6 @@ export default function Lasers() {
           removeLaser={removeLaser}
         />
       ))}
-    </div>
+    </>
   );
 }
