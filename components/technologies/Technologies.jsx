@@ -3,7 +3,7 @@ import GameController from './game_controller/GameController';
 import Crosshair from './crosshair/Crosshair';
 import Lasers from './lasers/Lasers';
 import Asteroid from './asteroid/Asteroid';
-import asteroids from './asteroid/asteroidsStartingSetup';
+import asteroids from '@/configuration/asteroidsStartingSetup';
 import { useSelector } from 'react-redux';
 
 export default function Technologies() {
@@ -20,6 +20,8 @@ export default function Technologies() {
             asteroidID={asteroid.id}
             imageName={asteroid.imageName}
             startingPosition={asteroid.startingPosition}
+            asteroidSize={asteroid.asteroidSize}
+            startingHealthPoints={asteroid.startingHealthPoints}
           />
         );
       })}

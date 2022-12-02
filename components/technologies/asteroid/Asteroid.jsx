@@ -7,9 +7,7 @@ import useHealthPoints from './hooks/useHealthPoints';
 import { useSelector } from 'react-redux';
 import { useState } from 'react';
 
-export default function Asteroid({ asteroidID, imageName, startingPosition }) {
-  const asteroidSize = 100;
-  const startingHealthPoints = 5;
+export default function Asteroid({ asteroidID, imageName, startingPosition, asteroidSize, startingHealthPoints }) {
   const asteroidHits = useSelector((state) => state.asteroidsHits[asteroidID]);
   const [position, setPosition] = useState(startingPosition);
   const [explosions, removeExplosion] = useExplosions(asteroidHits);
