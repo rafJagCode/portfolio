@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="20"
+   height="20"
+   viewBox="0 0 20 20"
+   version="1.1"
+   id="svg3153"
+   inkscape:version="1.2.1 (9c6d41e410, 2022-07-14)"
+   sodipodi:docname="asteroid_bit4.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview3155"
+     pagecolor="#505050"
+     bordercolor="#ffffff"
+     borderopacity="1"
+     inkscape:showpageshadow="0"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="1"
+     inkscape:deskcolor="#505050"
+     inkscape:document-units="mm"
+     showgrid="false"
+     inkscape:zoom="5.9651515"
+     inkscape:cx="50.878842"
+     inkscape:cy="29.001778"
+     inkscape:window-width="1920"
+     inkscape:window-height="1017"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs3150" />
+  <g
+     inkscape:label="Warstwa 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <path
+       id="path3894"
+       style="fill:#7e5130;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.0352778"
+       d="m 17.817388,8.9351494 c -0.508,1.8168106 -2.42005,4.0745906 -6.37469,6.6957306 -3.11503,2.06015 -5.08,-0.11286 -6.57225,-0.7196 -0.9772,-0.39871 -1.80975,-0.4481 -2.31775,-1.29477 0.75494,-1.83091 3.53836,-0.0952 4.6743,-0.508 1.05481,-0.38452 1.55222,-2.09902 4.10281,-2.22602 3.79589,-0.18698 2.34244,-1.3370306 4.16983,-1.8344506 0.37042,-0.1023 1.38995,0.11289 2.31775,-0.11289" />
+    <path
+       id="path3896"
+       style="fill:#9e6f43;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.0352778"
+       d="m 17.817388,8.9351494 c -0.9278,0.22578 -1.94733,0.0106 -2.31775,0.11289 -1.82739,0.49742 -0.37394,1.6474706 -4.16983,1.8344506 -2.55059,0.127 -3.048,1.8415 -4.10281,2.22602 -1.13594,0.41275 -3.91936,-1.32291 -4.6743,0.508 -0.254,-0.42333 -0.43392,-1.04775 -0.50448,-2.01788 0,0 0.0106,-3.0444806 1.26295,-4.1063406 1.52753,-1.29822 3.92641,-3.24908 5.87728,-3.45369 5.14702,-0.54328 9.62377,1.31586 8.62894,4.89655" />
+  </g>
+</svg>
