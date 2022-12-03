@@ -1,4 +1,4 @@
-import uuid from 'react-uuid';
+import { LaserExplosion } from '@/components/technologies/asteroid/explosion/ExplosionTypes';
 import { useEffect, useState } from 'react';
 
 const useExplosions = (asteroidHits) => {
@@ -15,7 +15,7 @@ const useExplosions = (asteroidHits) => {
   useEffect(() => {
     if (!asteroidHits || !asteroidHits.length) return;
     const position = asteroidHits.at(-1);
-    const explosion = { explosionID: uuid(), imageName: 'explosion-sequence', position: position, size: 50, framesAmount: 7 };
+    const explosion = new LaserExplosion(position);
     addExplosion(explosion);
   }, [asteroidHits]);
 
