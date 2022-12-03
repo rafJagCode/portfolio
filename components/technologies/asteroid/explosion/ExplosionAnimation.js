@@ -1,15 +1,17 @@
 class ExplosionAnimation {
-  #framesAmount = 7;
+  #framesAmount;
   #currentFrame = 0;
   #frameSize;
   #explosion;
   #requestAnimationID = null;
   #resolve = null;
-  #fps = 10;
+  #fps;
   #prevFrameTimestamp = 0;
 
-  constructor(explosionRef, size) {
+  constructor(explosionRef, size, framesAmount) {
     this.#explosion = explosionRef.current;
+    this.#framesAmount = framesAmount;
+    this.#fps = framesAmount;
     this.#frameSize = size;
     this.step = this.step.bind(this);
   }

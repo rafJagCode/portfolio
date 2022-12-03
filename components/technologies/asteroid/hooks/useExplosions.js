@@ -4,20 +4,22 @@ import { useEffect, useState } from 'react';
 const useExplosions = (asteroidHits) => {
   const [explosions, setExplosions] = useState([]);
 
-  const addExplosion = (hitpoint) => {
-    setExplosions((state) => [...state, { id: uuid(), hitpoint: hitpoint, size: 50 }]);
+  const addExplosion = (explosion) => {
+    setExplosions((state) => [...state, explosion]);
   };
 
-  const removeExplosion = (id) => {
-    setExplosions((explosions) => explosions.filter((explosion) => explosion.id !== id));
+  const removeExplosion = (explosionID) => {
+    setExplosions((explosions) => explosions.filter((explosion) => explosion.explosionID !== explosionID));
   };
 
   useEffect(() => {
     if (!asteroidHits || !asteroidHits.length) return;
-    addExplosion(asteroidHits.at(-1));
+    const position = asteroidHits.at(-1);
+    const explosion = { explosionID: uuid(), imageName: 'explosion-sequence', position: position, size: 50, framesAmount: 7 };
+    addExplosion(explosion);
   }, [asteroidHits]);
 
-  return [explosions, removeExplosion];
+  return [explosions, addExplosion, removeExplosion];
 };
 
 export default useExplosions;
