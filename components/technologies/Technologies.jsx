@@ -16,12 +16,8 @@ export default function Technologies() {
       {asteroids.map((asteroid) => {
         return (
           <Asteroid
-            key={asteroid.id}
-            asteroidID={asteroid.id}
-            imageName={asteroid.imageName}
-            startingPosition={asteroid.startingPosition}
-            asteroidSize={asteroid.asteroidSize}
-            startingHealthPoints={asteroid.startingHealthPoints}
+            key={asteroid.asteroidID}
+            asteroid={asteroid}
           />
         );
       })}

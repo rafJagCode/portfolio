@@ -6,23 +6,27 @@ import useExplosions from './hooks/useExplosions';
 import useHealthPoints from './hooks/useHealthPoints';
 import { useSelector } from 'react-redux';
 import { useState } from 'react';
+import { useEffect } from 'react';
 
-export default function Asteroid({ asteroidID, imageName, startingPosition, asteroidSize, startingHealthPoints }) {
+export default function Asteroid({ asteroid }) {
+  const { asteroidID, imageName, startingPosition, asteroidSize, startingHealthPoints } = asteroid;
   const asteroidHits = useSelector((state) => state.asteroidsHits[asteroidID]);
   const [position, setPosition] = useState(startingPosition);
-  const [explosions, removeExplosion] = useExplosions(asteroidHits);
+  const [explosions, addExplosion, removeExplosion] = useExplosions(asteroidHits);
   const healthPoints = useHealthPoints(startingHealthPoints, asteroidHits);
-  useAsteroidData(asteroidID, imageName, position);
+  const cleanAsteroidData = useAsteroidData(asteroidID, imageName, position);
+
+  useEffect(() => {
+    if (!healthPoints) cleanAsteroidData();
+  }, [healthPoints]);
 
   return (
     <>
       {explosions.map((explosion) => {
         return (
           <Explosion
-            key={explosion.id}
-            explosionID={explosion.id}
-            hitpoint={explosion.hitpoint}
-            size={explosion.size}
+            key={explosion.explosionID}
+            explosion={explosion}
             removeExplosion={removeExplosion}
           />
         );

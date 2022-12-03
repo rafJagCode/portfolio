@@ -1,7 +1,7 @@
 import uuid from 'react-uuid';
 
 class Asteroid {
-  id;
+  asteroidID;
   imageName;
   startingPosition;
   asteroidKind;
@@ -9,7 +9,7 @@ class Asteroid {
   startingHealthPoints;
 
   constructor(imageName, startingPosition) {
-    this.id = uuid();
+    this.asteroidID = uuid();
     this.imageName = imageName;
     this.startingPosition = startingPosition;
     const asteroidKind = this.getAsteroidKind(imageName);

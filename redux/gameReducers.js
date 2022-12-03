@@ -23,6 +23,10 @@ const asteroidsData = (state = ASTEROIDS_DATA, action) => {
     case types.UPDATE_ASTEROID_POSITION: {
       return { ...state, [action.asteroidID]: { ...state[action.asteroidID], posX: action.posX, posY: action.posY } };
     }
+    case types.CLEAN_ASTEROID_DATA: {
+      const { [action.asteroidID]: dataToRemove, ...remainingData } = state;
+      return remainingData;
+    }
     default:
       return state;
   }
