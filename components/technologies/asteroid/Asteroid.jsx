@@ -50,7 +50,7 @@ export default function Asteroid({ asteroid }) {
           healthPoints={healthPoints}
         />
         <img
-          src={`/static/images/${imageName}.svg`}
+          src={`/static/images/asteroids/${imageName}.svg`}
           className={styles.asteroid__image}
           style={{ width: asteroidSize }}
         ></img>

@@ -19,9 +19,7 @@ class Asteroid {
   }
 
   getAsteroidKind(imageName) {
-    const nameWithoutNumber = imageName.slice(0, imageName.length - 1);
-    const [, asteroidKind] = nameWithoutNumber.split('_');
-    if (!asteroidKind) return 'asteroid';
+    const [prefix, asteroidKind, number] = imageName.split('-');
     return asteroidKind;
   }
 
@@ -36,7 +34,7 @@ class Asteroid {
         asteroidSize = 40;
         break;
       }
-      case 'asteroid': {
+      case 'whole': {
         asteroidSize = 100;
         break;
       }
@@ -58,7 +56,7 @@ class Asteroid {
         startingHealthPoints = 2;
         break;
       }
-      case 'asteroid': {
+      case 'whole': {
         startingHealthPoints = 5;
         break;
       }
@@ -71,13 +69,13 @@ class Asteroid {
 }
 
 const asteroids = [
-  new Asteroid('asteroid1', { x: 900, y: 200 }),
-  new Asteroid('asteroid2', { x: 100, y: 400 }),
-  new Asteroid('asteroid3', { x: 600, y: 100 }),
-  new Asteroid('asteroid_fragment1', { x: 100, y: 800 }),
-  new Asteroid('asteroid_fragment2', { x: 200, y: 800 }),
-  new Asteroid('asteroid_bit1', { x: 600, y: 700 }),
-  new Asteroid('asteroid_bit2', { x: 700, y: 700 }),
+  new Asteroid('asteroid-whole-1', { x: 900, y: 200 }),
+  new Asteroid('asteroid-whole-2', { x: 100, y: 400 }),
+  new Asteroid('asteroid-whole-3', { x: 600, y: 100 }),
+  new Asteroid('asteroid-fragment-1', { x: 100, y: 800 }),
+  new Asteroid('asteroid-fragment-2', { x: 200, y: 800 }),
+  new Asteroid('asteroid-bit-1', { x: 600, y: 700 }),
+  new Asteroid('asteroid-bit-2', { x: 700, y: 700 }),
 ];
 
 export default asteroids;
