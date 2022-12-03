@@ -10,7 +10,7 @@ export default function Technologies() {
   const gameState = useSelector((state) => state.gameState);
   return (
     <div className={styles.technologies}>
-      {gameState !== 'FINISHED' && <Crosshair />}
+      {gameState === 'STARTED' && <Crosshair />}
       <GameController />
       <Lasers />
       {asteroids.map((asteroid) => {

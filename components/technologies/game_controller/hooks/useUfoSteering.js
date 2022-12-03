@@ -24,7 +24,6 @@ const useUfoSteering = () => {
   };
 
   useEffect(() => {
-    if (fullpage_api.getActiveSection().anchor !== '#technologies') return;
     if (!holdLaunchingPositionAnimation || !ufoSteeringAnimation || !flyToLaunchingPositionAnimation) return;
     if (gameState === 'STARTED') {
       enableUfoSteering();

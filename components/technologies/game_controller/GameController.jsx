@@ -19,6 +19,7 @@ export default function GameController() {
     if (gameState === 'STARTED') {
       fullpage_api.setAllowScrolling(false);
       fullpage_api.setKeyboardScrolling(false);
+      dispatch({ type: 'CHANGE_NAVIGATION_VISIBILITY', visible: false });
       addEventListener('keydown', handleKeyStateChange);
       addEventListener('keyup', handleKeyStateChange);
       return;
@@ -26,6 +27,7 @@ export default function GameController() {
     if (gameState === 'FINISHED') {
       fullpage_api.setAllowScrolling(true);
       fullpage_api.setKeyboardScrolling(true);
+      dispatch({ type: 'CHANGE_NAVIGATION_VISIBILITY', visible: true });
     }
     removeEventListener('keydown', handleKeyStateChange);
     removeEventListener('keyup', handleKeyStateChange);

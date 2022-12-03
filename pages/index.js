@@ -13,6 +13,7 @@ import { defaultTranslation } from '@/translations/translations';
 import { animationsTypes } from '@/types';
 
 export default function App() {
+  const isNavigationVisible = useSelector((state) => state.isNavigationVisible);
   const orbitingAnimation = useSelector((state) => state.animations[animationsTypes.ORBITING_ANIMATION]);
   const engineAnimation = useSelector((state) => state.animations[animationsTypes.ENGINE_ANIMATION]);
   const holdLaunchingPositionAnimation = useSelector((state) => state.animations[animationsTypes.HOLD_LAUNCHING_POSITION_ANIMATION]);
@@ -53,8 +54,8 @@ export default function App() {
 
   return (
     <div className={styles.app__container}>
-      <Sidebar />
-      <Topbar />
+      {isNavigationVisible && <Sidebar />}
+      {isNavigationVisible && <Topbar />}
       <main className={styles.app__content}>
         <ReactFullpage
           licenseKey={`Ca(6HeW5q[zX%k*>A#'V%I@@k|5*QKt)s]k3HmOaAPWk}sQdFK('[p0:wkl3f=|Fo0%ijhruscuZC\SYLWQI`}

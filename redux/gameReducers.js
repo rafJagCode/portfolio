@@ -1,7 +1,7 @@
 import types from './types';
 import availableKeys from '@/configuration/availableKeys';
 
-const GAME_STATE = 'FINISHED';
+const GAME_STATE = null;
 
 const gameState = (state = GAME_STATE, action) => {
   switch (action.type) {
