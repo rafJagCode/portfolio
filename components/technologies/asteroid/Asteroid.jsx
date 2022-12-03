@@ -4,6 +4,7 @@ import Healthbar from './healthbar/Healthbar';
 import useAsteroidData from './hooks/useAsteroidData';
 import useExplosions from './hooks/useExplosions';
 import useHealthPoints from './hooks/useHealthPoints';
+import { AsteroidExplosion } from '@/components/technologies/asteroid/explosion/ExplosionTypes';
 import { useSelector } from 'react-redux';
 import { useState } from 'react';
 import { useEffect } from 'react';
@@ -16,8 +17,16 @@ export default function Asteroid({ asteroid }) {
   const healthPoints = useHealthPoints(startingHealthPoints, asteroidHits);
   const cleanAsteroidData = useAsteroidData(asteroidID, imageName, position);
 
+  const getAsteroidCenterPosition = () => {
+    const asteroidCenterPosition = { x: position.x + asteroidSize / 2, y: position.y + asteroidSize / 2 };
+    return asteroidCenterPosition;
+  };
+
   useEffect(() => {
-    if (!healthPoints) cleanAsteroidData();
+    if (healthPoints) return;
+    cleanAsteroidData();
+    const asteroidCenterPosition = getAsteroidCenterPosition();
+    addExplosion(new AsteroidExplosion(asteroidCenterPosition));
   }, [healthPoints]);
 
   return (
