@@ -1,5 +1,5 @@
 import styles from './GameController.module.scss';
-import availableKeys from '@/configuration/availableKeys';
+import availableKeys from '@/configuration/available_keys';
 import useUfoSteering from './hooks/useUfoSteering';
 import { useSelector, useDispatch } from 'react-redux';
 import { useEffect, useCallback } from 'react';
