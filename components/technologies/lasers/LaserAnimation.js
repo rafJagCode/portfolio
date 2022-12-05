@@ -141,6 +141,7 @@ class LaserAnimation {
   }
 
   getCollisionPointsInHitboxRange(asteroid, relativeLaserTipPosition, hitbox) {
+    if (!asteroid.data.collisionPoints) return [];
     const collisionPoints = asteroid.data.collisionPoints.filter((point) => {
       if (Math.abs(point[0] - relativeLaserTipPosition.x) > hitbox) return false;
       if (Math.abs(point[1] - relativeLaserTipPosition.y) > hitbox) return false;
