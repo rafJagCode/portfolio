@@ -20,6 +20,12 @@ export default function Healthbar({ startingHealthPoints, healthPoints }) {
     debounceHideHealthbar(3000);
   }, [healthPoints]);
 
+  useEffect(() => {
+    return () => {
+      clearTimeout(timerIDRef.current);
+    };
+  }, []);
+
   return (
     <div
       className={styles.healthbar}
