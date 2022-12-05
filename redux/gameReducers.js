@@ -1,5 +1,5 @@
 import types from './types';
-import availableKeys from '@/configuration/availableKeys';
+import availableKeys from '@/configuration/available_keys';
 
 const GAME_STATE = null;
 
@@ -21,6 +21,7 @@ const asteroidsData = (state = ASTEROIDS_DATA, action) => {
       return { ...state, [action.asteroidID]: { ...state[action.asteroidID], ...action.asteroidData } };
     }
     case types.UPDATE_ASTEROID_POSITION: {
+      if (!state[action.asteroidID]) return state;
       return { ...state, [action.asteroidID]: { ...state[action.asteroidID], posX: action.posX, posY: action.posY } };
     }
     case types.CLEAN_ASTEROID_DATA: {
