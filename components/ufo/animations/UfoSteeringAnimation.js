@@ -1,6 +1,6 @@
 import Animation from './Animation';
 import { animationsTypes } from '@/types';
-import availableKeys from '@/configuration/availableKeys';
+import availableKeys from '@/configuration/available_keys';
 
 class UfoSteeringAnimation extends Animation {
   #flyingHelper;
