@@ -43,11 +43,9 @@ class BeamAnimation extends Animation {
   }
 
   calculateBeamHeight() {
-    const sizeFactor = 0.4;
     const [, cowBottomY] = this.#cowHelper.getCowBottomMiddlePosition();
     const [, ufoBottomY] = this.#ufoHelper.getUfoMiddleBottomPosition();
-    const ufoHeight = this.#ufoHelper.getUfoHeight();
-    const beamHeight = cowBottomY - ufoBottomY + sizeFactor * ufoHeight;
+    const beamHeight = cowBottomY - ufoBottomY;
     return beamHeight;
   }
 

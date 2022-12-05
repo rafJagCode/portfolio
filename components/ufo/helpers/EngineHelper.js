@@ -10,7 +10,7 @@ class EngineHelper {
   }
 
   changeScale(scale) {
-    this.engine.style.transform = `scale(${scale})`;
+    this.engine.style.transform = `translateY(70%) scale(${scale})`;
   }
 }
 
