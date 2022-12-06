@@ -1,8 +1,9 @@
 .ufo {
   position: fixed;
-  width: 7rem;
-  aspect-ratio: 170/106;
+  width: 100px;
+  height: 50px;
   z-index: 2;
+  backface-visibility: hidden;
   transition: filter 1000ms ease 0s;
   &[data-is-blured='true'] {
     filter: blur(5px);
