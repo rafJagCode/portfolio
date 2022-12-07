@@ -5,10 +5,10 @@ import useAsteroidData from './hooks/useAsteroidData';
 import useExplosions from './hooks/useExplosions';
 import useHealthPoints from './hooks/useHealthPoints';
 import generateAsteroidShards from './utils/generateAsteroidShards';
+import useAsteroidAnimation from './hooks/useAsteroidAnimation';
 import { AsteroidExplosion } from '@/components/technologies/asteroid/explosion/ExplosionTypes';
 import { useSelector } from 'react-redux';
-import { useState, useEffect, useRef } from 'react';
-import AsteroidAnimation from './animations/AsteroidAnimation';
+import { useState, useEffect } from 'react';
 
 export default function Asteroid({ asteroid, addAsteroid, removeAsteroid }) {
   const { asteroidID, imageName, startingPosition, asteroidSize, startingHealthPoints, asteroidKind, startingSpeed } = asteroid;
@@ -18,7 +18,7 @@ export default function Asteroid({ asteroid, addAsteroid, removeAsteroid }) {
   const [explosions, addExplosion, removeExplosion] = useExplosions(asteroidHits);
   const healthPoints = useHealthPoints(startingHealthPoints, asteroidHits);
   const [asteroidData, cleanAsteroidData] = useAsteroidData(asteroidID, imageName, position);
-  const asteroidAnimationRef = useRef(null);
+  useAsteroidAnimation(asteroidData, startingSpeed, position, setPosition, asteroidID);
 
   const getAsteroidCenterPosition = () => {
     const asteroidCenterPosition = { x: position.x + asteroidSize / 2, y: position.y + asteroidSize / 2 };
@@ -33,7 +33,6 @@ export default function Asteroid({ asteroid, addAsteroid, removeAsteroid }) {
 
   useEffect(() => {
     if (healthPoints) return;
-    asteroidAnimationRef.current.stop();
     cleanAsteroidData();
     const asteroidCenterPosition = getAsteroidCenterPosition();
     addExplosion(new AsteroidExplosion(asteroidCenterPosition));
@@ -47,14 +46,6 @@ export default function Asteroid({ asteroid, addAsteroid, removeAsteroid }) {
     if (healthPoints || explosions.length) return;
     removeAsteroid(asteroidID);
   }, [healthPoints, explosions]);
-
-  useEffect(() => {
-    asteroidAnimationRef.current = new AsteroidAnimation(asteroidData, startingSpeed, position, setPosition);
-    asteroidAnimationRef.current.start();
-    return () => {
-      asteroidAnimationRef.current.stop();
-    };
-  }, []);
 
   return (
     <>
