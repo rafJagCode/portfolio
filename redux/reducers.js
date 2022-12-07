@@ -37,6 +37,18 @@ const isSidebarOpen = (state = IS_SIDEBAR_OPEN, action) => {
   }
 };
 
+const UFO_POSITION = null;
+
+const ufoPosition = (state = UFO_POSITION, action) => {
+  switch (action.type) {
+    case types.UPDATE_UFO_POSITION: {
+      return action.position;
+    }
+    default:
+      return state;
+  }
+};
+
 const CLICKED_COW_REF = null;
 
 const clickedCowRef = (state = CLICKED_COW_REF, action) => {
@@ -122,6 +134,7 @@ export default {
   language,
   isNavigationVisible,
   isSidebarOpen,
+  ufoPosition,
   clickedCowRef,
   globalRefs,
   animations,

@@ -1,19 +1,23 @@
 class UfoHelper {
   #ufo;
+  #position;
+  #setPosition;
 
-  constructor(ufoRef) {
+  constructor(ufoRef, position, setPosition) {
     this.#ufo = ufoRef.current;
+    this.#position = position;
+    this.#setPosition = setPosition;
   }
 
   getUfoMiddlePosition() {
-    const xPos = this.#ufo.offsetLeft + this.#ufo.offsetWidth / 2;
-    const yPos = this.#ufo.offsetTop + this.#ufo.offsetHeight / 2;
+    const xPos = this.#position.x + this.#ufo.offsetWidth / 2;
+    const yPos = this.#position.y + this.#ufo.offsetHeight / 2;
     return [xPos, yPos];
   }
 
   getUfoMiddleBottomPosition() {
-    const xPos = this.#ufo.offsetLeft + this.#ufo.offsetWidth / 2;
-    const yPos = this.#ufo.offsetTop + this.#ufo.offsetHeight;
+    const xPos = this.#position.x + this.#ufo.offsetWidth / 2;
+    const yPos = this.#position.y + this.#ufo.offsetHeight;
     return [xPos, yPos];
   }
 
@@ -34,26 +38,23 @@ class UfoHelper {
   }
 
   moveUfoHorizontally(xMove) {
-    this.#ufo.style.left = this.getPercentageHorizontalPos(this.#ufo.offsetLeft + xMove);
+    const newPosition = { ...this.#position, x: this.#position.x + xMove };
+    this.#position = newPosition;
+    this.#setPosition(newPosition);
   }
 
   moveUfoVertically(yMove) {
-    this.#ufo.style.top = this.getPercentageVerticalPos(this.#ufo.offsetTop + yMove);
-  }
-
-  getPercentageHorizontalPos(posX) {
-    return `${(posX / window.innerWidth) * 100}%`;
-  }
-
-  getPercentageVerticalPos(posY) {
-    return `${(posY / window.innerHeight) * 100}%`;
+    const newPosition = { ...this.#position, y: this.#position.y + yMove };
+    this.#position = newPosition;
+    this.#setPosition(newPosition);
   }
 
   setUfoPosition(posX, posY) {
     const ufoCenterPosX = posX - this.getUfoWidth() / 2;
     const ufoCenterPosY = posY - this.getUfoHeight() / 2;
-    this.#ufo.style.left = this.getPercentageHorizontalPos(ufoCenterPosX);
-    this.#ufo.style.top = this.getPercentageVerticalPos(ufoCenterPosY);
+    const newPosition = { x: ufoCenterPosX, y: ufoCenterPosY };
+    this.#position = newPosition;
+    this.#setPosition(newPosition);
   }
 }
 

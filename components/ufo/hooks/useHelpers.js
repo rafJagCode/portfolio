@@ -8,7 +8,7 @@ import { useSelector } from 'react-redux';
 import { useState, useEffect } from 'react';
 import { refsTypes } from '@/types';
 
-const useHelpers = (ufoRef, engineRef, beamRef) => {
+const useHelpers = (ufoRef, engineRef, beamRef, position, setPosition) => {
   const earthRef = useSelector((state) => state.globalRefs[refsTypes.EARTH_REF]);
 
   const [ufoHelper, setUfoHelper] = useState(null);
@@ -20,7 +20,7 @@ const useHelpers = (ufoRef, engineRef, beamRef) => {
 
   useEffect(() => {
     if (!ufoRef) return;
-    setUfoHelper(new UfoHelper(ufoRef));
+    setUfoHelper(new UfoHelper(ufoRef, position, setPosition));
   }, [ufoRef]);
 
   useEffect(() => {

@@ -3,14 +3,15 @@ import useHelpers from './hooks/useHelpers';
 import useAnimations from './hooks/useAnimations';
 import positionUfoInEarthCenter from './utils/positionUfoInEarthCenter';
 import { refsTypes } from '@/types';
-import { useRef, useEffect } from 'react';
+import { useRef, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 const Ufo = () => {
   const dispatch = useDispatch();
   const isSidebarOpen = useSelector((state) => state.isSidebarOpen);
+  const [position, setPosition] = useState(null);
   const [ufoRef, engineRef, beamRef] = [useRef(null), useRef(null), useRef(null)];
-  const [ufoHelper, flyingHelper, earthHelper, engineHelper, beamHelper, cowHelper] = useHelpers(ufoRef, engineRef, beamRef);
+  const [ufoHelper, flyingHelper, earthHelper, engineHelper, beamHelper, cowHelper] = useHelpers(ufoRef, engineRef, beamRef, position, setPosition);
 
   useEffect(() => {
     if (!ufoRef) return;
@@ -22,6 +23,10 @@ const Ufo = () => {
     positionUfoInEarthCenter(ufoHelper, earthHelper);
   }, [ufoHelper, earthHelper]);
 
+  useEffect(() => {
+    dispatch({ type: 'UPDATE_UFO_POSITION', position });
+  }, [position]);
+
   useAnimations(ufoHelper, flyingHelper, earthHelper, engineHelper, beamHelper, cowHelper);
 
   return (
@@ -29,6 +34,7 @@ const Ufo = () => {
       className={styles.ufo}
       ref={ufoRef}
       data-is-blured={isSidebarOpen}
+      style={!position ? { visibility: 'hidden' } : { left: position.x, top: position.y }}
     >
       <div className={styles.ufo__image}></div>
       <div
