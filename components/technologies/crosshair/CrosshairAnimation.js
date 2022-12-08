@@ -3,7 +3,7 @@ class CrosshairAnimation {
   #x = -100;
   #y = 0;
   #angle = Math.PI;
-  #angleVelocity = Math.PI / 180;
+  #angleVelocity = Math.PI / 60;
   #ufoCenter = { x: 0, y: 0 };
   #crosshairPosition = { x: 0, y: 0 };
   #crosshair;
