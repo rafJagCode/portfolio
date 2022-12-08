@@ -9,6 +9,10 @@ class UfoHelper {
     this.#setPosition = setPosition;
   }
 
+  getUfoPosition() {
+    return this.#position;
+  }
+
   getUfoMiddlePosition() {
     const xPos = this.#position.x + this.#ufo.offsetWidth / 2;
     const yPos = this.#position.y + this.#ufo.offsetHeight / 2;

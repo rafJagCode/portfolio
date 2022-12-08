@@ -5,6 +5,10 @@ class FlyingHelper {
     this.#ufoHelper = ufoHelper;
   }
 
+  getUfoHelper() {
+    return this.#ufoHelper;
+  }
+
   makeUfoStep(destination, speed) {
     const move = this.getMove(destination, speed);
     this.moveUfo(move.x, move.y);
