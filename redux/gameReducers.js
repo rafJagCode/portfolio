@@ -72,10 +72,42 @@ const crosshairAngle = (state = CROSSHAIR_ANGLE, action) => {
   }
 };
 
+const EXPLOSIONS = [];
+
+const explosions = (state = EXPLOSIONS, action) => {
+  switch (action.type) {
+    case types.ADD_EXPLOSION: {
+      return [...state, action.explosion];
+    }
+    case types.REMOVE_EXPLOSION: {
+      return state.filter((explosion) => explosion.explosionID !== action.explosionID);
+    }
+    default:
+      return state;
+  }
+};
+
+const UFO_HITS = [];
+
+const ufoHits = (state = UFO_HITS, action) => {
+  switch (action.type) {
+    case types.ADD_UFO_HIT: {
+      return [...state, action.hitpoint];
+    }
+    case types.CLEAR_UFO_HITS: {
+      return [];
+    }
+    default:
+      return state;
+  }
+};
+
 export default {
   gameState,
   asteroidsData,
   asteroidsHits,
   keys,
   crosshairAngle,
+  explosions,
+  ufoHits,
 };
