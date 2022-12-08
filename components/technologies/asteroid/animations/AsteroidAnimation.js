@@ -36,15 +36,18 @@ class AsteroidAnimation {
   }
 
   step() {
-    if (!this.#isUfoImmune && this.isAsteroidInUfoZone()) {
+    const isAsteroidInUfoZone = this.isAsteroidInUfoZone();
+    if (!this.#isUfoImmune && isAsteroidInUfoZone) {
       const overlapingArea = this.getOverlapingArea();
       const collisionPoint = this.findUfoCollisionPoint(overlapingArea);
       if (collisionPoint) {
+        this.#dispatch({ type: 'ADD_UFO_HIT', hitpoint: collisionPoint });
         if (overlapingArea.width > overlapingArea.height) this.bounceVertical();
         else this.bounceHorizontal();
         this.#isUfoImmune = true;
       }
     }
+    if (this.#isUfoImmune && !isAsteroidInUfoZone) this.#isUfoImmune = false;
     if (this.isVerticalScreenLimit()) this.bounceVertical();
     if (this.isHoriziontalScreenLimit()) this.bounceHorizontal();
     this.moveAsteroid();
