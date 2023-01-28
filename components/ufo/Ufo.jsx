@@ -1,4 +1,5 @@
 import styles from './Ufo.module.scss';
+import UfoHealthbar from './ufo_healthbar/UfoHealthbar';
 import Explosion from '@/components/technologies/explosion/Explosion';
 import useHelpers from './hooks/useHelpers';
 import useAnimations from './hooks/useAnimations';
@@ -41,6 +42,7 @@ const Ufo = () => {
         data-is-blured={isSidebarOpen}
         style={!position ? { visibility: 'hidden' } : { left: position.x, top: position.y }}
       >
+        <UfoHealthbar />
         <div className={styles.ufo__image}></div>
         <div
           className={styles.ufo__engine}
