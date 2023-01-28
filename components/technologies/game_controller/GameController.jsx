@@ -15,6 +15,10 @@ export default function GameController() {
     dispatch({ type: 'UPDATE_KEY_STATE', key: e.key });
   }, []);
 
+  const changeGameState = (gameState) => {
+    dispatch({ type: 'SET_GAME_STATE', gameState: gameState });
+  };
+
   useEffect(() => {
     if (gameState === 'STARTED') {
       fullpage_api.setAllowScrolling(false);
@@ -35,9 +39,9 @@ export default function GameController() {
 
   return (
     <div className={styles.game_controller}>
-      {gameState !== 'STARTED' && <button onClick={() => dispatch({ type: 'SET_GAME_STATE', gameState: 'STARTED' })}>START GAME</button>}
-      {gameState !== 'FINISHED' && <button onClick={() => dispatch({ type: 'SET_GAME_STATE', gameState: 'FINISHED' })}>END GAME</button>}
-      {gameState === 'STARTED' && <button onClick={() => dispatch({ type: 'SET_GAME_STATE', gameState: 'PAUSED' })}>PAUSE</button>}
+      {gameState !== 'STARTED' && <button onClick={() => changeGameState('STARTED')}>START GAME</button>}
+      {gameState !== 'FINISHED' && <button onClick={() => changeGameState('FINISHED')}>END GAME</button>}
+      {gameState === 'STARTED' && <button onClick={() => changeGameState('PAUSED')}>PAUSE</button>}
     </div>
   );
 }
