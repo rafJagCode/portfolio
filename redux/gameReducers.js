@@ -102,6 +102,21 @@ const ufoHits = (state = UFO_HITS, action) => {
   }
 };
 
+const TECHNOLOGIES = [
+  { name: 'git', unlocked: false },
+  { name: 'react', unlocked: false },
+];
+
+const technologies = (state = TECHNOLOGIES, action) => {
+  switch (action.type) {
+    case types.UPDATE_TECHNOLOGIES: {
+      return state.map((technology) => (technology.name === action.technologyName ? { ...technology, unlocked: action.unlocked } : technology));
+    }
+    default:
+      return state;
+  }
+};
+
 export default {
   gameState,
   asteroidsData,
@@ -110,4 +125,5 @@ export default {
   crosshairAngle,
   explosions,
   ufoHits,
+  technologies,
 };

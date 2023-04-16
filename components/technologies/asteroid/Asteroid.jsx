@@ -8,12 +8,12 @@ import useAsteroidAnimation from './hooks/useAsteroidAnimation';
 import { useSelector } from 'react-redux';
 import { useState, useEffect } from 'react';
 
-export default function Asteroid({ asteroid, addAsteroid, removeAsteroid }) {
+export default function Asteroid({ asteroid, addAsteroid, removeAsteroid, addTechnology }) {
   const getAsteroidCenterPosition = () => {
     const asteroidCenterPosition = { x: position.x + asteroidSize / 2, y: position.y + asteroidSize / 2 };
     return asteroidCenterPosition;
   };
-  const { asteroidID, imageName, startingPosition, asteroidSize, startingHealthPoints, asteroidKind, startingSpeed } = asteroid;
+  const { asteroidID, imageName, startingPosition, asteroidSize, startingHealthPoints, asteroidKind, startingSpeed, technology } = asteroid;
   const [position, setPosition] = useState(startingPosition);
   const asteroidHits = useSelector((state) => state.asteroidsHits[asteroidID]);
   const healthPoints = useHealthPoints(startingHealthPoints, asteroidHits);
@@ -27,10 +27,16 @@ export default function Asteroid({ asteroid, addAsteroid, removeAsteroid }) {
     asteroidShards.forEach(addAsteroid);
   };
 
+  const discoverTechnology = () => {
+    if (asteroidKind !== 'whole') return;
+    addTechnology(technology, position);
+  };
+
   useEffect(() => {
     if (!healthPoints) {
       cleanAsteroidData();
       addAsteroidShards();
+      discoverTechnology();
       removeAsteroid(asteroidID);
     }
   }, [healthPoints]);

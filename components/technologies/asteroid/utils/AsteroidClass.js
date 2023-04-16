@@ -8,11 +8,13 @@ class Asteroid {
   asteroidSize;
   startingHealthPoints;
   startingSpeed;
+  technology;
 
-  constructor(imageName, startingPosition) {
+  constructor(imageName, startingPosition, technology = null) {
     this.asteroidID = uuid();
     this.imageName = imageName;
     this.startingPosition = startingPosition;
+    this.technology = technology;
     const asteroidKind = this.getAsteroidKind(imageName);
     this.setKindDependentProperties(asteroidKind);
   }
