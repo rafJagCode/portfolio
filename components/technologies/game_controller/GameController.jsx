@@ -1,6 +1,7 @@
 import styles from './GameController.module.scss';
 import availableKeys from '@/configuration/available_keys';
 import useUfoSteering from './hooks/useUfoSteering';
+import Instructions from '@/components/technologies/instructions/Instructions';
 import { useSelector, useDispatch } from 'react-redux';
 import { useEffect, useCallback } from 'react';
 
@@ -39,9 +40,31 @@ export default function GameController() {
 
   return (
     <div className={styles.game_controller}>
-      {gameState !== 'STARTED' && <button onClick={() => changeGameState('STARTED')}>START GAME</button>}
-      {gameState !== 'FINISHED' && <button onClick={() => changeGameState('FINISHED')}>END GAME</button>}
-      {gameState === 'STARTED' && <button onClick={() => changeGameState('PAUSED')}>PAUSE</button>}
+      {gameState !== 'STARTED' && <Instructions />}
+      {gameState !== 'STARTED' && (
+        <button
+          className={styles.game_controller__button}
+          onClick={() => changeGameState('STARTED')}
+        >
+          START GAME
+        </button>
+      )}
+      {gameState !== 'FINISHED' && (
+        <button
+          className={styles.game_controller__button}
+          onClick={() => changeGameState('FINISHED')}
+        >
+          END GAME
+        </button>
+      )}
+      {gameState === 'STARTED' && (
+        <button
+          className={styles.game_controller__button}
+          onClick={() => changeGameState('PAUSED')}
+        >
+          PAUSE
+        </button>
+      )}
     </div>
   );
 }

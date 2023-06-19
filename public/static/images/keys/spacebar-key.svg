@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="176.18234"
+   height="29.167974"
+   viewBox="0 0 46.61491 7.7173599"
+   version="1.1"
+   id="svg557"
+   inkscape:version="1.2.1 (9c6d41e410, 2022-07-14)"
+   sodipodi:docname="spacebar_key.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview559"
+     pagecolor="#505050"
+     bordercolor="#ffffff"
+     borderopacity="1"
+     inkscape:showpageshadow="0"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="1"
+     inkscape:deskcolor="#505050"
+     inkscape:document-units="mm"
+     showgrid="false"
+     inkscape:zoom="4.2179991"
+     inkscape:cx="77.406371"
+     inkscape:cy="33.191093"
+     inkscape:window-width="1920"
+     inkscape:window-height="1017"
+     inkscape:window-x="-8"
+     inkscape:window-y="1072"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs554" />
+  <g
+     inkscape:label="Warstwa 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-109.13607,-156.08487)">
+    <path
+       id="path1104"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="ccccccc"
+       style="fill:#b7b7b5;fill-opacity:0.9919;stroke-width:0.264583"
+       d="m 109.89834,156.09809 c -0.42228,0 -0.76227,0.33999 -0.76227,0.76227 l 0.0165,6.94187 h 46.59841 l -0.0165,-6.94187 c 0,-0.42228 -0.33999,-0.76227 -0.76227,-0.76227 z" />
+    <path
+       id="path1103"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="ccccccc"
+       style="fill:#ffffff;fill-opacity:0.5081;stroke-width:0.264583"
+       d="m 110.11,156.08487 c -0.40904,0 -0.73845,0.3294 -0.73845,0.73818 l -0.0331,6.02245 h 45.12733 l 0.0331,-6.02245 c 0,-0.40878 -0.32914,-0.73818 -0.73818,-0.73818 z" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:3.52778px;line-height:1.25;font-family:'Comic Sans MS';-inkscape-font-specification:'Comic Sans MS';text-align:end;text-anchor:end;fill:#979797;fill-opacity:1;stroke:#979797;stroke-width:0.264583;stroke-opacity:1"
+       x="139.62787"
+       y="160.51569"
+       id="text1335"><tspan
+         sodipodi:role="line"
+         id="tspan1333"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:3.52778px;font-family:'Comic Sans MS';-inkscape-font-specification:'Comic Sans MS';text-align:end;text-anchor:end;fill:#979797;fill-opacity:1;stroke:#979797;stroke-width:0.264583;stroke-opacity:1"
+         x="139.62787"
+         y="160.51569">Spacebar</tspan></text>
+  </g>
+</svg>
