@@ -1,0 +1,110 @@
+.contact_form {
+  align-self: center;
+  width: 40rem;
+  & input {
+    width: 40rem;
+    background-color: rgba(86, 11, 173, 0.9);
+    color: var(--theme-text);
+    border: 2px solid darkgrey;
+    border-radius: 1rem;
+    padding: 0.5rem 1rem;
+    &:focus {
+      outline: none;
+      border-color: var(--theme-text);
+    }
+    &::placeholder {
+      /* Chrome, Firefox, Opera, Safari 10.1+ */
+      color: darkgrey;
+      opacity: 1; /* Firefox */
+    }
+
+    &:-ms-input-placeholder {
+      /* Internet Explorer 10-11 */
+      color: darkgrey;
+    }
+
+    &::-ms-input-placeholder {
+      /* Microsoft Edge */
+      color: darkgrey;
+    }
+  }
+  & .contact_form__message_container {
+    width: 40rem;
+    border: 2px solid darkgrey;
+    border-radius: 1rem;
+    padding: 0.5rem 1rem;
+    margin: 0.5rem 0;
+    &:focus-within {
+      border-color: var(--theme-text);
+    }
+  }
+  & textarea {
+    width: 38rem;
+    resize: none;
+    background-color: rgba(86, 11, 173, 0.9);
+    border: none;
+    color: var(--theme-text);
+
+    &:focus {
+      outline: none;
+    }
+    &::placeholder {
+      /* Chrome, Firefox, Opera, Safari 10.1+ */
+      color: darkgrey;
+      opacity: 1; /* Firefox */
+    }
+
+    &:-ms-input-placeholder {
+      /* Internet Explorer 10-11 */
+      color: darkgrey;
+    }
+
+    &::-ms-input-placeholder {
+      /* Microsoft Edge */
+      color: darkgrey;
+    }
+    white-space: pre-line;
+    overflow-y: auto;
+    /* ===== Scrollbar CSS ===== */
+    /* Firefox */
+    scrollbar-width: thin;
+    scrollbar-color: var(--theme-text) darkgrey;
+
+    /* Chrome, Edge, and Safari */
+    &::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    &::-webkit-scrollbar-track {
+      background: darkgrey;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background-color: #323232;
+      border-radius: 2px;
+      border: 0px none darkgrey;
+    }
+  }
+  & button {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(86, 11, 173, 0.9);
+    color: #00ff00;
+    padding: 0.5rem 1rem;
+    border: 2px solid #00ff00;
+    border-radius: 1rem;
+    transition: 250ms;
+    text-transform: uppercase;
+    cursor: pointer;
+    svg {
+      margin-right: 0.3rem;
+    }
+    &:hover,
+    :focus {
+      background-color: #00ff00;
+      color: black;
+    }
+  }
+}

@@ -4,6 +4,7 @@ import styles from './Sections.module.scss';
 import Home from '@/components/home/Home';
 import Projects from '@/components/projects/Projects';
 import Technologies from '@/components/technologies/Technologies';
+import Contact from '@/components/contact/Contact';
 import Footer from '@/components/footer/Footer';
 import { useEffect, useCallback } from 'react';
 import { useSelector } from 'react-redux';
@@ -60,7 +61,9 @@ export default function Sections() {
         <div
           className={styles.section__container}
           data-is-last="true"
-        ></div>
+        >
+          <Contact />
+        </div>
         <Footer />
       </section>
     </ReactFullpage.Wrapper>,

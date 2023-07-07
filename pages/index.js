@@ -59,7 +59,7 @@ export default function App() {
       <main className={styles.app__content}>
         <ReactFullpage
           licenseKey={`Ca(6HeW5q[zX%k*>A#'V%I@@k|5*QKt)s]k3HmOaAPWk}sQdFK('[p0:wkl3f=|Fo0%ijhruscuZC\SYLWQI`}
-          normalScrollElements={'#terminal__text'}
+          normalScrollElements={'#terminal__text, #message'}
           scrollingSpeed={1000}
           dragAndMove={true}
           touchSensitivity={3}
