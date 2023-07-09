@@ -1,13 +1,20 @@
 import styles from './ContactForm.module.scss';
 import { FaSatelliteDish } from 'react-icons/fa';
+import sentEmail from '@/utils/sentEmail';
 
 export default function ContactForm() {
+  const handleEmail = async (e) => {
+    e.preventDefault();
+    const data = {
+      from: 'from@test.com',
+      message: 'test message',
+    };
+    const response = await sentEmail(data);
+    console.log(response);
+  };
+
   return (
-    <form
-      className={styles.contact_form}
-      action="submit.php"
-      method="POST"
-    >
+    <form className={styles.contact_form}>
       <input
         placeholder="Your Email"
         type="email"
@@ -25,10 +32,7 @@ export default function ContactForm() {
         ></textarea>
       </div>
 
-      <button
-        type="submit"
-        value="Submit"
-      >
+      <button onClick={handleEmail}>
         <FaSatelliteDish />
         Send Message
       </button>
