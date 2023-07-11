@@ -1,6 +1,9 @@
 .contact_form {
   align-self: center;
   width: 40rem;
+  & .input_container {
+    position: relative;
+  }
   & input {
     width: 40rem;
     background-color: rgba(86, 11, 173, 0.9);
@@ -8,9 +11,17 @@
     border: 2px solid darkgrey;
     border-radius: 1rem;
     padding: 0.5rem 1rem;
-    &:focus {
-      outline: none;
+    outline: none;
+    &[data-valid='focused'] {
       border-color: var(--theme-text);
+    }
+    &[data-valid='false'] {
+      color: var(--theme-accent);
+      border-color: var(--theme-accent);
+    }
+    &[data-valid='true'] {
+      color: #00ff00;
+      border-color: #00ff00;
     }
     &::placeholder {
       /* Chrome, Firefox, Opera, Safari 10.1+ */
@@ -28,23 +39,41 @@
       color: darkgrey;
     }
   }
+  & .error_message {
+    position: absolute;
+    left: 0.8rem;
+    top: 100%;
+
+    color: var(--theme-accent);
+    font-size: 0.8rem;
+    line-height: 1.1rem;
+  }
   & .contact_form__message_container {
+    position: relative;
     width: 40rem;
     border: 2px solid darkgrey;
     border-radius: 1rem;
     padding: 0.5rem 1rem;
-    margin: 0.5rem 0;
-    &:focus-within {
+    margin: 1.1rem 0;
+    color: var(--theme-text);
+    &[data-valid='focused'] {
       border-color: var(--theme-text);
+    }
+    &[data-valid='false'] {
+      color: var(--theme-accent);
+      border-color: var(--theme-accent);
+    }
+    &[data-valid='true'] {
+      color: #00ff00;
+      border-color: #00ff00;
     }
   }
   & textarea {
+    color: inherit;
     width: 38rem;
     resize: none;
     background-color: rgba(86, 11, 173, 0.9);
     border: none;
-    color: var(--theme-text);
-
     &:focus {
       outline: none;
     }
