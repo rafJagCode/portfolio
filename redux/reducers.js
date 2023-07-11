@@ -130,6 +130,24 @@ const terminal = (state = TERMINAL, action) => {
   }
 };
 
+const DIALOG = {
+  message: null,
+  isVisible: false,
+};
+
+const dialog = (state = DIALOG, action) => {
+  switch (action.type) {
+    case types.SHOW_DIALOG: {
+      return { message: action.message, isVisible: true };
+    }
+    case types.HIDE_DIALOG: {
+      return { message: null, isVisible: false };
+    }
+    default:
+      return state;
+  }
+};
+
 export default {
   language,
   isNavigationVisible,
@@ -139,4 +157,5 @@ export default {
   globalRefs,
   animations,
   terminal,
+  dialog,
 };
