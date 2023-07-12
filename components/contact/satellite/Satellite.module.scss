@@ -1,5 +1,9 @@
-.satellite {
-  width: 20rem;
+.container {
+  position: relative;
+  display: grid;
+}
+.satellite_image {
+  width: 10rem;
   justify-self: center;
   align-self: center;
 }

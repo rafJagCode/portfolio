@@ -9,7 +9,8 @@
       "@/handlers/*": ["handlers/*"],
       "@/types": ["types.js"],
       "@/links": ["links.js"],
-      "@/utils/*": ["utils/*"]
+      "@/utils/*": ["utils/*"],
+      "@/animations/*": ["animations/*"]
     }
   }
 }

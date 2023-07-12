@@ -16,6 +16,7 @@ export default function ContactForm() {
   const handleMessageBlur = (e) => validateMessage(e.target.value);
   const handleEmail = async (e) => {
     e.preventDefault();
+    dispatch({ type: 'TURN_SIGNALS_ON' });
     validateEmail(emailRef.current.value);
     validateMessage(messageRef.current.value);
     if (!isEmailValid || !isMessageValid) {
