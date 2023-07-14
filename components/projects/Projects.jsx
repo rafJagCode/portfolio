@@ -4,10 +4,10 @@ import Terminal from '@/components/projects/terminal/Terminal';
 
 export default function Projects() {
   return (
-    <div className={styles.projects}>
+    <div className={styles.container}>
       <Terminal />
-      <div className={styles.projects__island_container}>
-        <div className={styles.projects__island}></div>
+      <div className={styles.island_container}>
+        <div className={styles.island}></div>
         <Cow imageName="cow1" />
         <Cow imageName="cow2" />
         <Cow imageName="cow3" />

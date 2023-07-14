@@ -44,7 +44,7 @@ export default function Asteroid({ asteroid, addAsteroid, removeAsteroid, addTec
   return (
     <>
       <div
-        className={styles.asteroid}
+        className={styles.container}
         style={{ left: position.x, top: position.y }}
         id={asteroidID}
       >
@@ -54,7 +54,7 @@ export default function Asteroid({ asteroid, addAsteroid, removeAsteroid, addTec
         />
         <img
           src={`/static/images/asteroids/${imageName}.svg`}
-          className={styles.asteroid__image}
+          className={styles.image}
           style={{ width: asteroidSize }}
         ></img>
       </div>

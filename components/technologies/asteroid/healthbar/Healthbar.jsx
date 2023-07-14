@@ -28,11 +28,11 @@ export default function Healthbar({ startingHealthPoints, healthPoints }) {
 
   return (
     <div
-      className={styles.healthbar}
+      className={styles.container}
       style={{ visibility: isVisible ? 'visible' : 'hidden' }}
     >
       <div
-        className={styles.healthbar__state}
+        className={styles.state}
         style={{ width: `${(healthPoints / startingHealthPoints) * 100}%` }}
       ></div>
     </div>

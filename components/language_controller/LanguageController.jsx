@@ -18,7 +18,7 @@ export default function LanguageController() {
 
   return (
     <nav
-      className={styles.language_controller}
+      className={styles.container}
       id="languageController"
       ref={languageControllerRef}
     >
@@ -28,7 +28,7 @@ export default function LanguageController() {
       >
         PL
       </a>
-      <div className={styles.language_controller__vertical_line}></div>
+      <div className={styles.vertical_line}></div>
       <a
         onClick={() => changeLanguage('en')}
         data-is-selected={language === 'en'}

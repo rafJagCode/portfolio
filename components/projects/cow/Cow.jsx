@@ -11,13 +11,13 @@ export default function Cow({ imageName }) {
   return (
     <button
       data-project={imageName.toUpperCase()}
-      className={styles.cow}
+      className={styles.button}
       style={{ gridColumn: `${imageName}_column_start / ${imageName}_column_end` }}
       ref={cowRef}
       onClick={onClick}
     >
       <img
-        className={styles.cow__image}
+        className={styles.image}
         src={`/static/images/${imageName}.png`}
         alt={`image ${imageName}`}
       ></img>

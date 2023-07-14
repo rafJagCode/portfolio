@@ -17,16 +17,16 @@ export default function Topbar() {
 
   return (
     <header
-      className={styles.topbar}
+      className={styles.container}
       id="topbar"
     >
-      <div className={styles.topbar__left}>
+      <div className={styles.left}>
         <LanguageController />
       </div>
-      <div className={styles.topbar__right}>
+      <div className={styles.right}>
         <nav className="topbar__navigation">
           <ul
-            className={styles.topbar__menu}
+            className={styles.menu}
             id="topbarMenu"
             ref={topbarMenuRef}
           >

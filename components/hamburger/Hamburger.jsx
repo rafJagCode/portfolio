@@ -11,14 +11,14 @@ export default function Hamburger() {
 
   return (
     <button
-      className={styles.hamburger}
+      className={styles.button}
       data-is-open={isSidebarOpen}
       onClick={handleClick}
       id="hamburger"
     >
-      <span className={styles.hamburger__line1}></span>
-      <span className={styles.hamburger__line2}></span>
-      <span className={styles.hamburger__line3}></span>
+      <span className={styles.line1}></span>
+      <span className={styles.line2}></span>
+      <span className={styles.line3}></span>
     </button>
   );
 }

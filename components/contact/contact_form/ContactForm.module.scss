@@ -1,4 +1,4 @@
-.contact_form {
+.container {
   align-self: center;
   width: 40rem;
   & .input_container {
@@ -48,7 +48,7 @@
     font-size: 0.8rem;
     line-height: 1.1rem;
   }
-  & .contact_form__message_container {
+  & .message_container {
     position: relative;
     width: 40rem;
     border: 2px solid darkgrey;

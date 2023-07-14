@@ -10,7 +10,7 @@ export default function UfoHealthbar() {
   if (gameState !== 'STARTED') return null;
 
   return (
-    <div className={styles.ufo_healthbar}>
+    <div className={styles.container}>
       {currentLives
         ? currentLives.map((life) => (
             <UfoLife

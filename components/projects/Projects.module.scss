@@ -1,11 +1,11 @@
-.projects {
+.container {
   width: 100%;
   height: 100%;
   display: grid;
   grid-template-rows: [start] 60% [island_row] 40% [end];
   grid-template-columns: [start] 30% [terminal_end] 70% [end];
 }
-.projects__island_container {
+.island_container {
   grid-column: terminal_end / end;
   grid-row: island_row / end;
   justify-self: start;
@@ -18,7 +18,7 @@
   grid-template-columns: [start] 20% [cow1_column_start] 15% [cow1_column_end] 7.5% [cow2_column_start] 15% [cow2_column_end] 7.5% [cow3_column_start] 15%[cow3_column_end] 20% [end];
   aspect-ratio: 792/ 301;
 }
-.projects__island {
+.island {
   background-image: url('/static/images/floating-island.png');
   background-repeat: no-repeat;
   background-size: contain;

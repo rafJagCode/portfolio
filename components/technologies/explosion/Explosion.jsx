@@ -20,7 +20,7 @@ export default function Explosion({ explosion, removeExplosion }) {
   return (
     <div
       ref={explosionRef}
-      className={styles.explosion}
+      className={styles.container}
       style={{ background: `url('/static/images/explosions/${imageName}.png')`, height: size, left: position.x, top: position.y }}
     ></div>
   );

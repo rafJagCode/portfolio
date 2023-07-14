@@ -5,7 +5,7 @@ export default function TechnologiesBar() {
   const technologies = useSelector((state) => state.technologies);
 
   return (
-    <div className={styles.technologies_bar}>
+    <div className={styles.container}>
       {technologies.map((technology) => (
         <img
           key={technology.name}

@@ -1,13 +1,13 @@
-.key {
+.container {
   display: grid;
   grid-template-columns: 200px auto;
   padding: 0.5rem;
 }
-.key__image_container {
+.image_container {
   display: grid;
   place-items: center;
 }
-.key__desc_container {
+.key_desc_container {
   display: grid;
   align-items: center;
 }

@@ -45,11 +45,11 @@ export default function Sidebar() {
 
   return (
     <nav
-      className={styles.sidebar}
+      className={styles.container}
       data-is-open={isSidebarOpen}
       ref={sidebarRef}
     >
-      <ul className={styles.sidebar__menu}>
+      <ul className={styles.menu}>
         {navigationLinks.map((link) => {
           return (
             <li

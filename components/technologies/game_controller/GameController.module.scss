@@ -1,4 +1,4 @@
-.game_controller {
+.container {
   position: absolute;
   right: 0;
   bottom: 0;
@@ -7,7 +7,7 @@
   color: rgb(155, 155, 155);
   font-size: 1.3rem;
 }
-.game_controller__button {
+.button {
   color: #00ff00;
   position: relative;
   font-size: 1.5rem;

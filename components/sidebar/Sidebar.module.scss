@@ -1,4 +1,4 @@
-.sidebar {
+.container {
   position: fixed;
   right: calc(#{-$sidebar-width} - 5px);
   width: $sidebar-width;
@@ -11,7 +11,7 @@
     right: 0;
   }
 }
-.sidebar__menu {
+.menu {
   margin-top: $topbar-height;
   height: calc(100% - #{$topbar-height});
   display: flex;
@@ -20,7 +20,7 @@
   justify-content: space-evenly;
 }
 @media (min-width: $hamburger-breakpoint) {
-  .sidebar {
+  .container {
     display: none;
   }
 }

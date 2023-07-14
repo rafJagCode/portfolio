@@ -13,7 +13,7 @@ export default function HomeImage() {
 
   return (
     <div
-      className={styles.home__image}
+      className={styles.container}
       ref={earthRef}
     ></div>
   );

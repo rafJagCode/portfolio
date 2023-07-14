@@ -32,7 +32,7 @@ export default function ContactForm() {
   };
 
   return (
-    <form className={styles.contact_form}>
+    <form className={styles.container}>
       <div className={styles.input_container}>
         <input
           ref={emailRef}
@@ -48,7 +48,7 @@ export default function ContactForm() {
         {!isEmailValid ? <p className={styles.error_message}>{emailErrorMessage}</p> : null}
       </div>
       <div
-        className={styles.contact_form__message_container}
+        className={styles.message_container}
         data-valid={isMessageValid}
       >
         <textarea

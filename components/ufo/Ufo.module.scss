@@ -1,4 +1,4 @@
-.ufo {
+.container {
   position: fixed;
   width: 100px;
   aspect-ratio: 1;
@@ -9,7 +9,7 @@
     filter: blur(5px);
   }
 }
-.ufo__image {
+.image {
   background-image: url('/static/images/ufo.svg');
   background-size: contain;
   background-repeat: no-repeat;
@@ -19,7 +19,7 @@
   position: absolute;
   z-index: 2;
 }
-.ufo__engine {
+.engine {
   background-image: url('/static/images/engine.svg');
   background-size: contain;
   width: 100%;
@@ -31,7 +31,7 @@
   transform: translateY(70%);
   opacity: 0;
 }
-.ufo__beam {
+.beam {
   background-image: url('/static/images/ufo-beam.svg');
   background-size: 100% 100%;
   background-repeat: no-repeat;

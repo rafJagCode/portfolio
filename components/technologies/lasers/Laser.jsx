@@ -39,7 +39,7 @@ export default function Laser({ id, removeLaser }) {
   return (
     <div
       ref={laserRef}
-      className={styles.laser}
+      className={styles.container}
       style={{ left: position?.x, top: position?.y, visibility: position ? 'visible' : 'hidden' }}
     ></div>
   );

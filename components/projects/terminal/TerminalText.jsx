@@ -29,7 +29,7 @@ export default function TerminalText() {
 
   return (
     <div
-      className={styles.terminal_text}
+      className={styles.container}
       id="terminal__text"
       ref={terminalTextRef}
     >

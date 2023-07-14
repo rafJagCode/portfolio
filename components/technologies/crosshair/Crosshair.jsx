@@ -43,7 +43,7 @@ export default function Crosshair() {
   return (
     <img
       ref={crosshairRef}
-      className={styles.crosshair}
+      className={styles.image}
       src={'/static/images/crosshair.svg'}
       style={{ left: position.x, top: position.y, visibility: !crosshairAnimationRef.current ? 'hidden' : 'visible' }}
     ></img>

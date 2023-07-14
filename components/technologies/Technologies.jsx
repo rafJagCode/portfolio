@@ -18,7 +18,7 @@ export default function Technologies() {
   const gameState = useSelector((state) => state.gameState);
 
   return (
-    <div className={styles.technologies}>
+    <div className={styles.container}>
       {gameState === 'STARTED' && <Crosshair />}
       <TechnologiesBar />
       <GameController />

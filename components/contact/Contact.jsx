@@ -5,7 +5,7 @@ import Dialog from './dialog/Dialog';
 
 export default function Contact() {
   return (
-    <div className={styles.contact}>
+    <div className={styles.container}>
       <ContactForm />
       <Satellite />
       <Dialog />

@@ -1,4 +1,4 @@
-.topbar {
+.container {
   display: grid;
   align-items: center;
   grid-template-columns: auto 1fr;
@@ -8,13 +8,13 @@
   height: $topbar-height;
   z-index: 3;
 }
-.topbar__left {
+.left {
   justify-self: start;
 }
-.topbar__right {
+.right {
   justify-self: end;
 }
-.topbar__menu {
+.menu {
   height: $topbar-height;
   min-width: $sidebar-width;
   justify-content: flex-end;
@@ -26,7 +26,7 @@
 }
 
 @media (min-width: $hamburger-breakpoint) {
-  .topbar__menu li {
+  .menu li {
     display: inherit;
   }
 }

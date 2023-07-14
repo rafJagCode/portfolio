@@ -5,7 +5,7 @@ export default function UfoLife({ lifeState }) {
   const image = lifeState === 'FULL' ? 'full-ufo-life.svg' : 'empty-ufo-life.svg';
   return (
     <img
-      className={styles.ufo_life}
+      className={styles.image}
       src={imageDir + image}
     ></img>
   );

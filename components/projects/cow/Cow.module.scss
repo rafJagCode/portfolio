@@ -1,11 +1,11 @@
-.cow {
+.button {
   position: relative;
   cursor: pointer;
   grid-row: start;
   align-self: end;
   aspect-ratio: 1;
 }
-.cow__image {
+.image {
   position: absolute;
   bottom: 0;
   width: 100%;

@@ -5,9 +5,9 @@ import { BiLinkExternal } from 'react-icons/bi';
 
 export default function ProjectLinks({ project }) {
   return (
-    <div className={styles.project_links}>
+    <div className={styles.container}>
       <a
-        className={styles.project_links__link}
+        className={styles.link}
         target="_blank"
         href={links[project].github}
       >
@@ -15,7 +15,7 @@ export default function ProjectLinks({ project }) {
         GITHUB
       </a>
       <a
-        className={styles.project_links__link}
+        className={styles.link}
         target="_blank"
         href={links[project].live}
       >

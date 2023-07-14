@@ -36,7 +36,7 @@ export default function Satellite() {
       ))}
       <img
         id="satellite"
-        className={styles.satellite_image}
+        className={styles.image}
         src="/static/images/satellite.svg"
         alt="satellite"
       />

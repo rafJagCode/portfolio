@@ -39,11 +39,11 @@ export default function GameController() {
   }, [gameState]);
 
   return (
-    <div className={styles.game_controller}>
+    <div className={styles.container}>
       {gameState !== 'STARTED' && <Instructions />}
       {gameState !== 'STARTED' && (
         <button
-          className={styles.game_controller__button}
+          className={styles.button}
           onClick={() => changeGameState('STARTED')}
         >
           START GAME
@@ -51,7 +51,7 @@ export default function GameController() {
       )}
       {gameState !== 'FINISHED' && (
         <button
-          className={styles.game_controller__button}
+          className={styles.button}
           onClick={() => changeGameState('FINISHED')}
         >
           END GAME
@@ -59,7 +59,7 @@ export default function GameController() {
       )}
       {gameState === 'STARTED' && (
         <button
-          className={styles.game_controller__button}
+          className={styles.button}
           onClick={() => changeGameState('PAUSED')}
         >
           PAUSE

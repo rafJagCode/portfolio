@@ -37,19 +37,19 @@ const Ufo = () => {
   return (
     <>
       <div
-        className={styles.ufo}
+        className={styles.container}
         ref={ufoRef}
         data-is-blured={isSidebarOpen}
         style={!position ? { visibility: 'hidden' } : { left: position.x, top: position.y }}
       >
         <UfoHealthbar />
-        <div className={styles.ufo__image}></div>
+        <div className={styles.image}></div>
         <div
-          className={styles.ufo__engine}
+          className={styles.engine}
           ref={engineRef}
         ></div>
         <div
-          className={styles.ufo__beam}
+          className={styles.beam}
           ref={beamRef}
           style={{ opacity: 0 }}
         ></div>

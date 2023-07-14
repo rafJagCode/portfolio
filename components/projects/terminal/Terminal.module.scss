@@ -1,4 +1,4 @@
-.terminal {
+.container {
   position: relative;
   grid-column: start / terminal_end;
   align-self: center;
@@ -8,7 +8,7 @@
   height: max-content;
 }
 
-.terminal__image {
+.image {
   width: 100%;
   aspect-ratio: 132/85;
 }

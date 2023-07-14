@@ -5,8 +5,8 @@ export default function StartingLine({ directory }) {
   const { t } = useTranslation();
   return (
     <>
-      <span className={styles.starting_line__pc_info}>DEATH_STAR@QUANTUM_PC </span>
-      <span className={styles.starting_line__catalog}>
+      <span className={styles.pc_info}>DEATH_STAR@QUANTUM_PC </span>
+      <span className={styles.catalog}>
         ~/FLOPPY_COWS
         {!!directory && `/${t(directory)}`}
       </span>

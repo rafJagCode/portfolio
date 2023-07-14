@@ -1,4 +1,3 @@
-import styles from './Instructions.module.scss';
 import Key from './key/Key';
 
 export default function Instructions() {
@@ -8,7 +7,7 @@ export default function Instructions() {
     { name: 'aim', description: 'USE ARROWS TO AIM' },
   ];
   return (
-    <div className={styles.instructions}>
+    <div>
       {keys.map((key) => (
         <Key
           key={key.name}
