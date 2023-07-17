@@ -34,7 +34,6 @@ class Animation {
   start() {
     throw new Error('You have to implement the method start!');
   }
-
   stop() {
     throw new Error('You have to implement the method stop!');
   }

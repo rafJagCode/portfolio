@@ -11,8 +11,10 @@ import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { defaultTranslation } from '@/translations/translations';
 import { animationsTypes } from '@/types';
+import useAnimations from '@/hooks/useAnimations';
 
 export default function App() {
+  useAnimations();
   const isNavigationVisible = useSelector((state) => state.isNavigationVisible);
   const orbitingAnimation = useSelector((state) => state.animations[animationsTypes.ORBITING_ANIMATION]);
   const engineAnimation = useSelector((state) => state.animations[animationsTypes.ENGINE_ANIMATION]);

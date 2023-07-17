@@ -1,13 +1,18 @@
-.button {
+.container {
   position: relative;
-  cursor: pointer;
   grid-row: start;
   align-self: end;
-  aspect-ratio: 1;
+}
+.ufo_placeholder {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  transform: translate(-50%, -200%);
+}
+.button {
+  cursor: pointer;
 }
 .image {
-  position: absolute;
-  bottom: 0;
   width: 100%;
   background-repeat: no-repeat;
   background-size: contain;

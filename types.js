@@ -15,10 +15,12 @@ const animationsTypes = {
 };
 
 const refsTypes = {
+  UFO_REF: 'UFO_REF',
+  ENGINE_REF: 'ENGINE_REF',
+  BEAM_REF: 'BEAM_REF',
   EARTH_REF: 'EARTH_REF',
   LANGUAGE_CONTROLLER_REF: 'LANGUAGE_CONTROLLER_REF',
   TOPBAR_MENU_REF: 'TOPBAR_MENU_REF',
-  UFO_REF: 'UFO_REF',
 };
 
 export { animationsTypes, refsTypes };

@@ -1,4 +1,4 @@
-import Animation from '@/utils/Animation';
+import Animation from '@/animations/Animation';
 import { animationsTypes } from '@/types';
 
 class SignalAnimation extends Animation {
@@ -18,7 +18,7 @@ class SignalAnimation extends Animation {
     this.prevTimestamp = performance.now();
     return requestAnimationFrame(this.step);
   }
-  stop() {
+  stopAnimation() {
     this.resolve();
   }
   reset() {}
@@ -43,7 +43,7 @@ class SignalAnimation extends Animation {
     if (this.getCurrentDuration() >= 100) signal.style.visibility = 'visible';
     this.move -= this.moveIncrement;
     this.scale += this.scaleIncrement;
-    if (this.getCurrentDuration() >= this.animationDuration) return this.stop();
+    if (this.getCurrentDuration() >= this.animationDuration) return this.stopAnimation();
     this.requestAnimationID = requestAnimationFrame(this.step);
   }
 }

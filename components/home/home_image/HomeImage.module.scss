@@ -1,8 +1,13 @@
 .container {
-  background-image: url('/static/images/planet-earth.png');
-  background-repeat: no-repeat;
-  background-size: contain;
+  position: relative;
+  display: grid;
   width: 40%;
+  aspect-ratio: 1;
+  align-self: center;
+  justify-self: center;
+}
+.earth_image {
+  width: 100%;
   aspect-ratio: 1;
   align-self: center;
   justify-self: center;

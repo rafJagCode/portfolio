@@ -1,10 +1,7 @@
 import styles from './Ufo.module.scss';
 import UfoHealthbar from './ufo_healthbar/UfoHealthbar';
 import Explosion from '@/components/technologies/explosion/Explosion';
-import useHelpers from './hooks/useHelpers';
-import useAnimations from './hooks/useAnimations';
 import useUfoExplosions from './hooks/useUfoExplosions';
-import positionUfoInEarthCenter from './utils/positionUfoInEarthCenter';
 import { refsTypes } from '@/types';
 import { useRef, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -15,43 +12,36 @@ const Ufo = () => {
   const ufoHits = useSelector((state) => state.ufoHits);
   const [position, setPosition] = useState(null);
   const [ufoRef, engineRef, beamRef] = [useRef(null), useRef(null), useRef(null)];
-  const [ufoHelper, flyingHelper, earthHelper, engineHelper, beamHelper, cowHelper] = useHelpers(ufoRef, engineRef, beamRef, position, setPosition);
   const [explosions, removeExplosion] = useUfoExplosions(ufoHits);
 
   useEffect(() => {
-    if (!ufoRef) return;
     dispatch({ type: 'GLOBAL_REFS', refName: refsTypes.UFO_REF, ref: ufoRef });
-  }, [ufoRef]);
-
-  useEffect(() => {
-    if (!ufoHelper || !earthHelper) return;
-    positionUfoInEarthCenter(ufoHelper, earthHelper);
-  }, [ufoHelper, earthHelper]);
+    dispatch({ type: 'GLOBAL_REFS', refName: refsTypes.ENGINE_REF, ref: engineRef });
+    dispatch({ type: 'GLOBAL_REFS', refName: refsTypes.BEAM_REF, ref: beamRef });
+  }, []);
 
   useEffect(() => {
     dispatch({ type: 'UPDATE_UFO_POSITION', position });
   }, [position]);
 
-  useAnimations(ufoHelper, flyingHelper, earthHelper, engineHelper, beamHelper, cowHelper);
-
   return (
     <>
       <div
-        className={styles.container}
+        id="ufo"
+        className={styles.container + ' ufo_placeholder'}
         ref={ufoRef}
         data-is-blured={isSidebarOpen}
-        style={!position ? { visibility: 'hidden' } : { left: position.x, top: position.y }}
       >
         <UfoHealthbar />
         <div className={styles.image}></div>
         <div
+          id="engine"
           className={styles.engine}
           ref={engineRef}
         ></div>
         <div
           className={styles.beam}
           ref={beamRef}
-          style={{ opacity: 0 }}
         ></div>
       </div>
       {explosions.map((explosion) => {

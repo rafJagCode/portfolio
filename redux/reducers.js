@@ -62,9 +62,11 @@ const clickedCowRef = (state = CLICKED_COW_REF, action) => {
 
 const GLOBAL_REFS = {
   [refsTypes.EARTH_REF]: null,
+  [refsTypes.UFO_REF]: null,
+  [refsTypes.ENGINE_REF]: null,
+  [refsTypes.BEAM_REF]: null,
   [refsTypes.LANGUAGE_CONTROLLER_REF]: null,
   [refsTypes.TOPBAR_MENU_REF]: null,
-  [refsTypes.UFO_REF]: null,
 };
 
 const globalRefs = (state = GLOBAL_REFS, action) => {

@@ -1,7 +1,5 @@
 .container {
   position: fixed;
-  width: 100px;
-  aspect-ratio: 1;
   z-index: 2;
   backface-visibility: hidden;
   transition: filter 1000ms ease 0s;
@@ -27,8 +25,7 @@
   background-repeat: no-repeat;
   background-position-x: center;
   position: absolute;
-  bottom: 0;
-  transform: translateY(70%);
+  top: 70%;
   opacity: 0;
 }
 .beam {
