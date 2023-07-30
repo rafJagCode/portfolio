@@ -10,7 +10,6 @@ class FlyToCowAnimation extends Animation {
 
   constructor(dispatch = null) {
     super(animationsTypes.FLY_TO_COW_ANIMATION, dispatch);
-    this.reset();
   }
 
   start() {
@@ -32,7 +31,7 @@ class FlyToCowAnimation extends Animation {
   step() {
     this.setDestination();
     if (this.isDestinationReached()) return this.stopAnimation();
-    moveElementTowardsAnotherElement(document.getElementById('ufo'), this.destination);
+    moveElementTowardsAnotherElement(document.getElementById('ufo'), this.destination, this.speed);
     this.requestAnimationID = requestAnimationFrame(this.step);
   }
 
@@ -44,7 +43,7 @@ class FlyToCowAnimation extends Animation {
   }
 
   isDestinationReached() {
-    const precision = 0.02;
+    const precision = 1;
     const ufo = document.getElementById('ufo');
     if (getDistanceBetweenElementsCenters(ufo, this.destination) < precision) return true;
     return false;

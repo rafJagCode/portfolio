@@ -1,16 +1,22 @@
 import styles from './Cow.module.scss';
-import { useRef } from 'react';
+import types from 'redux/types';
 import { useDispatch } from 'react-redux';
 
-export default function Cow({ imageName, flyToCowAnimation }) {
-  //   const cowRef = useRef();
-  //   const dispatch = useDispatch();
-  const onClick = async () => {
-    // dispatch({ type: 'SET_CLICKED_COW_REF', cowRef: cowRef });
-    flyToCowAnimation.stopAnimation();
-    flyToCowAnimation.setCow(imageName);
-    flyToCowAnimation.startAnimation();
+export default function Cow({ imageName }) {
+  const dispatch = useDispatch();
+
+  const showProjectDetails = () => {
+    const project = imageName.toUpperCase();
+    dispatch({ type: types.QUEUE_COMMAND, command: `COMMAND_CD_${project}`, directory: project });
+    dispatch({ type: types.QUEUE_COMMAND, command: `clear`, directory: project });
+    dispatch({ type: types.QUEUE_COMMAND, command: `COMMAND_CAT_PROJECT_DESCRIPTION`, print: `PRINT_PROJECT_${project}`, directory: project });
   };
+
+  const onClick = () => {
+    dispatch({ type: types.SET_CLICKED_COW, cow: imageName });
+    showProjectDetails();
+  };
+
   return (
     <div
       className={styles.container}
@@ -22,12 +28,12 @@ export default function Cow({ imageName, flyToCowAnimation }) {
       ></div>
 
       <button
-        data-project={imageName.toUpperCase()}
+        id={`button_${imageName}`}
         className={styles.button}
-        // ref={cowRef}
         onClick={onClick}
       >
         <img
+          id={`image_${imageName}`}
           className={styles.image}
           src={`/static/images/${imageName}.png`}
           alt={`image ${imageName}`}

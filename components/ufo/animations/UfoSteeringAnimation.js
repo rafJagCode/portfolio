@@ -1,4 +1,4 @@
-import Animation from './Animation';
+import Animation from '@/animations/Animation';
 import { animationsTypes } from '@/types';
 import availableKeys from '@/configuration/available_keys';
 import imagesCollisionData from '@/configuration/images_collision_data';

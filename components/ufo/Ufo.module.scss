@@ -29,6 +29,9 @@
   opacity: 0;
 }
 .beam {
+  opacity: 0;
+  height: 16rem;
+  width: 10rem;
   background-image: url('/static/images/ufo-beam.svg');
   background-size: 100% 100%;
   background-repeat: no-repeat;

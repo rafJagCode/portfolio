@@ -1,7 +1,8 @@
 .section__container {
   height: calc(100% - 2 * $topbar-height);
-  margin: $topbar-height;
+  margin: 0 $topbar-height;
   &[data-is-last] {
+    margin: $topbar-height;
     height: calc(100% - calc(2 * $topbar-height + $footer-height));
   }
 }

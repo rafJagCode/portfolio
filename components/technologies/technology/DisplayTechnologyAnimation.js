@@ -1,5 +1,5 @@
 import { animationsTypes } from '@/types';
-import Animation from '@/components/ufo/animations/Animation';
+import Animation from '@/animations/Animation';
 
 class DisplayTechnologyAnimation extends Animation {
   #destination;

@@ -1,13 +1,13 @@
-import Animation from './Animation';
+import Animation from '@/animations/Animation';
 import { animationsTypes } from '@/types';
+import changeElementStyle from '@/utils/changeElementStyle';
+import getTranslateY from '@/utils/getTranslateY';
 
 class LiftCowUpAnimation extends Animation {
-  #cowHelper;
+  cow = null;
 
-  constructor(dispatch = null, cowHelper) {
+  constructor(dispatch = null) {
     super(animationsTypes.LIFT_COW_UP_ANIMATION, dispatch);
-    this.#cowHelper = cowHelper;
-    this.reset();
   }
 
   start() {
@@ -21,24 +21,26 @@ class LiftCowUpAnimation extends Animation {
 
   reset() {
     this.requestAnimationID = null;
+    this.cow = null;
   }
 
   step() {
-    if (this.isLifted()) {
-      this.stopAnimation();
-      return;
-    }
+    if (this.isLifted()) return this.stopAnimation();
     this.lift();
     this.requestAnimationID = requestAnimationFrame(this.step);
   }
 
+  setCow(cow) {
+    this.cow = document.getElementById(`button_${cow}`);
+  }
+
   isLifted() {
-    if (this.#cowHelper.getCowImageShiftY() === 40) return true;
+    if (getTranslateY(this.cow) <= -40) return true;
     return false;
   }
 
   lift() {
-    this.#cowHelper.shiftCowImageVertically(2);
+    changeElementStyle(this.cow, 'translateY', getTranslateY(this.cow) - 2);
   }
 }
 

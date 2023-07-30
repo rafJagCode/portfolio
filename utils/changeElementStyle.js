@@ -1,3 +1,5 @@
+import getTranslateY from './getTranslateY';
+
 const changeElementStyle = (element, property, value) => {
   switch (property) {
     case 'centerPosition': {
@@ -20,6 +22,9 @@ const changeElementStyle = (element, property, value) => {
     case 'opacity': {
       element.style.opacity = value;
       return;
+    }
+    case 'translateY': {
+      element.style.transform = `translateY(${value}%)`;
     }
     default: {
       return;

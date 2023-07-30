@@ -51,7 +51,7 @@ class OrbitingAnimation extends Animation {
     this.setSpeed();
     this.setScale();
     this.setZIndex();
-    moveElementTowardsCoordinates(ufo, this.destination, this.speed);
+    moveElementTowardsCoordinates(this.ufo, this.destination, this.speed);
     if (this.shouldStop()) return this.resolve();
     this.requestAnimationID = requestAnimationFrame(this.step);
   }
@@ -62,7 +62,7 @@ class OrbitingAnimation extends Animation {
   }
 
   isDestinationReached() {
-    const precision = 0.02;
+    const precision = 1;
     const ufoCenter = getElementCenterCoordinates(this.ufo);
     if (calculateDistanceBetweenTwoPoints(this.destination, ufoCenter) < precision) return true;
     return false;

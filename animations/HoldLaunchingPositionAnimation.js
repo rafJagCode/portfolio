@@ -1,7 +1,7 @@
 import Animation from '@/animations/Animation';
 import { animationsTypes } from '@/types';
 import changeElementStyle from '@/utils/changeElementStyle';
-import getElementTopRightCornerCoordinates from '@/utils/getElementTopRightCornerCoordinates';
+import getElementTopRightCornerCoordinatesRelativeToPage from '@/utils/getElementTopRightCornerCoordinatesRelativeToPage';
 
 class HoldLaunchingPositionAnimation extends Animation {
   ufo = null;
@@ -21,10 +21,12 @@ class HoldLaunchingPositionAnimation extends Animation {
     this.resolve();
   }
 
-  reset() {}
+  reset() {
+    this.requestAnimationID = null;
+  }
 
   step() {
-    const launchingPositionCenterCoordinates = getElementTopRightCornerCoordinates(this.earth);
+    const launchingPositionCenterCoordinates = getElementTopRightCornerCoordinatesRelativeToPage(this.earth);
     changeElementStyle(ufo, 'centerPosition', launchingPositionCenterCoordinates);
     this.requestAnimationID = requestAnimationFrame(this.step);
   }

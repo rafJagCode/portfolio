@@ -1,8 +1,9 @@
-import useCowAnimations from '@/hooks/useCowAnimations';
-import { useDispatch } from 'react-redux';
+import types from 'redux/types';
+import { animationsTypes } from '@/types';
+import { useDispatch, useSelector } from 'react-redux';
 
 const useBeforeScrollHandler = (engineAnimation, orbitingAnimation, updateState) => {
-  const stopCowAbduction = useCowAnimations();
+  const flyToLaunchingPositionAnimation = useSelector((state) => state.animations[animationsTypes.FLY_TO_LAUNCHING_POSITION_ANIMATION]);
   const dispatch = useDispatch();
 
   const handleAnimationsBeforeScroll = (origin) => {
@@ -19,10 +20,12 @@ const useBeforeScrollHandler = (engineAnimation, orbitingAnimation, updateState)
   };
 
   const handleLeavingProjectsSection = async () => {
-    await stopCowAbduction();
+    dispatch({ type: types.SET_CLICKED_COW, cow: null });
+    await new Promise((resolve) => setTimeout(resolve, 0));
+    await flyToLaunchingPositionAnimation.promise;
     engineAnimation.startAnimation();
     updateState('ALLOW_SCROLL');
-    dispatch({ type: 'CLEAR_TERMINAL' });
+    dispatch({ type: types.CLEAR_TERMINAL });
   };
 
   const handleLeavingTechnologiesSection = async () => {

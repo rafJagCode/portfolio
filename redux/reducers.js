@@ -49,12 +49,15 @@ const ufoPosition = (state = UFO_POSITION, action) => {
   }
 };
 
-const CLICKED_COW_REF = null;
+const CLICKED_COW = {
+  current: null,
+  previous: null,
+};
 
-const clickedCowRef = (state = CLICKED_COW_REF, action) => {
+const clickedCow = (state = CLICKED_COW, action) => {
   switch (action.type) {
-    case types.SET_CLICKED_COW_REF:
-      return action.cowRef;
+    case types.SET_CLICKED_COW:
+      return { current: action.cow, previous: state.current };
     default:
       return state;
   }
@@ -170,7 +173,7 @@ export default {
   isNavigationVisible,
   isSidebarOpen,
   ufoPosition,
-  clickedCowRef,
+  clickedCow,
   globalRefs,
   animations,
   terminal,
