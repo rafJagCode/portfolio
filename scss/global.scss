@@ -1,0 +1,12 @@
+html {
+  font-family: 'Saira', sans-serif;
+  font-size: calc(5px + (13 - 5) * ((100vw - 300px) / (1600 - 300)));
+  color: var(--theme-text);
+}
+#fullpage {
+  z-index: 1;
+}
+.ufo_placeholder {
+  width: 6rem;
+  aspect-ratio: 1;
+}

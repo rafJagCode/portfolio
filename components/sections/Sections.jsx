@@ -1,10 +1,10 @@
 import ParticlesBackground from '@/components/particles_background/ParticlesBackground';
 import ReactFullpage from '@fullpage/react-fullpage';
 import styles from './Sections.module.scss';
-import Home from '@/components/home/Home';
-import Projects from '@/components/projects/Projects';
-import Technologies from '@/components/technologies/Technologies';
-import Contact from '@/components/contact/Contact';
+import Home from './home/Home';
+import Projects from './projects/Projects';
+import Technologies from './technologies/Technologies';
+import Contact from './contact/Contact';
 import Footer from '@/components/footer/Footer';
 import { useEffect, useCallback } from 'react';
 import { useSelector } from 'react-redux';
@@ -40,28 +40,25 @@ export default function Sections() {
   }, [isSidebarOpen]);
 
   return [
-    <ParticlesBackground key="particles" />,
-    <ReactFullpage.Wrapper key="fullpage__wrapper">
-      <section className="section">
+    <ParticlesBackground key='particles' />,
+    <ReactFullpage.Wrapper key='fullpage__wrapper'>
+      <section className='section'>
         <div className={styles.section__container}>
           <Home />
         </div>
       </section>
-      <section className="section">
+      <section className='section'>
         <div className={styles.section__container}>
           <Projects />
         </div>
       </section>
-      <section className="section">
+      <section className='section'>
         <div className={styles.section__container}>
           <Technologies />
         </div>
       </section>
-      <section className="section">
-        <div
-          className={styles.section__container}
-          data-is-last="true"
-        >
+      <section className='section'>
+        <div className={styles.section__container} data-is-last='true'>
           <Contact />
         </div>
         <Footer />

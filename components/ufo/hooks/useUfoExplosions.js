@@ -1,4 +1,4 @@
-import { UfoDamage } from '@/components/technologies/explosion/ExplosionTypes';
+import { UfoDamage } from '@/components/sections/technologies/explosion/ExplosionTypes';
 import { useEffect, useState } from 'react';
 
 const useUfoExplosions = (ufoHits) => {

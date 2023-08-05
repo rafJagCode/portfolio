@@ -1,5 +1,5 @@
 import types from './types';
-import { animationsTypes, refsTypes } from '@/types';
+import { animationsTypes, refsTypes } from '@/configuration/types';
 
 const LANGUAGE = 'pl';
 

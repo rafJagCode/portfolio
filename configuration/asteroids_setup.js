@@ -1,4 +1,4 @@
-import Asteroid from '@/components/technologies/asteroid/utils/AsteroidClass';
+import Asteroid from '@/components/sections/technologies/asteroid/utils/AsteroidClass';
 
 const asteroids = [
   new Asteroid('asteroid-whole-1', { x: 900, y: 200 }, 'git'),

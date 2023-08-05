@@ -1,17 +1,18 @@
 import styles from './App.module.scss';
-import Sidebar from '@/components/sidebar/Sidebar';
-import Topbar from '@/components/topbar/Topbar';
-import ReactFullpage from '@fullpage/react-fullpage';
+import Sidebar from '@/components/navigation/sidebar/Sidebar';
+import Topbar from '@/components/navigation/topbar/Topbar';
 import Sections from '@/components/sections/Sections';
 import Ufo from '@/components/ufo/Ufo';
-import useScrollMachineState from '@/hooks/useScrollMachineState';
-import useDelayedScroll from '@/hooks/useDelayedScroll';
-import useBeforeScrollHandler from '@/hooks/useBeforeScrollHandler';
-import { useEffect } from 'react';
+import { defaultTranslation } from 'translation/translations';
+import { animationsTypes } from '@/configuration/types';
+import useScrollMachineState from './hooks/useScrollMachineState';
+import useDelayedScroll from './hooks/useDelayedScroll';
+import useBeforeScrollHandler from './hooks/useBeforeScrollHandler';
+import useAnimations from './hooks/useAnimations';
+import ReactFullpage from '@fullpage/react-fullpage';
+import types from 'redux/types';
 import { useSelector, useDispatch } from 'react-redux';
-import { defaultTranslation } from '@/translations/translations';
-import { animationsTypes } from '@/types';
-import useAnimations from '@/hooks/useAnimations';
+import { useEffect } from 'react';
 
 export default function App() {
   useAnimations();
@@ -26,7 +27,7 @@ export default function App() {
 
   useEffect(() => {
     const language = localStorage.getItem('language') ? localStorage.getItem('language') : defaultTranslation;
-    dispatch({ type: 'CHANGE_LANGUAGE', language: language });
+    dispatch({ type: types.CHANGE_LANGUAGE, language: language });
   }, []);
 
   useEffect(() => {
@@ -51,7 +52,7 @@ export default function App() {
     engineAnimation.stopAnimation();
     if (destination.anchor !== '#home') holdLaunchingPositionAnimation.startAnimation();
     if (destination.anchor === '#home') orbitingAnimation.startAnimation();
-    if (destination.anchor === '#projects') dispatch({ type: 'QUEUE_COMMAND', command: 'COMMAND_CAT_INSTRUCTION', print: 'PRINT_INSTRUCTION' });
+    if (destination.anchor === '#projects') dispatch({ type: types.QUEUE_COMMAND, command: 'COMMAND_CAT_INSTRUCTION', print: 'PRINT_INSTRUCTION' });
   };
 
   return (
