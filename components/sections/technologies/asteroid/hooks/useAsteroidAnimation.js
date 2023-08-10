@@ -1,24 +1,27 @@
-import imagesCollisionData from '@/configuration/images_collision_data';
 import AsteroidAnimation from '../animations/AsteroidAnimation';
+import { refsTypes } from '@/configuration/types';
 import { useSelector, useDispatch } from 'react-redux';
 import { useEffect, useRef } from 'react';
 
-const useAsteroidAnimation = (asteroidData, startingSpeed, position, setPosition, asteroidID) => {
+const useAsteroidAnimation = (startingSpeed, asteroidRef) => {
+  const ufoRef = useSelector((state) => state.globalRefs[refsTypes.UFO_REF]);
+  const gameState = useSelector((state) => state.gameState);
   const dispatch = useDispatch();
   const asteroidAnimationRef = useRef(null);
-  const ufoPosition = useSelector((state) => state.ufoPosition);
 
   useEffect(() => {
-    asteroidAnimationRef.current = new AsteroidAnimation(asteroidData, startingSpeed, position, setPosition, imagesCollisionData.ufo, ufoPosition, dispatch, asteroidID);
-    asteroidAnimationRef.current.start();
+    if (!asteroidRef || !ufoRef) return;
+    asteroidAnimationRef.current = new AsteroidAnimation(startingSpeed, asteroidRef, ufoRef, dispatch);
     return () => {
       asteroidAnimationRef.current.stop();
     };
-  }, []);
+  }, [asteroidRef, ufoRef]);
 
   useEffect(() => {
-    asteroidAnimationRef.current.setUfoPosition(ufoPosition);
-  }, [ufoPosition]);
+    if (!asteroidAnimationRef.current) return;
+    if (gameState === 'STARTED') asteroidAnimationRef.current.start();
+    else asteroidAnimationRef.current.stop();
+  }, [gameState]);
 };
 
 export default useAsteroidAnimation;

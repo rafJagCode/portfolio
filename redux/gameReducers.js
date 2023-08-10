@@ -13,26 +13,6 @@ const gameState = (state = GAME_STATE, action) => {
   }
 };
 
-const ASTEROIDS_DATA = {};
-
-const asteroidsData = (state = ASTEROIDS_DATA, action) => {
-  switch (action.type) {
-    case types.UPDATE_ASTEROID_DATA: {
-      return { ...state, [action.asteroidID]: { ...state[action.asteroidID], ...action.asteroidData } };
-    }
-    case types.UPDATE_ASTEROID_POSITION: {
-      if (!state[action.asteroidID]) return state;
-      return { ...state, [action.asteroidID]: { ...state[action.asteroidID], posX: action.posX, posY: action.posY } };
-    }
-    case types.CLEAN_ASTEROID_DATA: {
-      const { [action.asteroidID]: dataToRemove, ...remainingData } = state;
-      return remainingData;
-    }
-    default:
-      return state;
-  }
-};
-
 const ASTEROIDS_HITS = {};
 
 const asteroidsHits = (state = ASTEROIDS_HITS, action) => {
@@ -119,7 +99,6 @@ const technologies = (state = TECHNOLOGIES, action) => {
 
 export default {
   gameState,
-  asteroidsData,
   asteroidsHits,
   keys,
   crosshairAngle,

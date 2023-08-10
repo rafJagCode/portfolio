@@ -5,13 +5,12 @@ import useUfoExplosions from './hooks/useUfoExplosions';
 import types from 'redux/types';
 import { refsTypes } from '@/configuration/types';
 import { useDispatch, useSelector } from 'react-redux';
-import { useRef, useEffect, useState } from 'react';
+import { useRef, useEffect } from 'react';
 
 const Ufo = () => {
   const dispatch = useDispatch();
   const isSidebarOpen = useSelector((state) => state.isSidebarOpen);
   const ufoHits = useSelector((state) => state.ufoHits);
-  const [position, setPosition] = useState(null);
   const [ufoRef, engineRef, beamRef] = [useRef(null), useRef(null), useRef(null)];
   const [explosions, removeExplosion] = useUfoExplosions(ufoHits);
 
@@ -21,13 +20,9 @@ const Ufo = () => {
     dispatch({ type: types.GLOBAL_REFS, refName: refsTypes.BEAM_REF, ref: beamRef });
   }, []);
 
-  useEffect(() => {
-    dispatch({ type: types.UPDATE_UFO_POSITION, position });
-  }, [position]);
-
   return (
     <>
-      <div id='ufo' className={styles.container + ' ufo_placeholder'} ref={ufoRef} data-is-blured={isSidebarOpen}>
+      <div id='ufo' className={styles.container + ' ufo_placeholder'} ref={ufoRef} data-is-blured={isSidebarOpen} data-is-immune='false'>
         <UfoHealthbar />
         <div className={styles.image}></div>
         <div id='engine' className={styles.engine} ref={engineRef}></div>

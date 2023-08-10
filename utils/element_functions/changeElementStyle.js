@@ -23,6 +23,11 @@ const changeElementStyle = (element, property, value) => {
     }
     case 'translateY': {
       element.style.transform = `translateY(${value}%)`;
+      return;
+    }
+    case 'rotate': {
+      element.style.transform = `rotate(${value}rad)`;
+      return;
     }
     default: {
       return;

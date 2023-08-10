@@ -1,3 +1,7 @@
+import imagesCollisionData from '@/configuration/images_collision_data';
+import changeElementStyle from '@/utils/element_functions/changeElementStyle';
+import getElementCenterCoordinates from '@/utils/element_functions/getElementCenterCoordinates';
+import getAngleBetweenTwoPoints from '@/utils/helper_functions/getAngleBetweenTwoPoints';
 import types from 'redux/types';
 
 class LaserAnimation {
@@ -6,25 +10,20 @@ class LaserAnimation {
   promise;
   resolve;
   laser;
-  speed = 10;
+  ufo;
+  speed = 5;
   speedX;
   speedY;
   angle;
-  position;
-  laserTipPosition;
+  laserTip;
   asteroidsData;
 
-  constructor(laserRef, startingPosition, setPosition, crosshairAngle, dispatch) {
-    this.reset();
+  constructor(laserRef, ufoRef, crosshairAngle, dispatch) {
     this.laser = laserRef.current;
-    this.position = startingPosition;
+    this.ufo = ufoRef.current;
     this.angle = crosshairAngle;
-    this.speedX = this.speed * Math.cos(crosshairAngle);
-    this.speedY = this.speed * -Math.sin(crosshairAngle);
-    this.setLaserTipPosition();
     this.dispatch = dispatch;
     this.step = this.step.bind(this);
-    this.moveLaser = this.moveLaser.bind(this, setPosition);
   }
 
   reset() {
@@ -32,28 +31,30 @@ class LaserAnimation {
   }
 
   step() {
-    if (this.isLaserBeyondScreen()) return this.stop();
+    if (!this.isInViewport()) return this.stop();
+    this.moveLaser();
+    this.setLaserTip();
 
     const asteroid = this.checkAsteroidsCollisionZones();
+
     if (asteroid) {
       const hitpoint = this.checkCollisionPoints(asteroid);
       if (hitpoint) {
-        this.dispatch({ type: types.ADD_ASTEROID_HIT, asteroidID: asteroid.asteroidID, hitpoint: hitpoint });
+        this.dispatch({ type: types.ADD_ASTEROID_HIT, asteroidID: asteroid.id, hitpoint: hitpoint });
         return this.stop();
       }
     }
 
-    this.moveLaser();
-    this.setLaserTipPosition();
     this.requestAnimationID = requestAnimationFrame(this.step);
   }
 
   start() {
     if (this.requestAnimationID) return;
+    this.setStartingStyles();
+    this.setDirectionalSpeedComponents();
     this.promise = new Promise((resolve) => {
       this.resolve = resolve;
     });
-    this.laser.style.transform = `rotate(${-this.angle - Math.PI}rad)`;
     this.requestAnimationID = requestAnimationFrame(this.step);
     return this.promise;
   }
@@ -65,91 +66,62 @@ class LaserAnimation {
     this.reset();
   }
 
-  moveLaser(setPosition) {
-    this.position = { x: this.position.x + this.speedX, y: this.position.y + this.speedY };
-    setPosition(this.position);
+  setStartingStyles() {
+    const ufoCenter = getElementCenterCoordinates(this.ufo);
+    changeElementStyle(this.laser, 'centerPosition', ufoCenter);
+    changeElementStyle(this.laser, 'rotate', Math.PI - this.angle);
   }
 
-  setLaserTipPosition() {
-    const posX = this.laser.offsetWidth * Math.cos(this.angle) + this.laser.offsetWidth + this.position.x;
-    const posY = this.laser.offsetWidth * -Math.sin(this.angle) + this.position.y;
-    this.laserTipPosition = {
-      x: posX,
-      y: posY,
-    };
+  setDirectionalSpeedComponents() {
+    this.speedX = this.speed * Math.cos(this.angle);
+    this.speedY = this.speed * -Math.sin(this.angle);
   }
 
-  isLaserBeyondScreen() {
-    if (this.laserTipPosition.x <= -this.laser.offsetWidth) return true;
-    if (this.laserTipPosition.x >= window.innerWidth + this.laser.offsetWidth) return true;
-    if (this.laserTipPosition.y <= -this.laser.offsetWidth) return true;
-    if (this.laserTipPosition.y >= window.innerHeight + this.laser.offsetWidth) return true;
-    return false;
+  isInViewport() {
+    const { left, right, top, bottom } = this.laser.getBoundingClientRect();
+    return top >= 0 && left >= 0 && bottom <= (window.innerHeight || document.documentElement.clientHeight) && right <= (window.innerWidth || document.documentElement.clientWidth);
   }
 
-  getLaserTipPositionRelativeToAsteroid(posX, posY) {
-    const relativeLaserTipPosition = { x: this.laserTipPosition.x - posX, y: this.laserTipPosition.y - posY };
-    return relativeLaserTipPosition;
+  moveLaser() {
+    const laserCenter = getElementCenterCoordinates(this.laser);
+    changeElementStyle(this.laser, 'centerPosition', { x: laserCenter.x + this.speedX, y: laserCenter.y + this.speedY });
+  }
+
+  setLaserTip() {
+    const laserCenter = getElementCenterCoordinates(this.laser);
+    const x = laserCenter.x + Math.cos(this.angle) * (this.laser.offsetWidth / 2);
+    const y = laserCenter.y - Math.sin(this.angle) * (this.laser.offsetWidth / 2);
+    this.laserTip = { x, y };
   }
 
   checkAsteroidsCollisionZones() {
-    const checkResult = Object.entries(this.asteroidsData).find(([id, data]) => {
-      const relativeLaserTipPosition = this.getLaserTipPositionRelativeToAsteroid(data.posX, data.posY);
-      if (relativeLaserTipPosition.x < data.minX) return false;
-      if (relativeLaserTipPosition.x > data.maxX) return false;
-      if (relativeLaserTipPosition.y < data.minY) return false;
-      if (relativeLaserTipPosition.y > data.maxY) return false;
+    const asteroids = Array.from(document.querySelectorAll('.asteroid'));
+    return asteroids.find((asteroid) => {
+      const { left, right, top, bottom } = asteroid.getBoundingClientRect();
+      if (this.laserTip.x < left) return false;
+      if (this.laserTip.x > right) return false;
+      if (this.laserTip.y < top) return false;
+      if (this.laserTip.y > bottom) return false;
       return true;
     });
-    if (!checkResult) return null;
-    return { asteroidID: checkResult[0], data: checkResult[1] };
   }
 
-  // checkCollisionPoints searches for collision point in hitbox area with angle between point and laser tip closest to that of laser angle
   checkCollisionPoints(asteroid) {
     const hitbox = 10;
-    const relativeLaserTipPosition = this.getLaserTipPositionRelativeToAsteroid(asteroid.data.posX, asteroid.data.posY);
-    const collisionPoints = this.getCollisionPointsInHitboxRange(asteroid, relativeLaserTipPosition, hitbox);
-    if (!collisionPoints.length) return null;
+    const anglePrecision = Math.PI / 9;
+    const imageName = asteroid.dataset.image;
+    const { left, top, width, height } = asteroid.getBoundingClientRect();
+    const points = imagesCollisionData[imageName];
 
-    let closestAngleDiff;
-    let hitpoint;
-    collisionPoints.forEach((point) => {
-      const angle = this.getAngleBetweenPoints(relativeLaserTipPosition, { x: point[0], y: point[1] });
-      const angleDiff = Math.abs(this.angle - angle);
-
-      if (!closestAngleDiff) {
-        closestAngleDiff = angleDiff;
-        hitpoint = point;
-        return;
-      }
-      if (angleDiff < closestAngleDiff) {
-        closestAngleDiff = angleDiff;
-        hitpoint = point;
-      }
-    });
-
-    return { x: hitpoint[0] + asteroid.data.posX, y: hitpoint[1] + asteroid.data.posY };
-  }
-
-  setAsteroidsData(asteroidsData) {
-    this.asteroidsData = asteroidsData;
-  }
-
-  getAngleBetweenPoints(point1, point2) {
-    let angle = Math.PI - Math.atan2(point1.y - point2.x, point1.x - point2.x);
-    if (angle < 0) angle += 2 * Math.PI;
-    return angle;
-  }
-
-  getCollisionPointsInHitboxRange(asteroid, relativeLaserTipPosition, hitbox) {
-    if (!asteroid.data.collisionPoints) return [];
-    const collisionPoints = asteroid.data.collisionPoints.filter((point) => {
-      if (Math.abs(point[0] - relativeLaserTipPosition.x) > hitbox) return false;
-      if (Math.abs(point[1] - relativeLaserTipPosition.y) > hitbox) return false;
+    const hitpoint = points.find((point) => {
+      const pointPos = { x: point.x * width + left, y: point.y * height + top };
+      if (Math.abs(pointPos.x - this.laserTip.x) > hitbox) return false;
+      if (Math.abs(pointPos.y - this.laserTip.y) > hitbox) return false;
+      if (Math.abs(getAngleBetweenTwoPoints(pointPos, this.laserTip) - this.angle) > anglePrecision) return false;
       return true;
     });
-    return collisionPoints;
+
+    return hitpoint ? { x: hitpoint.x * width + left, y: hitpoint.y * height + top } : false;
   }
 }
 

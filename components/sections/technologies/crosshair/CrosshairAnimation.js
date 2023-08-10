@@ -45,19 +45,19 @@ class CrosshairAnimation {
     this.angle -= this.angleVelocity;
     if (this.angle <= 0) this.angle = 2 * Math.PI;
     this.x = this.r * Math.cos(this.angle);
-    this.y = this.r * Math.sin(this.angle);
+    this.y = this.r * -Math.sin(this.angle);
   }
 
   handleLeftArrow() {
     this.angle += this.angleVelocity;
     if (this.angle >= 2 * Math.PI) this.angle = 0;
     this.x = this.r * Math.cos(this.angle);
-    this.y = this.r * Math.sin(this.angle);
+    this.y = this.r * -Math.sin(this.angle);
   }
 
   moveCrosshair() {
     const ufoCenter = getElementCenterCoordinates(this.ufo);
-    changeElementStyle(this.crosshair, 'centerPosition', { x: ufoCenter.x + this.x, y: ufoCenter.y - this.y });
+    changeElementStyle(this.crosshair, 'centerPosition', { x: ufoCenter.x + this.x, y: ufoCenter.y + this.y });
   }
 
   setIsRightArrowPressed(pressed) {

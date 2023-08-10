@@ -22,6 +22,7 @@ export default function Lasers() {
 
   return (
     <>
+      {/* <div id='laser_test' style={{ position: 'absolute', width: '2px', height: '2px', background: 'green' }}></div> */}
       {lasers.map((laser) => (
         <Laser key={laser.id} id={laser.id} removeLaser={removeLaser} />
       ))}

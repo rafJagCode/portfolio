@@ -1,79 +1,138 @@
+import imagesCollisionData from '@/configuration/images_collision_data';
+import changeElementStyle from '@/utils/element_functions/changeElementStyle';
+import getElementCenterCoordinates from '@/utils/element_functions/getElementCenterCoordinates';
+import getAngleBetweenTwoPoints from '@/utils/helper_functions/getAngleBetweenTwoPoints';
+import getDistanceBetweenTwoPoints from '@/utils/helper_functions/getDistanceBetweenTwoPoints';
 import types from 'redux/types';
 
 class AsteroidAnimation {
-  asteroidData;
   speed;
-  position;
-  setPosition;
-  ufoCollisionData;
-  ufoPosition;
-  isUfoImmune;
-  dispatch;
-  asteroidID;
+  asteroid;
+  ufo;
   angle;
   requestAnimationID;
 
-  constructor(asteroidData, startingSpeed, position, setPosition, ufoCollisionData, ufoPosition, dispatch, asteroidID) {
-    this.asteroidData = asteroidData;
+  constructor(startingSpeed, asteroidRef, ufoRef, dispatch) {
     this.speed = startingSpeed;
-    this.position = position;
-    this.setPosition = setPosition;
-    this.ufoCollisionData = ufoCollisionData;
-    this.ufoPosition = ufoPosition;
-    this.isUfoImmune = false;
+    this.asteroid = asteroidRef.current;
+    this.ufo = ufoRef.current;
     this.dispatch = dispatch;
-    this.asteroidID = asteroidID;
-    this.angle = Math.random() * (2 * Math.PI);
+    this.angle = Math.random() * 2 * Math.PI;
     this.step = this.step.bind(this);
   }
 
   start() {
     if (this.requestAnimationID) return;
     this.requestAnimationID = requestAnimationFrame(this.step);
+    return this;
   }
 
   stop() {
     if (!this.requestAnimationID) return;
     cancelAnimationFrame(this.requestAnimationID);
+    this.requestAnimationID = null;
   }
 
   step() {
-    const isAsteroidInUfoZone = this.isAsteroidInUfoZone();
-    if (!this.isUfoImmune && isAsteroidInUfoZone) {
-      const overlapingArea = this.getOverlapingArea();
-      const collisionPoint = this.findUfoCollisionPoint(overlapingArea);
-      if (collisionPoint) {
-        this.dispatch({ type: types.ADD_UFO_HIT, hitpoint: collisionPoint });
-        if (overlapingArea.width > overlapingArea.height) this.bounceVertical();
-        else this.bounceHorizontal();
-        this.isUfoImmune = true;
+    if (!this.isUfoImmune() && this.isAsteroidInUfoZone()) {
+      const hitpoints = this.checkCollisionPoints();
+      if (hitpoints) {
+        this.makeUfoImmune();
+        this.bounceFromUfo(hitpoints);
+        this.dispatch({ type: types.ADD_UFO_HIT, hitpoint: hitpoints.first });
       }
     }
-    if (this.isUfoImmune && !isAsteroidInUfoZone) this.isUfoImmune = false;
+
     if (this.isVerticalScreenLimit()) this.bounceVertical();
     if (this.isHoriziontalScreenLimit()) this.bounceHorizontal();
     this.moveAsteroid();
     this.requestAnimationID = requestAnimationFrame(this.step);
   }
 
-  moveAsteroid() {
-    const moveX = this.speed * Math.cos(this.angle);
-    const moveY = this.speed * Math.sin(this.angle);
-    const newPosition = { x: this.position.x + moveX, y: this.position.y + moveY };
-    this.position = newPosition;
-    this.setPosition(newPosition);
+  isUfoImmune() {
+    return this.ufo.dataset.isImmune === 'false' ? false : true;
+  }
+
+  isAsteroidInUfoZone() {
+    const asteroidRect = this.asteroid.getBoundingClientRect();
+    const ufoRect = this.ufo.getBoundingClientRect();
+    return asteroidRect.left <= ufoRect.right && asteroidRect.right >= ufoRect.left && asteroidRect.top <= ufoRect.bottom && asteroidRect.bottom >= ufoRect.top;
+  }
+
+  checkCollisionPoints() {
+    const hitbox = 10;
+    const imageName = this.asteroid.dataset.image;
+    const asteroidCollisionPoints = imagesCollisionData[imageName];
+    const ufoCollisionPoints = imagesCollisionData.ufo;
+    const asteroidRect = this.asteroid.getBoundingClientRect();
+    const ufoRect = this.ufo.getBoundingClientRect();
+
+    const hitpointIndex = ufoCollisionPoints.findIndex((ufoPoint) => {
+      const ufoPointPos = { x: ufoPoint.x * ufoRect.width + ufoRect.left, y: ufoPoint.y * ufoRect.height + ufoRect.top };
+      if (ufoPointPos.x < asteroidRect.left) return false;
+      if (ufoPointPos.x > asteroidRect.right) return false;
+      if (ufoPointPos.y < asteroidRect.top) return false;
+      if (ufoPointPos.y > asteroidRect.bottom) return false;
+      return asteroidCollisionPoints.find((asteroidPoint) => {
+        const asteroidPointPos = { x: asteroidPoint.x * asteroidRect.width + asteroidRect.left, y: asteroidPoint.y * asteroidRect.height + asteroidRect.top };
+        if (Math.abs(asteroidPointPos.x - ufoPointPos.x) > hitbox) return false;
+        if (Math.abs(asteroidPointPos.y - ufoPointPos.y) > hitbox) return false;
+        return true;
+      });
+    });
+
+    if (hitpointIndex === -1) return null;
+
+    const hitpoint1 = {
+      //force prettier break
+      x: ufoCollisionPoints[hitpointIndex].x * ufoRect.width + ufoRect.left,
+      y: ufoCollisionPoints[hitpointIndex].y * ufoRect.height + ufoRect.top,
+    };
+
+    //GET CLOSEST NEXT CLOSEST HITPOINT
+    const hitpointIndex2 = hitpointIndex < ufoCollisionPoints.length ? hitpointIndex + 1 : hitpointIndex - 1;
+    const hitpoint2 = {
+      //force prettier break
+      x: ufoCollisionPoints[hitpointIndex2].x * ufoRect.width + ufoRect.left,
+      y: ufoCollisionPoints[hitpointIndex2].y * ufoRect.height + ufoRect.top,
+    };
+
+    return { first: hitpoint1, second: hitpoint2 };
+  }
+
+  makeUfoImmune() {
+    this.ufo.dataset.isImmune = true;
+    setTimeout(() => (this.ufo.dataset.isImmune = false), 5000);
+  }
+
+  bounceFromUfo(hitpoints) {
+    const collisionAngle = getAngleBetweenTwoPoints(hitpoints.first, hitpoints.second);
+    const normal = collisionAngle + Math.PI / 2;
+    const diffFromNormal = Math.abs(this.angle - normal);
+    let bounceAngle = this.angle - 2 * diffFromNormal;
+    if (bounceAngle < 0) bounceAngle += 2 * Math.PI;
+    if (!this.isEscapeAngle(bounceAngle)) bounceAngle += Math.PI;
+    this.angle = bounceAngle;
+  }
+
+  isEscapeAngle(bounceAngle) {
+    const asteroidCenter = getElementCenterCoordinates(this.asteroid);
+    const ufoCenter = getElementCenterCoordinates(this.ufo);
+    const moveX = this.speed * Math.cos(bounceAngle);
+    const moveY = this.speed * -Math.sin(bounceAngle);
+    const movedAsteroidCenter = { x: asteroidCenter.x + moveX, y: asteroidCenter.y + moveY };
+    const reversedMovedAsteroidCenter = { x: asteroidCenter.x - moveX, y: asteroidCenter.y - moveY };
+    return getDistanceBetweenTwoPoints(ufoCenter, movedAsteroidCenter) > getDistanceBetweenTwoPoints(ufoCenter, reversedMovedAsteroidCenter);
   }
 
   isVerticalScreenLimit() {
-    if (this.position.y + this.asteroidData.minY <= 0) return true;
-    if (this.position.y + this.asteroidData.maxY >= window.innerHeight) return true;
-    return false;
+    const { top, bottom } = this.asteroid.getBoundingClientRect();
+    return top <= 0 || bottom >= (window.innerHeight || document.documentElement.clientHeight);
   }
 
   isHoriziontalScreenLimit() {
-    if (this.position.x + this.asteroidData.minX <= 0) return true;
-    if (this.position.x + this.asteroidData.maxX >= window.innerWidth) return true;
-    return false;
+    const { left, right } = this.asteroid.getBoundingClientRect();
+    return left <= 0 || right >= (window.innerWidth || document.documentElement.clientWidth);
   }
 
   bounceVertical() {
@@ -84,86 +143,11 @@ class AsteroidAnimation {
     this.angle = Math.PI - this.angle;
   }
 
-  setUfoPosition(ufoPosition) {
-    this.ufoPosition = ufoPosition;
-  }
-
-  isAsteroidInUfoZone() {
-    if (!this.ufoPosition) return false;
-    if (this.position.x + this.asteroidData.minX > this.ufoPosition.x + this.ufoCollisionData.maxX) return false;
-    if (this.position.x + this.asteroidData.maxX < this.ufoPosition.x + this.ufoCollisionData.minX) return false;
-    if (this.position.y + this.asteroidData.minY > this.ufoPosition.y + this.ufoCollisionData.maxY) return false;
-    if (this.position.y + this.asteroidData.maxY < this.ufoPosition.y + this.ufoCollisionData.minY) return false;
-    return true;
-  }
-
-  getOverlapingArea() {
-    const xPoints = [this.position.x + this.asteroidData.minX, this.position.x + this.asteroidData.maxX, this.ufoPosition.x + this.ufoCollisionData.minX, this.ufoPosition.x + this.ufoCollisionData.maxX].sort((a, b) => a - b);
-    const yPoints = [this.position.y + this.asteroidData.minY, this.position.y + this.asteroidData.maxY, this.ufoPosition.y + this.ufoCollisionData.minY, this.ufoPosition.y + this.ufoCollisionData.maxY].sort((a, b) => a - b);
-    const overlapingArea = {
-      minX: xPoints[1],
-      maxX: xPoints[2],
-      minY: yPoints[1],
-      maxY: yPoints[2],
-      width: xPoints[2] - xPoints[1],
-      height: yPoints[2] - yPoints[1],
-    };
-
-    return overlapingArea;
-  }
-
-  getPossibleCollisionPoints(collisionPoints, position, overlapingArea) {
-    const possibleCollisionPoints = collisionPoints.filter((point) => {
-      if (point[0] + position.x < overlapingArea.minX) return false;
-      if (point[0] + position.x > overlapingArea.maxX) return false;
-      if (point[1] + position.y < overlapingArea.minY) return false;
-      if (point[1] + position.y > overlapingArea.maxY) return false;
-      return true;
-    });
-    return possibleCollisionPoints;
-  }
-
-  findUfoCollisionPoint(overlapingArea) {
-    const hitbox = 10;
-    const possibleUfoCollionPoints = this.getPossibleCollisionPoints(this.ufoCollisionData.collisionPoints, this.ufoPosition, overlapingArea);
-    if (!possibleUfoCollionPoints.length) return null;
-    const possibleAsteroidCollisionPoints = this.getPossibleCollisionPoints(this.asteroidData.collisionPoints, this.position, overlapingArea);
-    if (!possibleAsteroidCollisionPoints.length) return null;
-
-    const result = this.findClosestCollisionPoint(possibleAsteroidCollisionPoints, possibleUfoCollionPoints);
-    if (!result) return null;
-    if (result.distance > hitbox) return null;
-    return result.collisionPoint;
-  }
-
-  findClosestCollisionPoint(possibleAsteroidCollisionPoints, possibleUfoCollionPoints) {
-    const [minDistance, ufoPoint] = possibleAsteroidCollisionPoints.reduce(
-      (acc, asteroidPoint) => {
-        const [minDistance, ufoPoint] = possibleUfoCollionPoints.reduce(
-          (acc, ufoPoint) => {
-            const relativeAsteroidPoint = { x: asteroidPoint[0] + this.position.x, y: asteroidPoint[1] + this.position.y };
-            const relativeUfoPoint = { x: ufoPoint[0] + this.ufoPosition.x, y: ufoPoint[1] + this.ufoPosition.y };
-            const distance = this.getDistanceBetweenTwoPoints(relativeAsteroidPoint, relativeUfoPoint);
-            if (distance < acc[0]) return [distance, relativeUfoPoint];
-            return acc;
-          },
-          [Number.POSITIVE_INFINITY, null],
-        );
-        if (minDistance < acc[0]) return [minDistance, ufoPoint];
-        return acc;
-      },
-      [Number.POSITIVE_INFINITY, null],
-    );
-
-    if (!ufoPoint) return null;
-    return { distance: minDistance, collisionPoint: ufoPoint };
-  }
-
-  getDistanceBetweenTwoPoints(point1, point2) {
-    const xDiff = point1.x - point2.x;
-    const yDiff = point1.y - point2.y;
-    const distance = Math.sqrt(Math.pow(xDiff, 2) + Math.pow(yDiff, 2));
-    return distance;
+  moveAsteroid() {
+    const asteroidCenter = getElementCenterCoordinates(this.asteroid);
+    const moveX = this.speed * Math.cos(this.angle);
+    const moveY = this.speed * -Math.sin(this.angle);
+    changeElementStyle(this.asteroid, 'centerPosition', { x: asteroidCenter.x + moveX, y: asteroidCenter.y + moveY });
   }
 }
 

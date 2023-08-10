@@ -1,10 +1,16 @@
 import { LaserExplosion, AsteroidExplosion } from '../../explosion/ExplosionTypes';
+import getElementCenterCoordinates from '@/utils/element_functions/getElementCenterCoordinates';
 import types from 'redux/types';
 import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 
-const useAsteroidExplosions = (asteroidHits, healthPoints, getAsteroidCenterPosition) => {
+const useAsteroidExplosions = (asteroidHits, healthPoints, asteroidID) => {
   const dispatch = useDispatch();
+
+  const getAsteroidCenterPosition = () => {
+    const asteroid = document.getElementById(asteroidID);
+    return getElementCenterCoordinates(asteroid);
+  };
 
   const addExplosion = () => {
     let explosion;

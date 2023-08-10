@@ -6,6 +6,10 @@
   &[data-is-blured='true'] {
     filter: blur(5px);
   }
+  &[data-is-immune='true'] {
+    animation: blink-animation 200ms steps(2, start) infinite;
+    -webkit-animation: blink-animation 200ms steps(2, start) infinite;
+  }
 }
 .image {
   background-image: url('/static/images/ufo.svg');
@@ -40,4 +44,15 @@
   bottom: 0;
   left: 50%;
   transform: translate(-50%, 100%);
+}
+
+@keyframes blink-animation {
+  to {
+    opacity: 0.3;
+  }
+}
+@-webkit-keyframes blink-animation {
+  to {
+    opacity: 0.3;
+  }
 }
