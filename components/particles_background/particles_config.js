@@ -9,9 +9,7 @@ const particlesConfig = {
   },
   detectRetina: true,
   interactivity: {
-    events: {
-      resize: true,
-    },
+    resize: true,
   },
   particles: {
     move: {

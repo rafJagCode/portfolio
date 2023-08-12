@@ -1,4 +1,3 @@
-import ParticlesBackground from '@/components/particles_background/ParticlesBackground';
 import ReactFullpage from '@fullpage/react-fullpage';
 import styles from './Sections.module.scss';
 import Home from './home/Home';
@@ -39,8 +38,7 @@ export default function Sections() {
     }
   }, [isSidebarOpen]);
 
-  return [
-    <ParticlesBackground key='particles' />,
+  return (
     <ReactFullpage.Wrapper key='fullpage__wrapper'>
       <section className='section'>
         <div className={styles.section__container}>
@@ -63,6 +61,6 @@ export default function Sections() {
         </div>
         <Footer />
       </section>
-    </ReactFullpage.Wrapper>,
-  ];
+    </ReactFullpage.Wrapper>
+  );
 }

@@ -1,6 +1,7 @@
 import styles from './App.module.scss';
 import Sidebar from '@/components/navigation/sidebar/Sidebar';
 import Topbar from '@/components/navigation/topbar/Topbar';
+import ParticlesBackground from '@/components/particles_background/ParticlesBackground';
 import Sections from '@/components/sections/Sections';
 import Ufo from '@/components/ufo/Ufo';
 import { defaultTranslation } from 'translation/translations';
@@ -60,6 +61,7 @@ export default function App() {
       {isNavigationVisible && <Sidebar />}
       {isNavigationVisible && <Topbar />}
       <main className={styles.app__content}>
+        <ParticlesBackground key='particles' />
         <ReactFullpage
           licenseKey={`Ca(6HeW5q[zX%k*>A#'V%I@@k|5*QKt)s]k3HmOaAPWk}sQdFK('[p0:wkl3f=|Fo0%ijhruscuZC\SYLWQI`}
           normalScrollElements={'#terminal__text, #message'}
