@@ -1,8 +1,9 @@
 .container {
   position: absolute;
-  width: 100%;
+  width: 60%;
   aspect-ratio: 5;
-  top: 0;
+  line-height: 0;
+  top: -0.5rem;
   left: 50%;
   transform: translate(-50%, -100%);
 }
