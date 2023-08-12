@@ -2,35 +2,41 @@ import { useState } from 'react';
 
 const useScrollMachineState = () => {
   const states = {
-    isOrbitingAnimationNotReady: 'orbitingAnimationNotReady',
-    isOrbitingAnimationReady: 'orbitingAnimationReady',
-    isScrollHandled: 'scrollHandled',
-    isScrollDelayed: 'scrollDelayed',
-    isScrollAllowed: 'scrollAllowed',
+    ORBITING_ANIMATION_NOT_READY: 'ORBITING_ANIMATION_NOT_READY',
+    ORBITING_ANIMATION_READY: 'ORBITING_ANIMATION_READY',
+    SCROLL_HANDLED: 'SCROLL_HANDLED',
+    SCROLL_DELAYED: 'SCROLL_DELAYED',
+    SCROLL_ALLOWED: 'SCROLL_ALOWED',
   };
 
-  const [currentState, setCurrentState] = useState(states.isOrbitingAnimationNotReady);
+  const actions = {
+    SET_ORBITING_ANIMATION_TO_READY: 'SET_ORBITING_ANIMATION_TO_READY',
+    HANDLE_SCROLL: 'HANDLE_SCROLL',
+    DELAY_SCROLL: 'DELAY_SCROLL',
+    ALLOW_SCROLL: 'ALLOW_SCROLL',
+  };
 
   const transitions = {
-    [states.isOrbitingAnimationNotReady]: {
-      ORBITING_ANIMATION_READY: states.isOrbitingAnimationReady,
+    [states.ORBITING_ANIMATION_NOT_READY]: {
+      [actions.SET_ORBITING_ANIMATION_TO_READY]: states.ORBITING_ANIMATION_READY,
     },
-    [states.isOrbitingAnimationReady]: {
-      HANDLE_SCROLL: states.isScrollHandled,
-      DELAY_SCROLL: states.isScrollDelayed,
-      ALLOW_SCROLL: states.isScrollAllowed,
+    [states.ORBITING_ANIMATION_READY]: {
+      [actions.HANDLE_SCROLL]: states.SCROLL_HANDLED,
+      [actions.DELAY_SCROLL]: states.SCROLL_DELAYED,
+      [actions.ALLOW_SCROLL]: states.SCROLL_ALLOWED,
     },
-    [states.isScrollHandled]: {
-      DELAY_SCROLL: states.isScrollDelayed,
-      ALLOW_SCROLL: states.isScrollAllowed,
+    [states.SCROLL_HANDLED]: {
+      [actions.DELAY_SCROLL]: states.SCROLL_DELAYED,
+      [actions.ALLOW_SCROLL]: states.SCROLL_ALLOWED,
     },
-    [states.isScrollDelayed]: {
-      ALLOW_SCROLL: states.isScrollAllowed,
+    [states.SCROLL_DELAYED]: {
+      [actions.ALLOW_SCROLL]: states.SCROLL_ALLOWED,
     },
-    [states.isScrollAllowed]: {
-      HANDLE_SCROLL: states.isScrollHandled,
+    [states.SCROLL_ALLOWED]: {
+      [actions.HANDLE_SCROLL]: states.SCROLL_HANDLED,
     },
   };
+  const [currentState, setCurrentState] = useState(states.ORBITING_ANIMATION_NOT_READY);
 
   const transition = (currentState, action) => {
     const nextState = transitions[currentState][action];
@@ -43,7 +49,7 @@ const useScrollMachineState = () => {
 
   const compareState = (state) => state === currentState;
 
-  return [states, updateState, compareState, currentState];
+  return [states, actions, updateState, compareState, currentState];
 };
 
 export default useScrollMachineState;

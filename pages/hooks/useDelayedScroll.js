@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 
-const useDelayedScroll = (states, updateState, compareState, currentState) => {
+const useDelayedScroll = (states, actions, updateState, compareState, currentState) => {
   const [destination, setDestination] = useState(null);
 
   const repeatScrollWhenAnimationReady = (destination) => {
@@ -9,12 +9,12 @@ const useDelayedScroll = (states, updateState, compareState, currentState) => {
   };
 
   const delayScroll = (destination) => {
-    updateState('DELAY_SCROLL');
+    updateState(actions.DELAY_SCROLL);
     setDestination(destination);
   };
 
   useEffect(() => {
-    if (!destination || (!compareState(states.isScrollAllowed) && !compareState(states.isOrbitingAnimationReady))) return;
+    if (!destination || (!compareState(states.SCROLL_ALLOWED) && !compareState(states.ORBITING_ANIMATION_READY))) return;
     fullpage_api.moveTo(destination.anchor);
   }, [currentState, destination]);
 

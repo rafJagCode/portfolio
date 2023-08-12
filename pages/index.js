@@ -20,9 +20,9 @@ export default function App() {
   const orbitingAnimation = useSelector((state) => state.animations[animationsTypes.ORBITING_ANIMATION]);
   const engineAnimation = useSelector((state) => state.animations[animationsTypes.ENGINE_ANIMATION]);
   const holdLaunchingPositionAnimation = useSelector((state) => state.animations[animationsTypes.HOLD_LAUNCHING_POSITION_ANIMATION]);
-  const [states, updateState, compareState, currentState] = useScrollMachineState();
-  const [repeatScrollWhenAnimationReady, delayScroll] = useDelayedScroll(states, updateState, compareState, currentState);
-  const handleAnimationsBeforeScroll = useBeforeScrollHandler(engineAnimation, orbitingAnimation, updateState);
+  const [scrollStates, scrollActions, updateState, compareState, currentState] = useScrollMachineState();
+  const [repeatScrollWhenAnimationReady, delayScroll] = useDelayedScroll(scrollStates, scrollActions, updateState, compareState, currentState);
+  const handleAnimationsBeforeScroll = useBeforeScrollHandler(engineAnimation, orbitingAnimation, scrollActions, updateState);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -31,13 +31,13 @@ export default function App() {
   }, []);
 
   useEffect(() => {
-    if (!!orbitingAnimation) updateState('ORBITING_ANIMATION_READY');
+    if (!!orbitingAnimation) updateState(scrollActions.SET_ORBITING_ANIMATION_TO_READY);
   }, [orbitingAnimation]);
 
   const onLeave = (origin, destination) => {
-    if (compareState(states.isOrbitingAnimationNotReady)) return repeatScrollWhenAnimationReady(destination);
-    if (compareState(states.isScrollDelayed)) return false;
-    if (compareState(states.isScrollAllowed)) return true;
+    if (compareState(scrollStates.ORBITING_ANIMATION_NOT_READY)) return repeatScrollWhenAnimationReady(destination);
+    if (compareState(scrollStates.SCROLL_DELAYED)) return false;
+    if (compareState(scrollStates.SCROLL_ALLOWED)) return true;
 
     delayScroll(destination);
     holdLaunchingPositionAnimation.stopAnimation();
@@ -48,7 +48,7 @@ export default function App() {
 
   const afterLoad = (origin, destination) => {
     if (!engineAnimation) return;
-    updateState('HANDLE_SCROLL');
+    updateState(scrollActions.HANDLE_SCROLL);
     engineAnimation.stopAnimation();
     if (destination.anchor !== '#home') holdLaunchingPositionAnimation.startAnimation();
     if (destination.anchor === '#home') orbitingAnimation.startAnimation();
