@@ -1,5 +1,5 @@
 import styles from './Cow.module.scss';
-import types from 'redux/types';
+import actions from 'redux/actions';
 import { useDispatch } from 'react-redux';
 
 export default function Cow({ imageName }) {
@@ -7,13 +7,13 @@ export default function Cow({ imageName }) {
 
   const showProjectDetails = () => {
     const project = imageName.toUpperCase();
-    dispatch({ type: types.QUEUE_COMMAND, command: `COMMAND_CD_${project}`, directory: project });
-    dispatch({ type: types.QUEUE_COMMAND, command: `clear`, directory: project });
-    dispatch({ type: types.QUEUE_COMMAND, command: `COMMAND_CAT_PROJECT_DESCRIPTION`, print: `PRINT_PROJECT_${project}`, directory: project });
+    dispatch(actions.queueCommand(`COMMAND_CD_${project}`, project, null));
+    dispatch(actions.queueCommand('clear', project, null));
+    dispatch(actions.queueCommand('COMMAND_CAT_PROJECT_DESCRIPTION', project, `PRINT_PROJECT_${project}`));
   };
 
   const onClick = () => {
-    dispatch({ type: types.SET_CLICKED_COW, cow: imageName });
+    dispatch(actions.setClickedCow(imageName));
     showProjectDetails();
   };
 

@@ -1,4 +1,4 @@
-import types from 'redux/types';
+import actions from 'redux/actions';
 import { useSelector, useDispatch } from 'react-redux';
 
 const useExplosions = () => {
@@ -6,7 +6,7 @@ const useExplosions = () => {
   const explosions = useSelector((state) => state.explosions);
 
   const removeExplosion = (explosionID) => {
-    dispatch({ type: types.REMOVE_EXPLOSION, explosionID });
+    dispatch(actions.removeExplosion(explosionID));
   };
 
   return [explosions, removeExplosion];

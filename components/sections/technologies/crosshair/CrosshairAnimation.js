@@ -1,6 +1,6 @@
 import changeElementStyle from '@/utils/element_functions/changeElementStyle';
 import getElementCenterCoordinates from '@/utils/element_functions/getElementCenterCoordinates';
-import types from 'redux/types';
+import actions from 'redux/actions';
 
 class CrosshairAnimation {
   r = 100;
@@ -37,7 +37,7 @@ class CrosshairAnimation {
     if (this.isLeftArrowPressed) this.handleLeftArrow();
     if (this.isRightArrowPressed) this.handleRightArrow();
     this.moveCrosshair();
-    this.dispatch({ type: types.SET_CROSSHAIR_ANGLE, angle: this.getCurrentAngle() });
+    this.dispatch(actions.setCorsshairAngle(this.angle));
     this.requestAnimationID = requestAnimationFrame(this.step);
   }
 
@@ -66,10 +66,6 @@ class CrosshairAnimation {
 
   setIsLeftArrowPressed(pressed) {
     this.isLeftArrowPressed = pressed;
-  }
-
-  getCurrentAngle() {
-    return this.angle;
   }
 }
 

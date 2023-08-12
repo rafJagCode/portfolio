@@ -1,7 +1,7 @@
 import styles from './Satellite.module.scss';
 import Signal from './signal/Signal';
 import useSignals from './hooks/useSignals';
-import types from 'redux/types';
+import actions from 'redux/actions';
 import { useSelector, useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 
@@ -14,7 +14,7 @@ export default function Satellite() {
     const intervalID = setInterval(() => {
       addSignal();
       if (calls >= 5) {
-        dispatch({ type: types.TURN_SIGNALS_OFF });
+        dispatch(actions.turnSingalsOff());
         return clearInterval(intervalID);
       }
       calls += 1;

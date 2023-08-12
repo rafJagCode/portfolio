@@ -1,10 +1,13 @@
-import { useSelector } from 'react-redux';
+import actions from 'redux/actions';
+import { useSelector, useDispatch } from 'react-redux';
 import { useState, useEffect } from 'react';
 
 const useUfoLives = () => {
   const startingLives = 5;
+  const dispatch = useDispatch();
   const [currentLives, setCurrentLives] = useState();
   const ufoHits = useSelector((state) => state.ufoHits);
+  const gameState = useSelector((state) => state.gameState);
   const life = (index, lifeState) => {
     return {
       index: index,
@@ -38,6 +41,11 @@ const useUfoLives = () => {
     if (startingLives - ufoHits.length === currentLives.length) return;
     changeLifeToEmpty();
   }, [ufoHits]);
+
+  useEffect(() => {
+    if (!ufoHits) return;
+    if (gameState === 'STARTED' && startingLives - ufoHits.length === 0) dispatch(actions.setGameState('GAME_LOST'));
+  }, [ufoHits, gameState]);
 
   return currentLives;
 };

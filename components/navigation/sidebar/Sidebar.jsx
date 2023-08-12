@@ -1,7 +1,7 @@
 import styles from './Sidebar.module.scss';
 import NavLink from '../navlink/NavLink';
 import navigationLinks from '@/configuration/navigation_links';
-import types from 'redux/types';
+import actions from 'redux/actions';
 import { refsTypes } from '@/configuration/types';
 import { useSelector, useDispatch } from 'react-redux';
 import { useEffect, useRef, useCallback } from 'react';
@@ -21,7 +21,7 @@ export default function Sidebar() {
       if (topbarMenuRef.current.contains(e.target)) return;
       if (languageControllerRef.current.contains(e.target)) return;
       if (sidebarRef.current.contains(e.target)) return;
-      dispatch({ type: types.CHANGE_SIDEBAR_STATE });
+      dispatch(actions.changeSidebarState());
     },
     [topbarMenuRef, languageControllerRef],
   );
@@ -52,7 +52,7 @@ export default function Sidebar() {
             <li
               key={link.name}
               onClick={() => {
-                dispatch({ type: types.CHANGE_SIDEBAR_STATE });
+                dispatch(actions.changeSidebarState());
               }}>
               <NavLink link={link} />
             </li>

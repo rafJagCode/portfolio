@@ -1,4 +1,4 @@
-import types from 'redux/types';
+import actions from 'redux/actions';
 import { animationsTypes } from '@/configuration/types';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -20,12 +20,12 @@ const useBeforeScrollHandler = (engineAnimation, orbitingAnimation, updateState)
   };
 
   const handleLeavingProjectsSection = async () => {
-    dispatch({ type: types.SET_CLICKED_COW, cow: null });
+    dispatch(actions.setClickedCow(null));
     await new Promise((resolve) => setTimeout(resolve, 0));
     await flyToLaunchingPositionAnimation.promise;
     engineAnimation.startAnimation();
     updateState('ALLOW_SCROLL');
-    dispatch({ type: types.CLEAR_TERMINAL });
+    dispatch(actions.clearTerminal());
   };
 
   const handleLeavingTechnologiesSection = async () => {

@@ -2,7 +2,7 @@ import styles from './GameController.module.scss';
 import Instructions from '../instructions/Instructions';
 import availableKeys from '@/configuration/available_keys';
 import useUfoSteering from './hooks/useUfoSteering';
-import types from 'redux/types';
+import actions from 'redux/actions';
 import { useSelector, useDispatch } from 'react-redux';
 import { useEffect, useCallback } from 'react';
 
@@ -14,18 +14,18 @@ export default function GameController() {
   const handleKeyStateChange = useCallback((e) => {
     if (!availableKeys.includes(e.key)) return;
     if (e.repeat) return;
-    dispatch({ type: types.UPDATE_KEY_STATE, key: e.key });
+    dispatch(actions.updateKeyState(e.key));
   }, []);
 
   const changeGameState = (gameState) => {
-    dispatch({ type: types.SET_GAME_STATE, gameState: gameState });
+    dispatch(actions.setGameState(gameState));
   };
 
   useEffect(() => {
     if (gameState === 'STARTED') {
       fullpage_api.setAllowScrolling(false);
       fullpage_api.setKeyboardScrolling(false);
-      dispatch({ type: types.CHANGE_NAVIGATION_VISIBILITY, visible: false });
+      dispatch(actions.changeNavigationVisibility(false));
       addEventListener('keydown', handleKeyStateChange);
       addEventListener('keyup', handleKeyStateChange);
       return;
@@ -33,7 +33,7 @@ export default function GameController() {
     if (gameState === 'FINISHED') {
       fullpage_api.setAllowScrolling(true);
       fullpage_api.setKeyboardScrolling(true);
-      dispatch({ type: types.CHANGE_NAVIGATION_VISIBILITY, visible: true });
+      dispatch(actions.changeNavigationVisibility(true));
     }
     removeEventListener('keydown', handleKeyStateChange);
     removeEventListener('keyup', handleKeyStateChange);

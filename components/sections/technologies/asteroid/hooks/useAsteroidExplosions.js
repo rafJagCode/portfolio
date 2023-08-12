@@ -1,6 +1,6 @@
 import { LaserExplosion, AsteroidExplosion } from '../../explosion/ExplosionTypes';
 import getElementCenterCoordinates from '@/utils/element_functions/getElementCenterCoordinates';
-import types from 'redux/types';
+import actions from 'redux/actions';
 import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 
@@ -16,7 +16,7 @@ const useAsteroidExplosions = (asteroidHits, healthPoints, asteroidID) => {
     let explosion;
     if (!healthPoints) explosion = new AsteroidExplosion(getAsteroidCenterPosition());
     else explosion = new LaserExplosion(asteroidHits.at(-1));
-    dispatch({ type: types.ADD_EXPLOSION, explosion });
+    dispatch(actions.addExplosion(explosion));
   };
 
   useEffect(() => {

@@ -10,7 +10,7 @@ import useDelayedScroll from './hooks/useDelayedScroll';
 import useBeforeScrollHandler from './hooks/useBeforeScrollHandler';
 import useAnimations from './hooks/useAnimations';
 import ReactFullpage from '@fullpage/react-fullpage';
-import types from 'redux/types';
+import actions from 'redux/actions';
 import { useSelector, useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 
@@ -27,7 +27,7 @@ export default function App() {
 
   useEffect(() => {
     const language = localStorage.getItem('language') ? localStorage.getItem('language') : defaultTranslation;
-    dispatch({ type: types.CHANGE_LANGUAGE, language: language });
+    dispatch(actions.changeLanguage(language));
   }, []);
 
   useEffect(() => {
@@ -52,7 +52,7 @@ export default function App() {
     engineAnimation.stopAnimation();
     if (destination.anchor !== '#home') holdLaunchingPositionAnimation.startAnimation();
     if (destination.anchor === '#home') orbitingAnimation.startAnimation();
-    if (destination.anchor === '#projects') dispatch({ type: types.QUEUE_COMMAND, command: 'COMMAND_CAT_INSTRUCTION', print: 'PRINT_INSTRUCTION' });
+    if (destination.anchor === '#projects') dispatch(actions.queueCommand('COMMAND_CAT_INSTRUCTION', null, 'PRINT_INSTRUCTION'));
   };
 
   return (

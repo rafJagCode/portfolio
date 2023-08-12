@@ -2,7 +2,7 @@ import styles from './HomeImage.module.scss';
 import { refsTypes, animationsTypes } from '@/configuration/types';
 import changeElementStyle from '@/utils/element_functions/changeElementStyle';
 import getElementCenterCoordinates from '@/utils/element_functions/getElementCenterCoordinates';
-import types from 'redux/types';
+import actions from 'redux/actions';
 import { useDispatch, useSelector } from 'react-redux';
 import { useRef, useEffect } from 'react';
 
@@ -13,7 +13,7 @@ export default function HomeImage() {
   const orbitingAnimation = useSelector((state) => state.animations[animationsTypes.ORBITING_ANIMATION]);
 
   useEffect(() => {
-    dispatch({ type: types.GLOBAL_REFS, refName: refsTypes.EARTH_REF, ref: earthRef });
+    dispatch(actions.setGlobalRef(refsTypes.EARTH_REF, earthRef));
   }, []);
 
   useEffect(() => {

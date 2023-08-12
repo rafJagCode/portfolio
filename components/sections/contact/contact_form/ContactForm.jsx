@@ -2,7 +2,7 @@ import styles from './ContactForm.module.scss';
 import useValidateEmail from './hooks/useValidateEmail';
 import useValidateMessage from './hooks/useValidateMessage';
 import sentEmail from './sentEmail';
-import types from 'redux/types';
+import actions from 'redux/actions';
 import { FaSatelliteDish } from 'react-icons/fa';
 import { useDispatch } from 'react-redux';
 import { useRef } from 'react';
@@ -15,13 +15,14 @@ export default function ContactForm() {
   const [isMessageValid, setIsMessageValid, messageErrorMessage, validateMessage] = useValidateMessage();
   const handleEmailBlur = (e) => validateEmail(e.target.value);
   const handleMessageBlur = (e) => validateMessage(e.target.value);
+
   const handleEmail = async (e) => {
     e.preventDefault();
-    dispatch({ type: types.TURN_SIGNALS_ON });
+    dispatch(actions.turnSignalsOn());
     validateEmail(emailRef.current.value);
     validateMessage(messageRef.current.value);
     if (!isEmailValid || !isMessageValid) {
-      dispatch({ type: types.SHOW_DIALOG, message: 'Contact form was filled inproperly. Please correct marked fields and try again.' });
+      dispatch(actions.showDialog('Contact form was filled inproperly. Please correct marked fields and try again.'));
       return;
     }
     const data = {
@@ -29,7 +30,7 @@ export default function ContactForm() {
       message: messageRef.current.value,
     };
     const response = await sentEmail(data);
-    dispatch({ type: types.SHOW_DIALOG, message: response.message });
+    dispatch(actions.showDialog(response.message));
   };
 
   return (

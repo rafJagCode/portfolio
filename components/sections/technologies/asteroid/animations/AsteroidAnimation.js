@@ -3,7 +3,7 @@ import changeElementStyle from '@/utils/element_functions/changeElementStyle';
 import getElementCenterCoordinates from '@/utils/element_functions/getElementCenterCoordinates';
 import getAngleBetweenTwoPoints from '@/utils/helper_functions/getAngleBetweenTwoPoints';
 import getDistanceBetweenTwoPoints from '@/utils/helper_functions/getDistanceBetweenTwoPoints';
-import types from 'redux/types';
+import actions from 'redux/actions';
 
 class AsteroidAnimation {
   speed;
@@ -39,7 +39,7 @@ class AsteroidAnimation {
       if (hitpoints) {
         this.makeUfoImmune();
         this.bounceFromUfo(hitpoints);
-        this.dispatch({ type: types.ADD_UFO_HIT, hitpoint: hitpoints.first });
+        this.dispatch(actions.addUfoHit(hitpoints.first));
       }
     }
 

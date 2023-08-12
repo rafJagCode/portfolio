@@ -1,4 +1,4 @@
-import types from 'redux/types';
+import actions from 'redux/actions';
 
 class Animation {
   name;
@@ -11,7 +11,7 @@ class Animation {
     if (!name) throw new Error('Animation must have name');
     this.name = name;
     this.step = this.step.bind(this);
-    if (dispatch) dispatch({ type: types.ANIMATIONS, animationName: this.name, animation: this });
+    if (dispatch) dispatch(actions.setAnimation(name, this));
   }
 
   startAnimation() {

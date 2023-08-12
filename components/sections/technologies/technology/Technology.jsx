@@ -1,6 +1,6 @@
 import styles from './Technology.module.scss';
 import DisplayTechnologyAnimation from './DisplayTechnologyAnimation';
-import types from 'redux/types';
+import actions from 'redux/actions';
 import { useDispatch } from 'react-redux';
 import { useRef, useEffect } from 'react';
 
@@ -13,7 +13,7 @@ export default function Technology({ name, startingPosition, removeTechnology })
     new DisplayTechnologyAnimation(technologyRef, destination) //force prettier break
       .startAnimation()
       .then(() => {
-        dispatch({ type: types.UPDATE_TECHNOLOGIES, technologyName: name, unlocked: true });
+        dispatch(actions.updateTechnologies(name, true));
         removeTechnology(name);
       });
   }, []);

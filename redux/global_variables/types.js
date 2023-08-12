@@ -1,0 +1,7 @@
+const SET_GLOBAL_REF = 'SET_GLOBAL_REF';
+const SET_ANIMATION = 'SET_ANIMATION';
+
+export default {
+  SET_GLOBAL_REF,
+  SET_ANIMATION,
+};

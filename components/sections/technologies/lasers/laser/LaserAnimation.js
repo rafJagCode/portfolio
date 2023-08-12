@@ -2,7 +2,7 @@ import imagesCollisionData from '@/configuration/images_collision_data';
 import changeElementStyle from '@/utils/element_functions/changeElementStyle';
 import getElementCenterCoordinates from '@/utils/element_functions/getElementCenterCoordinates';
 import getAngleBetweenTwoPoints from '@/utils/helper_functions/getAngleBetweenTwoPoints';
-import types from 'redux/types';
+import actions from 'redux/actions';
 
 class LaserAnimation {
   requestAnimationID;
@@ -40,7 +40,7 @@ class LaserAnimation {
     if (asteroid) {
       const hitpoint = this.checkCollisionPoints(asteroid);
       if (hitpoint) {
-        this.dispatch({ type: types.ADD_ASTEROID_HIT, asteroidID: asteroid.id, hitpoint: hitpoint });
+        this.dispatch(actions.addAsteroidHit(asteroid.id, hitpoint));
         return this.stop();
       }
     }

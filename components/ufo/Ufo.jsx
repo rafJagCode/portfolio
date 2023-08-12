@@ -2,7 +2,7 @@ import styles from './Ufo.module.scss';
 import UfoHealthbar from './ufo_healthbar/UfoHealthbar';
 import Explosion from '@/components/sections/technologies/explosion/Explosion';
 import useUfoExplosions from './hooks/useUfoExplosions';
-import types from 'redux/types';
+import actions from 'redux/actions';
 import { refsTypes } from '@/configuration/types';
 import { useDispatch, useSelector } from 'react-redux';
 import { useRef, useEffect } from 'react';
@@ -15,9 +15,9 @@ const Ufo = () => {
   const [explosions, removeExplosion] = useUfoExplosions(ufoHits);
 
   useEffect(() => {
-    dispatch({ type: types.GLOBAL_REFS, refName: refsTypes.UFO_REF, ref: ufoRef });
-    dispatch({ type: types.GLOBAL_REFS, refName: refsTypes.ENGINE_REF, ref: engineRef });
-    dispatch({ type: types.GLOBAL_REFS, refName: refsTypes.BEAM_REF, ref: beamRef });
+    dispatch(actions.setGlobalRef(refsTypes.UFO_REF, ufoRef));
+    dispatch(actions.setGlobalRef(refsTypes.ENGINE_REF, engineRef));
+    dispatch(actions.setGlobalRef(refsTypes.BEAM_REF, beamRef));
   }, []);
 
   return (

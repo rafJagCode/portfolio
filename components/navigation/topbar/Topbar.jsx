@@ -3,7 +3,7 @@ import Hamburger from './hamburger/Hamburger';
 import LanguageController from './language_controller/LanguageController';
 import NavLink from '../navlink/NavLink';
 import navigationLinks from '@/configuration/navigation_links';
-import types from 'redux/types';
+import actions from 'redux/actions';
 import { refsTypes } from '@/configuration/types';
 import { useRef, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
@@ -13,7 +13,7 @@ export default function Topbar() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch({ type: types.GLOBAL_REFS, refName: refsTypes.TOPBAR_MENU_REF, ref: topbarMenuRef });
+    dispatch(actions.setGlobalRef(refsTypes.TOPBAR_MENU_REF, topbarMenuRef));
   }, []);
 
   return (

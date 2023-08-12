@@ -1,5 +1,5 @@
 import styles from './Dialog.module.scss';
-import types from 'redux/types';
+import actions from 'redux/actions';
 import { useSelector, useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 
@@ -8,7 +8,7 @@ export default function Dialog() {
   const isVisible = useSelector((state) => state.dialog.isVisible);
   const dispatch = useDispatch();
 
-  const closeDialog = () => dispatch({ type: types.HIDE_DIALOG });
+  const closeDialog = () => dispatch(actions.hideDialog());
 
   useEffect(() => {
     if (!isVisible) return;

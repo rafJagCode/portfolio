@@ -1,5 +1,5 @@
 import styles from './LanguageController.module.scss';
-import types from 'redux/types';
+import actions from 'redux/actions';
 import { refsTypes } from '@/configuration/types';
 import { useSelector, useDispatch } from 'react-redux';
 import { useRef, useEffect } from 'react';
@@ -10,11 +10,11 @@ export default function LanguageController() {
   const dispatch = useDispatch();
 
   const changeLanguage = (language) => {
-    dispatch({ type: types.CHANGE_LANGUAGE, language: language });
+    dispatch(actions.changeLanguage(language));
   };
 
   useEffect(() => {
-    dispatch({ type: types.GLOBAL_REFS, refName: refsTypes.LANGUAGE_CONTROLLER_REF, ref: languageControllerRef });
+    dispatch(actions.setGlobalRef(refsTypes.LANGUAGE_CONTROLLER_REF, languageControllerRef));
   }, []);
 
   return (

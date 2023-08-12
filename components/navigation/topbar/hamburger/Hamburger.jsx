@@ -1,5 +1,5 @@
 import styles from './Hamburger.module.scss';
-import types from 'redux/types';
+import actions from 'redux/actions';
 import { useSelector, useDispatch } from 'react-redux';
 
 export default function Hamburger() {
@@ -7,7 +7,7 @@ export default function Hamburger() {
   const dispatch = useDispatch();
 
   const handleClick = () => {
-    dispatch({ type: types.CHANGE_SIDEBAR_STATE });
+    dispatch(actions.changeSidebarState());
   };
 
   return (
