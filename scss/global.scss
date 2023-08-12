@@ -1,3 +1,26 @@
+@font-face {
+  font-family: Fructur;
+  src: url('/static/fonts/Fructur-Regular.ttf') format('truetype');
+}
+@font-face {
+  font-family: VT323;
+  src: url('/static/fonts/VT323-Regular.ttf') format('truetype');
+}
+@font-face {
+  font-family: Saira;
+  font-weight: 300;
+  src: url('/static/fonts/Saira-Light.ttf') format('truetype');
+}
+@font-face {
+  font-family: Saira;
+  font-weight: 500;
+  src: url('/static/fonts/Saira-Medium.ttf') format('truetype');
+}
+@font-face {
+  font-family: Saira;
+  font-weight: 800;
+  src: url('/static/fonts/Saira-ExtraBold.ttf') format('truetype');
+}
 html {
   font-family: 'Saira', sans-serif;
   font-size: calc(5px + (13 - 5) * ((100vw - 300px) / (1600 - 300)));
