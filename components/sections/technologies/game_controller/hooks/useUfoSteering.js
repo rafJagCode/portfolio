@@ -1,4 +1,5 @@
 import { animationsTypes } from '@/configuration/types';
+import { gameStates, compareGameState } from 'redux/game/gameStateMachine';
 import { useSelector } from 'react-redux';
 import { useEffect } from 'react';
 
@@ -25,12 +26,9 @@ const useUfoSteering = () => {
 
   useEffect(() => {
     if (!holdLaunchingPositionAnimation || !ufoSteeringAnimation || !flyToLaunchingPositionAnimation) return;
-    if (gameState === 'STARTED') {
-      enableUfoSteering();
-      return;
-    }
-    if (gameState === 'FINISHED') flyToLaunchingPosition();
-    disableUfoSteering();
+    if (compareGameState(gameState, gameStates.GAME_ENDED)) flyToLaunchingPosition();
+    if (compareGameState(gameState, gameStates.PLAYING)) enableUfoSteering();
+    else disableUfoSteering();
   }, [gameState, holdLaunchingPositionAnimation, ufoSteeringAnimation, flyToLaunchingPositionAnimation]);
 
   useEffect(() => {

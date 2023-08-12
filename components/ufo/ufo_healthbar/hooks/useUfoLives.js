@@ -1,4 +1,5 @@
 import actions from 'redux/actions';
+import { gameStates, gameActions, compareGameState } from 'redux/game/gameStateMachine';
 import { useSelector, useDispatch } from 'react-redux';
 import { useState, useEffect } from 'react';
 
@@ -44,7 +45,7 @@ const useUfoLives = () => {
 
   useEffect(() => {
     if (!ufoHits) return;
-    if (gameState === 'STARTED' && startingLives - ufoHits.length === 0) dispatch(actions.setGameState('GAME_LOST'));
+    if (compareGameState(gameState, gameStates.PLAYING) && startingLives - ufoHits.length === 0) dispatch(actions.updateGameState(gameActions.LOSE_GAME));
   }, [ufoHits, gameState]);
 
   return currentLives;

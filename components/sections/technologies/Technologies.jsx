@@ -10,6 +10,7 @@ import Technology from './technology/Technology';
 import useAsteroids from './hooks/useAsteroids';
 import useExplosions from './hooks/useExplosions';
 import useTechnologies from './hooks/useTechnologies';
+import { gameStates, gameActions, compareGameState } from 'redux/game/gameStateMachine';
 import actions from 'redux/actions';
 import { useSelector, useDispatch } from 'react-redux';
 import { useEffect } from 'react';
@@ -22,13 +23,14 @@ export default function Technologies() {
   const gameState = useSelector((state) => state.gameState);
 
   useEffect(() => {
-    if (gameState === 'STARTED' && asteroids.length === 0) dispatch(actions.setGameState('GAME_WON'));
+    if (compareGameState(gameState, gameStates.PLAYING) && asteroids.length === 0) dispatch(actions.updateGameState(gameActions.WIN_GAME));
   }, [asteroids]);
 
   return (
     <div className={styles.container}>
-      {gameState === 'GAME_WON' || gameState === 'GAME_LOST' ? <GameResult gameState={gameState} /> : null}
-      {gameState === 'STARTED' ? <Crosshair /> : null}
+      {compareGameState(gameState, gameStates.GAME_WON) ? <GameResult gameState={gameState} /> : null}
+      {compareGameState(gameState, gameStates.GAME_LOST) ? <GameResult gameState={gameState} /> : null}
+      {compareGameState(gameState, gameStates.PLAYING) ? <Crosshair /> : null}
       <TechnologiesBar />
       <GameController />
       <Lasers />

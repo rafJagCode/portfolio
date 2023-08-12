@@ -1,12 +1,13 @@
 import types from './types';
 import availableKeys from '@/configuration/available_keys';
+import { gameStates, getUpdatedGameState } from './gameStateMachine';
 
-const GAME_STATE = null;
+const GAME_STATE = gameStates.INITIAL_STATE;
 
 const gameState = (state = GAME_STATE, action) => {
   switch (action.type) {
-    case types.SET_GAME_STATE: {
-      return action.gameState;
+    case types.UPDATE_GAME_STATE: {
+      return getUpdatedGameState(state, action.action);
     }
     default:
       return state;

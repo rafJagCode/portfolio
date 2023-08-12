@@ -1,5 +1,6 @@
 import AsteroidAnimation from '../animations/AsteroidAnimation';
 import { refsTypes } from '@/configuration/types';
+import { gameStates, compareGameState } from 'redux/game/gameStateMachine';
 import { useSelector, useDispatch } from 'react-redux';
 import { useEffect, useRef } from 'react';
 
@@ -19,7 +20,7 @@ const useAsteroidAnimation = (startingSpeed, asteroidRef) => {
 
   useEffect(() => {
     if (!asteroidAnimationRef.current) return;
-    if (gameState === 'STARTED') asteroidAnimationRef.current.start();
+    if (compareGameState(gameState, gameStates.PLAYING)) asteroidAnimationRef.current.start();
     else asteroidAnimationRef.current.stop();
   }, [gameState]);
 };
