@@ -2,13 +2,14 @@ import styles from './Crosshair.module.scss';
 import CrosshairAnimation from './CrosshairAnimation';
 import { refsTypes } from '@/configuration/types';
 import { useSelector, useDispatch } from 'react-redux';
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 export default function Crosshair() {
   const dispatch = useDispatch();
   const crosshairRef = useRef(null);
   const crosshairAnimationRef = useRef(null);
   const ufoRef = useSelector((state) => state.globalRefs[refsTypes.UFO_REF]);
+  const [isVisible, setIsVisible] = useState(false);
 
   const arrowRight = useSelector((state) => state.keys.ArrowRight);
   const arrowLeft = useSelector((state) => state.keys.ArrowLeft);
@@ -17,6 +18,7 @@ export default function Crosshair() {
     if (!ufoRef || !crosshairRef) return;
     crosshairAnimationRef.current = new CrosshairAnimation(ufoRef, crosshairRef, dispatch);
     crosshairAnimationRef.current.start();
+    setIsVisible(true);
   }, [ufoRef, crosshairRef]);
 
   useEffect(() => {
@@ -35,5 +37,5 @@ export default function Crosshair() {
     };
   }, []);
 
-  return <img ref={crosshairRef} className={styles.image} src={'/static/images/crosshair.svg'}></img>;
+  return <img ref={crosshairRef} className={styles.image} src={'/static/images/crosshair.svg'} style={{ visibility: isVisible ? 'visible' : 'hidden' }}></img>;
 }
