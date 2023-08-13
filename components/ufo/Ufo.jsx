@@ -9,7 +9,7 @@ import { useRef, useEffect } from 'react';
 
 const Ufo = () => {
   const dispatch = useDispatch();
-  const isSidebarOpen = useSelector((state) => state.isSidebarOpen);
+  //   const isSidebarOpen = useSelector((state) => state.isSidebarOpen);
   const ufoHits = useSelector((state) => state.ufoHits);
   const [ufoRef, engineRef, beamRef] = [useRef(null), useRef(null), useRef(null)];
   const [explosions, removeExplosion] = useUfoExplosions(ufoHits);
@@ -22,7 +22,7 @@ const Ufo = () => {
 
   return (
     <>
-      <div id='ufo' className={styles.container + ' ufo_placeholder'} ref={ufoRef} data-is-blured={isSidebarOpen} data-is-immune='false'>
+      <div id='ufo' className={styles.container + ' ufo_placeholder'} ref={ufoRef} data-is-immune='false'>
         <UfoHealthbar />
         <div className={styles.image}></div>
         <div id='engine' className={styles.engine} ref={engineRef}></div>
