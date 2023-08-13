@@ -62,7 +62,6 @@ export default function App() {
       {isNavigationVisible && <Sidebar />}
       {isNavigationVisible && <Topbar />}
       <main className={styles.app__content} data-is-blured={isSidebarOpen}>
-        <ParticlesBackground key='particles' />
         <ReactFullpage
           licenseKey={`Ca(6HeW5q[zX%k*>A#'V%I@@k|5*QKt)s]k3HmOaAPWk}sQdFK('[p0:wkl3f=|Fo0%ijhruscuZC\SYLWQI`}
           normalScrollElements={'#terminal__text, #message'}
@@ -76,6 +75,7 @@ export default function App() {
             return <Sections />;
           }}
         />
+        <ParticlesBackground />
         <Ufo />
       </main>
     </div>
