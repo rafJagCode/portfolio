@@ -3,9 +3,6 @@
   z-index: 2;
   backface-visibility: hidden;
   transition: filter 1000ms ease 0s;
-  &[data-is-blured='true'] {
-    filter: blur(5px);
-  }
   &[data-is-immune='true'] {
     animation: blink-animation 200ms steps(2, start) infinite;
     -webkit-animation: blink-animation 200ms steps(2, start) infinite;

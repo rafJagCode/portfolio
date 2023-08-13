@@ -17,6 +17,7 @@ import { useEffect } from 'react';
 
 export default function App() {
   useAnimations();
+  const isSidebarOpen = useSelector((state) => state.isSidebarOpen);
   const isNavigationVisible = useSelector((state) => state.isNavigationVisible);
   const orbitingAnimation = useSelector((state) => state.animations[animationsTypes.ORBITING_ANIMATION]);
   const engineAnimation = useSelector((state) => state.animations[animationsTypes.ENGINE_ANIMATION]);
@@ -60,7 +61,7 @@ export default function App() {
     <div className={styles.app__container}>
       {isNavigationVisible && <Sidebar />}
       {isNavigationVisible && <Topbar />}
-      <main className={styles.app__content}>
+      <main className={styles.app__content} data-is-blured={isSidebarOpen}>
         <ParticlesBackground key='particles' />
         <ReactFullpage
           licenseKey={`Ca(6HeW5q[zX%k*>A#'V%I@@k|5*QKt)s]k3HmOaAPWk}sQdFK('[p0:wkl3f=|Fo0%ijhruscuZC\SYLWQI`}

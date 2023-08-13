@@ -6,11 +6,8 @@ import Technologies from './technologies/Technologies';
 import Contact from './contact/Contact';
 import Footer from '@/components/footer/Footer';
 import { useEffect, useCallback } from 'react';
-// import { useSelector } from 'react-redux';
 
 export default function Sections() {
-  //   const isSidebarOpen = useSelector((state) => state.isSidebarOpen);
-
   const handleHashChange = useCallback((e) => {
     fullpage_api.moveTo(`#${e.newURL.split('#')[1]}`);
   }, []);
@@ -27,16 +24,6 @@ export default function Sections() {
     if (anchor === '#home') return;
     fullpage_api.moveTo(anchor);
   }, []);
-
-  //   useEffect(() => {
-  //     if (isSidebarOpen) {
-  //       document.querySelector('#fullpage').style.filter = 'blur(5px)';
-  //       document.querySelector('#fullpage').style.pointerEvents = 'none';
-  //     } else {
-  //       document.querySelector('#fullpage').style.filter = 'none';
-  //       document.querySelector('#fullpage').style.pointerEvents = 'auto';
-  //     }
-  //   }, [isSidebarOpen]);
 
   return (
     <ReactFullpage.Wrapper key='fullpage__wrapper'>

@@ -9,7 +9,6 @@ import { useRef, useEffect } from 'react';
 
 const Ufo = () => {
   const dispatch = useDispatch();
-  //   const isSidebarOpen = useSelector((state) => state.isSidebarOpen);
   const ufoHits = useSelector((state) => state.ufoHits);
   const [ufoRef, engineRef, beamRef] = [useRef(null), useRef(null), useRef(null)];
   const [explosions, removeExplosion] = useUfoExplosions(ufoHits);
