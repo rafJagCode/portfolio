@@ -7,7 +7,7 @@ export default function TechnologiesBar() {
   return (
     <div className={styles.container}>
       {technologies.map((technology) => (
-        <img key={technology.name} id={`technology_${technology.name}`} data-src={`/static/images/technologies/${technology.name}-icon.svg`} style={{ opacity: technology.unlocked ? 1 : 0.4 }}></img>
+        <img key={technology.name} id={`technology_${technology.name}`} src={`/static/images/technologies/${technology.name}-icon.svg`} style={{ opacity: technology.unlocked ? 1 : 0.4 }}></img>
       ))}
     </div>
   );

@@ -23,9 +23,9 @@ const Ufo = () => {
     <>
       <div id='ufo' className={styles.container + ' ufo_placeholder'} ref={ufoRef} data-is-immune='false'>
         <UfoHealthbar />
-        <div className={styles.image}></div>
-        <div id='engine' className={styles.engine} ref={engineRef}></div>
-        <div className={styles.beam} ref={beamRef}></div>
+        <img className={styles.image} src='/static/images/ufo.svg' alt='ufo' />
+        <img id='engine' className={styles.engine} ref={engineRef} src='/static/images/engine.svg' alt='engine' />
+        <img className={styles.beam} ref={beamRef} src='/static/images/ufo-beam.svg' alt='ufo-beam' />
       </div>
       {explosions.map((explosion) => {
         return <Explosion key={explosion.explosionID} explosion={explosion} removeExplosion={removeExplosion}></Explosion>;

@@ -1,7 +1,8 @@
 .container {
   position: relative;
-  grid-column: start / terminal_end;
-  align-self: center;
+  width: 40rem;
+  align-self: start;
+  margin-top: 2rem;
   font-family: 'VT323', monospace;
   color: #00ff00;
   font-size: 1.5rem;

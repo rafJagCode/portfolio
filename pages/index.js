@@ -67,6 +67,7 @@ export default function App() {
           normalScrollElements={'#terminal__text, #message'}
           scrollingSpeed={1000}
           dragAndMove={true}
+          lazyLoading={false}
           touchSensitivity={3}
           anchors={['#home', '#projects', '#technologies', '#contact']}
           onLeave={onLeave}

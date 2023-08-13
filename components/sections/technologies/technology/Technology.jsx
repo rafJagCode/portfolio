@@ -18,5 +18,5 @@ export default function Technology({ name, startingPosition, removeTechnology })
       });
   }, []);
 
-  return <img data-src={`/static/images/technologies/${name}-icon.svg`} style={{ left: startingPosition.x, top: startingPosition.y }} className={styles.image} ref={technologyRef}></img>;
+  return <img src={`/static/images/technologies/${name}-icon.svg`} style={{ left: startingPosition.x, top: startingPosition.y }} className={styles.image} ref={technologyRef}></img>;
 }

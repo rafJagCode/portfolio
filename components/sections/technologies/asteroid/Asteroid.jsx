@@ -39,7 +39,7 @@ export default function Asteroid({ asteroid, addAsteroid, removeAsteroid, addTec
     <>
       <div className={styles.container + ' asteroid'} style={{ left: startingPosition.x, top: startingPosition.y }} id={asteroidID} ref={asteroidRef} data-image={imageName}>
         <Healthbar startingHealthPoints={startingHealthPoints} healthPoints={healthPoints} />
-        <img data-src={`/static/images/asteroids/${imageName}.svg`} className={styles.image} style={{ width: asteroidSize }}></img>
+        <img src={`/static/images/asteroids/${imageName}.svg`} className={styles.image} style={{ width: asteroidSize }}></img>
       </div>
     </>
   );

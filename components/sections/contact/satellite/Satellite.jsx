@@ -31,7 +31,7 @@ export default function Satellite() {
       {signals.map((signal) => (
         <Signal key={signal.signalID} id={signal.signalID} removeSignal={removeSignal} />
       ))}
-      <img id='satellite' className={styles.image} data-src='/static/images/satellite.svg' alt='satellite' />
+      <img id='satellite' className={styles.image} src='/static/images/satellite.svg' alt='satellite' />
     </div>
   );
 }

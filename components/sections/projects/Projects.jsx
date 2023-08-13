@@ -10,10 +10,12 @@ export default function Projects() {
     <div className={styles.container}>
       <Terminal />
       <div className={styles.island_container}>
-        <div className={styles.island}></div>
-        <Cow imageName='cow1' />
-        <Cow imageName='cow2' />
-        <Cow imageName='cow3' />
+        <img className={styles.island} src='/static/images/floating-island.png' />
+        <div className={styles.cows}>
+          <Cow imageName='cow1' />
+          <Cow imageName='cow2' />
+          <Cow imageName='cow3' />
+        </div>
       </div>
     </div>
   );
