@@ -37,5 +37,5 @@ export default function Crosshair() {
     };
   }, []);
 
-  return <img ref={crosshairRef} className={styles.image} src={'/static/images/crosshair.svg'} style={{ visibility: isVisible ? 'visible' : 'hidden' }}></img>;
+  return <img ref={crosshairRef} className={styles.image} data-src={'/static/images/crosshair.svg'} style={{ visibility: isVisible ? 'visible' : 'hidden' }}></img>;
 }

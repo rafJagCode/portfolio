@@ -4,7 +4,7 @@ import TerminalText from './terminal_text/TerminalText';
 export default function Terminal() {
   return (
     <div className={styles.container}>
-      <img className={styles.image} src='/static/images/terminal.svg' alt='terminal image' />
+      <img className={styles.image} data-src='/static/images/terminal.svg' alt='terminal image' />
       <TerminalText />
     </div>
   );

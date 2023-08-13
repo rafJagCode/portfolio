@@ -22,5 +22,5 @@ export default function Laser({ id, removeLaser }) {
     displayLaser(laserAnimation.current);
   }, [ufoRef, laserRef]);
 
-  return <img src='/static/images/laser.svg' ref={laserRef} className={styles.image} />;
+  return <img data-src='/static/images/laser.svg' ref={laserRef} className={styles.image} />;
 }

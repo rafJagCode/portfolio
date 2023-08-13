@@ -11,5 +11,5 @@ export default function Signal({ id, removeSignal }) {
     animateSignal();
   }, []);
 
-  return <img id={`signal_${id}`} className={styles.image} src='/static/images/signal.svg' alt='signal' />;
+  return <img id={`signal_${id}`} className={styles.image} data-src='/static/images/signal.svg' alt='signal' />;
 }
