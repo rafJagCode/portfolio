@@ -33,6 +33,10 @@ export default function GameController() {
       fullpage_api.setAllowScrolling(true);
       fullpage_api.setKeyboardScrolling(true);
       dispatch(actions.changeNavigationVisibility(true));
+      dispatch(actions.clearAsteroids());
+      dispatch(actions.clearAsteroidsHits());
+      dispatch(actions.clearUfoHits());
+      dispatch(actions.clearTechnologies());
     }
     removeEventListener('keydown', handleKeyStateChange);
     removeEventListener('keyup', handleKeyStateChange);
@@ -40,9 +44,8 @@ export default function GameController() {
 
   useEffect(() => {
     setMenu([
-      { text: 'START GAME', action: gameActions.START_GAME, active: compareGameState(gameState, gameStates.INITIAL_STATE) || compareGameState(gameState, gameStates.GAME_PAUSED) },
+      { text: 'START GAME', action: gameActions.START_GAME, active: compareGameState(gameState, gameStates.INITIAL_STATE) || compareGameState(gameState, gameStates.GAME_PAUSED) || compareGameState(gameState, gameStates.GAME_ENDED) },
       { text: 'PAUSE GAME', action: gameActions.PAUSE_GAME, active: compareGameState(gameState, gameStates.PLAYING) },
-      { text: 'RESET GAME', action: gameActions.RESET_GAME, active: !compareGameState(gameState, gameStates.INITIAL_STATE) },
       { text: 'END GAME', action: gameActions.END_GAME, active: !compareGameState(gameState, gameStates.GAME_ENDED) && !compareGameState(gameState, gameStates.INITIAL_STATE) },
     ]);
   }, [gameState]);

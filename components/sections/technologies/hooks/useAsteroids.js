@@ -1,15 +1,16 @@
-import startingAsteroids from '@/configuration/asteroids_setup';
-import { useState } from 'react';
+import actions from 'redux/actions';
+import { useSelector, useDispatch } from 'react-redux';
 
 const useAsteroids = () => {
-  const [asteroids, setAsteroids] = useState(startingAsteroids);
+  const asteroids = useSelector((state) => state.asteroids);
+  const dispatch = useDispatch();
 
   const addAsteroid = (asteroid) => {
-    setAsteroids((asteroids) => [...asteroids, asteroid]);
+    dispatch(actions.addAsteroid(asteroid));
   };
 
   const removeAsteroid = (asteroidID) => {
-    setAsteroids((asteroids) => asteroids.filter((asteroid) => asteroid.asteroidID !== asteroidID));
+    dispatch(actions.removeAsteroid(asteroidID));
   };
 
   return [asteroids, addAsteroid, removeAsteroid];
