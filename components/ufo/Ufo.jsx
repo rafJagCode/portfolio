@@ -3,7 +3,7 @@ import UfoHealthbar from './ufo_healthbar/UfoHealthbar';
 import Explosion from '@/components/sections/technologies/explosion/Explosion';
 import useUfoExplosions from './hooks/useUfoExplosions';
 import actions from 'redux/actions';
-import { refsTypes } from '@/configuration/types';
+import { refsTypes } from '@/configuration/types_conf';
 import { useDispatch, useSelector } from 'react-redux';
 import { useRef, useEffect } from 'react';
 

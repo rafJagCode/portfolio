@@ -1,5 +1,5 @@
 import AsteroidAnimation from '../animations/AsteroidAnimation';
-import { refsTypes } from '@/configuration/types';
+import { refsTypes } from '@/configuration/types_conf';
 import { gameStates, compareGameState } from 'redux/game/gameStateMachine';
 import { useSelector, useDispatch } from 'react-redux';
 import { useEffect, useRef } from 'react';

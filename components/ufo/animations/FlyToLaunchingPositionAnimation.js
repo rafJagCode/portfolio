@@ -3,7 +3,7 @@ import calculateDistanceBetweenTwoPoints from '@/utils/helper_functions/getDista
 import moveElementTowardsCoordinates from '@/utils/element_functions/moveElementTowardsCoordinates';
 import getElementTopRightCornerCoordinatesRelativeToPage from '@/utils/element_functions/getElementTopRightCornerCoordinatesRelativeToPage';
 import Animation from 'Animation';
-import { animationsTypes } from '@/configuration/types';
+import { animationsTypes } from '@/configuration/types_conf';
 
 class FlyToLaunchingPosition extends Animation {
   earth = null;

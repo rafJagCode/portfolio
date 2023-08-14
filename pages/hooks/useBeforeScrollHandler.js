@@ -1,5 +1,5 @@
 import actions from 'redux/actions';
-import { animationsTypes } from '@/configuration/types';
+import { animationsTypes } from '@/configuration/types_conf';
 import { useDispatch, useSelector } from 'react-redux';
 
 const useBeforeScrollHandler = (engineAnimation, orbitingAnimation, scrollActions, updateState) => {

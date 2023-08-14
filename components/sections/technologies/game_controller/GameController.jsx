@@ -1,7 +1,7 @@
 import styles from './GameController.module.scss';
 import MenuButton from './menu_button/MenuButton';
 import Instructions from '../instructions/Instructions';
-import availableKeys from '@/configuration/available_keys';
+import availableKeys from '@/configuration/available_keys_conf';
 import useUfoSteering from './hooks/useUfoSteering';
 import { gameStates, gameActions, compareGameState } from 'redux/game/gameStateMachine';
 import actions from 'redux/actions';

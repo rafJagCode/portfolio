@@ -1,6 +1,6 @@
 import styles from './Laser.module.scss';
 import LaserAnimation from './LaserAnimation';
-import { refsTypes } from '@/configuration/types';
+import { refsTypes } from '@/configuration/types_conf';
 import { useSelector, useDispatch } from 'react-redux';
 import { useEffect, useState, useRef } from 'react';
 

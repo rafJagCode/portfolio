@@ -1,5 +1,5 @@
 import Animation from 'Animation';
-import { animationsTypes } from '@/configuration/types';
+import { animationsTypes } from '@/configuration/types_conf';
 import changeElementStyle from '@/utils/element_functions/changeElementStyle';
 import getElementCenterCoordinates from '@/utils/element_functions/getElementCenterCoordinates';
 import getElementBottomLeftCornerCoordinates from '@/utils/element_functions/getElementBottomLeftCornerCoordinates';

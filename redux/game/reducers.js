@@ -1,6 +1,9 @@
 import types from './types';
-import availableKeys from '@/configuration/available_keys';
+import startingAsteroids from '@/configuration/asteroids_setup_conf';
+import availableKeys from '@/configuration/available_keys_conf';
+import knownTechnologies from '@/configuration/technologies_conf';
 import { gameStates, getUpdatedGameState } from './gameStateMachine';
+import uuid from 'react-uuid';
 
 const GAME_STATE = gameStates.INITIAL_STATE;
 
@@ -8,6 +11,24 @@ const gameState = (state = GAME_STATE, action) => {
   switch (action.type) {
     case types.UPDATE_GAME_STATE: {
       return getUpdatedGameState(state, action.action);
+    }
+    default:
+      return state;
+  }
+};
+
+const ASTEROIDS = startingAsteroids;
+
+const asteroids = (state = ASTEROIDS, action) => {
+  switch (action.type) {
+    case types.ADD_ASTEROID: {
+      return [...state, action.asteroid];
+    }
+    case types.REMOVE_ASTEROID: {
+      return state.filter((asteroid) => asteroid.asteroidID !== action.asteroidID);
+    }
+    case types.CLEAR_ASTEROIDS: {
+      return ASTEROIDS.map((asteroid) => ({ ...asteroid, asteroidID: uuid() }));
     }
     default:
       return state;
@@ -23,6 +44,9 @@ const asteroidsHits = (state = ASTEROIDS_HITS, action) => {
         return { ...state, [action.asteroidID]: [action.hitpoint] };
       }
       return { ...state, [action.asteroidID]: [...state[action.asteroidID], action.hitpoint] };
+    }
+    case types.CLEAR_ASTEROIDS_HITS: {
+      return ASTEROIDS_HITS;
     }
     default:
       return state;
@@ -83,15 +107,15 @@ const ufoHits = (state = UFO_HITS, action) => {
   }
 };
 
-const TECHNOLOGIES = [
-  { name: 'git', unlocked: false },
-  { name: 'react', unlocked: false },
-];
+const TECHNOLOGIES = knownTechnologies.map((technology) => ({ name: technology, unlocked: false }));
 
 const technologies = (state = TECHNOLOGIES, action) => {
   switch (action.type) {
     case types.UPDATE_TECHNOLOGIES: {
       return state.map((technology) => (technology.name === action.technologyName ? { ...technology, unlocked: action.unlocked } : technology));
+    }
+    case types.CLEAR_TECHNOLOGIES: {
+      return TECHNOLOGIES;
     }
     default:
       return state;
@@ -100,6 +124,7 @@ const technologies = (state = TECHNOLOGIES, action) => {
 
 export default {
   gameState,
+  asteroids,
   asteroidsHits,
   keys,
   crosshairAngle,

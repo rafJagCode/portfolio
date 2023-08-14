@@ -1,4 +1,4 @@
-import { animationsTypes } from '@/configuration/types';
+import { animationsTypes } from '@/configuration/types_conf';
 import { gameStates, compareGameState } from 'redux/game/gameStateMachine';
 import { useSelector } from 'react-redux';
 import { useEffect } from 'react';

@@ -5,7 +5,7 @@ import ParticlesBackground from '@/components/particles_background/ParticlesBack
 import Sections from '@/components/sections/Sections';
 import Ufo from '@/components/ufo/Ufo';
 import { defaultTranslation } from 'translation/translations';
-import { animationsTypes } from '@/configuration/types';
+import { animationsTypes } from '@/configuration/types_conf';
 import useScrollMachineState from './hooks/useScrollMachineState';
 import useDelayedScroll from './hooks/useDelayedScroll';
 import useBeforeScrollHandler from './hooks/useBeforeScrollHandler';

@@ -1,5 +1,5 @@
 import styles from './ProjectLinks.module.scss';
-import links from '@/configuration/links';
+import links from '@/configuration/links_conf';
 import { ImGithub } from 'react-icons/im';
 import { BiLinkExternal } from 'react-icons/bi';
 

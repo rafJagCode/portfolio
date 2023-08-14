@@ -1,5 +1,5 @@
 import types from './types';
-import { refsTypes, animationsTypes } from '@/configuration/types';
+import { refsTypes, animationsTypes } from '@/configuration/types_conf';
 
 const GLOBAL_REFS = {
   [refsTypes.EARTH_REF]: null,

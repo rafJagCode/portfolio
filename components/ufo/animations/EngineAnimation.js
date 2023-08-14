@@ -1,6 +1,6 @@
 import Animation from 'Animation';
 import changeElementStyle from '@/utils/element_functions/changeElementStyle';
-import { animationsTypes } from '@/configuration/types';
+import { animationsTypes } from '@/configuration/types_conf';
 
 class EngineAnimation extends Animation {
   startTime = null;

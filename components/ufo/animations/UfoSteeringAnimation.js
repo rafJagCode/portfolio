@@ -1,6 +1,6 @@
 import Animation from 'Animation';
-import { animationsTypes } from '@/configuration/types';
-import availableKeys from '@/configuration/available_keys';
+import { animationsTypes } from '@/configuration/types_conf';
+import availableKeys from '@/configuration/available_keys_conf';
 import clamp from '@/utils/helper_functions/clamp';
 import getElementCenterCoordinates from '@/utils/element_functions/getElementCenterCoordinates';
 import changeElementStyle from '@/utils/element_functions/changeElementStyle';

@@ -1,6 +1,6 @@
 import styles from './LanguageController.module.scss';
 import actions from 'redux/actions';
-import { refsTypes } from '@/configuration/types';
+import { refsTypes } from '@/configuration/types_conf';
 import { useSelector, useDispatch } from 'react-redux';
 import { useRef, useEffect } from 'react';
 

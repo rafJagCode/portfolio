@@ -1,8 +1,8 @@
 import styles from './Sidebar.module.scss';
 import NavLink from '../navlink/NavLink';
-import navigationLinks from '@/configuration/navigation_links';
+import navigationLinks from '@/configuration/navigation_links_conf';
 import actions from 'redux/actions';
-import { refsTypes } from '@/configuration/types';
+import { refsTypes } from '@/configuration/types_conf';
 import { useSelector, useDispatch } from 'react-redux';
 import { useEffect, useRef, useCallback } from 'react';
 

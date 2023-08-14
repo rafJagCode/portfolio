@@ -1,5 +1,5 @@
 import Animation from 'Animation';
-import { animationsTypes } from '@/configuration/types';
+import { animationsTypes } from '@/configuration/types_conf';
 import getDistanceBetweenElementsCenters from '@/utils/element_functions/getDistanceBetweenElementsCenters';
 import moveElementTowardsAnotherElement from '@/utils/element_functions/moveElementTowardsAnotherElement';
 

@@ -1,4 +1,4 @@
-import images_collision_data from '@/configuration/images_collision_data';
+import images_collision_data from '@/configuration/images_collision_data_conf';
 import Asteroid from './AsteroidClass';
 import getRandomFromArray from '@/utils/helper_functions/getRandomFromArray';
 

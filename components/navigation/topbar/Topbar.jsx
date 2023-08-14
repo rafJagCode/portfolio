@@ -2,9 +2,9 @@ import styles from './Topbar.module.scss';
 import Hamburger from './hamburger/Hamburger';
 import LanguageController from './language_controller/LanguageController';
 import NavLink from '../navlink/NavLink';
-import navigationLinks from '@/configuration/navigation_links';
+import navigationLinks from '@/configuration/navigation_links_conf';
 import actions from 'redux/actions';
-import { refsTypes } from '@/configuration/types';
+import { refsTypes } from '@/configuration/types_conf';
 import { useRef, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 

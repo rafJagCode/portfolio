@@ -1,4 +1,4 @@
-import imagesCollisionData from '@/configuration/images_collision_data';
+import imagesCollisionData from '@/configuration/images_collision_data_conf';
 import changeElementStyle from '@/utils/element_functions/changeElementStyle';
 import getElementCenterCoordinates from '@/utils/element_functions/getElementCenterCoordinates';
 import getAngleBetweenTwoPoints from '@/utils/helper_functions/getAngleBetweenTwoPoints';

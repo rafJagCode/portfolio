@@ -1,4 +1,4 @@
-import { animationsTypes } from '@/configuration/types';
+import { animationsTypes } from '@/configuration/types_conf';
 import getElementCenterCoordinates from '@/utils/element_functions/getElementCenterCoordinates';
 import moveElementTowardsAnotherElement from '@/utils/element_functions/moveElementTowardsAnotherElement';
 import calculateDistanceBetweenTwoPoints from '@/utils/helper_functions/getDistanceBetweenTwoPoints';

@@ -1,6 +1,6 @@
 import styles from './Crosshair.module.scss';
 import CrosshairAnimation from './CrosshairAnimation';
-import { refsTypes } from '@/configuration/types';
+import { refsTypes } from '@/configuration/types_conf';
 import { useSelector, useDispatch } from 'react-redux';
 import { useEffect, useRef, useState } from 'react';
 

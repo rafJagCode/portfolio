@@ -1,5 +1,5 @@
 import styles from './HomeImage.module.scss';
-import { refsTypes, animationsTypes } from '@/configuration/types';
+import { refsTypes, animationsTypes } from '@/configuration/types_conf';
 import changeElementStyle from '@/utils/element_functions/changeElementStyle';
 import getElementCenterCoordinates from '@/utils/element_functions/getElementCenterCoordinates';
 import actions from 'redux/actions';

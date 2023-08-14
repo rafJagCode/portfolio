@@ -1,5 +1,5 @@
 import PutCowDownAnimation from '@/components/sections/projects/cow/animations/PutCowDownAnimation';
-import { animationsTypes } from '@/configuration/types';
+import { animationsTypes } from '@/configuration/types_conf';
 import { useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 

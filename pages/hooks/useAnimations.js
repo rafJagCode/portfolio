@@ -7,7 +7,7 @@ import LiftCowUpAnimation from '@/components/sections/projects/cow/animations/Li
 import BeamAnimation from '@/components/ufo/animations/BeamAnimation';
 import FlyToLaunchingPositionAnimation from '@/components/ufo/animations/FlyToLaunchingPositionAnimation';
 import UfoSteeringAnimation from '@/components/ufo/animations/UfoSteeringAnimation';
-import { refsTypes } from '@/configuration/types';
+import { refsTypes } from '@/configuration/types_conf';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 
