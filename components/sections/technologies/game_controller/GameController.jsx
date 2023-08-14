@@ -1,17 +1,16 @@
 import styles from './GameController.module.scss';
-import MenuButton from './menu_button/MenuButton';
 import Instructions from '../instructions/Instructions';
+import GameMenu from './game_menu/GameMenu';
 import availableKeys from '@/configuration/available_keys_conf';
 import useUfoSteering from './hooks/useUfoSteering';
-import { gameStates, gameActions, compareGameState } from 'redux/game/gameStateMachine';
+import { gameStates, compareGameState } from 'redux/game/gameStateMachine';
 import actions from 'redux/actions';
 import { useSelector, useDispatch } from 'react-redux';
-import { useEffect, useCallback, useState } from 'react';
+import { useEffect, useCallback } from 'react';
 
 export default function GameController() {
   const dispatch = useDispatch();
   const gameState = useSelector((state) => state.gameState);
-  const [menu, setMenu] = useState([]);
   useUfoSteering();
 
   const handleKeyStateChange = useCallback((e) => {
@@ -42,20 +41,10 @@ export default function GameController() {
     removeEventListener('keyup', handleKeyStateChange);
   }, [gameState]);
 
-  useEffect(() => {
-    setMenu([
-      { text: 'START GAME', action: gameActions.START_GAME, active: compareGameState(gameState, gameStates.INITIAL_STATE) || compareGameState(gameState, gameStates.GAME_PAUSED) || compareGameState(gameState, gameStates.GAME_ENDED) },
-      { text: 'PAUSE GAME', action: gameActions.PAUSE_GAME, active: compareGameState(gameState, gameStates.PLAYING) },
-      { text: 'END GAME', action: gameActions.END_GAME, active: !compareGameState(gameState, gameStates.GAME_ENDED) && !compareGameState(gameState, gameStates.INITIAL_STATE) },
-    ]);
-  }, [gameState]);
-
   return (
     <div className={styles.container}>
-      {!compareGameState(gameState, gameStates.PLAYING) ? <Instructions /> : null}
-      {menu.map((button) => {
-        return button.active ? <MenuButton key={button.text} text={button.text} action={button.action} /> : null;
-      })}
+      <Instructions />
+      <GameMenu />
     </div>
   );
 }

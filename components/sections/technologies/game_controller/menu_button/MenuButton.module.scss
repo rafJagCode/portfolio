@@ -5,6 +5,15 @@
   padding: 0.5rem 1rem;
   margin: 1rem 1rem;
   cursor: pointer;
+  transition: color 300ms;
+  &[data-is-active='false'] {
+    color: rgb(155, 155, 155);
+    transition: color 300ms;
+    pointer-events: none;
+    &:before {
+      background-color: rgb(155, 155, 155);
+    }
+  }
   &:before {
     content: '';
     position: absolute;
