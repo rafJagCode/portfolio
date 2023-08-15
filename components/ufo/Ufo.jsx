@@ -1,4 +1,5 @@
 import styles from './Ufo.module.scss';
+import ReloadingBar from './reloading_bar/ReloadingBar';
 import Explosion from '@/components/sections/technologies/explosion/Explosion';
 import useUfoExplosions from './hooks/useUfoExplosions';
 import actions from 'redux/actions';
@@ -23,6 +24,7 @@ const Ufo = () => {
         <img className={styles.image} src='/static/images/ufo.svg' alt='ufo' />
         <img id='engine' className={styles.engine} ref={engineRef} src='/static/images/engine.svg' alt='engine' />
         <img className={styles.beam} ref={beamRef} src='/static/images/ufo-beam.svg' alt='ufo-beam' />
+        <ReloadingBar />
       </div>
       {explosions.map((explosion) => {
         return <Explosion key={explosion.explosionID} explosion={explosion} removeExplosion={removeExplosion}></Explosion>;
