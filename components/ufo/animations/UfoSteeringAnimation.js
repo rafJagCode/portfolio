@@ -2,13 +2,17 @@ import Animation from 'Animation';
 import { animationsTypes } from '@/configuration/types_conf';
 import availableKeys from '@/configuration/available_keys_conf';
 import clamp from '@/utils/helper_functions/clamp';
-import getElementCenterCoordinates from '@/utils/element_functions/getElementCenterCoordinates';
 import changeElementStyle from '@/utils/element_functions/changeElementStyle';
 
 class UfoSteeringAnimation extends Animation {
   keys = availableKeys.reduce((a, v) => ({ ...a, [v]: { pressed: false } }), {});
-  speed = 5;
-  move = null;
+  speed = {
+    x: 0,
+    y: 0,
+  };
+  slowdown = 3 / 60;
+  acceleration = 10 / 60;
+  maxSpeed = 10;
 
   constructor(dispatch = null, { ufoRef }) {
     super(animationsTypes.UFO_STEERING_ANIMATION, dispatch);
@@ -24,45 +28,57 @@ class UfoSteeringAnimation extends Animation {
   }
 
   reset() {
+    this.speed.x = 0;
+    this.speed.y = 0;
     this.requestAnimationID = null;
   }
 
   step() {
-    this.checkMove();
+    this.setSpeed();
+    this.handleSlowdown();
     this.limitMoveToScreenBoundries();
-    if (!this.move.x && !this.move.y) return (this.requestAnimationID = requestAnimationFrame(this.step));
     this.moveUfo();
     this.requestAnimationID = requestAnimationFrame(this.step);
   }
 
-  checkMove() {
-    const move = { x: 0, y: 0 };
-    if (this.keys['w'].pressed) move.y += -this.speed;
-    if (this.keys['a'].pressed) move.x += -this.speed;
-    if (this.keys['s'].pressed) move.y += this.speed;
-    if (this.keys['d'].pressed) move.x += this.speed;
-    this.move = move;
+  setSpeed() {
+    if (this.keys['w'].pressed) this.speed.y -= this.acceleration;
+    if (this.keys['a'].pressed) this.speed.x -= this.acceleration;
+    if (this.keys['s'].pressed) this.speed.y += this.acceleration;
+    if (this.keys['d'].pressed) this.speed.x += this.acceleration;
+    this.speed.x = clamp(this.speed.x, -this.maxSpeed, this.maxSpeed);
+    this.speed.y = clamp(this.speed.y, -this.maxSpeed, this.maxSpeed);
+  }
+
+  handleSlowdown() {
+    if (!this.keys['w'].pressed && this.speed.y < 0) this.speed.y += Math.min(this.slowdown, -this.speed.y);
+    if (!this.keys['a'].pressed && this.speed.x < 0) this.speed.x += Math.min(this.slowdown, -this.speed.x);
+    if (!this.keys['s'].pressed && this.speed.y > 0) this.speed.y += Math.max(-this.slowdown, -this.speed.y);
+    if (!this.keys['d'].pressed && this.speed.x > 0) this.speed.x += Math.max(-this.slowdown, -this.speed.x);
   }
 
   limitMoveToScreenBoundries() {
     const { minX, maxX, minY, maxY } = this.getMoveLimits();
-    this.move.x = Math.round(clamp(this.move.x, minX, maxX));
-    this.move.y = Math.round(clamp(this.move.y, minY, maxY));
+    this.speed.x = clamp(this.speed.x, minX, maxX) === this.speed.x ? this.speed.x : -this.speed.x;
+    this.speed.y = clamp(this.speed.y, minY, maxY) === this.speed.y ? this.speed.y : -this.speed.y;
   }
 
   getMoveLimits() {
     const { left, right, top, bottom } = ufo.getBoundingClientRect();
+    const windowWidth = window.innerWidth || document.documentElement.clientWidth;
+    const windowHeight = window.innerHeight || document.documentElement.clientHeight;
     return {
       minX: -left,
-      maxX: window.innerWidth - right,
+      maxX: windowWidth - right,
       minY: -top,
-      maxY: window.innerHeight - bottom,
+      maxY: windowHeight - bottom,
     };
   }
 
   moveUfo() {
-    const ufoCenter = getElementCenterCoordinates(this.ufo);
-    changeElementStyle(this.ufo, 'centerPosition', { x: ufoCenter.x + this.move.x, y: ufoCenter.y + this.move.y });
+    const ufoCenterX = this.ufo.offsetLeft + this.ufo.offsetWidth / 2;
+    const ufoCenterY = this.ufo.offsetTop + this.ufo.offsetHeight / 2;
+    changeElementStyle(this.ufo, 'centerPosition', { x: ufoCenterX + this.speed.x, y: ufoCenterY + this.speed.y });
   }
 
   setKeys(keys) {

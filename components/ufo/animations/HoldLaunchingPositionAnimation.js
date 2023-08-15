@@ -18,6 +18,7 @@ class HoldLaunchingPositionAnimation extends Animation {
   }
 
   stop() {
+    console.log('finished');
     this.resolve();
   }
 

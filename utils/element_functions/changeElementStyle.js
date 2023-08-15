@@ -1,8 +1,14 @@
 const changeElementStyle = (element, property, value) => {
   switch (property) {
     case 'centerPosition': {
-      element.style.left = `${value.x - element.offsetWidth / 2}px`;
-      element.style.top = `${value.y - element.offsetHeight / 2}px`;
+      const windowWidth = window.innerWidth || document.documentElement.clientWidth;
+      const windowHeight = window.innerHeight || document.documentElement.clientHeight;
+      const x = value.x - element.offsetWidth / 2;
+      const y = value.y - element.offsetHeight / 2;
+      const xInProcents = (x / windowWidth) * 100;
+      const yInProcents = (y / windowHeight) * 100;
+      element.style.left = `${xInProcents}%`;
+      element.style.top = `${yInProcents}%`;
       return;
     }
     case 'scale': {
