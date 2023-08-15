@@ -14,6 +14,8 @@ const addUfoHit = (hitpoint) => ({ type: types.ADD_UFO_HIT, hitpoint });
 const clearUfoHits = () => ({ type: types.CLEAR_UFO_HITS });
 const updateTechnologies = (technologyName, unlocked) => ({ type: types.UPDATE_TECHNOLOGIES, technologyName, unlocked });
 const clearTechnologies = () => ({ type: types.CLEAR_TECHNOLOGIES });
+const decreaseAmmunition = () => ({ type: types.DECREASE_AMMUNITION });
+const reloadAmmunition = () => ({ type: types.RELOAD_AMMUNITION });
 
 export default {
   updateGameState,
@@ -30,4 +32,6 @@ export default {
   clearUfoHits,
   updateTechnologies,
   clearTechnologies,
+  decreaseAmmunition,
+  reloadAmmunition,
 };

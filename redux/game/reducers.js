@@ -122,6 +122,21 @@ const technologies = (state = TECHNOLOGIES, action) => {
   }
 };
 
+const AMMUNITION = 5;
+
+const ammunition = (state = AMMUNITION, action) => {
+  switch (action.type) {
+    case types.DECREASE_AMMUNITION: {
+      return state - 1;
+    }
+    case types.RELOAD_AMMUNITION: {
+      return AMMUNITION;
+    }
+    default:
+      return state;
+  }
+};
+
 export default {
   gameState,
   asteroids,
@@ -131,4 +146,5 @@ export default {
   explosions,
   ufoHits,
   technologies,
+  ammunition,
 };

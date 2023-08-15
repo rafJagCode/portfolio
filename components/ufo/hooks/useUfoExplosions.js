@@ -1,7 +1,9 @@
 import { UfoDamage } from '@/components/sections/technologies/explosion/ExplosionTypes';
+import { useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 
-const useUfoExplosions = (ufoHits) => {
+const useUfoExplosions = () => {
+  const ufoHits = useSelector((state) => state.ufoHits);
   const [explosions, setExplosions] = useState([]);
 
   const removeExplosion = (explosionID) => {
