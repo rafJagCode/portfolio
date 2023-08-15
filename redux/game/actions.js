@@ -6,7 +6,7 @@ const removeAsteroid = (asteroidID) => ({ type: types.REMOVE_ASTEROID, asteroidI
 const clearAsteroids = () => ({ type: types.CLEAR_ASTEROIDS });
 const addAsteroidHit = (asteroidID, hitpoint) => ({ type: types.ADD_ASTEROID_HIT, asteroidID, hitpoint });
 const clearAsteroidsHits = () => ({ type: types.CLEAR_ASTEROIDS_HITS });
-const updateKeyState = (key) => ({ type: types.UPDATE_KEY_STATE, key });
+const updateKeyState = (key, pressed) => ({ type: types.UPDATE_KEY_STATE, key, pressed });
 const setCorsshairAngle = (angle) => ({ type: types.SET_CROSSHAIR_ANGLE, angle });
 const addExplosion = (explosion) => ({ type: types.ADD_EXPLOSION, explosion });
 const removeExplosion = (explosionID) => ({ type: types.REMOVE_EXPLOSION, explosionID });

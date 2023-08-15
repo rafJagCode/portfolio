@@ -16,7 +16,8 @@ export default function GameController() {
   const handleKeyStateChange = useCallback((e) => {
     if (!availableKeys.includes(e.key)) return;
     if (e.repeat) return;
-    dispatch(actions.updateKeyState(e.key));
+    const pressed = e.type === 'keydown';
+    dispatch(actions.updateKeyState(e.key, pressed));
   }, []);
 
   useEffect(() => {

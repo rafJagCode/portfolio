@@ -58,7 +58,7 @@ const KEYS = availableKeys.reduce((a, v) => ({ ...a, [v]: { pressed: false } }),
 const keys = (state = KEYS, action) => {
   switch (action.type) {
     case types.UPDATE_KEY_STATE: {
-      return { ...state, [action.key]: { ...state[action.key], pressed: !state[action.key].pressed } };
+      return { ...state, [action.key]: { ...state[action.key], pressed: action.pressed } };
     }
     default:
       return state;
