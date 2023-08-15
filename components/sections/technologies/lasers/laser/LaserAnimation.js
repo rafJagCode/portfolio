@@ -70,6 +70,7 @@ class LaserAnimation {
     const ufoCenter = getElementCenterCoordinates(this.ufo);
     changeElementStyle(this.laser, 'centerPosition', ufoCenter);
     changeElementStyle(this.laser, 'rotate', Math.PI - this.angle);
+    changeElementStyle(this.laser, 'visibility', true);
   }
 
   setDirectionalSpeedComponents() {
