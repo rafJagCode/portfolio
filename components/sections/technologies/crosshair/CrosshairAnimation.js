@@ -7,7 +7,10 @@ class CrosshairAnimation {
   x = -100;
   y = 0;
   angle = Math.PI;
-  angleVelocity = Math.PI / 60;
+  angleSpeed = 0;
+  angleSpeedChange = Math.PI / (10 * 60);
+  maxAngleSpeed = Math.PI / 30;
+  minAngleSpeed = -Math.PI / 30;
   isRightArrowPressed = false;
   isLeftArrowPressed = false;
   ufo;
@@ -36,26 +39,28 @@ class CrosshairAnimation {
   step() {
     if (this.isLeftArrowPressed) this.handleLeftArrow();
     if (this.isRightArrowPressed) this.handleRightArrow();
+    if (!this.isLeftArrowPressed && !this.isRightArrowPressed) this.angleSpeed = 0;
     this.moveCrosshair();
     this.dispatch(actions.setCorsshairAngle(this.angle));
     this.requestAnimationID = requestAnimationFrame(this.step);
   }
 
   handleRightArrow() {
-    this.angle -= this.angleVelocity;
+    this.angleSpeed -= this.angleSpeedChange;
+    if (this.angleSpeed < this.minAngleSpeed) this.angleSpeed = this.minAngleSpeed;
     if (this.angle <= 0) this.angle = 2 * Math.PI;
-    this.x = this.r * Math.cos(this.angle);
-    this.y = this.r * -Math.sin(this.angle);
   }
 
   handleLeftArrow() {
-    this.angle += this.angleVelocity;
+    this.angleSpeed += this.angleSpeedChange;
+    if (this.angleSpeed > this.maxAngleSpeed) this.angleSpeed = this.maxAngleSpeed;
     if (this.angle >= 2 * Math.PI) this.angle = 0;
-    this.x = this.r * Math.cos(this.angle);
-    this.y = this.r * -Math.sin(this.angle);
   }
 
   moveCrosshair() {
+    this.angle += this.angleSpeed;
+    this.x = this.r * Math.cos(this.angle);
+    this.y = this.r * -Math.sin(this.angle);
     const ufoCenter = getElementCenterCoordinates(this.ufo);
     changeElementStyle(this.crosshair, 'centerPosition', { x: ufoCenter.x + this.x, y: ufoCenter.y + this.y });
   }
