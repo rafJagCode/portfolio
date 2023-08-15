@@ -11,7 +11,7 @@ class BeamAnimation extends Animation {
   }
 
   start() {
-    changeElementStyle(this.beam, 'opacity', 1);
+    changeElementStyle(this.beam, 'visibility', true);
     return requestAnimationFrame(this.step);
   }
 
@@ -21,7 +21,7 @@ class BeamAnimation extends Animation {
 
   reset() {
     this.requestAnimationID = null;
-    changeElementStyle(this.beam, 'opacity', 0);
+    changeElementStyle(this.beam, 'visibility', false);
   }
 
   step() {
