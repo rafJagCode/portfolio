@@ -10,7 +10,7 @@ export default function Projects() {
     <div className={styles.container}>
       <Terminal />
       <div className={styles.island_container}>
-        <img className={styles.island} src='/static/images/floating-island.png' />
+        <img className={styles.island} src='/static/images/floating-island.svg' />
         <div className={styles.cows}>
           <Cow imageName='cow1' />
           <Cow imageName='cow2' />

@@ -26,5 +26,5 @@ export default function HomeImage() {
     orbitingAnimation.startAnimation();
   }, [orbitingAnimation]);
 
-  return <img id='earth' ref={earthRef} className={styles.earth_image} src='/static/images/planet-earth.png' alt='planet-earth' />;
+  return <img id='earth' ref={earthRef} className={styles.earth_image} src='/static/images/planet-earth.svg' alt='planet-earth' />;
 }

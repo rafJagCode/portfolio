@@ -21,7 +21,7 @@ export default function Cow({ imageName }) {
     <div className={styles.container}>
       <div id={`ufo_placeholder_${imageName}`} className={styles.ufo_placeholder + ' ufo_placeholder'}></div>
       <button id={`button_${imageName}`} className={styles.button} onClick={onClick}>
-        <img id={`image_${imageName}`} className={styles.image} src={`/static/images/${imageName}.png`} alt={`image ${imageName}`}></img>
+        <img id={`image_${imageName}`} className={styles.image} src={`/static/images/${imageName}.svg`} alt={`image ${imageName}`}></img>
       </button>
     </div>
   );

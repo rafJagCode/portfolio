@@ -16,7 +16,7 @@
   //   display: grid;
   //   grid-template-rows: [start] 25% [cow_row] 75% [end];
   //   grid-template-columns: [start] 20% [cow1_column_start] 15% [cow1_column_end] 7.5% [cow2_column_start] 15% [cow2_column_end] 7.5% [cow3_column_start] 15%[cow3_column_end] 20% [end];
-  aspect-ratio: 792/ 301;
+  aspect-ratio: 800/600;
 }
 .island {
   //   display: block;
@@ -31,8 +31,8 @@
   position: absolute;
   display: flex;
   width: 100%;
-  height: 100%;
-  top: -15%;
+  height: 72%;
+  bottom: 0;
   left: 0;
   justify-content: space-around;
 }
