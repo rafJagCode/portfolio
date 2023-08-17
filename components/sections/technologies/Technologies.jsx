@@ -12,17 +12,20 @@ import Technology from './technology/Technology';
 import useAsteroids from './hooks/useAsteroids';
 import useExplosions from './hooks/useExplosions';
 import useTechnologies from './hooks/useTechnologies';
+import { gameStates, compareGameState } from 'redux/game/gameStateMachine';
+import { useSelector } from 'react-redux';
 
 export default function Technologies() {
   const [asteroids, addAsteroid, removeAsteroid] = useAsteroids();
   const [explosions, removeExplosion] = useExplosions();
   const [technologies, addTechnology, removeTechnology] = useTechnologies();
+  const gameState = useSelector((state) => state.gameState);
 
   return (
     <div className={styles.container}>
       <GameResult />
-      <Crosshair />
-      <UfoHealthbar />
+      {compareGameState(gameState, gameStates.PLAYING) ? <Crosshair /> : null}
+      {compareGameState(gameState, gameStates.PLAYING) ? <UfoHealthbar /> : null}
       <AmmunitionBar />
       <TechnologiesBar />
       <GameController />

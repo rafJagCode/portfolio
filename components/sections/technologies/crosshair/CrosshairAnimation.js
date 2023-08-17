@@ -37,11 +37,12 @@ class CrosshairAnimation {
   }
 
   step() {
+    if (!this.isLeftArrowPressed && !this.isRightArrowPressed) this.angleSpeed = 0;
     if (this.isLeftArrowPressed) this.handleLeftArrow();
     if (this.isRightArrowPressed) this.handleRightArrow();
-    if (!this.isLeftArrowPressed && !this.isRightArrowPressed) this.angleSpeed = 0;
+    this.changeAngle();
     this.moveCrosshair();
-    this.dispatch(actions.setCorsshairAngle(this.angle));
+
     this.requestAnimationID = requestAnimationFrame(this.step);
   }
 
@@ -57,8 +58,12 @@ class CrosshairAnimation {
     if (this.angle >= 2 * Math.PI) this.angle = 0;
   }
 
-  moveCrosshair() {
+  changeAngle() {
     this.angle += this.angleSpeed;
+    if (!this.angleSpeed) this.dispatch(actions.setCorsshairAngle(this.angle));
+  }
+
+  moveCrosshair() {
     this.x = this.r * Math.cos(this.angle);
     this.y = this.r * -Math.sin(this.angle);
     const ufoCenter = getElementCenterCoordinates(this.ufo);

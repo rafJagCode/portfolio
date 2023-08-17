@@ -6,7 +6,7 @@ import { useState, useEffect } from 'react';
 const useUfoLives = () => {
   const startingLives = 5;
   const dispatch = useDispatch();
-  const [currentLives, setCurrentLives] = useState();
+  const [currentLives, setCurrentLives] = useState([]);
   const ufoHits = useSelector((state) => state.ufoHits);
   const gameState = useSelector((state) => state.gameState);
   const life = (index, lifeState) => {
