@@ -37,6 +37,7 @@ export default function GameController() {
       dispatch(actions.clearAsteroidsHits());
       dispatch(actions.clearUfoHits());
       dispatch(actions.clearTechnologies());
+      dispatch(actions.reloadAmmunition());
     }
     removeEventListener('keydown', handleKeyStateChange);
     removeEventListener('keyup', handleKeyStateChange);

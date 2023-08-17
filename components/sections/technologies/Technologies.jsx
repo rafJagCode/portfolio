@@ -26,7 +26,7 @@ export default function Technologies() {
       <GameResult />
       {compareGameState(gameState, gameStates.PLAYING) ? <Crosshair /> : null}
       {compareGameState(gameState, gameStates.PLAYING) ? <UfoHealthbar /> : null}
-      <AmmunitionBar />
+      {compareGameState(gameState, gameStates.PLAYING) ? <AmmunitionBar /> : null}
       <TechnologiesBar />
       <GameController />
       <Lasers />

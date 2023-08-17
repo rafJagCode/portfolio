@@ -1,5 +1,4 @@
 import styles from './AmmunitionBar.module.scss';
-import { gameStates, compareGameState } from 'redux/game/gameStateMachine';
 import actions from 'redux/actions';
 import { useSelector, useDispatch } from 'react-redux';
 import { useEffect, useRef } from 'react';
@@ -9,7 +8,6 @@ export default function AmmunitionBar() {
   const reloadTime = 1000;
   const dispatch = useDispatch();
   const ammunition = useSelector((state) => state.ammunition);
-  const gameState = useSelector((state) => state.gameState);
   const timoutID = useRef(null);
 
   useEffect(() => {
@@ -18,8 +16,6 @@ export default function AmmunitionBar() {
     }
     return () => clearTimeout(timoutID);
   }, [ammunition]);
-
-  if (!compareGameState(gameState, gameStates.PLAYING)) return null;
 
   return (
     <div className={styles.container}>
