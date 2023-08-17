@@ -1,7 +1,8 @@
 import { animationsTypes } from '@/configuration/types_conf';
 import { gameStates, compareGameState } from 'redux/game/gameStateMachine';
 import { useSelector } from 'react-redux';
-import { useEffect, useRef } from 'react';
+import { useEffect } from 'react';
+import setPointerEventsState from '@/utils/helper_functions/setPointerEventsState';
 
 const useUfoSteering = () => {
   const gameState = useSelector((state) => state.gameState);
@@ -9,10 +10,8 @@ const useUfoSteering = () => {
   const flyToLaunchingPositionAnimation = useSelector((state) => state.animations[animationsTypes.FLY_TO_LAUNCHING_POSITION_ANIMATION]);
   const ufoSteeringAnimation = useSelector((state) => state.animations[animationsTypes.UFO_STEERING_ANIMATION]);
   const keys = useSelector((state) => state.keys);
-  const ufoInPostitionPromise = useRef(null);
 
-  const enableUfoSteering = async () => {
-    await ufoInPostitionPromise.current;
+  const enableUfoSteering = () => {
     holdLaunchingPositionAnimation.stopAnimation();
     ufoSteeringAnimation.startAnimation();
   };
@@ -22,14 +21,16 @@ const useUfoSteering = () => {
   };
 
   const flyToLaunchingPosition = async () => {
+    setPointerEventsState(false);
     await flyToLaunchingPositionAnimation.startAnimation();
     holdLaunchingPositionAnimation.startAnimation();
+    setPointerEventsState(true);
     return;
   };
 
   useEffect(() => {
     if (!holdLaunchingPositionAnimation || !ufoSteeringAnimation || !flyToLaunchingPositionAnimation) return;
-    if (compareGameState(gameState, gameStates.GAME_ENDED)) ufoInPostitionPromise.current = flyToLaunchingPosition();
+    if (compareGameState(gameState, gameStates.GAME_ENDED)) flyToLaunchingPosition();
     if (compareGameState(gameState, gameStates.PLAYING)) enableUfoSteering();
     else disableUfoSteering();
   }, [gameState, holdLaunchingPositionAnimation, ufoSteeringAnimation, flyToLaunchingPositionAnimation]);
