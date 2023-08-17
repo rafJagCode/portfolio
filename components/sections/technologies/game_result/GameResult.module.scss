@@ -1,15 +1,9 @@
-.container {
+.image {
+  width: 30rem;
+  aspect-ratio: 600/250;
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  font-family: 'Fruktur', cursive;
-  font-size: 4rem;
   z-index: 3;
-  &[data-game-state='GAME_LOST'] {
-    color: var(--theme-accent);
-  }
-  &[data-game-state='GAME_WON'] {
-    color: #00ff00;
-  }
 }
