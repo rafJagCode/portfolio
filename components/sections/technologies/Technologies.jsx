@@ -1,5 +1,4 @@
 import styles from './Technologies.module.scss';
-import GameResult from './game_result/GameResult';
 import Crosshair from './crosshair/Crosshair';
 import UfoHealthbar from './ufo_healthbar/UfoHealthbar';
 import AmmunitionBar from './ammunition_bar/AmmunitionBar';
@@ -23,7 +22,6 @@ export default function Technologies() {
 
   return (
     <div className={styles.container}>
-      <GameResult />
       {compareGameState(gameState, gameStates.PLAYING) ? <Crosshair /> : null}
       {compareGameState(gameState, gameStates.PLAYING) ? <UfoHealthbar /> : null}
       {compareGameState(gameState, gameStates.PLAYING) ? <AmmunitionBar /> : null}

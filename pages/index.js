@@ -1,9 +1,11 @@
 import styles from './App.module.scss';
+import setPointerEventsState from '@/utils/helper_functions/setPointerEventsState';
 import Sidebar from '@/components/navigation/sidebar/Sidebar';
 import Topbar from '@/components/navigation/topbar/Topbar';
 import ParticlesBackground from '@/components/particles_background/ParticlesBackground';
 import Sections from '@/components/sections/Sections';
 import Ufo from '@/components/ufo/Ufo';
+import GameResult from '@/components/sections/technologies/game_result/GameResult';
 import { defaultTranslation } from 'translation/translations';
 import { animationsTypes } from '@/configuration/types_conf';
 import useScrollMachineState from './hooks/useScrollMachineState';
@@ -14,7 +16,6 @@ import ReactFullpage from '@fullpage/react-fullpage';
 import actions from 'redux/actions';
 import { useSelector, useDispatch } from 'react-redux';
 import { useEffect } from 'react';
-import setPointerEventsState from '@/utils/helper_functions/setPointerEventsState';
 
 export default function App() {
   useAnimations();
@@ -81,6 +82,7 @@ export default function App() {
         />
         <ParticlesBackground />
         <Ufo />
+        <GameResult />
       </main>
     </div>
   );

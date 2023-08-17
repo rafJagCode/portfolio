@@ -5,6 +5,7 @@
   transform: translate(-50%, -50%);
   font-family: 'Fruktur', cursive;
   font-size: 4rem;
+  z-index: 3;
   &[data-game-state='GAME_LOST'] {
     color: var(--theme-accent);
   }
