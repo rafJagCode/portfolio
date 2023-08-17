@@ -1,7 +1,6 @@
 import types from './types';
 
 const TERMINAL = {
-  directory: null,
   queue: [],
   display: [],
 };
@@ -9,8 +8,7 @@ const TERMINAL = {
 const terminal = (state = TERMINAL, action) => {
   switch (action.type) {
     case types.QUEUE_COMMAND: {
-      const queue = [...state.queue, action.command];
-      return { ...state, queue: queue };
+      return { ...state, queue: [...state.queue, action.command] };
     }
     case types.REMOVE_COMMAND_FROM_QUEUE: {
       const queue = state.queue.filter((command) => command !== action.command);
@@ -21,11 +19,7 @@ const terminal = (state = TERMINAL, action) => {
       return { ...state, display: display };
     }
     case types.CLEAR_TERMINAL: {
-      if (action.clearOnlyDisplay) return { directory: state.directory, queue: state.queue, display: [] };
-      return { ...TERMINAL };
-    }
-    case types.CHANGE_DIRECTORY: {
-      return { ...state, directory: action.directory };
+      return TERMINAL;
     }
     default:
       return state;

@@ -7,7 +7,6 @@ import { useEffect, useRef, useState } from 'react';
 
 export default function TerminalText() {
   const commands = useSelector((state) => state.terminal.display);
-  const directory = useSelector((state) => state.terminal.directory);
   const terminalTextRef = useRef();
   const [scrollHeight, setScrollHeight] = useState(null);
   const [isTerminalBusy, setIsTerminalBusy] = useState(false);
@@ -29,9 +28,9 @@ export default function TerminalText() {
 
   return (
     <div className={styles.container} id='terminal__text' ref={terminalTextRef}>
-      <StartingLine directory={directory} />
+      <StartingLine />
       {commands.map((command, index) => {
-        return <Command command={command.text} resolve={command.resolve} print={command.print} directory={command.directory} setIsTerminalBusy={setIsTerminalBusy} key={command + index} />;
+        return <Command command={command} setIsTerminalBusy={setIsTerminalBusy} key={command + index} />;
       })}
       <Caret shouldBlink={!isTerminalBusy} />
     </div>

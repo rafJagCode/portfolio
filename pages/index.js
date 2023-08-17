@@ -14,6 +14,7 @@ import ReactFullpage from '@fullpage/react-fullpage';
 import actions from 'redux/actions';
 import { useSelector, useDispatch } from 'react-redux';
 import { useEffect } from 'react';
+import setPointerEventsState from '@/utils/helper_functions/setPointerEventsState';
 
 export default function App() {
   useAnimations();
@@ -37,6 +38,7 @@ export default function App() {
   }, [orbitingAnimation]);
 
   const onLeave = (origin, destination) => {
+    setPointerEventsState(false);
     if (compareState(scrollStates.ORBITING_ANIMATION_NOT_READY)) return repeatScrollWhenAnimationReady(destination);
     if (compareState(scrollStates.SCROLL_DELAYED)) return false;
     if (compareState(scrollStates.SCROLL_ALLOWED)) return true;
@@ -54,7 +56,8 @@ export default function App() {
     engineAnimation.stopAnimation();
     if (destination.anchor !== '#home') holdLaunchingPositionAnimation.startAnimation();
     if (destination.anchor === '#home') orbitingAnimation.startAnimation();
-    if (destination.anchor === '#projects') dispatch(actions.queueCommand('COMMAND_CAT_INSTRUCTION', null, 'PRINT_INSTRUCTION'));
+    if (destination.anchor === '#projects') dispatch(actions.queueCommand('COMMAND_CAT_INSTRUCTION', 'PRINT_INSTRUCTION'));
+    setPointerEventsState(true);
   };
 
   return (

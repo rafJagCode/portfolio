@@ -5,7 +5,7 @@ class TypingAnimation {
   #textToType;
   #typed;
   #resolve;
-  #typingSpeed = 0.02;
+  #typingSpeed = 0.1;
 
   constructor() {
     this.reset();

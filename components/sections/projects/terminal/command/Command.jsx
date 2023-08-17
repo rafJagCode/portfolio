@@ -4,38 +4,51 @@ import TypingAnimation from '../animations/TypingAnimation';
 import useTranslation from '@/translation/useTranslation';
 import { useState, useEffect } from 'react';
 
-export default function Command({ command, resolve, print, directory, setIsTerminalBusy }) {
+export default function Command({ command, setIsTerminalBusy }) {
   const { t } = useTranslation();
   const [typed, setTyped] = useState('');
   const [isTypingFinished, setIsTypingFinished] = useState(false);
 
   useEffect(() => {
-    let isMounted = true;
+    // let isMounted = true;
     setIsTerminalBusy(true);
     const typingAnimation = new TypingAnimation();
+
     typingAnimation
-      .setTextToType(t(command))
+      .setTextToType(t(command.text))
       .type(setTyped)
       .then(() => {
-        resolve();
-        if (isMounted) setIsTypingFinished(true);
+        command.resolve();
+        // if (isMounted) setIsTypingFinished(true);
+        setIsTypingFinished(true);
         setIsTerminalBusy(false);
       });
+
     return () => {
-      isMounted = false;
+      //   isMounted = false;
       typingAnimation.stop();
       setIsTerminalBusy(false);
     };
   }, []);
 
+  const getCommandResult = () => {
+    if (!isTypingFinished) return null;
+    if (command.text === 'clear') return null;
+    return (
+      <>
+        <br></br>
+        {t(command.print)}
+        {!command.project ? null : <ProjectLinks project={command.project} />}
+        <br></br>
+        <StartingLine />
+      </>
+    );
+  };
+
   return (
     <span className='command'>
-      {isTypingFinished ? t(command) : typed}
-      {command !== 'clear' && isTypingFinished && <br></br>}
-      {!!print && isTypingFinished && t(print)}
-      {!!print && isTypingFinished && <br></br>}
-      {command === 'COMMAND_CAT_PROJECT_DESCRIPTION' && isTypingFinished && <ProjectLinks project={directory} />}
-      {command !== 'clear' && isTypingFinished && <StartingLine directory={directory} />}
+      {isTypingFinished ? t(command.text) : typed}
+      {getCommandResult()}
     </span>
   );
 }
