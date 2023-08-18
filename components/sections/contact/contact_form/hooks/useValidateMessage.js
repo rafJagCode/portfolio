@@ -5,13 +5,13 @@ const useValidateMessage = () => {
   const [messageErrorMessage, setMessageErrorMessage] = useState(null);
 
   const validateMessage = (message) => {
-    if (message.trim().length < 1) {
-      setMessageErrorMessage('EMPTY_MESSAGE');
+    if (!message.trim().length) {
+      setMessageErrorMessage('VALIDATION_EMPTY_MESSAGE');
       setIsMessageValid(false);
       return;
     }
     if (message.trim().length < 10) {
-      setMessageErrorMessage('TO_SHORT_MESSAGE');
+      setMessageErrorMessage('VALIDATION_TO_SHORT_MESSAGE');
       setIsMessageValid(false);
       return;
     }

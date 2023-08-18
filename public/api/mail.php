@@ -3,7 +3,7 @@ header('Content-Type: application/json');
 
 function validateData($data){
 	if(is_null($data)){
-  		echo json_encode(array("message" => "No data provided."));
+  		echo json_encode(array("message" => "BACKEND_DATA_PROBLEM"));
 		return false;
 	}
 	return true;
@@ -11,7 +11,7 @@ function validateData($data){
 
 function validateEmail($data){
 	if (is_null($data->from) || !filter_var($data->from, FILTER_VALIDATE_EMAIL)) {
-  		echo json_encode(array("message" => "No email provided or invalid email format."));
+  		echo json_encode(array("message" => "BACKEND_EMAIL_PROBLEM"));
 		return false;
 	}
 	return true;
@@ -19,7 +19,7 @@ function validateEmail($data){
 
 function validateMessage($data){
 	if(is_null($data->message) || empty(trim($data->message))){
-  		echo json_encode(array("message" => "No message provided or empty message."));
+  		echo json_encode(array("message" => "BACKEND_MESSAGE_PROBLEM"));
 		return false;
 	}
 	return true;
@@ -41,11 +41,11 @@ $emailSent = mail($to,$subject,$message, $from);
 
 if ($emailSent){
 	$status = 200;
-	$message = "Email sent successfully.";
+	$message = "BACKEND_EMAIL_SENT_SUCCESSFULLY";
 }
 else{
 	$status = 400;
-	$message = "Something went wrong. Email could not be sent.";
+	$message = "BACKEND_SOMETHING_WENT_WRONG";
 }
 
 http_response_code($status);

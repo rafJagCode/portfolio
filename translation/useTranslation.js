@@ -1,7 +1,7 @@
 import translations, { availableTranslations } from 'translation/translations';
 import { useSelector } from 'react-redux';
 
-const useTranslation = (text) => {
+const useTranslation = () => {
   const language = useSelector((state) => state.language);
 
   const getTranslation = (text, lang) => {

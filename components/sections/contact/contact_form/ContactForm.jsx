@@ -6,8 +6,10 @@ import actions from 'redux/actions';
 import { FaSatelliteDish } from 'react-icons/fa';
 import { useDispatch } from 'react-redux';
 import { useRef } from 'react';
+import useTranslation from '@/translation/useTranslation';
 
 export default function ContactForm() {
+  const { t } = useTranslation();
   const dispatch = useDispatch();
   const emailRef = useRef(null);
   const messageRef = useRef(null);
@@ -22,7 +24,7 @@ export default function ContactForm() {
     validateEmail(emailRef.current.value);
     validateMessage(messageRef.current.value);
     if (!isEmailValid || !isMessageValid) {
-      dispatch(actions.showDialog('Contact form was filled inproperly. Please correct marked fields and try again.'));
+      dispatch(actions.showDialog('DIALOG_FORM_FILLED_INCORRECTLY'));
       return;
     }
     const data = {
@@ -36,17 +38,17 @@ export default function ContactForm() {
   return (
     <form className={styles.container}>
       <div className={styles.input_container}>
-        <input ref={emailRef} onBlur={handleEmailBlur} onFocus={() => setIsEmailValid('focused')} data-valid={isEmailValid} placeholder='Your Email' type='email' id='email' name='email' required></input>
-        {!isEmailValid ? <p className={styles.error_message}>{emailErrorMessage}</p> : null}
+        <input ref={emailRef} onBlur={handleEmailBlur} onFocus={() => setIsEmailValid('focused')} data-valid={isEmailValid} placeholder={t('EMAIL_PLACEHOLDER')} type='email' id='email' name='email' required></input>
+        {!isEmailValid ? <p className={styles.error_message}>{t(emailErrorMessage)}</p> : null}
       </div>
       <div className={styles.message_container} data-valid={isMessageValid}>
-        <textarea ref={messageRef} onBlur={handleMessageBlur} onFocus={() => setIsMessageValid('focused')} placeholder='Your Massage' id='message' name='message' rows='10' required></textarea>
-        {!isMessageValid ? <p className={styles.error_message}>{messageErrorMessage}</p> : null}
+        <textarea ref={messageRef} onBlur={handleMessageBlur} onFocus={() => setIsMessageValid('focused')} placeholder={t('MESSAGE_PLACEHOLDER')} id='message' name='message' rows='10' required></textarea>
+        {!isMessageValid ? <p className={styles.error_message}>{t(messageErrorMessage)}</p> : null}
       </div>
 
       <button onClick={handleEmail}>
         <FaSatelliteDish />
-        Send Message
+        {t('MESSAGE_BUTTON')}
       </button>
     </form>
   );

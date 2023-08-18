@@ -6,12 +6,12 @@ const useValidateEmail = () => {
 
   const validateEmail = (email) => {
     if (email.length < 1) {
-      setEmailErrorMessage('EMPTY_EMAIL');
+      setEmailErrorMessage('VALIDATION_EMPTY_EMAIL');
       setIsEmailValid(false);
       return;
     }
     if (!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)) {
-      setEmailErrorMessage('INVALID_EMAIL');
+      setEmailErrorMessage('VALIDATION_INVALID_EMAIL');
       setIsEmailValid(false);
       return;
     }

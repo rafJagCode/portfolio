@@ -6,9 +6,9 @@ import { useSelector } from 'react-redux';
 export default function Instructions() {
   const gameState = useSelector((state) => state.gameState);
   const keys = [
-    { name: 'spacebar', description: 'CLICK SPACEBAR TO SHOOT' },
-    { name: 'move', description: 'STEER USING WASD KEYS' },
-    { name: 'aim', description: 'USE ARROWS TO AIM' },
+    { name: 'spacebar', description: 'GAME_SPACEBAR_KEY_INSTRUCTION' },
+    { name: 'move', description: 'GAME_WASD_KEYS_INSTRUCTION' },
+    { name: 'aim', description: 'GAME_ARROWS_KEYS_INSTRUCTION' },
   ];
 
   return (
