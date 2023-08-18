@@ -4,15 +4,17 @@
 .ufo_placeholder {
   position: absolute;
   left: 50%;
-  top: 0;
-  transform: translate(-50%, -300%);
+  bottom: $beam-height;
+  transform: translateX(-50%);
 }
 .button {
-  height: 10rem;
+  height: $cow-height;
+  width: $cow-width;
   cursor: pointer;
 }
 .image {
   height: 100%;
+  width: 100%;
   background-repeat: no-repeat;
   background-size: contain;
 }
