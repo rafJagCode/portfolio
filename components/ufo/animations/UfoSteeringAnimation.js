@@ -3,6 +3,7 @@ import { animationsTypes } from '@/configuration/types_conf';
 import availableKeys from '@/configuration/available_keys_conf';
 import clamp from '@/utils/helper_functions/clamp';
 import changeElementStyle from '@/utils/element_functions/changeElementStyle';
+import getElementCenterCoordinates from '@/utils/element_functions/getElementCenterCoordinates';
 
 class UfoSteeringAnimation extends Animation {
   keys = availableKeys.reduce((a, v) => ({ ...a, [v]: { pressed: false } }), {});
@@ -76,9 +77,8 @@ class UfoSteeringAnimation extends Animation {
   }
 
   moveUfo() {
-    const ufoCenterX = this.ufo.offsetLeft + this.ufo.offsetWidth / 2;
-    const ufoCenterY = this.ufo.offsetTop + this.ufo.offsetHeight / 2;
-    changeElementStyle(this.ufo, 'centerPosition', { x: ufoCenterX + this.speed.x, y: ufoCenterY + this.speed.y });
+    const ufoCenter = getElementCenterCoordinates(this.ufo);
+    changeElementStyle(this.ufo, 'centerPosition', { x: ufoCenter.x + this.speed.x, y: ufoCenter.y + this.speed.y });
   }
 
   setKeys(keys) {

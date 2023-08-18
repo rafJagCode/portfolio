@@ -1,7 +1,8 @@
 import Animation from 'Animation';
 import { animationsTypes } from '@/configuration/types_conf';
-import getDistanceBetweenElementsCenters from '@/utils/element_functions/getDistanceBetweenElementsCenters';
-import moveElementTowardsAnotherElement from '@/utils/element_functions/moveElementTowardsAnotherElement';
+import getDistanceBetweenTwoPoints from '@/utils/helper_functions/getDistanceBetweenTwoPoints';
+import getElementCenterCoordinates from '@/utils/element_functions/getElementCenterCoordinates';
+import moveElementTowardsCoordinates from '@/utils/element_functions/moveElementTowardsCoordinates';
 
 class FlyToCowAnimation extends Animation {
   cow = null;
@@ -31,7 +32,7 @@ class FlyToCowAnimation extends Animation {
   step() {
     this.setDestination();
     if (this.isDestinationReached()) return this.stopAnimation();
-    moveElementTowardsAnotherElement(document.getElementById('ufo'), this.destination, this.speed);
+    moveElementTowardsCoordinates(document.getElementById('ufo'), this.destination, this.speed);
     this.requestAnimationID = requestAnimationFrame(this.step);
   }
 
@@ -39,13 +40,16 @@ class FlyToCowAnimation extends Animation {
     this.cow = cow;
   }
   setDestination() {
-    this.destination = document.getElementById(`ufo_placeholder_${this.cow}`);
+    const ufoPlaceholder = document.getElementById(`ufo_placeholder_${this.cow}`);
+    const { x, y, width, height } = ufoPlaceholder.getBoundingClientRect();
+    this.destination = { x: x + width / 2, y: y + height / 2 };
   }
 
   isDestinationReached() {
     const precision = 1;
     const ufo = document.getElementById('ufo');
-    if (getDistanceBetweenElementsCenters(ufo, this.destination) < precision) return true;
+    const ufoCenter = getElementCenterCoordinates(ufo);
+    if (getDistanceBetweenTwoPoints(ufoCenter, this.destination) < precision) return true;
     return false;
   }
 }

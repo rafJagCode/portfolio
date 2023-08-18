@@ -24,10 +24,14 @@ class HoverOverCow extends Animation {
 
   step() {
     const ufo = document.getElementById('ufo');
-    const ufoPlaceholder = document.getElementById(`ufo_placeholder_${this.cow}`);
-    const ufoPlaceholderCenterCoordinates = getElementCenterCoordinates(ufoPlaceholder);
-    changeElementStyle(ufo, 'centerPosition', ufoPlaceholderCenterCoordinates);
+    changeElementStyle(ufo, 'centerPosition', this.getPosition());
     this.requestAnimationID = requestAnimationFrame(this.step);
+  }
+
+  getPosition() {
+    const ufoPlaceholder = document.getElementById(`ufo_placeholder_${this.cow}`);
+    const { x, y, width, height } = ufoPlaceholder.getBoundingClientRect();
+    return { x: x + width / 2, y: y + height / 2 };
   }
 
   setCow(cow) {
