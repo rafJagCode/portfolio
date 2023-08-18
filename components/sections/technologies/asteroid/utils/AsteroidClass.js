@@ -8,13 +8,13 @@ class Asteroid {
   asteroidSize;
   startingHealthPoints;
   startingSpeed;
-  technology;
+  technologies;
 
-  constructor(imageName, startingPosition, technology = null) {
+  constructor(imageName, startingPosition, technologies = null) {
     this.asteroidID = uuid();
     this.imageName = imageName;
     this.startingPosition = startingPosition;
-    this.technology = technology;
+    this.technologies = technologies;
     const asteroidKind = this.getAsteroidKind(imageName);
     this.setKindDependentProperties(asteroidKind);
   }
@@ -30,25 +30,25 @@ class Asteroid {
     let startingSpeed;
     switch (asteroidKind) {
       case 'bit': {
-        asteroidSize = 20;
+        asteroidSize = 2;
         startingHealthPoints = 1;
         startingSpeed = 1;
         break;
       }
       case 'fragment': {
-        asteroidSize = 40;
+        asteroidSize = 4;
         startingHealthPoints = 2;
         startingSpeed = 2;
         break;
       }
       case 'whole': {
-        asteroidSize = 100;
+        asteroidSize = 8;
         startingHealthPoints = 5;
         startingSpeed = 1;
         break;
       }
       default: {
-        asteroidSize = 100;
+        asteroidSize = 8;
       }
     }
     this.asteroidKind = asteroidKind;

@@ -10,7 +10,7 @@ import getElementCenterCoordinates from '@/utils/element_functions/getElementCen
 
 export default function Asteroid({ asteroid, addAsteroid, removeAsteroid, addTechnology }) {
   const asteroidRef = useRef(null);
-  const { asteroidID, imageName, startingPosition, asteroidSize, startingHealthPoints, asteroidKind, startingSpeed, technology } = asteroid;
+  const { asteroidID, imageName, startingPosition, asteroidSize, startingHealthPoints, asteroidKind, startingSpeed, technologies } = asteroid;
   const asteroidHits = useSelector((state) => state.asteroidsHits[asteroidID]);
   const healthPoints = useHealthPoints(startingHealthPoints, asteroidHits);
   useAsteroidAnimation(startingSpeed, asteroidRef);
@@ -20,8 +20,8 @@ export default function Asteroid({ asteroid, addAsteroid, removeAsteroid, addTec
     generateAsteroidShards(position).forEach(addAsteroid);
   };
 
-  const discoverTechnology = (position) => {
-    addTechnology(technology, position);
+  const discoverTechnologies = (position) => {
+    technologies.forEach((technology) => addTechnology(technology, position));
   };
 
   useEffect(() => {
@@ -29,7 +29,7 @@ export default function Asteroid({ asteroid, addAsteroid, removeAsteroid, addTec
       if (asteroidKind === 'whole') {
         const position = getElementCenterCoordinates(asteroidRef.current);
         addAsteroidShards(position);
-        discoverTechnology(position);
+        discoverTechnologies(position);
       }
       removeAsteroid(asteroidID);
     }
@@ -39,7 +39,7 @@ export default function Asteroid({ asteroid, addAsteroid, removeAsteroid, addTec
     <>
       <div className={styles.container + ' asteroid'} style={{ left: startingPosition.x, top: startingPosition.y }} id={asteroidID} ref={asteroidRef} data-image={imageName}>
         <Healthbar startingHealthPoints={startingHealthPoints} healthPoints={healthPoints} />
-        <img src={`/static/images/asteroids/${imageName}.svg`} className={styles.image} style={{ width: asteroidSize }}></img>
+        <img src={`/static/images/asteroids/${imageName}.svg`} className={styles.image} style={{ width: `${asteroidSize}rem` }}></img>
       </div>
     </>
   );
