@@ -25,6 +25,7 @@ export default function GameController() {
       fullpage_api.setAllowScrolling(false);
       fullpage_api.setKeyboardScrolling(false);
       dispatch(actions.changeNavigationVisibility(false));
+      dispatch(actions.clearKeys());
       addEventListener('keydown', handleKeyStateChange);
       addEventListener('keyup', handleKeyStateChange);
       return;
