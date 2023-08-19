@@ -1,54 +1,21 @@
 import actions from 'redux/actions';
-import { gameStates, gameActions, compareGameState } from 'redux/game/gameStateMachine';
 import { useSelector, useDispatch } from 'react-redux';
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 
 const useUfoLives = () => {
-  const startingLives = 5;
   const dispatch = useDispatch();
-  const [currentLives, setCurrentLives] = useState([]);
   const ufoHits = useSelector((state) => state.ufoHits);
-  const gameState = useSelector((state) => state.gameState);
-  const life = (index, lifeState) => {
-    return {
-      index: index,
-      state: lifeState,
-    };
-  };
+  const ufoLives = useSelector((state) => state.ufoLives);
 
-  const resetLives = () => {
-    let lifes = [];
-    for (let i = 0; i < startingLives; i++) {
-      lifes = [...lifes, life(i, 'FULL')];
-    }
-    setCurrentLives(lifes);
-  };
-
-  const changeLifeToEmpty = () => {
-    let lifesChanged = 0;
-    const lifes = currentLives.map((life) => {
-      if (life.state === 'FULL' && !lifesChanged) {
-        life.state = 'EMPTY';
-        lifesChanged++;
-      }
-      return life;
-    });
-    setCurrentLives(lifes);
+  const getEmptyLives = () => {
+    return ufoLives.reduce((acc, curr) => (curr === 'empty' ? acc + 1 : acc), 0);
   };
 
   useEffect(() => {
-    if (!ufoHits) return;
-    if (!ufoHits.length) return resetLives();
-    if (startingLives - ufoHits.length === currentLives.length) return;
-    changeLifeToEmpty();
+    if (ufoHits.length > getEmptyLives()) dispatch(actions.loseLife());
   }, [ufoHits]);
 
-  useEffect(() => {
-    if (!ufoHits) return;
-    if (compareGameState(gameState, gameStates.PLAYING) && startingLives - ufoHits.length === 0) dispatch(actions.updateGameState(gameActions.LOSE_GAME));
-  }, [ufoHits, gameState]);
-
-  return currentLives;
+  return ufoLives;
 };
 
 export default useUfoLives;

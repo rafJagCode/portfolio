@@ -60,6 +60,9 @@ const keys = (state = KEYS, action) => {
     case types.UPDATE_KEY_STATE: {
       return { ...state, [action.key]: { ...state[action.key], pressed: action.pressed } };
     }
+    case types.CLEAR_KEYS: {
+      return KEYS;
+    }
     default:
       return state;
   }
@@ -122,15 +125,32 @@ const technologies = (state = TECHNOLOGIES, action) => {
   }
 };
 
-const AMMUNITION = 5;
+const AMMUNITION = new Array(5).fill('full');
 
 const ammunition = (state = AMMUNITION, action) => {
   switch (action.type) {
     case types.DECREASE_AMMUNITION: {
-      return state - 1;
+      const emptyBullets = state.indexOf('full');
+      return state.map((bullet, index) => (index <= emptyBullets ? 'empty' : 'full'));
     }
     case types.RELOAD_AMMUNITION: {
       return AMMUNITION;
+    }
+    default:
+      return state;
+  }
+};
+
+const UFO_LIVES = new Array(5).fill('full');
+
+const ufoLives = (state = UFO_LIVES, action) => {
+  switch (action.type) {
+    case types.LOSE_LIFE: {
+      const emptyLives = state.indexOf('full');
+      return state.map((life, index) => (index <= emptyLives ? 'empty' : 'full'));
+    }
+    case types.RESET_LIVES: {
+      return UFO_LIVES;
     }
     default:
       return state;
@@ -147,4 +167,5 @@ export default {
   ufoHits,
   technologies,
   ammunition,
+  ufoLives,
 };

@@ -10,9 +10,13 @@ export default function Lasers() {
   const ammunition = useSelector((state) => state.ammunition);
   const [lasers, setLasers] = useState([]);
 
+  const getFullBullets = () => {
+    return ammunition.reduce((acc, curr) => (curr === 'full' ? acc + 1 : acc), 0);
+  };
+
   useEffect(() => {
     if (!spaceKeyPressed) return;
-    if (!ammunition) return;
+    if (!getFullBullets()) return;
     addLaser();
     dispatch(actions.decreaseAmmunition());
   }, [spaceKeyPressed]);

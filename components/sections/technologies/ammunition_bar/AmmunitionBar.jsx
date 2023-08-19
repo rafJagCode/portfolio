@@ -4,14 +4,17 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useEffect, useRef } from 'react';
 
 export default function AmmunitionBar() {
-  const magazineCapacity = 5;
   const reloadTime = 1000;
   const dispatch = useDispatch();
   const ammunition = useSelector((state) => state.ammunition);
   const timoutID = useRef(null);
 
+  const getFullBullets = () => {
+    return ammunition.reduce((acc, curr) => (curr === 'full' ? acc + 1 : acc), 0);
+  };
+
   useEffect(() => {
-    if (!ammunition) {
+    if (!getFullBullets()) {
       timoutID = setTimeout(() => dispatch(actions.reloadAmmunition()), reloadTime);
     }
     return () => clearTimeout(timoutID);
@@ -19,11 +22,11 @@ export default function AmmunitionBar() {
 
   return (
     <div className={styles.container}>
-      {[...Array(magazineCapacity)].map((bullet, index) => (
+      {ammunition.map((bulletState, index) => (
         <img
           key={index} //force prettier break
           className={styles.bullet}
-          src={`/static/images/bullet${index < magazineCapacity - ammunition ? '-empty' : ''}.svg`}
+          src={`/static/images/bullet-${bulletState}.svg`}
         />
       ))}
     </div>
