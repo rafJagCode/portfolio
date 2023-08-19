@@ -3,7 +3,7 @@ import Instructions from '../instructions/Instructions';
 import GameMenu from './game_menu/GameMenu';
 import availableKeys from '@/configuration/available_keys_conf';
 import useUfoSteering from './hooks/useUfoSteering';
-import { gameStates, compareGameState } from 'redux/game/gameStateMachine';
+import { gameStates, gameActions, compareGameState } from 'redux/game/gameStateMachine';
 import actions from 'redux/actions';
 import { useSelector, useDispatch } from 'react-redux';
 import { useEffect, useCallback } from 'react';
@@ -11,7 +11,23 @@ import { useEffect, useCallback } from 'react';
 export default function GameController() {
   const dispatch = useDispatch();
   const gameState = useSelector((state) => state.gameState);
+  const asteroids = useSelector((state) => state.asteroids);
+  const ufoLives = useSelector((state) => state.ufoLives);
   useUfoSteering();
+
+  const getFullLives = () => {
+    return ufoLives.reduce((acc, curr) => (curr === 'full' ? acc + 1 : acc), 0);
+  };
+
+  useEffect(() => {
+    if (!compareGameState(gameState, gameStates.PLAYING)) return;
+    if (!getFullLives()) dispatch(actions.updateGameState(gameActions.LOSE_GAME));
+  }, [ufoLives]);
+
+  useEffect(() => {
+    if (!compareGameState(gameState, gameStates.PLAYING)) return;
+    if (!asteroids.length) dispatch(actions.updateGameState(gameActions.WIN_GAME));
+  }, [asteroids]);
 
   const handleKeyStateChange = useCallback((e) => {
     if (!availableKeys.includes(e.key)) return;
@@ -39,6 +55,7 @@ export default function GameController() {
       dispatch(actions.clearUfoHits());
       dispatch(actions.clearTechnologies());
       dispatch(actions.reloadAmmunition());
+      dispatch(actions.resetLives());
     }
     removeEventListener('keydown', handleKeyStateChange);
     removeEventListener('keyup', handleKeyStateChange);
