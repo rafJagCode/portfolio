@@ -28,12 +28,14 @@ class AsteroidAnimation {
 
   start() {
     if (this.requestAnimationID) return;
+    if (this.immunityTimer) this.immunityTimer.resume();
     this.requestAnimationID = requestAnimationFrame(this.step);
     return this;
   }
 
   stop() {
     if (!this.requestAnimationID) return;
+    if (this.immunityTimer) this.immunityTimer.pause();
     cancelAnimationFrame(this.requestAnimationID);
     this.requestAnimationID = null;
   }
@@ -56,6 +58,10 @@ class AsteroidAnimation {
 
   isUfoImmune() {
     return this.ufo.dataset.isImmune === 'false' ? false : true;
+  }
+
+  makeUfoImmune() {
+    this.ufo.dataset.isImmune = true;
   }
 
   isAsteroidInUfoZone() {
@@ -103,11 +109,6 @@ class AsteroidAnimation {
     };
 
     return { first: hitpoint1, second: hitpoint2 };
-  }
-
-  makeUfoImmune() {
-    this.ufo.dataset.isImmune = true;
-    setTimeout(() => (this.ufo.dataset.isImmune = false), 5000);
   }
 
   isVerticalScreenLimit() {

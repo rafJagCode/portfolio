@@ -3,6 +3,7 @@ import Instructions from '../instructions/Instructions';
 import GameMenu from './game_menu/GameMenu';
 import availableKeys from '@/configuration/available_keys_conf';
 import useUfoSteering from './hooks/useUfoSteering';
+import useUfoImmunity from './hooks/useUfoImmunity';
 import { gameStates, gameActions, compareGameState } from 'redux/game/gameStateMachine';
 import actions from 'redux/actions';
 import { useSelector, useDispatch } from 'react-redux';
@@ -14,6 +15,7 @@ export default function GameController() {
   const asteroids = useSelector((state) => state.asteroids);
   const ufoLives = useSelector((state) => state.ufoLives);
   useUfoSteering();
+  useUfoImmunity();
 
   const getFullLives = () => {
     return ufoLives.reduce((acc, curr) => (curr === 'full' ? acc + 1 : acc), 0);
