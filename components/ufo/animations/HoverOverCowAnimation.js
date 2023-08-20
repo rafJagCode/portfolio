@@ -30,8 +30,7 @@ class HoverOverCow extends Animation {
 
   getPosition() {
     const ufoPlaceholder = document.getElementById(`ufo_placeholder_${this.cow}`);
-    const { x, y, width, height } = ufoPlaceholder.getBoundingClientRect();
-    return { x: x + width / 2, y: y + height / 2 };
+    return getElementCenterCoordinates(ufoPlaceholder);
   }
 
   setCow(cow) {

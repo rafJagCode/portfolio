@@ -50,7 +50,7 @@ class OrbitingAnimation extends Animation {
     this.setSpeed();
     this.setScale();
     this.setZIndex();
-    moveElementTowardsCoordinates(this.ufo, this.destination, this.speed);
+    moveElementTowardsCoordinates(this.ufo, this.destination, this.speed, true);
     if (this.shouldStop()) return this.resolve();
     this.requestAnimationID = requestAnimationFrame(this.step);
   }

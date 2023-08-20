@@ -1,5 +1,6 @@
 const getElementCenterCoordinates = (element) => {
-  return { x: element.offsetLeft + element.offsetWidth / 2, y: element.offsetTop + element.offsetHeight / 2 };
+  const { x, y, width, height } = element.getBoundingClientRect();
+  return { x: x + width / 2, y: y + height / 2 };
 };
 
 export default getElementCenterCoordinates;

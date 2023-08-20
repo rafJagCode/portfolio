@@ -2,23 +2,28 @@ import imagesCollisionData from '@/configuration/images_collision_data_conf';
 import changeElementStyle from '@/utils/element_functions/changeElementStyle';
 import getElementCenterCoordinates from '@/utils/element_functions/getElementCenterCoordinates';
 import getAngleBetweenTwoPoints from '@/utils/helper_functions/getAngleBetweenTwoPoints';
+import getClockwiseRotatedVector from '@/utils/helper_functions/getClockwiseRotatedVector';
+import getCounterclockwiseRotatedVector from '@/utils/helper_functions/getCounterclockwiseRotatedVector';
 import getDistanceBetweenTwoPoints from '@/utils/helper_functions/getDistanceBetweenTwoPoints';
 import actions from 'redux/actions';
 
 class AsteroidAnimation {
-  speed;
   asteroid;
   ufo;
-  angle;
+  speed;
   requestAnimationID;
 
   constructor(startingSpeed, asteroidRef, ufoRef, dispatch) {
-    this.speed = startingSpeed;
+    this.setStartingSpeed(startingSpeed);
     this.asteroid = asteroidRef.current;
     this.ufo = ufoRef.current;
     this.dispatch = dispatch;
-    this.angle = Math.random() * 2 * Math.PI;
     this.step = this.step.bind(this);
+  }
+
+  setStartingSpeed(startingSpeed) {
+    const angle = Math.random() * 2 * Math.PI;
+    this.speed = { x: startingSpeed * Math.cos(angle), y: startingSpeed * -Math.sin(angle) };
   }
 
   start() {
@@ -44,7 +49,7 @@ class AsteroidAnimation {
     }
 
     if (this.isVerticalScreenLimit()) this.bounceVertical();
-    if (this.isHoriziontalScreenLimit()) this.bounceHorizontal();
+    if (this.isHorizontalScreenLimit()) this.bounceHorizontal();
     this.moveAsteroid();
     this.requestAnimationID = requestAnimationFrame(this.step);
   }
@@ -105,49 +110,51 @@ class AsteroidAnimation {
     setTimeout(() => (this.ufo.dataset.isImmune = false), 5000);
   }
 
-  bounceFromUfo(hitpoints) {
-    const collisionAngle = getAngleBetweenTwoPoints(hitpoints.first, hitpoints.second);
-    const normal = collisionAngle + Math.PI / 2;
-    const diffFromNormal = Math.abs(this.angle - normal);
-    let bounceAngle = this.angle - 2 * diffFromNormal;
-    if (bounceAngle < 0) bounceAngle += 2 * Math.PI;
-    if (!this.isEscapeAngle(bounceAngle)) bounceAngle += Math.PI;
-    this.angle = bounceAngle;
-  }
-
-  isEscapeAngle(bounceAngle) {
-    const asteroidCenter = getElementCenterCoordinates(this.asteroid);
-    const ufoCenter = getElementCenterCoordinates(this.ufo);
-    const moveX = this.speed * Math.cos(bounceAngle);
-    const moveY = this.speed * -Math.sin(bounceAngle);
-    const movedAsteroidCenter = { x: asteroidCenter.x + moveX, y: asteroidCenter.y + moveY };
-    const reversedMovedAsteroidCenter = { x: asteroidCenter.x - moveX, y: asteroidCenter.y - moveY };
-    return getDistanceBetweenTwoPoints(ufoCenter, movedAsteroidCenter) > getDistanceBetweenTwoPoints(ufoCenter, reversedMovedAsteroidCenter);
-  }
-
   isVerticalScreenLimit() {
+    const windowHeight = window.innerHeight || document.documentElement.clientHeight;
     const { top, bottom } = this.asteroid.getBoundingClientRect();
-    return top <= 0 || bottom >= (window.innerHeight || document.documentElement.clientHeight);
+    if (this.speed.y < -top) return true;
+    if (this.speed.y > windowHeight - bottom) return true;
   }
 
-  isHoriziontalScreenLimit() {
+  isHorizontalScreenLimit() {
+    const windowWidth = window.innerWidth || document.documentElement.clientWidth;
     const { left, right } = this.asteroid.getBoundingClientRect();
-    return left <= 0 || right >= (window.innerWidth || document.documentElement.clientWidth);
+    if (this.speed.x < -left) return true;
+    if (this.speed.x > windowWidth - right) return true;
   }
 
   bounceVertical() {
-    this.angle = 2 * Math.PI - this.angle;
+    this.speed.y = -this.speed.y;
   }
 
   bounceHorizontal() {
-    this.angle = Math.PI - this.angle;
+    this.speed.x = -this.speed.x;
+  }
+
+  bounceFromUfo(hitpoints) {
+    this.speed = this.getBounceSpeed(hitpoints);
+    if (!this.isMovingAway()) this.speed = { x: -this.speed.x, y: -this.speed.y };
+  }
+
+  getBounceSpeed(hitpoints) {
+    const ufoAngle = getAngleBetweenTwoPoints(hitpoints.first, hitpoints.second);
+    const clockwiseRotatedSpeed = getClockwiseRotatedVector(this.speed, ufoAngle);
+    const veticallyBouncedSpeed = { x: clockwiseRotatedSpeed.x, y: -clockwiseRotatedSpeed.y };
+    return getCounterclockwiseRotatedVector(veticallyBouncedSpeed, ufoAngle);
+  }
+
+  isMovingAway() {
+    const asteroidCenter = getElementCenterCoordinates(this.asteroid);
+    const ufoCenter = getElementCenterCoordinates(this.ufo);
+    const movedAsteroidCenter = { x: asteroidCenter.x + this.speed.x, y: asteroidCenter.y + this.speed.y };
+    const reversedMovedAsteroidCenter = { x: asteroidCenter.x - this.speed.x, y: asteroidCenter.y - this.speed.y };
+    return getDistanceBetweenTwoPoints(ufoCenter, movedAsteroidCenter) > getDistanceBetweenTwoPoints(ufoCenter, reversedMovedAsteroidCenter);
   }
 
   moveAsteroid() {
     const asteroidCenter = getElementCenterCoordinates(this.asteroid);
-    const moveX = this.speed * Math.cos(this.angle);
-    const moveY = this.speed * -Math.sin(this.angle);
-    changeElementStyle(this.asteroid, 'centerPosition', { x: asteroidCenter.x + moveX, y: asteroidCenter.y + moveY });
+    changeElementStyle(this.asteroid, 'centerPosition', { x: asteroidCenter.x + this.speed.x, y: asteroidCenter.y + this.speed.y });
   }
 }
 

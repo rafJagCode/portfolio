@@ -41,8 +41,7 @@ class FlyToCowAnimation extends Animation {
   }
   setDestination() {
     const ufoPlaceholder = document.getElementById(`ufo_placeholder_${this.cow}`);
-    const { x, y, width, height } = ufoPlaceholder.getBoundingClientRect();
-    this.destination = { x: x + width / 2, y: y + height / 2 };
+    this.destination = getElementCenterCoordinates(ufoPlaceholder);
   }
 
   isDestinationReached() {

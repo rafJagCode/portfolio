@@ -85,7 +85,7 @@ class LaserAnimation {
 
   moveLaser() {
     const laserCenter = getElementCenterCoordinates(this.laser);
-    changeElementStyle(this.laser, 'centerPosition', { x: laserCenter.x + this.speedX, y: laserCenter.y + this.speedY });
+    changeElementStyle(this.laser, 'centerPosition', { x: laserCenter.x + this.speedX, y: laserCenter.y + this.speedY }, true);
   }
 
   setLaserTip() {
