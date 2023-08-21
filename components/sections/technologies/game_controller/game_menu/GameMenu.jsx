@@ -1,3 +1,4 @@
+import styles from './GameMenu.module.scss';
 import MenuButton from '../menu_button/MenuButton';
 import { gameStates, gameActions, compareGameState } from 'redux/game/gameStateMachine';
 import { useSelector } from 'react-redux';
@@ -16,7 +17,7 @@ export default function GameMenu() {
   }, [gameState]);
 
   return (
-    <div>
+    <div className={styles.container}>
       {menu.map((button) => (
         <MenuButton key={button.text} text={button.text} action={button.action} active={button.active} />
       ))}
