@@ -1,5 +1,5 @@
 import styles from './GameMenu.module.scss';
-import MenuButton from '../menu_button/MenuButton';
+import MenuButton from './menu_button/MenuButton';
 import { gameStates, gameActions, compareGameState } from 'redux/game/gameStateMachine';
 import { useSelector } from 'react-redux';
 import { useState, useEffect } from 'react';

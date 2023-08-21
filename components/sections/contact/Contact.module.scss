@@ -4,3 +4,10 @@
   display: grid;
   grid-template-columns: auto 1fr;
 }
+
+@media screen and (orientation: portrait) {
+  .container {
+    grid-template-columns: auto;
+    grid-template-rows: 1fr 50rem;
+  }
+}

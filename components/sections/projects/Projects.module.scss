@@ -27,3 +27,13 @@
   justify-content: space-around;
   align-items: flex-start;
 }
+
+@media screen and (orientation: portrait) {
+  .container {
+    grid-template-columns: auto;
+    grid-template-rows: 1fr auto;
+  }
+  .island_container {
+    justify-self: center;
+  }
+}

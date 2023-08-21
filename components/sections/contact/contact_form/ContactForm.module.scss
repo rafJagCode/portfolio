@@ -137,3 +137,10 @@
     }
   }
 }
+
+@media screen and (orientation: portrait) {
+  .container {
+    justify-self: center;
+    align-self: end;
+  }
+}

@@ -1,0 +1,17 @@
+.container {
+  display: flex;
+  padding: 0.5rem;
+  gap: 1rem;
+}
+.image_container {
+  width: 8rem;
+}
+.image {
+  width: 100%;
+}
+.key_desc_container {
+  display: flex;
+  align-items: center;
+  white-space: pre;
+  font-size: 1rem;
+}

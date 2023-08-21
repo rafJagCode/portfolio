@@ -14,7 +14,7 @@ export default function Instructions() {
   return (
     <div className={styles.container} data-is-visible={!compareGameState(gameState, gameStates.PLAYING)}>
       {keys.map((key) => (
-        <Key key={key.name} keyName={key.name} keyDescription={key.description} />
+        <Key key={key.name} properties={key} />
       ))}
     </div>
   );

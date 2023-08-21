@@ -13,3 +13,9 @@
   width: 100%;
   aspect-ratio: 132/85;
 }
+
+@media screen and (orientation: portrait) {
+  .container {
+    align-self: center;
+  }
+}

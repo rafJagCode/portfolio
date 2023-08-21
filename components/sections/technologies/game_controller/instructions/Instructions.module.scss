@@ -1,4 +1,5 @@
 .container {
+  width: fit-content;
   &[data-is-visible='true'] {
     animation: fade-in 300ms ease-in 0ms 1 forwards;
   }

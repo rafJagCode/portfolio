@@ -1,5 +1,5 @@
 import styles from './GameController.module.scss';
-import Instructions from '../instructions/Instructions';
+import Instructions from './instructions/Instructions';
 import GameMenu from './game_menu/GameMenu';
 import availableKeys from '@/configuration/available_keys_conf';
 import useUfoSteering from './hooks/useUfoSteering';
