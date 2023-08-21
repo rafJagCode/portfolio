@@ -37,3 +37,12 @@
     justify-self: center;
   }
 }
+
+@media (max-height: 600px) {
+  .island_container {
+    width: 40rem;
+  }
+  .cows {
+    height: 80%;
+  }
+}
