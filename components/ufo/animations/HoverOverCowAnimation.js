@@ -1,16 +1,12 @@
-import Animation from './Animation';
-import { animationsTypes } from '@/types';
+import Animation from 'Animation';
+import { animationsTypes } from '@/configuration/types_conf';
+import changeElementStyle from '@/utils/element_functions/changeElementStyle';
+import getElementCenterCoordinates from '@/utils/element_functions/getElementCenterCoordinates';
 
 class HoverOverCow extends Animation {
-  #flyingHelper;
-  #cowHelper;
-  #destination;
-
-  constructor(dispatch = null, flyingHelper, cowHelper) {
+  cow = null;
+  constructor(dispatch = null) {
     super(animationsTypes.HOVER_OVER_COW_ANIMATION, dispatch);
-    this.#flyingHelper = flyingHelper;
-    this.#cowHelper = cowHelper;
-    this.reset();
   }
 
   start() {
@@ -23,28 +19,22 @@ class HoverOverCow extends Animation {
 
   reset() {
     this.requestAnimationID = null;
-    this.#destination = null;
+    this.cow = null;
   }
 
   step() {
-    this.setDestination();
-    if (this.isDestinationReached()) {
-      this.requestAnimationID = requestAnimationFrame(this.step);
-      return;
-    } else {
-      this.#flyingHelper.teleportUfoToDestination(this.#destination);
-      this.requestAnimationID = requestAnimationFrame(this.step);
-    }
+    const ufo = document.getElementById('ufo');
+    changeElementStyle(ufo, 'centerPosition', this.getPosition());
+    this.requestAnimationID = requestAnimationFrame(this.step);
   }
 
-  setDestination() {
-    const spaceAboveCow = 0.6;
-    const [cowTopMiddleX, cowTopMiddleY] = this.#cowHelper.getCowTopMiddlePosition();
-    this.#destination = [cowTopMiddleX, cowTopMiddleY * spaceAboveCow];
+  getPosition() {
+    const ufoPlaceholder = document.getElementById(`ufo_placeholder_${this.cow}`);
+    return getElementCenterCoordinates(ufoPlaceholder);
   }
 
-  isDestinationReached() {
-    return this.#flyingHelper.isDestinationReached(this.#destination);
+  setCow(cow) {
+    this.cow = cow;
   }
 }
 

@@ -3,12 +3,10 @@
     "baseUrl": ".",
     "paths": {
       "@/components/*": ["components/*"],
-      "@/hooks/*": ["hooks/*"],
       "@/configuration/*": ["configuration/*"],
-      "@/translations/*": ["translations/*"],
-      "@/handlers/*": ["handlers/*"],
-      "@/types": ["types.js"],
-      "@/links": ["links.js"]
+      "@/translation/*": ["translation/*"],
+      "@/utils/*": ["utils/*"],
+      "@/animation": ["Animation.js"]
     }
   }
 }

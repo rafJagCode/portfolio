@@ -1,17 +1,20 @@
-import Animation from './Animation';
-import { animationsTypes } from '@/types';
+import getElementCenterCoordinates from '@/utils/element_functions/getElementCenterCoordinates';
+import calculateDistanceBetweenTwoPoints from '@/utils/helper_functions/getDistanceBetweenTwoPoints';
+import moveElementTowardsCoordinates from '@/utils/element_functions/moveElementTowardsCoordinates';
+import getElementTopRightCornerCoordinatesRelativeToPage from '@/utils/element_functions/getElementTopRightCornerCoordinatesRelativeToPage';
+import Animation from 'Animation';
+import { animationsTypes } from '@/configuration/types_conf';
 
 class FlyToLaunchingPosition extends Animation {
-  #flyingHelper;
-  #earthHelper;
-  #destination;
-  #speed;
+  earth = null;
+  ufo = null;
+  destination = null;
+  speed = 15;
 
-  constructor(dispatch = null, flyingHelper, earthHelper) {
+  constructor(dispatch = null, { earthRef, ufoRef }) {
     super(animationsTypes.FLY_TO_LAUNCHING_POSITION_ANIMATION, dispatch);
-    this.#flyingHelper = flyingHelper;
-    this.#earthHelper = earthHelper;
-    this.reset();
+    this.earth = earthRef.current;
+    this.ufo = ufoRef.current;
   }
 
   start() {
@@ -24,26 +27,25 @@ class FlyToLaunchingPosition extends Animation {
 
   reset() {
     this.requestAnimationID = null;
-    this.#destination = null;
-    this.#speed = 15;
+    this.destination = null;
   }
 
   step() {
     this.setDestination();
-    if (this.isDestinationReached()) this.stopAnimation();
-    else {
-      this.#flyingHelper.makeUfoStep(this.#destination, this.#speed);
-      this.requestAnimationID = requestAnimationFrame(this.step);
-    }
+    if (this.isDestinationReached()) return this.stopAnimation();
+    moveElementTowardsCoordinates(this.ufo, this.destination, this.speed);
+    this.requestAnimationID = requestAnimationFrame(this.step);
   }
 
   setDestination() {
-    const [launchingPosX, launchingPosY] = this.#earthHelper.getEarthTopRightCornerPosition();
-    this.#destination = [launchingPosX, launchingPosY];
+    this.destination = getElementTopRightCornerCoordinatesRelativeToPage(this.earth);
   }
 
   isDestinationReached() {
-    return this.#flyingHelper.isDestinationReached(this.#destination);
+    const precision = 1;
+    const ufoCenter = getElementCenterCoordinates(this.ufo);
+    if (calculateDistanceBetweenTwoPoints(this.destination, ufoCenter) < precision) return true;
+    return false;
   }
 }
 

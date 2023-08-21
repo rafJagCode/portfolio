@@ -1,46 +1,35 @@
 import styles from './Ufo.module.scss';
-import useHelpers from './hooks/useHelpers';
-import useAnimations from './hooks/useAnimations';
-import positionUfoInEarthCenter from './utils/positionUfoInEarthCenter';
-import { refsTypes } from '@/types';
+import ReloadingBar from './reloading_bar/ReloadingBar';
+import Explosion from '@/components/sections/technologies/explosion/Explosion';
+import useUfoExplosions from './hooks/useUfoExplosions';
+import actions from 'redux/actions';
+import { refsTypes } from '@/configuration/types_conf';
+import { useDispatch } from 'react-redux';
 import { useRef, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 
 const Ufo = () => {
   const dispatch = useDispatch();
-  const isSidebarOpen = useSelector((state) => state.isSidebarOpen);
   const [ufoRef, engineRef, beamRef] = [useRef(null), useRef(null), useRef(null)];
-  const [ufoHelper, flyingHelper, earthHelper, engineHelper, beamHelper, cowHelper] = useHelpers(ufoRef, engineRef, beamRef);
+  const [explosions, removeExplosion] = useUfoExplosions();
 
   useEffect(() => {
-    if (!ufoRef) return;
-    dispatch({ type: 'GLOBAL_REFS', refName: refsTypes.UFO_REF, ref: ufoRef });
-  }, [ufoRef]);
-
-  useEffect(() => {
-    if (!ufoHelper || !earthHelper) return;
-    positionUfoInEarthCenter(ufoHelper, earthHelper);
-  }, [ufoHelper, earthHelper]);
-
-  useAnimations(ufoHelper, flyingHelper, earthHelper, engineHelper, beamHelper, cowHelper);
+    dispatch(actions.setGlobalRef(refsTypes.UFO_REF, ufoRef));
+    dispatch(actions.setGlobalRef(refsTypes.ENGINE_REF, engineRef));
+    dispatch(actions.setGlobalRef(refsTypes.BEAM_REF, beamRef));
+  }, []);
 
   return (
-    <div
-      className={styles.ufo}
-      ref={ufoRef}
-      data-is-blured={isSidebarOpen}
-    >
-      <div className={styles.ufo__image}></div>
-      <div
-        className={styles.ufo__engine}
-        ref={engineRef}
-      ></div>
-      <div
-        className={styles.ufo__beam}
-        ref={beamRef}
-        style={{ opacity: 0 }}
-      ></div>
-    </div>
+    <>
+      <div id='ufo' className={styles.container + ' ufo_placeholder'} ref={ufoRef} data-is-immune='false'>
+        <img className={styles.image} src='/static/images/ufo.svg' alt='ufo' />
+        <img id='engine' className={styles.engine} ref={engineRef} src='/static/images/engine.svg' alt='engine' />
+        <img className={styles.beam} ref={beamRef} src='/static/images/ufo-beam.svg' alt='ufo-beam' />
+        <ReloadingBar />
+      </div>
+      {explosions.map((explosion) => {
+        return <Explosion key={explosion.explosionID} explosion={explosion} removeExplosion={removeExplosion}></Explosion>;
+      })}
+    </>
   );
 };
 

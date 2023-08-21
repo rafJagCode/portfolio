@@ -1,16 +1,16 @@
-import Animation from './Animation';
-import { animationsTypes } from '@/types';
+import Animation from 'Animation';
+import { animationsTypes } from '@/configuration/types_conf';
+import changeElementStyle from '@/utils/element_functions/changeElementStyle';
+import getElementTopRightCornerCoordinatesRelativeToPage from '@/utils/element_functions/getElementTopRightCornerCoordinatesRelativeToPage';
 
 class HoldLaunchingPositionAnimation extends Animation {
-  #flyingHelper;
-  #earthHelper;
-  #destination;
+  ufo = null;
+  earth = null;
 
-  constructor(dispatch = null, flyingHelper, earthHelper) {
+  constructor(dispatch = null, { ufoRef, earthRef }) {
     super(animationsTypes.HOLD_LAUNCHING_POSITION_ANIMATION, dispatch);
-    this.#flyingHelper = flyingHelper;
-    this.#earthHelper = earthHelper;
-    this.reset();
+    this.ufo = ufoRef.current;
+    this.earth = earthRef.current;
   }
 
   start() {
@@ -23,27 +23,12 @@ class HoldLaunchingPositionAnimation extends Animation {
 
   reset() {
     this.requestAnimationID = null;
-    this.#destination = null;
   }
 
   step() {
-    this.setDestination();
-    if (this.isDestinationReached()) {
-      this.requestAnimationID = requestAnimationFrame(this.step);
-      return;
-    } else {
-      this.#flyingHelper.teleportUfoToDestination(this.#destination);
-      this.requestAnimationID = requestAnimationFrame(this.step);
-    }
-  }
-
-  setDestination() {
-    const [launchingPosX, launchingPosY] = this.#earthHelper.getEarthTopRightCornerPosition();
-    this.#destination = [launchingPosX, launchingPosY];
-  }
-
-  isDestinationReached() {
-    return this.#flyingHelper.isDestinationReached(this.#destination);
+    const launchingPositionCenterCoordinates = getElementTopRightCornerCoordinatesRelativeToPage(this.earth);
+    changeElementStyle(ufo, 'centerPosition', launchingPositionCenterCoordinates);
+    this.requestAnimationID = requestAnimationFrame(this.step);
   }
 }
 

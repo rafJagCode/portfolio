@@ -1,10 +1,10 @@
-import './scss/reset.scss';
-import './scss/global.scss';
-import './scss/themes.scss';
-import { Provider } from 'react-redux';
-import store from '../redux/store';
-import { useEffect, useState } from 'react';
+import 'scss/reset.scss';
+import 'scss/global.scss';
+import 'scss/themes.scss';
 import Head from 'next/head';
+import store from '../redux/store';
+import { Provider } from 'react-redux';
+import { useEffect, useState } from 'react';
 
 export default function MyApp({ Component, pageProps }) {
   const [pageLoading, setPageLoading] = useState(true);

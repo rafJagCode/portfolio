@@ -1,19 +1,16 @@
-import ParticlesBackground from '@/components/particles_background/ParticlesBackground';
 import ReactFullpage from '@fullpage/react-fullpage';
 import styles from './Sections.module.scss';
-import Home from '@/components/home/Home';
-import Projects from '@/components/projects/Projects';
-import Technologies from '@/components/technologies/Technologies';
+import Home from './home/Home';
+import Projects from './projects/Projects';
+import Technologies from './technologies/Technologies';
+import Contact from './contact/Contact';
 import Footer from '@/components/footer/Footer';
-import { useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import { useEffect, useCallback } from 'react';
 
 export default function Sections() {
-  const isSidebarOpen = useSelector((state) => state.isSidebarOpen);
-
-  const handleHashChange = (e) => {
+  const handleHashChange = useCallback((e) => {
     fullpage_api.moveTo(`#${e.newURL.split('#')[1]}`);
-  };
+  }, []);
 
   useEffect(() => {
     addEventListener('hashchange', handleHashChange);
@@ -28,41 +25,29 @@ export default function Sections() {
     fullpage_api.moveTo(anchor);
   }, []);
 
-  useEffect(() => {
-    if (isSidebarOpen) {
-      document.querySelector('#fullpage').style.filter = 'blur(5px)';
-      document.querySelector('#fullpage').style.pointerEvents = 'none';
-    } else {
-      document.querySelector('#fullpage').style.filter = 'none';
-      document.querySelector('#fullpage').style.pointerEvents = 'auto';
-    }
-  }, [isSidebarOpen]);
-
-  return [
-    <ParticlesBackground key="particles" />,
-    <ReactFullpage.Wrapper key="fullpage__wrapper">
-      <section className="section">
+  return (
+    <ReactFullpage.Wrapper key='fullpage__wrapper'>
+      <section className='section'>
         <div className={styles.section__container}>
           <Home />
         </div>
       </section>
-      <section className="section">
+      <section className='section'>
         <div className={styles.section__container}>
           <Projects />
         </div>
       </section>
-      <section className="section">
+      <section className='section'>
         <div className={styles.section__container}>
           <Technologies />
         </div>
       </section>
-      <section className="section">
-        <div
-          className={styles.section__container}
-          data-is-last="true"
-        ></div>
+      <section className='section'>
+        <div className={styles.section__container} data-is-last='true'>
+          <Contact />
+        </div>
         <Footer />
       </section>
-    </ReactFullpage.Wrapper>,
-  ];
+    </ReactFullpage.Wrapper>
+  );
 }

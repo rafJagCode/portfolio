@@ -1,44 +1,52 @@
-$fireSizeFactor: 0.6;
-.ufo {
+.container {
   position: fixed;
-  top: 50%;
-  left: 50%;
-  width: 7rem;
-  aspect-ratio: $fireSizeFactor;
   z-index: 2;
+  backface-visibility: hidden;
   transition: filter 1000ms ease 0s;
-  &[data-is-blured='true'] {
-    filter: blur(5px);
+  &[data-is-immune='true'] {
+    animation: blink-animation 200ms steps(2, start) infinite;
+    -webkit-animation: blink-animation 200ms steps(2, start) infinite;
   }
 }
-.ufo__image {
-  background-image: url('/static/images/ufo.svg');
+.image {
   background-size: contain;
   background-repeat: no-repeat;
   background-position-y: bottom;
   width: 100%;
-  height: calc(1 / ($fireSizeFactor + 1) * 100%);
+  height: 100%;
   position: absolute;
   z-index: 2;
 }
-.ufo__engine {
-  background-image: url('/static/images/engine.svg');
+.engine {
   background-size: contain;
   width: 100%;
-  height: calc($fireSizeFactor / ($fireSizeFactor + 1) * 100%);
+  height: 100%;
   background-repeat: no-repeat;
   background-position-x: center;
   position: absolute;
-  bottom: 10%;
+  top: 70%;
   opacity: 0;
 }
-.ufo__beam {
-  background-image: url('/static/images/ufo-beam.svg');
+.beam {
+  visibility: hidden;
+  height: $beam-height;
+  width: $cow-width;
   background-size: 100% 100%;
   background-repeat: no-repeat;
   background-position-x: center;
   position: absolute;
-  top: calc(1 / ($fireSizeFactor + 1) * 100%);
+  bottom: 0;
   left: 50%;
-  transform: translate(-50%);
+  transform: translate(-50%, 100%);
+}
+
+@keyframes blink-animation {
+  to {
+    opacity: 0.3;
+  }
+}
+@-webkit-keyframes blink-animation {
+  to {
+    opacity: 0.3;
+  }
 }

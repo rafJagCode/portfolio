@@ -1,14 +1,14 @@
-import Animation from './Animation';
-import { animationsTypes } from '@/types';
+import Animation from 'Animation';
+import changeElementStyle from '@/utils/element_functions/changeElementStyle';
+import { animationsTypes } from '@/configuration/types_conf';
 
 class EngineAnimation extends Animation {
-  #engineHelper;
-  #startTime;
+  startTime = null;
+  engine = null;
 
-  constructor(dispatch = null, engineHelper) {
+  constructor(dispatch = null, { engineRef }) {
     super(animationsTypes.ENGINE_ANIMATION, dispatch);
-    this.#engineHelper = engineHelper;
-    this.reset();
+    this.engine = engineRef.current;
   }
 
   start() {
@@ -21,14 +21,13 @@ class EngineAnimation extends Animation {
 
   reset() {
     this.requestAnimationID = null;
-    this.#startTime = null;
-    this.#engineHelper.changeOpacity(0);
-    this.#engineHelper.changeScale(1);
+    changeElementStyle(this.engine, 'opacity', 0);
+    changeElementStyle(this.engine, 'scale', 1);
   }
 
   step(timestamp) {
-    if (!this.#startTime) this.#startTime = timestamp;
-    const duration = timestamp - this.#startTime;
+    if (!this.startTime) this.startTime = timestamp;
+    const duration = timestamp - this.startTime;
     const enginePower = this.timeFn(duration);
     this.handleEngineChanges(enginePower);
     this.requestAnimationID = requestAnimationFrame(this.step);
@@ -42,8 +41,8 @@ class EngineAnimation extends Animation {
   }
 
   handleEngineChanges(enginePower) {
-    this.#engineHelper.changeOpacity(enginePower);
-    this.#engineHelper.changeScale(enginePower);
+    changeElementStyle(this.engine, 'opacity', enginePower);
+    changeElementStyle(this.engine, 'scale', enginePower);
   }
 }
 

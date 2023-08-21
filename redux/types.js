@@ -1,27 +1,8 @@
-const CHANGE_LANGUAGE = 'CHANGE_LANGUAGE';
-const CHANGE_SIDEBAR_STATE = 'CHANGE_SIDEBAR_STATE';
-const SET_CLICKED_COW_REF = 'SET_CLICKED_COW_REF';
-const GLOBAL_REFS = 'GLOBAL_REFS';
-const ANIMATIONS = 'ANIMATIONS';
-const QUEUE_COMMAND = 'QUEUE_COMMAND';
-const REMOVE_COMMAND_FROM_QUEUE = 'REMOVE_COMMAND_FROM_QUEUE';
-const DISPLAY_COMMAND = 'DISPLAY_COMMAND';
-const CLEAR_TERMINAL = 'CLEAR_TERMINAL';
-const CHANGE_DIRECTORY = 'CHANGE_DIRECTORY';
-const UPDATE_ASTEROID_COLLISION_ZONE = 'UPDATE_ASTEROID_COLLISION_ZONE';
-const UPDATE_ASTEROID_COLLISION_POINTS = 'UPDATE_ASTEROID_COLLISION_POINTS';
+import { emailTypes } from './email';
+import { gameTypes } from './game';
+import { globalVariablesTypes } from './global_variables';
+import { languageTypes } from './language';
+import { navigationTypes } from './navigation';
+import { terminalTypes } from './terminal';
 
-export default {
-  CHANGE_LANGUAGE,
-  CHANGE_SIDEBAR_STATE,
-  SET_CLICKED_COW_REF,
-  GLOBAL_REFS,
-  ANIMATIONS,
-  QUEUE_COMMAND,
-  REMOVE_COMMAND_FROM_QUEUE,
-  DISPLAY_COMMAND,
-  CLEAR_TERMINAL,
-  CHANGE_DIRECTORY,
-  UPDATE_ASTEROID_COLLISION_ZONE,
-  UPDATE_ASTEROID_COLLISION_POINTS,
-};
+export default { ...emailTypes, ...gameTypes, ...globalVariablesTypes, ...languageTypes, ...navigationTypes, ...terminalTypes };

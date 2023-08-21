@@ -1,0 +1,139 @@
+.container {
+  align-self: center;
+  width: 40rem;
+  & .input_container {
+    position: relative;
+  }
+  & input {
+    width: 40rem;
+    background-color: rgba(86, 11, 173, 0.9);
+    color: var(--theme-text);
+    border: 2px solid darkgrey;
+    border-radius: 1rem;
+    padding: 0.5rem 1rem;
+    outline: none;
+    &[data-valid='focused'] {
+      border-color: var(--theme-text);
+    }
+    &[data-valid='false'] {
+      color: var(--theme-accent);
+      border-color: var(--theme-accent);
+    }
+    &[data-valid='true'] {
+      color: #00ff00;
+      border-color: #00ff00;
+    }
+    &::placeholder {
+      /* Chrome, Firefox, Opera, Safari 10.1+ */
+      color: darkgrey;
+      opacity: 1; /* Firefox */
+    }
+
+    &:-ms-input-placeholder {
+      /* Internet Explorer 10-11 */
+      color: darkgrey;
+    }
+
+    &::-ms-input-placeholder {
+      /* Microsoft Edge */
+      color: darkgrey;
+    }
+  }
+  & .error_message {
+    position: absolute;
+    left: 0.8rem;
+    top: 100%;
+
+    color: var(--theme-accent);
+    font-size: 0.8rem;
+    line-height: 1.1rem;
+  }
+  & .message_container {
+    position: relative;
+    width: 40rem;
+    border: 2px solid darkgrey;
+    border-radius: 1rem;
+    padding: 0.5rem 1rem;
+    margin: 1.1rem 0;
+    color: var(--theme-text);
+    &[data-valid='focused'] {
+      border-color: var(--theme-text);
+    }
+    &[data-valid='false'] {
+      color: var(--theme-accent);
+      border-color: var(--theme-accent);
+    }
+    &[data-valid='true'] {
+      color: #00ff00;
+      border-color: #00ff00;
+    }
+  }
+  & textarea {
+    color: inherit;
+    width: 38rem;
+    resize: none;
+    background-color: rgba(86, 11, 173, 0.9);
+    border: none;
+    &:focus {
+      outline: none;
+    }
+    &::placeholder {
+      /* Chrome, Firefox, Opera, Safari 10.1+ */
+      color: darkgrey;
+      opacity: 1; /* Firefox */
+    }
+
+    &:-ms-input-placeholder {
+      /* Internet Explorer 10-11 */
+      color: darkgrey;
+    }
+
+    &::-ms-input-placeholder {
+      /* Microsoft Edge */
+      color: darkgrey;
+    }
+    white-space: pre-line;
+    overflow-y: auto;
+    /* ===== Scrollbar CSS ===== */
+    /* Firefox */
+    scrollbar-width: thin;
+    scrollbar-color: var(--theme-text) darkgrey;
+
+    /* Chrome, Edge, and Safari */
+    &::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    &::-webkit-scrollbar-track {
+      background: darkgrey;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background-color: #323232;
+      border-radius: 2px;
+      border: 0px none darkgrey;
+    }
+  }
+  & button {
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(86, 11, 173, 0.9);
+    color: #00ff00;
+    padding: 0.5rem 2rem;
+    border: 2px solid #00ff00;
+    border-radius: 1rem;
+    transition: 250ms;
+    text-transform: uppercase;
+    cursor: pointer;
+    svg {
+      margin-right: 0.3rem;
+    }
+    &:hover,
+    :focus {
+      background-color: #00ff00;
+      color: black;
+    }
+  }
+}

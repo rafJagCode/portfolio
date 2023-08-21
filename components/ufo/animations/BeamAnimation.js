@@ -1,21 +1,17 @@
-import Animation from './Animation';
-import { animationsTypes } from '@/types';
+import Animation from 'Animation';
+import { animationsTypes } from '@/configuration/types_conf';
+import changeElementStyle from '@/utils/element_functions/changeElementStyle';
 
 class BeamAnimation extends Animation {
-  #beamHelper;
-  #ufoHelper;
-  #cowHelper;
+  beam = null;
 
-  constructor(dispatch = null, beamHelper, ufoHelper, cowHelper) {
+  constructor(dispatch = null, { beamRef }) {
     super(animationsTypes.BEAM_ANIMATION, dispatch);
-    this.#beamHelper = beamHelper;
-    this.#ufoHelper = ufoHelper;
-    this.#cowHelper = cowHelper;
-    this.reset();
+    this.beam = beamRef.current;
   }
 
   start() {
-    this.changeBeamOpacity(1);
+    changeElementStyle(this.beam, 'visibility', true);
     return requestAnimationFrame(this.step);
   }
 
@@ -25,34 +21,11 @@ class BeamAnimation extends Animation {
 
   reset() {
     this.requestAnimationID = null;
-    this.changeBeamOpacity(0);
-    this.#beamHelper.changeBeamWidth(0);
-    this.#beamHelper.changeBeamHeight(0);
+    changeElementStyle(this.beam, 'visibility', false);
   }
 
   step() {
-    this.resizeBeam();
     this.requestAnimationID = requestAnimationFrame(this.step);
-  }
-
-  resizeBeam() {
-    const width = this.#cowHelper.getCowWidth();
-    const height = this.calculateBeamHeight();
-    this.#beamHelper.changeBeamWidth(width);
-    this.#beamHelper.changeBeamHeight(height);
-  }
-
-  calculateBeamHeight() {
-    const sizeFactor = 0.4;
-    const [, cowBottomY] = this.#cowHelper.getCowBottomMiddlePosition();
-    const [, ufoBottomY] = this.#ufoHelper.getUfoMiddleBottomPosition();
-    const ufoHeight = this.#ufoHelper.getUfoHeight();
-    const beamHeight = cowBottomY - ufoBottomY + sizeFactor * ufoHeight;
-    return beamHeight;
-  }
-
-  changeBeamOpacity(beamPower) {
-    this.#beamHelper.changeBeamOpacity(beamPower);
   }
 }
 

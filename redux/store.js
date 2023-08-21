@@ -1,7 +1,7 @@
-import { createStore, applyMiddleware } from 'redux';
 import terminalQueueingMiddleware from './middlewares/terminalQueuingMiddleware';
 import reducers from './reducers';
+import { createStore, applyMiddleware, combineReducers, compose } from 'redux';
 
-const store = createStore(reducers, applyMiddleware(terminalQueueingMiddleware));
+const store = createStore(combineReducers({ ...reducers }), compose(applyMiddleware(terminalQueueingMiddleware)));
 
 export default store;

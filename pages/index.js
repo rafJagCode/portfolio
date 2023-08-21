@@ -1,39 +1,48 @@
 import styles from './App.module.scss';
-import Sidebar from '@/components/sidebar/Sidebar';
-import Topbar from '@/components/topbar/Topbar';
-import ReactFullpage from '@fullpage/react-fullpage';
+import setPointerEventsState from '@/utils/helper_functions/setPointerEventsState';
+import Sidebar from '@/components/navigation/sidebar/Sidebar';
+import Topbar from '@/components/navigation/topbar/Topbar';
+import ParticlesBackground from '@/components/particles_background/ParticlesBackground';
 import Sections from '@/components/sections/Sections';
 import Ufo from '@/components/ufo/Ufo';
-import useScrollMachineState from '@/hooks/useScrollMachineState';
-import useDelayedScroll from '@/hooks/useDelayedScroll';
-import useBeforeScrollHandler from '@/hooks/useBeforeScrollHandler';
-import { useEffect } from 'react';
+import GameResult from '@/components/sections/technologies/game_result/GameResult';
+import { defaultTranslation } from 'translation/translations';
+import { animationsTypes } from '@/configuration/types_conf';
+import useScrollMachineState from './hooks/useScrollMachineState';
+import useDelayedScroll from './hooks/useDelayedScroll';
+import useBeforeScrollHandler from './hooks/useBeforeScrollHandler';
+import useAnimations from './hooks/useAnimations';
+import ReactFullpage from '@fullpage/react-fullpage';
+import actions from 'redux/actions';
 import { useSelector, useDispatch } from 'react-redux';
-import { defaultTranslation } from '@/translations/translations';
-import { animationsTypes } from '@/types';
+import { useEffect } from 'react';
 
 export default function App() {
+  useAnimations();
+  const isSidebarOpen = useSelector((state) => state.isSidebarOpen);
+  const isNavigationVisible = useSelector((state) => state.isNavigationVisible);
   const orbitingAnimation = useSelector((state) => state.animations[animationsTypes.ORBITING_ANIMATION]);
   const engineAnimation = useSelector((state) => state.animations[animationsTypes.ENGINE_ANIMATION]);
   const holdLaunchingPositionAnimation = useSelector((state) => state.animations[animationsTypes.HOLD_LAUNCHING_POSITION_ANIMATION]);
-  const [states, updateState, compareState, currentState] = useScrollMachineState();
-  const [repeatScrollWhenAnimationReady, delayScroll] = useDelayedScroll(states, updateState, compareState, currentState);
-  const handleAnimationsBeforeScroll = useBeforeScrollHandler(engineAnimation, orbitingAnimation, updateState);
+  const [scrollStates, scrollActions, updateState, compareState, currentState] = useScrollMachineState();
+  const [repeatScrollWhenAnimationReady, delayScroll] = useDelayedScroll(scrollStates, scrollActions, updateState, compareState, currentState);
+  const handleAnimationsBeforeScroll = useBeforeScrollHandler(engineAnimation, orbitingAnimation, scrollActions, updateState);
   const dispatch = useDispatch();
 
   useEffect(() => {
     const language = localStorage.getItem('language') ? localStorage.getItem('language') : defaultTranslation;
-    dispatch({ type: 'CHANGE_LANGUAGE', language: language });
+    dispatch(actions.changeLanguage(language));
   }, []);
 
   useEffect(() => {
-    if (!!orbitingAnimation) updateState('ORBITING_ANIMATION_READY');
+    if (!!orbitingAnimation) updateState(scrollActions.SET_ORBITING_ANIMATION_TO_READY);
   }, [orbitingAnimation]);
 
   const onLeave = (origin, destination) => {
-    if (compareState(states.isOrbitingAnimationNotReady)) return repeatScrollWhenAnimationReady(destination);
-    if (compareState(states.isScrollDelayed)) return false;
-    if (compareState(states.isScrollAllowed)) return true;
+    setPointerEventsState(false);
+    if (compareState(scrollStates.ORBITING_ANIMATION_NOT_READY)) return repeatScrollWhenAnimationReady(destination);
+    if (compareState(scrollStates.SCROLL_DELAYED)) return false;
+    if (compareState(scrollStates.SCROLL_ALLOWED)) return true;
 
     delayScroll(destination);
     holdLaunchingPositionAnimation.stopAnimation();
@@ -44,23 +53,25 @@ export default function App() {
 
   const afterLoad = (origin, destination) => {
     if (!engineAnimation) return;
-    updateState('HANDLE_SCROLL');
+    updateState(scrollActions.HANDLE_SCROLL);
     engineAnimation.stopAnimation();
     if (destination.anchor !== '#home') holdLaunchingPositionAnimation.startAnimation();
     if (destination.anchor === '#home') orbitingAnimation.startAnimation();
-    if (destination.anchor === '#projects') dispatch({ type: 'QUEUE_COMMAND', command: 'COMMAND_CAT_INSTRUCTION', print: 'PRINT_INSTRUCTION' });
+    if (destination.anchor === '#projects') dispatch(actions.queueCommand('COMMAND_CAT_INSTRUCTION', 'PRINT_INSTRUCTION'));
+    setPointerEventsState(true);
   };
 
   return (
     <div className={styles.app__container}>
-      <Sidebar />
-      <Topbar />
-      <main className={styles.app__content}>
+      {isNavigationVisible && <Sidebar />}
+      {isNavigationVisible && <Topbar />}
+      <main className={styles.app__content} data-is-blured={isSidebarOpen}>
         <ReactFullpage
           licenseKey={`Ca(6HeW5q[zX%k*>A#'V%I@@k|5*QKt)s]k3HmOaAPWk}sQdFK('[p0:wkl3f=|Fo0%ijhruscuZC\SYLWQI`}
-          normalScrollElements={'#terminal__text'}
+          normalScrollElements={'#terminal__text, #message'}
           scrollingSpeed={1000}
           dragAndMove={true}
+          lazyLoading={false}
           touchSensitivity={3}
           anchors={['#home', '#projects', '#technologies', '#contact']}
           onLeave={onLeave}
@@ -69,7 +80,9 @@ export default function App() {
             return <Sections />;
           }}
         />
+        <ParticlesBackground />
         <Ufo />
+        <GameResult />
       </main>
     </div>
   );

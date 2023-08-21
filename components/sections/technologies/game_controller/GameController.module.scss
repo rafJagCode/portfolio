@@ -1,0 +1,11 @@
+.container {
+  display: grid;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  padding: 1rem;
+  font-family: 'VT323', monospace;
+  color: rgb(155, 155, 155);
+  font-size: 1.3rem;
+  z-index: 1;
+}
