@@ -101,7 +101,7 @@ class AsteroidAnimation {
     };
 
     //GET CLOSEST NEXT CLOSEST HITPOINT
-    const hitpointIndex2 = hitpointIndex < ufoCollisionPoints.length ? hitpointIndex + 1 : hitpointIndex - 1;
+    const hitpointIndex2 = hitpointIndex < ufoCollisionPoints.length - 1 ? hitpointIndex + 1 : hitpointIndex - 1;
     const hitpoint2 = {
       //force prettier break
       x: ufoCollisionPoints[hitpointIndex2].x * ufoRect.width + ufoRect.left,
