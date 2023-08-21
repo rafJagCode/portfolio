@@ -1,6 +1,5 @@
 import 'scss/reset.scss';
 import 'scss/global.scss';
-import 'scss/themes.scss';
 import Head from 'next/head';
 import store from '../redux/store';
 import { Provider } from 'react-redux';

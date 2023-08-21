@@ -1,6 +1,6 @@
 .container {
   font-size: $topbar-font-size;
-  color: var(--theme-text);
+  color: $text-color;
   display: flex;
   align-items: center;
   & a {
@@ -16,10 +16,10 @@
     justify-content: center;
   }
   & a:hover {
-    text-shadow: 1px 1px 4px var(--theme-accent), -1px -1px 4px var(--theme-accent);
+    text-shadow: 1px 1px 4px $accent-color, -1px -1px 4px $accent-color;
   }
   & a[data-is-selected='true'] {
-    color: var(--theme-accent);
+    color: $accent-color;
     &:hover {
       text-shadow: none;
     }
@@ -28,5 +28,5 @@
 .vertical_line {
   height: calc(1.1 * $topbar-font-size);
   width: 1px;
-  background-color: var(--theme-text);
+  background-color: $text-color;
 }

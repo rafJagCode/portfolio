@@ -6,12 +6,12 @@
   left: 3%;
   white-space: pre-line;
   overflow-y: auto;
-  scrollbar-color: #323232 black;
+  scrollbar-color: $grey-color black;
   scrollbar-width: thin;
   /* ===== Scrollbar CSS ===== */
   /* Firefox */
   scrollbar-width: thin;
-  scrollbar-color: #323232 #000000;
+  scrollbar-color: $grey-color #000000;
 
   /* Chrome, Edge, and Safari */
   &::-webkit-scrollbar {
@@ -23,7 +23,7 @@
   }
 
   &::-webkit-scrollbar-thumb {
-    background-color: #323232;
+    background-color: $grey-color;
     border-radius: 0px;
     border: 0px none #000000;
   }

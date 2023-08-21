@@ -3,10 +3,10 @@
   right: calc(#{-$sidebar-width} - 5px);
   width: $sidebar-width;
   height: 100vh;
-  box-shadow: -2px 0 3px var(--theme-accent);
+  box-shadow: -2px 0 3px $accent-color;
   transition: all 0.5s linear;
   z-index: 3;
-  background-color: var(--theme-primary);
+  background-color: $primary-color;
   &[data-is-open='true'] {
     right: 0;
   }

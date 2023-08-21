@@ -4,19 +4,19 @@
   bottom: 0;
   transform: translate(-50%, 100%);
   padding: 1rem 2rem;
-  background-color: #393939;
+  background-color: $dark-grey-color;
   border-radius: 0.5rem;
   display: grid;
   animation: move-dialog 400ms linear 0s 1 forwards;
   -webkit-animation: move-dialog 400ms linear 0s 1 forwards;
 }
 .text {
-  color: darkgrey;
+  color: $light-grey-color;
   margin-bottom: 0.5rem;
 }
 .button {
   cursor: pointer;
-  color: var(--theme-text);
+  color: $text-color;
   justify-self: center;
 }
 
