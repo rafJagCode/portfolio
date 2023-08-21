@@ -10,7 +10,6 @@ export default function Command({ command, setIsTerminalBusy }) {
   const [isTypingFinished, setIsTypingFinished] = useState(false);
 
   useEffect(() => {
-    // let isMounted = true;
     setIsTerminalBusy(true);
     const typingAnimation = new TypingAnimation();
 
@@ -19,13 +18,11 @@ export default function Command({ command, setIsTerminalBusy }) {
       .type(setTyped)
       .then(() => {
         command.resolve();
-        // if (isMounted) setIsTypingFinished(true);
         setIsTypingFinished(true);
         setIsTerminalBusy(false);
       });
 
     return () => {
-      //   isMounted = false;
       typingAnimation.stop();
       setIsTerminalBusy(false);
     };
