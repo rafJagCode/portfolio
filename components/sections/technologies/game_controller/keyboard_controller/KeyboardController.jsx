@@ -1,9 +1,11 @@
-import styles from './Instructions.module.scss';
+import styles from './KeyboardController.module.scss';
 import Key from './key/Key';
 import { gameStates, compareGameState } from 'redux/game/gameStateMachine';
+import useKeyboard from './hooks/useKeyboard';
 import { useSelector } from 'react-redux';
 
-export default function Instructions() {
+export default function KeyboardController() {
+  useKeyboard();
   const gameState = useSelector((state) => state.gameState);
   const keys = [
     { name: 'spacebar', description: 'GAME_SPACEBAR_KEY_INSTRUCTION' },
