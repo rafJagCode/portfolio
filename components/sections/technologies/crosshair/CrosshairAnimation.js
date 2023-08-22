@@ -3,9 +3,9 @@ import getElementCenterCoordinates from '@/utils/element_functions/getElementCen
 import actions from 'redux/actions';
 
 class CrosshairAnimation {
-  r = 100;
-  x = -100;
-  y = 0;
+  r = null;
+  x = null;
+  y = null;
   angle = Math.PI;
   angleSpeed = 0;
   angleSpeedChange = Math.PI / (10 * 60);
@@ -27,7 +27,6 @@ class CrosshairAnimation {
 
   start() {
     if (this.requestAnimationID) return;
-    this.moveCrosshair();
     requestAnimationFrame(this.step);
   }
 
@@ -64,6 +63,7 @@ class CrosshairAnimation {
   }
 
   moveCrosshair() {
+    this.r = 2 * this.ufo.getBoundingClientRect().width;
     this.x = this.r * Math.cos(this.angle);
     this.y = this.r * -Math.sin(this.angle);
     const ufoCenter = getElementCenterCoordinates(this.ufo);
