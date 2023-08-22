@@ -5,10 +5,7 @@ const useTouchDetection = () => {
 
   useEffect(() => {
     let result = false;
-
-    if (window.matchMedia && window.matchMedia('(any-pointer:coarse)').matches) {
-      result = true;
-    } else if (window.TouchEvent || 'ontouchstart' in window) {
+    if ('ontouchstart' in window || navigator.msMaxTouchPoints || navigator.maxTouchPoints) {
       result = true;
     }
 
