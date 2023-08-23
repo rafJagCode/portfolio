@@ -10,8 +10,8 @@ class Asteroid {
   startingSpeed;
   technologies;
 
-  constructor(imageName, startingPosition, technologies = null) {
-    this.asteroidID = uuid();
+  constructor(imageName, startingPosition, technologies = null, id = null) {
+    this.asteroidID = !id ? uuid() : id;
     this.imageName = imageName;
     this.startingPosition = startingPosition;
     this.technologies = technologies;
