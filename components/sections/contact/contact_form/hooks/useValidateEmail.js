@@ -19,7 +19,7 @@ const useValidateEmail = () => {
     return;
   };
 
-  return [isEmailValid, setIsEmailValid, emailErrorMessage, validateEmail];
+  return [isEmailValid, emailErrorMessage, validateEmail];
 };
 
 export default useValidateEmail;

@@ -13,10 +13,17 @@ export default function ContactForm() {
   const dispatch = useDispatch();
   const emailRef = useRef(null);
   const messageRef = useRef(null);
-  const [isEmailValid, setIsEmailValid, emailErrorMessage, validateEmail] = useValidateEmail();
-  const [isMessageValid, setIsMessageValid, messageErrorMessage, validateMessage] = useValidateMessage();
-  const handleEmailBlur = (e) => validateEmail(e.target.value);
-  const handleMessageBlur = (e) => validateMessage(e.target.value);
+  const [isEmailValid, emailErrorMessage, validateEmail] = useValidateEmail();
+  const [isMessageValid, messageErrorMessage, validateMessage] = useValidateMessage();
+
+  const checkEmail = (e) => {
+    if (isEmailValid === null) return;
+    validateEmail(e.target.value);
+  };
+  const checkMessage = (e) => {
+    if (isMessageValid === null) return;
+    validateMessage(e.target.value);
+  };
 
   const handleEmail = async (e) => {
     e.preventDefault();
@@ -38,11 +45,11 @@ export default function ContactForm() {
   return (
     <form className={styles.container}>
       <div className={styles.input_container}>
-        <input ref={emailRef} onBlur={handleEmailBlur} onFocus={() => setIsEmailValid('focused')} data-valid={isEmailValid} placeholder={t('EMAIL_PLACEHOLDER')} type='email' id='email' name='email' required tabIndex='8'></input>
+        <input ref={emailRef} onBlur={checkEmail} onChange={checkEmail} data-valid={isEmailValid} placeholder={t('EMAIL_PLACEHOLDER')} type='email' id='email' name='email' required tabIndex='8'></input>
         {!isEmailValid ? <p className={styles.error_message}>{t(emailErrorMessage)}</p> : null}
       </div>
       <div className={styles.message_container} data-valid={isMessageValid}>
-        <textarea ref={messageRef} onBlur={handleMessageBlur} onFocus={() => setIsMessageValid('focused')} placeholder={t('MESSAGE_PLACEHOLDER')} id='message' name='message' rows='10' required tabIndex='9'></textarea>
+        <textarea ref={messageRef} onBlur={checkMessage} onChange={checkMessage} placeholder={t('MESSAGE_PLACEHOLDER')} id='message' name='message' rows='10' required tabIndex='9'></textarea>
         {!isMessageValid ? <p className={styles.error_message}>{t(messageErrorMessage)}</p> : null}
       </div>
 
