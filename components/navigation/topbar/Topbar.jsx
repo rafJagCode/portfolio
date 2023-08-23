@@ -24,10 +24,10 @@ export default function Topbar() {
       <div className={styles.right}>
         <nav className='topbar__navigation'>
           <ul className={styles.menu} id='topbarMenu' ref={topbarMenuRef}>
-            {navigationLinks.map((link) => {
+            {navigationLinks.map((link, index) => {
               return (
                 <li key={link.name}>
-                  <NavLink link={link} />
+                  <NavLink link={link} index={index} />
                 </li>
               );
             })}

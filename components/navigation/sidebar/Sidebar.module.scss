@@ -7,8 +7,14 @@
   transition: all 0.5s linear;
   z-index: 3;
   background-color: $primary-color;
+  & a {
+    display: none;
+  }
   &[data-is-open='true'] {
     right: 0;
+    & a {
+      display: flex;
+    }
   }
 }
 .menu {

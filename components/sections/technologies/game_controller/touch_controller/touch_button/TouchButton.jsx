@@ -14,7 +14,7 @@ export default function TouchButton({ button }) {
   };
 
   return (
-    <button className={styles.container} style={{ gridArea: `${button.image}` }} onTouchStart={handleTouch} onTouchEnd={handleTouch}>
+    <button className={styles.container} style={{ gridArea: `${button.image}` }} onTouchStart={handleTouch} onTouchEnd={handleTouch} tabIndex='-1'>
       <img className={styles.image} src={`/static/images/touch_keys/touch-${button.image}.svg`}></img>
     </button>
   );

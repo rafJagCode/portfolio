@@ -12,6 +12,7 @@ import useScrollMachineState from './hooks/useScrollMachineState';
 import useDelayedScroll from './hooks/useDelayedScroll';
 import useBeforeScrollHandler from './hooks/useBeforeScrollHandler';
 import useAnimations from './hooks/useAnimations';
+import useTabHandling from './hooks/useTabHandling';
 import ReactFullpage from '@fullpage/react-fullpage';
 import actions from 'redux/actions';
 import { useSelector, useDispatch } from 'react-redux';
@@ -19,6 +20,7 @@ import { useEffect } from 'react';
 
 export default function App() {
   useAnimations();
+  useTabHandling();
   const isSidebarOpen = useSelector((state) => state.isSidebarOpen);
   const isNavigationVisible = useSelector((state) => state.isNavigationVisible);
   const orbitingAnimation = useSelector((state) => state.animations[animationsTypes.ORBITING_ANIMATION]);

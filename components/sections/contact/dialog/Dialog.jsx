@@ -23,7 +23,7 @@ export default function Dialog() {
       {isVisible ? (
         <div className={styles.container}>
           <p className={styles.text}>{t(message)}</p>
-          <button className={styles.button} onClick={closeDialog}>
+          <button className={styles.button} onClick={closeDialog} tabIndex='11'>
             OK
           </button>
         </div>

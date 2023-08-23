@@ -6,11 +6,11 @@ import { BiLinkExternal } from 'react-icons/bi';
 export default function ProjectLinks({ project }) {
   return (
     <div className={styles.container}>
-      <a className={styles.link} target='_blank' href={links[project].github}>
+      <a className={styles.link} target='_blank' href={links[project].github} tabIndex='11'>
         <ImGithub />
         GITHUB
       </a>
-      <a className={styles.link} target='_blank' href={links[project].live}>
+      <a className={styles.link} target='_blank' href={links[project].live} tabIndex='12'>
         <BiLinkExternal />
         LIVE
       </a>

@@ -11,7 +11,7 @@ export default function Hamburger() {
   };
 
   return (
-    <button className={styles.button} data-is-open={isSidebarOpen} onClick={handleClick} id='hamburger'>
+    <button className={styles.button} data-is-open={isSidebarOpen} onClick={handleClick} id='hamburger' tabIndex='3'>
       <span className={styles.line1}></span>
       <span className={styles.line2}></span>
       <span className={styles.line3}></span>

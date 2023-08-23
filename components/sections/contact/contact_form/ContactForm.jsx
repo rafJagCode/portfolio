@@ -38,15 +38,15 @@ export default function ContactForm() {
   return (
     <form className={styles.container}>
       <div className={styles.input_container}>
-        <input ref={emailRef} onBlur={handleEmailBlur} onFocus={() => setIsEmailValid('focused')} data-valid={isEmailValid} placeholder={t('EMAIL_PLACEHOLDER')} type='email' id='email' name='email' required></input>
+        <input ref={emailRef} onBlur={handleEmailBlur} onFocus={() => setIsEmailValid('focused')} data-valid={isEmailValid} placeholder={t('EMAIL_PLACEHOLDER')} type='email' id='email' name='email' required tabIndex='8'></input>
         {!isEmailValid ? <p className={styles.error_message}>{t(emailErrorMessage)}</p> : null}
       </div>
       <div className={styles.message_container} data-valid={isMessageValid}>
-        <textarea ref={messageRef} onBlur={handleMessageBlur} onFocus={() => setIsMessageValid('focused')} placeholder={t('MESSAGE_PLACEHOLDER')} id='message' name='message' rows='10' required></textarea>
+        <textarea ref={messageRef} onBlur={handleMessageBlur} onFocus={() => setIsMessageValid('focused')} placeholder={t('MESSAGE_PLACEHOLDER')} id='message' name='message' rows='10' required tabIndex='9'></textarea>
         {!isMessageValid ? <p className={styles.error_message}>{t(messageErrorMessage)}</p> : null}
       </div>
 
-      <button onClick={handleEmail}>
+      <button onClick={handleEmail} tabIndex='10'>
         <FaSatelliteDish />
         {t('MESSAGE_BUTTON')}
       </button>
