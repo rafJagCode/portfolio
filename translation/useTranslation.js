@@ -9,7 +9,7 @@ const useTranslation = () => {
   };
 
   const t = (text) => {
-    const translatedText = '';
+    let translatedText = '';
     availableTranslations.some((translation) => {
       if (translation === language) {
         translatedText = getTranslation(text, language);
