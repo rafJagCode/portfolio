@@ -48,6 +48,7 @@ $crater-size: calc($planet-size / 3);
   height: 100vh;
   display: grid;
   place-items: center;
+  overflow: hidden;
 }
 
 .planet {
@@ -247,7 +248,7 @@ $crater-size: calc($planet-size / 3);
 }
 
 .information {
-  width: 100vw;
+  width: 100%;
   display: grid;
   position: absolute;
   transform: translateY(20rem);

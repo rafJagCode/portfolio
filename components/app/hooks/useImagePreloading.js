@@ -16,7 +16,6 @@ const images = [
   'satellite.svg',
   'signal.svg',
   'terminal.svg',
-  'test-image.jpg',
   'ufo-beam.svg',
   'ufo.svg',
   'asteroids/asteroid-bit-1.svg',
