@@ -1,0 +1,262 @@
+$rocket-body1-color: #e5e5e5;
+$rocket-body2-color: #ffffff;
+$rocket-wings-color: #c82f1f;
+$rocket-engine-color: #bdbcb8;
+$rocket-window1-color: #63a4be;
+$rocket-window2-color: #224353;
+$rocket-window3-color: #cde0ed;
+$planet1-color: #4ba6bb;
+$planet-shadow-color: #05657b;
+$crater1-color: #158598;
+$crater2-color: #2b91a4;
+
+$rocket-size: 3rem;
+$planet-size: 20rem;
+$crater-size: calc($planet-size / 3);
+
+@mixin crater($scale, $top, $left) {
+  $width: calc($crater-size * $scale);
+  width: $width;
+  aspect-ratio: 1;
+  position: absolute;
+  top: $top;
+  left: $left;
+  transform: translate(-50%, -50%);
+  .crater {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background-color: $crater2-color;
+    overflow: hidden;
+    &::before {
+      content: '';
+      position: absolute;
+      width: calc(0.9 * $width);
+      aspect-ratio: 1;
+      border-radius: 50%;
+      box-shadow: 0 0 0 calc(0.1 * $width) $crater1-color;
+      top: calc(0.05 * $width);
+      left: calc(0.1 * $width);
+    }
+  }
+}
+
+.container {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  display: grid;
+  place-items: center;
+}
+
+.planet {
+  position: relative;
+  width: $planet-size;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background-color: $planet1-color;
+  overflow: hidden;
+}
+
+.planet_shadow {
+  position: absolute;
+  width: calc(1.2 * $planet-size);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  box-shadow: calc(0.2 * $planet-size) 0 0 calc(0.2 * $planet-size) $planet-shadow-color;
+  opacity: 0.2;
+  top: calc(-0.1 * $planet-size);
+  left: calc(-0.4 * $planet-size);
+}
+
+.crater_container1 {
+  @include crater($scale: 0.25, $top: 22%, $left: 66%);
+}
+.crater_container2 {
+  @include crater($scale: 0.27, $top: 60%, $left: 17%);
+}
+.crater_container3 {
+  @include crater($scale: 0.31, $top: 33%, $left: 69%);
+}
+.crater_container4 {
+  @include crater($scale: 0.32, $top: 70%, $left: 50%);
+}
+.crater_container5 {
+  @include crater($scale: 0.34, $top: 35%, $left: 23%);
+}
+.crater_container6 {
+  @include crater($scale: 0.38, $top: 80%, $left: 73%);
+}
+
+.rocket_container {
+  position: absolute;
+  transform: translate(0, 15rem) rotate(4.71238898038469rad);
+  height: calc(0.9 * $rocket-size);
+  width: calc(0.4 * $rocket-size);
+  .rocket {
+    height: 100%;
+    width: 100%;
+    position: relative;
+    background-color: $rocket-body1-color;
+    border-radius: 50% 50% 0% 0%;
+    &:before {
+      content: '';
+      position: absolute;
+      top: 95%;
+      width: 100%;
+      height: 10%;
+      border-radius: 0 0 50% 50%;
+      background-color: $rocket-body1-color;
+    }
+  }
+}
+
+.rocket_wings {
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  transform: translate(-50%, -50%);
+  width: calc(0.8 * $rocket-size);
+  height: calc(0.2 * $rocket-size);
+  background-color: $rocket-wings-color;
+  border-radius: 50% 50% 0 0;
+  z-index: -2;
+}
+
+.rocket_tip {
+  position: absolute;
+  left: 50%;
+  top: calc(-0.02 * $rocket-size);
+  transform: translate(-50%, -50%);
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 0 calc(0.11 * $rocket-size) calc(0.2 * $rocket-size) calc(0.11 * $rocket-size);
+  border-color: transparent transparent $rocket-wings-color transparent;
+  &::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: calc(0.2 * $rocket-size);
+    transform: translate(-50%, -50%);
+    background-color: $rocket-wings-color;
+    width: calc(0.2 * $rocket-size);
+    height: calc(0.05 * $rocket-size);
+    border-radius: 0 0 50% 50%;
+  }
+}
+
+.rocket_window {
+  position: absolute;
+  top: 35%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: calc(0.15 * $rocket-size);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background-color: $rocket-window1-color;
+  box-shadow: 0 0 0 calc(0.03 * $rocket-size) $rocket-window2-color;
+  &::before {
+    content: '';
+    position: absolute;
+    top: 20%;
+    left: 20%;
+    background-color: $rocket-window3-color;
+    width: calc(0.05 * $rocket-size);
+    aspect-ratio: 1;
+    border-radius: 50%;
+  }
+}
+
+.rocket_engine {
+  position: absolute;
+  left: 50%;
+  top: 105%;
+  transform: translate(-50%, -50%);
+  width: calc(0.3 * $rocket-size);
+  aspect-ratio: 3;
+  border-radius: 0 0 50% 50%;
+  background-color: $rocket-engine-color;
+  z-index: -1;
+}
+
+.rocket_flame {
+  position: absolute;
+  left: 50%;
+  top: 112%;
+  transform: translateX(-50%);
+  width: calc(0.3 * $rocket-size);
+  aspect-ratio: 1;
+  z-index: -2;
+  .flame_wrapper {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transform: rotate(135deg);
+    div {
+      position: absolute;
+      bottom: 0;
+      aspect-ratio: 1;
+      border-radius: 50% 0 50% 50%;
+    }
+    .red {
+      width: 80%;
+      background-color: orangered;
+    }
+    .orange {
+      width: 60%;
+      background-color: orange;
+    }
+    .gold {
+      width: 40%;
+      background-color: gold;
+    }
+    .white {
+      width: 20%;
+      background-color: lightyellow;
+    }
+  }
+}
+.trail {
+  position: absolute;
+  width: 0.5rem;
+  aspect-ratio: 1;
+  z-index: -1;
+  &::before {
+    content: '';
+    position: absolute;
+    background: orangered;
+    width: 100%;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    box-shadow: 0 0 0.1rem 0.1rem orangered;
+  }
+  &::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: gold;
+    width: 30%;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    box-shadow: 0 0 0.3rem 0.3rem gold;
+  }
+}
+
+.information {
+  width: 100vw;
+  display: grid;
+  position: absolute;
+  transform: translateY(20rem);
+  color: $terminal-green-color;
+  align-items: center;
+  grid-template-columns: 1fr 1fr;
+  font-size: 1.5rem;
+  gap: 1rem;
+  .text {
+    justify-self: end;
+  }
+}
