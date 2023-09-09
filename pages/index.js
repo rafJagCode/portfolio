@@ -1,14 +1,8 @@
-import styles from './Home.module.scss';
+import App from '@/components/app/App';
+import Loader from '@/components/loader/Loader';
+import useImagePreloading from '@/components/app/hooks/useImagePreloading';
 
-export default function Home() {
-  return (
-    <div id="app" className={styles.app}>
-		<div className={styles.sections}>
-			<div class={styles.section1}></div>
-			<div class={styles.section2}></div>
-			<div class={styles.section3}></div>
-			<div class={styles.section4}></div>
-		</div>
-    </div>
-  )
+export default function Page() {
+  const { imagesReady, progress, currentImage } = useImagePreloading();
+  return <>{!imagesReady ? <Loader progress={progress} currentImage={currentImage} /> : <App />}</>;
 }

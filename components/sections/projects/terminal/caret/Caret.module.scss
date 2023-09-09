@@ -1,0 +1,23 @@
+.caret {
+  width: 0.5ch;
+  display: inline-block;
+  vertical-align: top;
+  height: 1.5rem;
+  background-color: $terminal-green-color;
+}
+
+.caret__blinking {
+  animation: blink-animation 1s steps(2, start) infinite;
+  -webkit-animation: blink-animation 1s steps(2, start) infinite;
+}
+
+@keyframes blink-animation {
+  to {
+    visibility: hidden;
+  }
+}
+@-webkit-keyframes blink-animation {
+  to {
+    visibility: hidden;
+  }
+}

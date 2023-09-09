@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   width="100"
+   height="20"
+   viewBox="0 0 26.458462 5.292"
+   version="1.1"
+   id="svg22"
+   sodipodi:docname="aim-key.svg"
+   inkscape:version="1.2.1 (9c6d41e410, 2022-07-14)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview24"
+     pagecolor="#505050"
+     bordercolor="#ffffff"
+     borderopacity="1"
+     inkscape:showpageshadow="0"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="1"
+     inkscape:deskcolor="#505050"
+     showgrid="false"
+     inkscape:zoom="4.7653846"
+     inkscape:cx="-14.584342"
+     inkscape:cy="16.997579"
+     inkscape:window-width="1920"
+     inkscape:window-height="1017"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg22" />
+  <defs
+     id="defs8">
+    <marker
+       id="a"
+       markerHeight="3"
+       markerWidth="3"
+       orient="auto-start-reverse"
+       preserveAspectRatio="xMidYMid"
+       refX="0"
+       refY="0"
+       style="overflow:visible"
+       viewBox="0 0 6.135 5.93">
+      <path
+         d="m -0.211,-4.106 6.421,3.212 a 1,1 90 0 1 0,1.788 L -0.21,4.106 A 1.236,1.236 31.717 0 1 -2,3 v -6 a 1.236,1.236 148.283 0 1 1.789,-1.106 z"
+         style="fill:context-stroke;fill-rule:evenodd;stroke:none"
+         transform="scale(0.7)"
+         id="path2" />
+    </marker>
+    <marker
+       id="b"
+       markerHeight="3"
+       markerWidth="3"
+       orient="auto-start-reverse"
+       preserveAspectRatio="xMidYMid"
+       refX="0"
+       refY="0"
+       style="overflow:visible"
+       viewBox="0 0 6.135 5.93">
+      <path
+         d="m -0.211,-4.106 6.421,3.212 a 1,1 90 0 1 0,1.788 L -0.21,4.106 A 1.236,1.236 31.717 0 1 -2,3 v -6 a 1.236,1.236 148.283 0 1 1.789,-1.106 z"
+         style="fill:context-stroke;fill-rule:evenodd;stroke:none"
+         transform="scale(0.7)"
+         id="path5" />
+    </marker>
+  </defs>
+  <path
+     d="m 7.7593518,0 h 5.1193122 c 0.04734,0 0.08668,0.04067179 0.08668,0.09134484 V 5.2006551 A 0.08867784,0.08867784 0 0 1 12.878664,5.292 H 7.7593518 A 0.08867784,0.08867784 0 0 1 7.6726718,5.200655 V 0.09201159 c 0,-0.05067305 0.03867,-0.0913448393 0.08668,-0.0913448393 z"
+     style="fill:#b7b7b5;fill-opacity:0.9919;stroke-width:0.184646"
+     id="path10" />
+  <path
+     d="M 7.8746998,0.08867784 H 12.21258 c 0.04001,0 0.07334,0.03467103 0.07334,0.07734307 V 4.6432515 c 0,0.042672 -0.03334,0.076676 -0.07334,0.076676 H 7.8740328 a 0.07534282,0.07534282 0 0 1 -0.07334,-0.076676 V 0.16535417 c 0,-0.042672 0.03334,-0.07734309 0.07334,-0.07734309 z"
+     style="fill:#ffffff;fill-opacity:0.5081;stroke-width:0.184646"
+     id="path12" />
+  <path
+     d="m 13.580552,0 h 5.119312 c 0.04801,0 0.08667,0.04067179 0.08667,0.09134484 V 5.2006551 A 0.08867784,0.08867784 0 0 1 18.699864,5.292 H 13.580552 A 0.08867784,0.08867784 0 0 1 13.493872,5.200655 V 0.09201159 c 0,-0.05067305 0.03867,-0.0913448393 0.08668,-0.0913448393 z"
+     style="fill:#b7b7b5;fill-opacity:0.9919;stroke-width:0.184646"
+     id="path14" />
+  <path
+     d="m 13.6959,0.08867784 h 4.33788 c 0.04001,0 0.07334,0.03467103 0.07334,0.07734307 V 4.6432515 c 0,0.042672 -0.03267,0.076676 -0.07334,0.076676 H 13.6959 A 0.07534282,0.07534282 0 0 1 13.62256,4.6432515 V 0.16535417 c 0,-0.042672 0.03267,-0.07734309 0.07334,-0.07734309 z"
+     style="fill:#ffffff;fill-opacity:0.5081;stroke-width:0.184646"
+     id="path16" />
+  <path
+     d="M 9.4368968,2.2929554 H 11.730519"
+     style="fill:#979797;fill-opacity:1;stroke:#979797;stroke-width:0.510064;stroke-linecap:butt;stroke-linejoin:miter;stroke-dasharray:none;stroke-opacity:1;marker-start:url(#a)"
+     id="path18" />
+  <path
+     d="M 16.492919,2.2929554 H 14.023275"
+     style="fill:#979797;fill-opacity:1;stroke:#979797;stroke-width:0.510064;stroke-linecap:butt;stroke-linejoin:miter;stroke-dasharray:none;stroke-opacity:1;marker-start:url(#b)"
+     id="path20" />
+</svg>

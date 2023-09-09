@@ -1,0 +1,21 @@
+.container {
+  position: relative;
+  width: 40rem;
+  align-self: start;
+  margin-top: 2rem;
+  font-family: 'VT323', monospace;
+  color: $terminal-green-color;
+  font-size: 1.5rem;
+  height: max-content;
+}
+
+.image {
+  width: 100%;
+  aspect-ratio: 132/85;
+}
+
+@media screen and (orientation: portrait) {
+  .container {
+    align-self: center;
+  }
+}

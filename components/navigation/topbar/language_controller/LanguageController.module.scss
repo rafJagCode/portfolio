@@ -1,0 +1,32 @@
+.container {
+  font-size: $topbar-font-size;
+  color: $text-color;
+  display: flex;
+  align-items: center;
+  & button {
+    -webkit-user-select: none; /* Safari */
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* IE10+/Edge */
+    user-select: none; /* Standard */
+    cursor: pointer;
+    padding: 0.5rem 0.8rem;
+    line-height: 1rem;
+    width: 3rem;
+    display: flex;
+    justify-content: center;
+  }
+  & button:hover {
+    text-shadow: 1px 1px 4px $accent-color, -1px -1px 4px $accent-color;
+  }
+  & button[data-is-selected='true'] {
+    color: $accent-color;
+    &:hover {
+      text-shadow: none;
+    }
+  }
+}
+.vertical_line {
+  height: calc(1.1 * $topbar-font-size);
+  width: 1px;
+  background-color: $text-color;
+}

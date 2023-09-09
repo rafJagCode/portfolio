@@ -1,0 +1,12 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@/components/*": ["components/*"],
+      "@/configuration/*": ["configuration/*"],
+      "@/translation/*": ["translation/*"],
+      "@/utils/*": ["utils/*"],
+      "@/animation": ["Animation.js"]
+    }
+  }
+}

@@ -1,0 +1,48 @@
+.container {
+  height: 100%;
+  display: grid;
+  grid-template-columns: auto 1fr;
+}
+.island_container {
+  position: relative;
+  justify-self: start;
+  align-self: end;
+  width: 55rem;
+  aspect-ratio: 800/600;
+}
+.island {
+  width: 100%;
+  height: 100%;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+}
+.cows {
+  position: absolute;
+  display: flex;
+  width: 100%;
+  height: 72%;
+  left: 0;
+  bottom: 0;
+  justify-content: space-around;
+  align-items: flex-start;
+}
+
+@media screen and (orientation: portrait) {
+  .container {
+    grid-template-columns: auto;
+    grid-template-rows: 1fr auto;
+  }
+  .island_container {
+    justify-self: center;
+  }
+}
+
+@media (max-height: 600px) {
+  .island_container {
+    width: 40rem;
+  }
+  .cows {
+    height: 80%;
+  }
+}

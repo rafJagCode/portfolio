@@ -1,34 +1,36 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Portfolio - _website to introduce myself_
 
-## Getting Started
+Portfolio website containing short information about me, links to my projects, technologies I know (_in the form of a simple game_), contact information and a contact form.
 
-First, run the development server:
+[__=> LINK TO LIVE VERSION <=__](toDo)
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+---
+## Table of Contents
+* [General Informations](#general-informations)
+* [Technologies](#technologies)
+* [Build Setup](#built-setup)
+* [License](#license)
+---
+## General Informations
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+This portfolio is made as one page divided into sections, with scrolling using react-fullpage library.
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+---
+## Technologies
+List of technologies used to build the app:
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+- [next] - an open-source web development framework providing React-based web applications with server-side rendering.
+- [react] - free and open-source front-end JavaScript library for building user interfaces based on components.
+- [react-redux] - open-source JavaScript library for managing and centralizing application state.
+- [react-icons] - popular icon packs using ES6 imports.
+- [react-uuid] - react library for generating uuids.
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+---
 
-## Learn More
+MIT
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+[next]: <https://nextjs.org/>
+[react]: <https://react.dev/>
+[react-redux]: <https://react-redux.js.org/>
+[react-icons]: <https://react-icons.github.io/react-icons/>
+[react-uuid]: <https://www.npmjs.com/package/react-uuid>

@@ -1,0 +1,43 @@
+.container {
+  width: fit-content;
+  &[data-is-visible='true'] {
+    animation: fade-in 300ms ease-in 0ms 1 forwards;
+  }
+  &[data-is-visible='false'] {
+    animation: fade-out 300ms ease-out 0ms 1 forwards;
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@-webkit-keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fade-out {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+@-webkit-keyframes fade-out {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}

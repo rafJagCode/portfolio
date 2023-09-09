@@ -1,0 +1,32 @@
+.container {
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  transform: translate(-50%, 100%);
+  padding: 1rem 2rem;
+  background-color: $dark-grey-color;
+  border-radius: 0.5rem;
+  display: grid;
+  animation: move-dialog 400ms linear 0s 1 forwards;
+  -webkit-animation: move-dialog 400ms linear 0s 1 forwards;
+}
+.text {
+  color: $light-grey-color;
+  margin-bottom: 0.5rem;
+}
+.button {
+  cursor: pointer;
+  color: $text-color;
+  justify-self: center;
+}
+
+@keyframes move-dialog {
+  to {
+    transform: translate(-50%, -5rem);
+  }
+}
+@-webkit-keyframes move-dialog {
+  to {
+    transform: translate(-50%, -5rem);
+  }
+}

@@ -1,0 +1,31 @@
+.container {
+  color: $terminal-green-color;
+  position: relative;
+  font-size: 2rem;
+  padding: 0.5rem 1rem;
+  margin: 1rem 1rem;
+  cursor: pointer;
+  transition: color 300ms;
+  &[data-is-active='false'] {
+    color: $light-grey-color;
+    transition: color 300ms;
+    pointer-events: none;
+    &:before {
+      background-color: $light-grey-color;
+    }
+  }
+  &:before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background-color: $terminal-green-color;
+    transform: scaleX(30%);
+    transition-duration: 500ms;
+  }
+  &:hover:before {
+    transform: scaleX(80%);
+  }
+}

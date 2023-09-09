@@ -1,0 +1,33 @@
+.container {
+  position: fixed;
+  right: calc(#{-$sidebar-width} - 5px);
+  width: $sidebar-width;
+  height: 100vh;
+  box-shadow: -2px 0 3px $accent-color;
+  transition: all 0.5s linear;
+  z-index: 3;
+  background-color: $primary-color;
+  & a {
+    display: none;
+  }
+  &[data-is-open='true'] {
+    right: 0;
+    & a {
+      display: flex;
+    }
+  }
+}
+.menu {
+  margin-top: $topbar-height;
+  height: calc(100% - #{$topbar-height});
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5rem;
+}
+@media (min-width: $hamburger-breakpoint) {
+  .container {
+    display: none;
+  }
+}

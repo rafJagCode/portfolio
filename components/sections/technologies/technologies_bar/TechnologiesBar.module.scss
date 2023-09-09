@@ -1,0 +1,14 @@
+.container {
+  height: calc(100% - $topbar-height);
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  top: $topbar-height;
+  left: 0.25rem;
+}
+.image {
+  width: $technology-size;
+  aspect-ratio: 1;
+}
