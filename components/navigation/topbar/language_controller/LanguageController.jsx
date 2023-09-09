@@ -18,14 +18,14 @@ export default function LanguageController() {
   }, []);
 
   return (
-    <nav className={styles.container} id='languageController' ref={languageControllerRef}>
-      <a onClick={() => changeLanguage('pl')} data-is-selected={language === 'pl'}>
+    <div className={styles.container} id='languageController' ref={languageControllerRef}>
+      <button onClick={() => changeLanguage('pl')} data-is-selected={language === 'pl'} tabIndex='1'>
         PL
-      </a>
+      </button>
       <div className={styles.vertical_line}></div>
-      <a onClick={() => changeLanguage('en')} data-is-selected={language === 'en'}>
+      <button onClick={() => changeLanguage('en')} data-is-selected={language === 'en'} tabIndex='2'>
         EN
-      </a>
-    </nav>
+      </button>
+    </div>
   );
 }

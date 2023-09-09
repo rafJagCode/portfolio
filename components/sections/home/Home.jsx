@@ -20,15 +20,15 @@ export default function Home() {
           </p>
         </div>
         <div className={styles.contact}>
-          <a className='home__mobile' href='tel:+48 666 240 978'>
+          <a className='home__mobile' href='tel:+48 666 240 978' tabIndex='8'>
             <ImMobile />
             +48 666 240 978
           </a>
-          <a className='home__email' href='mailTo:jagielski.rafal.uwm@gmail.com'>
+          <a className='home__email' href='mailTo:jagielski.rafal.uwm@gmail.com' tabIndex='9'>
             <MdEmail />
             jagielski.rafal.uwm@gmail.com
           </a>
-          <a className='home__github' target='_blank' rel='noreferrer' href='https://github.com/rafJagCode'>
+          <a className='home__github' target='_blank' rel='noreferrer' href='https://github.com/rafJagCode' tabIndex='10'>
             <ImGithub />
             https://github.com/rafJagCode
           </a>

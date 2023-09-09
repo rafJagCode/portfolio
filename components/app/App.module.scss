@@ -1,8 +1,8 @@
 .app__container {
-  background-color: var(--theme-primary);
+  background-color: $primary-color;
 }
 .app__content {
-  &[data-is-blured='true'] {
+  &[data-is-blured='true'] > * {
     filter: blur(5px);
     pointer-events: none;
   }

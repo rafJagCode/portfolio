@@ -6,37 +6,37 @@
   }
   & input {
     width: 40rem;
-    background-color: rgba(86, 11, 173, 0.9);
-    color: var(--theme-text);
-    border: 2px solid darkgrey;
+    background-color: $primary-alpha-color;
+    color: $text-color;
+    border: 2px solid $light-grey-color;
     border-radius: 1rem;
     padding: 0.5rem 1rem;
     outline: none;
-    &[data-valid='focused'] {
-      border-color: var(--theme-text);
+    &:focus {
+      border-color: $text-color;
     }
     &[data-valid='false'] {
-      color: var(--theme-accent);
-      border-color: var(--theme-accent);
+      color: $accent-color;
+      border-color: $accent-color;
     }
     &[data-valid='true'] {
-      color: #00ff00;
-      border-color: #00ff00;
+      color: $terminal-green-color;
+      border-color: $terminal-green-color;
     }
     &::placeholder {
       /* Chrome, Firefox, Opera, Safari 10.1+ */
-      color: darkgrey;
+      color: $light-grey-color;
       opacity: 1; /* Firefox */
     }
 
     &:-ms-input-placeholder {
       /* Internet Explorer 10-11 */
-      color: darkgrey;
+      color: $light-grey-color;
     }
 
     &::-ms-input-placeholder {
       /* Microsoft Edge */
-      color: darkgrey;
+      color: $light-grey-color;
     }
   }
   & .error_message {
@@ -44,60 +44,60 @@
     left: 0.8rem;
     top: 100%;
 
-    color: var(--theme-accent);
+    color: $accent-color;
     font-size: 0.8rem;
     line-height: 1.1rem;
   }
   & .message_container {
     position: relative;
     width: 40rem;
-    border: 2px solid darkgrey;
+    border: 2px solid $light-grey-color;
     border-radius: 1rem;
     padding: 0.5rem 1rem;
     margin: 1.1rem 0;
-    color: var(--theme-text);
-    &[data-valid='focused'] {
-      border-color: var(--theme-text);
+    color: $text-color;
+    &:focus-within {
+      border-color: $text-color;
     }
     &[data-valid='false'] {
-      color: var(--theme-accent);
-      border-color: var(--theme-accent);
+      color: $accent-color;
+      border-color: $accent-color;
     }
     &[data-valid='true'] {
-      color: #00ff00;
-      border-color: #00ff00;
+      color: $terminal-green-color;
+      border-color: $terminal-green-color;
     }
   }
   & textarea {
     color: inherit;
     width: 38rem;
     resize: none;
-    background-color: rgba(86, 11, 173, 0.9);
+    background-color: $primary-alpha-color;
     border: none;
     &:focus {
       outline: none;
     }
     &::placeholder {
       /* Chrome, Firefox, Opera, Safari 10.1+ */
-      color: darkgrey;
+      color: $light-grey-color;
       opacity: 1; /* Firefox */
     }
 
     &:-ms-input-placeholder {
       /* Internet Explorer 10-11 */
-      color: darkgrey;
+      color: $light-grey-color;
     }
 
     &::-ms-input-placeholder {
       /* Microsoft Edge */
-      color: darkgrey;
+      color: $light-grey-color;
     }
     white-space: pre-line;
     overflow-y: auto;
     /* ===== Scrollbar CSS ===== */
     /* Firefox */
     scrollbar-width: thin;
-    scrollbar-color: var(--theme-text) darkgrey;
+    scrollbar-color: $text-color $light-grey-color;
 
     /* Chrome, Edge, and Safari */
     &::-webkit-scrollbar {
@@ -105,13 +105,13 @@
     }
 
     &::-webkit-scrollbar-track {
-      background: darkgrey;
+      background: $light-grey-color;
     }
 
     &::-webkit-scrollbar-thumb {
-      background-color: #323232;
+      background-color: $grey-color;
       border-radius: 2px;
-      border: 0px none darkgrey;
+      border: 0px none $light-grey-color;
     }
   }
   & button {
@@ -119,10 +119,10 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: rgba(86, 11, 173, 0.9);
-    color: #00ff00;
+    background-color: $primary-alpha-color;
+    color: $terminal-green-color;
     padding: 0.5rem 2rem;
-    border: 2px solid #00ff00;
+    border: 2px solid $terminal-green-color;
     border-radius: 1rem;
     transition: 250ms;
     text-transform: uppercase;
@@ -132,8 +132,15 @@
     }
     &:hover,
     :focus {
-      background-color: #00ff00;
+      background-color: $terminal-green-color;
       color: black;
     }
+  }
+}
+
+@media screen and (orientation: portrait) {
+  .container {
+    justify-self: center;
+    align-self: end;
   }
 }

@@ -1,19 +1,21 @@
 import styles from './GameController.module.scss';
-import Instructions from '../instructions/Instructions';
+import KeyboardController from './keyboard_controller/KeyboardController';
+import TouchController from './touch_controller/TouchController';
 import GameMenu from './game_menu/GameMenu';
-import availableKeys from '@/configuration/available_keys_conf';
 import useUfoSteering from './hooks/useUfoSteering';
 import useUfoImmunity from './hooks/useUfoImmunity';
+import useTouchDetection from './hooks/useTouchDetection';
 import { gameStates, gameActions, compareGameState } from 'redux/game/gameStateMachine';
 import actions from 'redux/actions';
 import { useSelector, useDispatch } from 'react-redux';
-import { useEffect, useCallback } from 'react';
+import { useEffect } from 'react';
 
 export default function GameController() {
   const dispatch = useDispatch();
   const gameState = useSelector((state) => state.gameState);
   const asteroids = useSelector((state) => state.asteroids);
   const ufoLives = useSelector((state) => state.ufoLives);
+  const isTouchDevice = useTouchDetection();
   useUfoSteering();
   useUfoImmunity();
 
@@ -31,21 +33,12 @@ export default function GameController() {
     if (!asteroids.length) dispatch(actions.updateGameState(gameActions.WIN_GAME));
   }, [asteroids]);
 
-  const handleKeyStateChange = useCallback((e) => {
-    if (!availableKeys.includes(e.key)) return;
-    if (e.repeat) return;
-    const pressed = e.type === 'keydown';
-    dispatch(actions.updateKeyState(e.key, pressed));
-  }, []);
-
   useEffect(() => {
     if (compareGameState(gameState, gameStates.PLAYING)) {
       fullpage_api.setAllowScrolling(false);
       fullpage_api.setKeyboardScrolling(false);
       dispatch(actions.changeNavigationVisibility(false));
       dispatch(actions.clearKeys());
-      addEventListener('keydown', handleKeyStateChange);
-      addEventListener('keyup', handleKeyStateChange);
       return;
     }
     if (compareGameState(gameState, gameStates.GAME_ENDED)) {
@@ -59,13 +52,11 @@ export default function GameController() {
       dispatch(actions.reloadAmmunition());
       dispatch(actions.resetLives());
     }
-    removeEventListener('keydown', handleKeyStateChange);
-    removeEventListener('keyup', handleKeyStateChange);
   }, [gameState]);
 
   return (
     <div className={styles.container}>
-      <Instructions />
+      {isTouchDevice ? <TouchController /> : <KeyboardController />}
       <GameMenu />
     </div>
   );

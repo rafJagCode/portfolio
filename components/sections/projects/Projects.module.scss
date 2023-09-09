@@ -27,3 +27,22 @@
   justify-content: space-around;
   align-items: flex-start;
 }
+
+@media screen and (orientation: portrait) {
+  .container {
+    grid-template-columns: auto;
+    grid-template-rows: 1fr auto;
+  }
+  .island_container {
+    justify-self: center;
+  }
+}
+
+@media (max-height: 600px) {
+  .island_container {
+    width: 40rem;
+  }
+  .cows {
+    height: 80%;
+  }
+}

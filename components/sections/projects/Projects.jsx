@@ -12,9 +12,9 @@ export default function Projects() {
       <div className={styles.island_container}>
         <img className={styles.island} src='/static/images/floating-island.svg' />
         <div className={styles.cows}>
-          <Cow imageName='cow1' />
-          <Cow imageName='cow2' />
-          <Cow imageName='cow3' />
+          <Cow imageName='cow1' tabIndex='8' />
+          <Cow imageName='cow2' tabIndex='9' />
+          <Cow imageName='cow3' tabIndex='10' />
         </div>
       </div>
     </div>

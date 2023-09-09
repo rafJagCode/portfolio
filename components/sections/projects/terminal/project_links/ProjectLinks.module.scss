@@ -10,14 +10,14 @@
   align-items: center;
   background-color: transparent;
   padding: 0.1rem 1rem;
-  border: 2px solid #00ff00;
+  border: 2px solid $terminal-green-color;
   transition: 250ms;
   svg {
     margin-right: 0.2rem;
   }
   &:hover,
   :focus {
-    background-color: #00ff00;
+    background-color: $terminal-green-color;
     color: black;
   }
 }

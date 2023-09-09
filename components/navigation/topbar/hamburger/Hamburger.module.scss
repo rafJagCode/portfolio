@@ -10,7 +10,7 @@
   align-items: stretch;
   span {
     pointer-events: none;
-    background-color: var(--theme-text);
+    background-color: $text-color;
     height: 2px;
     transition: all 0.5s ease;
     transform-origin: left;

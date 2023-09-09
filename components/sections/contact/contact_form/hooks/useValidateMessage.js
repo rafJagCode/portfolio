@@ -19,7 +19,7 @@ const useValidateMessage = () => {
     return;
   };
 
-  return [isMessageValid, setIsMessageValid, messageErrorMessage, validateMessage];
+  return [isMessageValid, messageErrorMessage, validateMessage];
 };
 
 export default useValidateMessage;
