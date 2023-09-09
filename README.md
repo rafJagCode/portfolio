@@ -24,6 +24,7 @@ List of technologies used to build the app:
 - [react-redux] - open-source JavaScript library for managing and centralizing application state.
 - [react-icons] - popular icon packs using ES6 imports.
 - [react-uuid] - react library for generating uuids.
+- [react-fullpage] - react component expanding scrolling functionalities.
 
 ---
 
@@ -34,3 +35,4 @@ MIT
 [react-redux]: <https://react-redux.js.org/>
 [react-icons]: <https://react-icons.github.io/react-icons/>
 [react-uuid]: <https://www.npmjs.com/package/react-uuid>
+[react-fullpage]: <https://alvarotrigo.com/react-fullpage/>
