@@ -1,29 +1,38 @@
 import styles from './Satellite.module.scss';
 import Signal from './signal/Signal';
 import useSignals from './hooks/useSignals';
-import actions from 'redux/actions';
-import { useSelector, useDispatch } from 'react-redux';
-import { useEffect } from 'react';
+import { useSelector } from 'react-redux';
+import { useEffect, useRef } from 'react';
 
 export default function Satellite() {
-  const dispatch = useDispatch();
+  const intervalID = useRef();
+  const continueSignals = useRef(true);
   const signalsOn = useSelector((state) => state.signalsOn);
   const [signals, addSignal, removeSignal] = useSignals();
-  const sendSignals = () => {
-    const calls = 0;
-    const intervalID = setInterval(() => {
-      addSignal();
-      if (calls >= 5) {
-        dispatch(actions.turnSingalsOff());
-        return clearInterval(intervalID);
-      }
-      calls += 1;
-    }, 300);
+
+  const sendSignals = async () => {
+    const MIN_SIGNALS_COUNT = 3;
+    let currSingalsCount = 0;
+    let minSignalsIntervalID;
+    continueSignals.current = true;
+    await new Promise((resolve) => {
+      minSignalsIntervalID = setInterval(() => {
+        if (currSingalsCount++ < MIN_SIGNALS_COUNT) addSignal();
+        else {
+          clearInterval(minSignalsIntervalID);
+          resolve();
+        }
+      }, 300);
+    });
+    if (continueSignals.current) intervalID.current = setInterval(addSignal, 300);
   };
 
   useEffect(() => {
-    if (!signalsOn) return;
-    sendSignals();
+    if (signalsOn) sendSignals();
+    else {
+      continueSignals.current = false;
+      clearInterval(intervalID.current);
+    }
   }, [signalsOn]);
 
   return (
