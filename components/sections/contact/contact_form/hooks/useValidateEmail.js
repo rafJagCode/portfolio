@@ -5,18 +5,18 @@ const useValidateEmail = () => {
   const [emailErrorMessage, setEmailErrorMessage] = useState(null);
 
   const validateEmail = (email) => {
-    if (email.length < 1) {
-      setEmailErrorMessage('VALIDATION_EMPTY_EMAIL');
+    let errorMessage = null;
+    if (!email.length) errorMessage = 'VALIDATION_EMPTY_EMAIL';
+    else if (!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)) errorMessage = 'VALIDATION_INVALID_EMAIL';
+
+    if (errorMessage) {
+      setEmailErrorMessage(errorMessage);
       setIsEmailValid(false);
-      return;
+      return false;
     }
-    if (!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)) {
-      setEmailErrorMessage('VALIDATION_INVALID_EMAIL');
-      setIsEmailValid(false);
-      return;
-    }
+
     setIsEmailValid(true);
-    return;
+    return true;
   };
 
   return [isEmailValid, emailErrorMessage, validateEmail];
