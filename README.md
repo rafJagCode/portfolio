@@ -34,6 +34,47 @@ List of technologies used to build the app:
 
 <a href="https://alvarotrigo.com/react-fullpage/"> <img src="https://github.com/rafJagCode/tech_icons/blob/main/no-logo.png?raw=true" width="30" height="30" style="vertical-align:middle"/> React-fullpage</a> - react component expanding scrolling functionalities.
 
+## Build Setup
+
+- Clone repository
+
+  ```sh
+  git clone https://github.com/rafJagCode/portfolio.git
+  ```
+
+- Install dependencies
+
+  ```sh
+  cd portfolio
+  npm install
+  ```
+
+- Serve at localhost:3000
+
+  ```sh
+  npm run dev
+  ```
+
+- Build for production and launch server
+
+  ```sh
+  npm run build
+  ```
+
+  ```sh
+  npm run start
+  ```
+
+- Generate static project
+ 
+  ```sh
+  npm run build
+  ```
+
+  ```sh
+  npm run generate
+  ```
+
 ## License
 
 MIT
