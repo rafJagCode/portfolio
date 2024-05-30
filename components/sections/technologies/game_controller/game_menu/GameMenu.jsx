@@ -15,10 +15,10 @@ export default function GameMenu() {
         text: 'GAME_MENU_START_BUTTON',
         action: gameActions.START_GAME,
         active: compareGameState(gameState, gameStates.INITIAL_STATE) || compareGameState(gameState, gameStates.GAME_PAUSED) || compareGameState(gameState, gameStates.GAME_ENDED),
-        tabIndex: '8',
+        tabIndex: '18',
       },
-      { text: 'GAME_MENU_PAUSE_BUTTON', action: gameActions.PAUSE_GAME, active: compareGameState(gameState, gameStates.PLAYING), tabIndex: '9' },
-      { text: 'GAME_MENU_END_BUTTON', action: gameActions.END_GAME, active: !compareGameState(gameState, gameStates.GAME_ENDED) && !compareGameState(gameState, gameStates.INITIAL_STATE), tabIndex: '10' },
+      { text: 'GAME_MENU_PAUSE_BUTTON', action: gameActions.PAUSE_GAME, active: compareGameState(gameState, gameStates.PLAYING), tabIndex: '19' },
+      { text: 'GAME_MENU_END_BUTTON', action: gameActions.END_GAME, active: !compareGameState(gameState, gameStates.GAME_ENDED) && !compareGameState(gameState, gameStates.INITIAL_STATE), tabIndex: '20' },
     ]);
   }, [gameState]);
 
