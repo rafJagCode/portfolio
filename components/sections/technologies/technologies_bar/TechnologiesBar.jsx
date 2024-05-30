@@ -1,4 +1,5 @@
 import styles from './TechnologiesBar.module.scss';
+import TechnologyIcon from './technology_icon/TechnologyIcon';
 import { useSelector } from 'react-redux';
 
 export default function TechnologiesBar() {
@@ -6,13 +7,8 @@ export default function TechnologiesBar() {
 
   return (
     <div className={styles.container}>
-      {technologies.map((technology) => (
-        <img
-          className={styles.image} //force prettier break
-          key={technology.name}
-          id={`technology_${technology.name}`}
-          src={`/static/images/technologies/${technology.name}-icon.svg`}
-          style={{ opacity: technology.unlocked ? 1 : 0.5 }}></img>
+      {technologies.map((technology, i) => (
+        <TechnologyIcon key={technology.name} technology={technology} tabIndex={i + 8} />
       ))}
     </div>
   );

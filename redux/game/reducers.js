@@ -110,7 +110,7 @@ const ufoHits = (state = UFO_HITS, action) => {
   }
 };
 
-const TECHNOLOGIES = knownTechnologies.map((technology) => ({ name: technology, unlocked: false }));
+const TECHNOLOGIES = knownTechnologies.map((technology) => ({ name: technology.name, link: technology.link, desc: technology.desc, unlocked: false }));
 
 const technologies = (state = TECHNOLOGIES, action) => {
   switch (action.type) {
