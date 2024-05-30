@@ -10,7 +10,7 @@ Portfolio website containing short information about me, links to my projects, t
 
 [⚓Technologies](#technologies)
 
-[⚓Build Setup](#built-setup)
+[⚓Build Setup](#build-setup)
 
 [⚓License](#license)
 
